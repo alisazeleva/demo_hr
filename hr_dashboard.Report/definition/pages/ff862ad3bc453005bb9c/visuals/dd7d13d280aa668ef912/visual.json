@@ -724,51 +724,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "d1c048a1922215635e17",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimPosition"
-              }
-            },
-            "Property": "PositionTitle"
-          }
-        },
-        "type": "TopN"
-      },
-      {
-        "name": "57dc2b08a4d9a8067964",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Headcount"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "d9046598bbb00903a9c9",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimDepartment"
-              }
-            },
-            "Property": "Department"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

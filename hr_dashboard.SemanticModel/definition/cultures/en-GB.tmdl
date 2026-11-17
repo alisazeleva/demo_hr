@@ -18913,6 +18913,51 @@ cultureInfo en-GB
 			          }
 			        }
 			      ]
+			    },
+			    "dimemployee.fullname": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DimEmployee",
+			          "ConceptualProperty": "FullName"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "factjobhistory.effectivedate": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactJobHistory",
+			          "ConceptualProperty": "EffectiveDate"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "factjobhistory.changetype": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactJobHistory",
+			          "ConceptualProperty": "ChangeType"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "factjobhistory.prevpositiontitle": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactJobHistory",
+			          "ConceptualProperty": "PrevPositionTitle"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "factjobhistory.positiontitle": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactJobHistory",
+			          "ConceptualProperty": "PositionTitle"
+			        }
+			      },
+			      "State": "Generated"
 			    }
 			  },
 			  "Relationships": {

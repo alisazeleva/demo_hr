@@ -69,8 +69,8 @@ table _Measures
 		displayFolder: Career
 		lineageTag: 0c5d85b3-28b0-4887-af77-3e7ff8c97f83
 
-	/// Average gap in months between consecutive promotions of the same employee (only employees with two or more promotions contribute)
-	measure 'Average Months Between Promotions' =
+	/// Average months in the job before a promotion: from the previous promotion, or from hire for a first promotion, to the promotion date. Every promoted employee contributes, so every department has a value.
+	measure 'Average Months Before Promotion' =
 			AVERAGEX(
 			    FILTER(FactJobHistory, FactJobHistory[IsPromotion] = TRUE()),
 			    VAR emp = FactJobHistory[EmployeeID]
@@ -80,7 +80,12 @@ table _Measures
 			            MAX(FactJobHistory[EffectiveDate]),
 			            FILTER(ALL(FactJobHistory), FactJobHistory[EmployeeID] = emp && FactJobHistory[IsPromotion] = TRUE() && FactJobHistory[EffectiveDate] < d)
 			        )
-			    RETURN IF(NOT ISBLANK(prevPromo), DATEDIFF(prevPromo, d, MONTH))
+			    VAR hired =
+			        CALCULATE(
+			            MIN(FactJobHistory[EffectiveDate]),
+			            FILTER(ALL(FactJobHistory), FactJobHistory[EmployeeID] = emp)
+			        )
+			    RETURN DATEDIFF(IF(ISBLANK(prevPromo), hired, prevPromo), d, MONTH)
 			)
 		formatString: 0.0
 		displayFolder: Career
@@ -261,6 +266,29 @@ table _Measures
 		formatString: 0.0
 		displayFolder: Organization
 		lineageTag: 5b1f6a0e-2c1d-4e7a-9a53-0d9c6e0f1a05
+
+	/// Job-history records that are career changes (excludes the Initial Assignment at hire)
+	measure 'Career Events' = CALCULATE(COUNTROWS(FactJobHistory), KEEPFILTERS(FactJobHistory[ChangeType] <> "Initial Assignment"))
+		formatString: #,0
+		displayFolder: Career
+		lineageTag: 1acf39d0-a826-4f8f-b5a5-d52fc92d22df
+
+	/// Position changes without a promotion or department transfer
+	measure 'Position Changes' = CALCULATE(COUNTROWS(FactJobHistory), FactJobHistory[ChangeType] = "Position Change")
+		formatString: #,0
+		displayFolder: Career
+		lineageTag: 53467b9d-99fa-4abb-bd60-a2e8e7969c73
+
+	/// Manager changes without a promotion, transfer or position change
+	measure 'Manager Changes' = CALCULATE(COUNTROWS(FactJobHistory), FactJobHistory[ChangeType] = "Manager Change")
+		formatString: #,0
+		displayFolder: Career
+		lineageTag: 05b661d7-f3eb-4b44-bfc8-56c17438e2f6
+
+	/// Chart subtitle: the overall average months before a promotion
+	measure 'Text: Months Before Promotion' = "Overall average " & FORMAT([Average Months Before Promotion], "0.0") & " months"
+		displayFolder: Text
+		lineageTag: 411869e0-64a1-498f-92df-89a35cf788e7
 
 	column Placeholder
 		isHidden

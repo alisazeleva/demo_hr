@@ -316,7 +316,7 @@ Employees relates one-to-many to every fact table on EmployeeID. Date relates to
 
 ### Measures
 
-Headcount, Headcount vs Target, Average Salary, Average Tenure (years), Promotions, Department Transfers, Average Months Between Promotions, Average Rating, Employees Without Recent Review, Leave Days, Vacation Days Used per Year, Currently Absent (on 2026-11-16), Direct Reports and Span of Control.
+Headcount, Headcount vs Target, Average Salary, Average Tenure (years), Promotions, Department Transfers, Average Months Before Promotion, Average Rating, Employees Without Recent Review, Leave Days, Vacation Days Used per Year, Currently Absent (on 2026-11-16), Direct Reports and Span of Control.
 
 ### Report pages
 

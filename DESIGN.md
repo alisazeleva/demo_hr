@@ -15,7 +15,7 @@ The Workforce page as built in Power BI Desktop is the reference. Copy it for ev
 - **Left navigation**, full height, x 0, y 0, 300 x 1080, navy #14213D, radius 12, no title or header.
   - "Acme HR": text box at (36, 36), 27 pt Segoe UI Semibold bold, white. "People analytics": text box at (36, 84), 16 pt, #CBD5E1.
   - Page navigator (native `pageNavigator` visual) at (24, 178), 254 x 587, vertical, cell padding 10. Text 16 pt, centred, white. Fill: default navy lightened 20 % (theme colour 8, #14213D, +20 %), hover +40 %, current page and press #2563EB. No outline, no accent bar, rounded 15, hidden pages not shown, no background or border.
-  - "Data as of {reference date}": card at (0, 987), 300 x 72, 14 pt #CBD5E1, no background, border or label (measure `Text: Footer As Of`).
+  - "Data as of {reference date}": card at (0, 978), 300 x 72, 14 pt #CBD5E1, no background, border or label (measure `Text: Footer As Of`). Next to it an "information" action button icon at (100, 1029), 100 x 40, no fill, icon #CBD5E1 (reserved for a data-source note; no action yet).
 - **Main area**: starts at x 330 and ends at x 1890 (30 px right padding); 24 px gaps.
   - Header: page title text box at (330, 19), 33 pt Semibold bold, #1F2937. Under it, a subtitle card at (317, 74), 16 pt #5B6472, no background or border, showing "Acme Corporation · {n} current employees · as of {reference date}" (measure `Text: Header Subtitle`).
   - Slicers on the right of the header, y 30, about 79 high: Department (x 1122, w 253), Job level (x 1394, w 231), Nationality (x 1637, w 253). Dropdown style, no background or border, label above the value, label 16 pt #5B6472, items 16 pt #1F2937, no accent bar. Synced across all pages. (Gender is not a slicer; the donut on page 1 and the Gender field in visuals cover it.)
@@ -68,36 +68,41 @@ Header subtitle, KPI cards and subtitles as built:
 
 | Cell | Visual | Type | Fields | Notes |
 | --- | --- | --- | --- | --- |
-| Row 1, col 1 | Headcount by department | Bar | Department, `Department Headcount` | Department colours; subtitle "Employees, excluding the CEO"; the CEO reports to Acme Corporation, outside the departments |
-| Row 1, col 2 | Headcount by job level | Bar | Job level (rank order, CEO first), Headcount | Neutral colour; subtitle "Employees, most senior level first" |
-| Row 1, col 3 | Headcount by position | Bar | Position, Headcount | Top 5 by headcount, coloured by department; subtitle "Top 5 positions, coloured by department" |
+| Row 1, col 1 | Headcount by job level | Bar | `DimPosition[JobLevel]` (rank order, CEO first), Headcount | Neutral colour; subtitle "Employees, most senior level first" |
+| Row 1, col 2 | Headcount by department | Bar | `DimDepartment[Department]`, `Department Headcount` | Department colours; subtitle "Employees, excluding the CEO"; the CEO reports to Acme Corporation, outside the departments |
+| Row 1, col 3 | Headcount by position | Bar | `DimPosition[PositionTitle]`, Headcount, legend `DimDepartment[Department]` | Top N positions by headcount (Top N filter), bars coloured by department through the legend; subtitle "Positions, coloured by department" |
 | Row 2, col 1 | Employees by nationality | Bar | `Nationality Top 6`, Headcount | Top 6 plus "Other"; subtitle `Text: Nationality Subtitle` |
 | Row 2, col 2 | Employees by native language | Bar | `Native Language Top 6`, Headcount | Top 6 plus "Other"; subtitle `Text: Language Subtitle` |
 | Row 2, col 3 | Gender split | Donut | Gender, Headcount | Female #7C5CD6, Male #E0A030; subtitle `Text: Gender Subtitle` |
 
-## Page 2: Organization
+## Page 2: Organization (built)
 
-KPI cards: Managers (employees with at least one direct report), Average span of control, Largest span of control, Departments at target (x of 5).
+KPI cards: Managers (employees with at least one direct report), Average team size (direct reports per manager), Largest team (largest number of direct reports; subtitle from `Text: Teams with Largest Span`), Departments at target (x of 5; subtitle `Text: Departments at Target`).
 
-| Visual | Type | Fields |
-| --- | --- | --- |
-| Reporting structure | Decomposition tree | Employee, explained by manager chain from the CEO (`vw_OrgHierarchy`) |
-| Direct reports per manager | Horizontal bar, top 15 | Manager name, Direct Reports; colour by department |
-| Headcount vs target | Clustered bar or bullet | Department, Target, Actual, Difference |
-| Employees per manager by department | Table or matrix | Department, Managers, Average span |
+The chart area is not the 3 x 2 grid: a tall decomposition tree on the left and two stacked cards on the right.
 
-## Page 3: Career
+| Visual | Position (x, y, w x h) | Type | Fields |
+| --- | --- | --- | --- |
+| Reporting structure | 330, 300, 952 x 749 | Decomposition tree | Analyze `Headcount`; explain by `DimDepartment[Department]`, `DimManager[ManagerName]`, `DimPosition[JobLevel]`, `DimEmployee[FullName]`; Acme Corporation excluded |
+| Headcount vs target | 1309, 300, 585 x 304 | Bar | `DimDepartment[Department]`, `Department Headcount`, `Headcount vs Target` (mean difference to plan); subtitle hidden |
+| Team size by department | 1309, 626, 585 x 423 | Matrix | `DimDepartment[Department]` rows; Managers, Average Team Size ("Avg team"), Largest Span of Control ("Max team") values; subtitle hidden |
 
-KPI cards: Promotions, Department transfers, Position changes, Manager changes (from `vw_JobHistory`, excluding Initial Assignment). A "Promotion + Department Transfer" counts in both Promotions and Department transfers.
+A chart subtitle may be hidden when the card is small (show = false); the title still says what it shows.
 
-| Visual | Type | Fields |
-| --- | --- | --- |
-| Career events per year | Stacked column | Year, Change type, count |
-| Average months between promotions | Card plus bar by department | Months between promotions, Department |
-| Changes by type and department | Matrix | Change type (rows), Department (columns) |
-| Latest career moves | Table | Employee, Date, Change type, From position, To position |
+## Page 3: Career (built)
 
-Rows in the table and the matrix drill through to page 7.
+KPI cards: Promotions (subtitle "Including promotions with a transfer"), Department transfers (same subtitle), Position changes (change type "Position Change", "Without a promotion or transfer"), Manager changes (change type "Manager Change", "Only the manager changed"). A "Promotion + Department Transfer" counts in both Promotions and Department transfers. Source: `FactJobHistory`, never counting the Initial Assignment.
+
+| Visual | Position (x, y, w x h) | Type | Fields |
+| --- | --- | --- | --- |
+| Career events per year | 330, 300, 1032 x 363 | Stacked column | `DimDate[Year]`, legend `FactJobHistory[ChangeType]`, `Career Events`; legend at the bottom |
+| Months before promotion | 1386, 300, 504 x 363 | Bar | `DimDepartment[Department]` (department colours), `Average Months Before Promotion`; subtitle `Text: Months Before Promotion` (overall average) |
+| Changes by type and department | 330, 687, 792 x 363 | Matrix | `ChangeType` rows, `DimDepartment[Department]` columns (current department, Acme Corporation excluded), `Career Events` |
+| Latest career moves | 1146, 687, 744 x 363 | Table | Employee, Date, Change, From position, To position; newest first, Initial Assignment excluded |
+
+Change-type colours (stacked column): Promotion #2563EB, Promotion + Department Transfer #8FAEE8, Department Transfer #4A6FA5, Position Change #E0A030, Manager Change #5B6472. Department colours are not used for change types.
+
+Not built yet: drill-through from the matrix and table rows to page 7 (page 7 does not exist yet). Add it when page 7 is built.
 
 ## Page 4: Compensation
 
@@ -163,7 +168,7 @@ Photos: resize to about 160 x 160 px (under 20 KB each), have Power Query read t
 | Average Tenure (years) | Average of (reference date minus hire date) in years |
 | Promotions | Job-history rows whose change type contains "Promotion" |
 | Department Transfers | Job-history rows whose change type contains "Department Transfer" |
-| Average Months Between Promotions | Average gap between consecutive promotions of the same employee |
+| Average Months Before Promotion | Average months in the job before a promotion: from the previous promotion, or from hire for a first promotion, to each promotion date (every promoted employee contributes) |
 | Average Rating | Average of OverallRating |
 | Employees Without Recent Review | Employees with no review dated within 12 months before the reference date |
 | Leave Days | Count of rows in `vw_LeaveDays` (one row per working day) |

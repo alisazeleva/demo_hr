@@ -721,62 +721,6 @@
             }
           ]
         }
-      },
-      {
-        "name": "65bf179071497a9bc09d",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Headcount"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "1e473c1db01198746693",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimManager"
-              }
-            },
-            "Property": "ManagerName"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "7e2ddfd9dc8d0c127711",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimPosition"
-              }
-            },
-            "Property": "PositionTitle"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "9215d0d5c07a77d9c37a",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimEmployee"
-              }
-            },
-            "Property": "FullName"
-          }
-        },
-        "type": "Categorical"
       }
     ]
   }
