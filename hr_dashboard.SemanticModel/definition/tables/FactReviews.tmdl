@@ -1,5 +1,5 @@
 /// Annual performance reviews (vw_PerformanceReviews)
-table Reviews
+table FactReviews
 	lineageTag: 181228c8-04e7-431e-8876-7cfa22949f8a
 
 	column PerformanceReviewID
@@ -18,30 +18,6 @@ table Reviews
 		summarizeBy: none
 		sourceColumn: EmployeeID
 
-	column EmployeeNumber
-		dataType: string
-		lineageTag: 7fbe51ff-491e-4167-a082-68acab36c053
-		summarizeBy: none
-		sourceColumn: EmployeeNumber
-
-		annotation SummarizationSetBy = Automatic
-
-	column EmployeeName
-		dataType: string
-		lineageTag: 098b4966-5309-4e7d-9876-96d9eea79624
-		summarizeBy: none
-		sourceColumn: EmployeeName
-
-		annotation SummarizationSetBy = Automatic
-
-	column Gender
-		dataType: string
-		lineageTag: 59d48079-f794-4478-afce-8ce30dd308b7
-		summarizeBy: none
-		sourceColumn: Gender
-
-		annotation SummarizationSetBy = Automatic
-
 	column ReviewerID
 		dataType: int64
 		isHidden
@@ -59,31 +35,6 @@ table Reviews
 
 		annotation SummarizationSetBy = Automatic
 
-	column Department
-		dataType: string
-		lineageTag: 0ced9104-6c09-4086-b41f-02fd41481c44
-		summarizeBy: none
-		sourceColumn: Department
-
-		annotation SummarizationSetBy = Automatic
-
-	column JobLevel
-		dataType: string
-		lineageTag: 718c7bcd-0a2e-4e77-a81a-02d7bf7c11e6
-		summarizeBy: none
-		sourceColumn: JobLevel
-		sortByColumn: JobLevelRank
-
-		annotation SummarizationSetBy = Automatic
-
-	column JobLevelRank
-		dataType: int64
-		lineageTag: 62b8b984-e331-404d-b5b0-8ac70c0eb59e
-		summarizeBy: sum
-		sourceColumn: JobLevelRank
-
-		annotation SummarizationSetBy = Automatic
-
 	column ReviewYear
 		dataType: int64
 		lineageTag: 5af00836-b22a-4c0b-a613-595e6a9ee779
@@ -91,34 +42,6 @@ table Reviews
 		sourceColumn: ReviewYear
 
 		annotation SummarizationSetBy = Automatic
-
-	column ReviewPeriodStart
-		dataType: dateTime
-		formatString: yyyy-mm-dd
-		lineageTag: d36b65a6-ae97-4d29-9b6e-94b7570400a9
-		summarizeBy: none
-		sourceColumn: ReviewPeriodStart
-
-		variation Variation
-			isDefault
-			relationship: 400954c7-a489-47d5-88e1-5eef26843501
-			defaultHierarchy: LocalDateTable_31457bad-4597-4792-a4fd-77c02860cde6.'Date Hierarchy'
-
-		annotation UnderlyingDateTimeDataType = Date
-
-	column ReviewPeriodEnd
-		dataType: dateTime
-		formatString: yyyy-mm-dd
-		lineageTag: 3b6cc186-a223-4e81-b006-989c7f0b98e8
-		summarizeBy: none
-		sourceColumn: ReviewPeriodEnd
-
-		variation Variation
-			isDefault
-			relationship: 488f4117-7d80-4e03-8024-a14fd6e8cd3a
-			defaultHierarchy: LocalDateTable_b4f104de-773a-4da8-974e-e67d71afd7a1.'Date Hierarchy'
-
-		annotation UnderlyingDateTimeDataType = Date
 
 	column ReviewDate
 		dataType: dateTime
@@ -162,12 +85,31 @@ table Reviews
 
 		annotation SummarizationSetBy = Automatic
 
+	column PositionID
+		dataType: int64
+		isHidden
+		lineageTag: 7cb47bd8-bb6c-4646-b29b-5908ef4c568b
+		summarizeBy: count
+		sourceColumn: PositionID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DepartmentID
+		dataType: int64
+		isHidden
+		lineageTag: c3b47b13-e7a9-44e8-8efe-90e97771827f
+		summarizeBy: count
+		sourceColumn: DepartmentID
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Reviews = m
 		mode: import
 		source =
 				let
 				    Source = Sql.Database(SqlServer, SqlDatabase),
-				    Data = Source{[Schema="dbo", Item="vw_PerformanceReviews"]}[Data]
+				    Data = Source{[Schema="dbo", Item="vw_PerformanceReviews"]}[Data],
+				    Slim = Table.RemoveColumns(Data, {"ReviewPeriodStart", "ReviewPeriodEnd"}, MissingField.Ignore)
 				in
-				    Data
+				    Slim
 

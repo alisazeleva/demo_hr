@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Employees"
+                      "Entity": "DimDepartment"
                     }
                   },
                   "Property": "Department"
                 }
               },
-              "queryRef": "Employees.Department",
+              "queryRef": "DimDepartment.Department",
               "nativeQueryRef": "Department",
               "active": true
             }
@@ -111,7 +111,7 @@
                       "Column": {
                         "Expression": {
                           "SourceRef": {
-                            "Entity": "Employees"
+                            "Entity": "DimDepartment"
                           }
                         },
                         "Property": "Department"
@@ -152,7 +152,7 @@
                       "Column": {
                         "Expression": {
                           "SourceRef": {
-                            "Entity": "Employees"
+                            "Entity": "DimDepartment"
                           }
                         },
                         "Property": "Department"
@@ -193,7 +193,7 @@
                       "Column": {
                         "Expression": {
                           "SourceRef": {
-                            "Entity": "Employees"
+                            "Entity": "DimDepartment"
                           }
                         },
                         "Property": "Department"
@@ -234,7 +234,7 @@
                       "Column": {
                         "Expression": {
                           "SourceRef": {
-                            "Entity": "Employees"
+                            "Entity": "DimDepartment"
                           }
                         },
                         "Property": "Department"
@@ -275,7 +275,7 @@
                       "Column": {
                         "Expression": {
                           "SourceRef": {
-                            "Entity": "Employees"
+                            "Entity": "DimDepartment"
                           }
                         },
                         "Property": "Department"
@@ -650,6 +650,33 @@
             }
           }
         }
+      ],
+      "visualTooltip": [
+        {
+          "properties": {
+            "type": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Default'"
+                }
+              }
+            },
+            "showChartSpecificTooltips": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "drillFilterOtherVisuals": true
@@ -657,12 +684,12 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "d51f298591a90049a805",
+        "name": "7e38025253127ec06b0d",
         "field": {
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Employees"
+                "Entity": "DimDepartment"
               }
             },
             "Property": "Department"
@@ -671,7 +698,7 @@
         "type": "Categorical"
       },
       {
-        "name": "a07aba5794e3271c6659",
+        "name": "0e5f58a6c9c0ec4036e8",
         "field": {
           "Measure": {
             "Expression": {

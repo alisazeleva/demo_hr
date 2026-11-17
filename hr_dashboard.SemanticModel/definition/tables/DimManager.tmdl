@@ -1,0 +1,36 @@
+/// Employees who manage a team: the manager role of an employee (vw_DimManager)
+table DimManager
+	lineageTag: 07bba801-b27f-4333-8f13-9b94bb8175f2
+
+	column ManagerEmployeeID
+		dataType: int64
+		isHidden
+		lineageTag: 05bf8384-1462-4435-8c8c-ae82c02da846
+		summarizeBy: none
+		sourceColumn: ManagerEmployeeID
+
+	column ManagerNumber
+		dataType: string
+		lineageTag: 819c079b-ad0a-47fd-9212-73b4f20a8053
+		summarizeBy: none
+		sourceColumn: ManagerNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column ManagerName
+		dataType: string
+		lineageTag: 24555b9f-c97e-460c-8f20-591d84e1bfd5
+		summarizeBy: none
+		sourceColumn: ManagerName
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Manager = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Data = Source{[Schema="dbo", Item="vw_DimManager"]}[Data]
+				in
+				    Data
+

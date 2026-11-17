@@ -4,10 +4,10 @@
   "position": {
     "x": 1121.6,
     "y": 137.5,
-    "z": 13000,
+    "z": 11000,
     "height": 139.7,
     "width": 373.9,
-    "tabOrder": 13000
+    "tabOrder": 11000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -534,23 +534,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "ab3cb03dc1050b3e64b1",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Largest Span of Control"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

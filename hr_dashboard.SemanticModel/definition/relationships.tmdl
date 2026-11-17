@@ -1,72 +1,52 @@
 relationship JobHistory_EmployeeID_Employees_EmployeeID
-	fromColumn: JobHistory.EmployeeID
-	toColumn: Employees.EmployeeID
+	fromColumn: FactJobHistory.EmployeeID
+	toColumn: DimEmployee.EmployeeID
 
 relationship Compensation_EmployeeID_Employees_EmployeeID
-	fromColumn: Compensation.EmployeeID
-	toColumn: Employees.EmployeeID
+	fromColumn: FactCompensation.EmployeeID
+	toColumn: DimEmployee.EmployeeID
 
 relationship Reviews_EmployeeID_Employees_EmployeeID
-	fromColumn: Reviews.EmployeeID
-	toColumn: Employees.EmployeeID
+	fromColumn: FactReviews.EmployeeID
+	toColumn: DimEmployee.EmployeeID
 
 relationship LeaveDays_EmployeeID_Employees_EmployeeID
-	fromColumn: LeaveDays.EmployeeID
-	toColumn: Employees.EmployeeID
+	fromColumn: FactLeaveDays.EmployeeID
+	toColumn: DimEmployee.EmployeeID
 
 relationship JobHistory_EffectiveDate_Date_Date
-	fromColumn: JobHistory.EffectiveDate
-	toColumn: Date.Date
+	fromColumn: FactJobHistory.EffectiveDate
+	toColumn: DimDate.Date
 
 relationship Compensation_EffectiveDate_Date_Date
-	fromColumn: Compensation.EffectiveDate
-	toColumn: Date.Date
+	fromColumn: FactCompensation.EffectiveDate
+	toColumn: DimDate.Date
 
 relationship Reviews_ReviewDate_Date_Date
-	fromColumn: Reviews.ReviewDate
-	toColumn: Date.Date
+	fromColumn: FactReviews.ReviewDate
+	toColumn: DimDate.Date
 
 relationship LeaveDays_LeaveDate_Date_Date
-	fromColumn: LeaveDays.LeaveDate
-	toColumn: Date.Date
+	fromColumn: FactLeaveDays.LeaveDate
+	toColumn: DimDate.Date
 
-relationship Employees_HireDate_Date_Date
-	isActive: false
-	fromColumn: Employees.HireDate
-	toColumn: Date.Date
+relationship Employees_DepartmentID_Department_DepartmentID
+	fromColumn: DimEmployee.DepartmentID
+	toColumn: DimDepartment.DepartmentID
 
-relationship d5ae22cc-f973-4bd3-95ac-481ad12dcddd
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Employees.DateOfBirth
-	toColumn: LocalDateTable_c378c038-90d8-4dbe-9380-7f55299afb1d.Date
+relationship Employees_PositionID_Position_PositionID
+	fromColumn: DimEmployee.PositionID
+	toColumn: DimPosition.PositionID
 
-relationship 72e91f93-d059-4dc4-847f-1ae6fd447a6b
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Employees.LatestReviewDate
-	toColumn: LocalDateTable_0ec995b0-9a23-4998-a051-cc7ab44ed1eb.Date
+relationship Employees_ManagerEmployeeID_Manager_ManagerEmployeeID
+	fromColumn: DimEmployee.ManagerEmployeeID
+	toColumn: DimManager.ManagerEmployeeID
 
-relationship c178ec67-d77d-4f2f-941e-a616adfe4625
-	joinOnDateBehavior: datePartOnly
-	fromColumn: JobHistory.EndDate
-	toColumn: LocalDateTable_7049d1a4-67c9-4141-9826-9a785e9521bb.Date
+relationship LeaveDays_LeaveTypeID_LeaveType_LeaveTypeID
+	fromColumn: FactLeaveDays.LeaveTypeID
+	toColumn: DimLeaveType.LeaveTypeID
 
-relationship 1790921b-1f0b-4700-b874-3d822a17e1cc
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Compensation.EndDate
-	toColumn: LocalDateTable_439503b5-e932-414b-9662-29c89bba7acf.Date
-
-relationship 400954c7-a489-47d5-88e1-5eef26843501
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Reviews.ReviewPeriodStart
-	toColumn: LocalDateTable_31457bad-4597-4792-a4fd-77c02860cde6.Date
-
-relationship 488f4117-7d80-4e03-8024-a14fd6e8cd3a
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Reviews.ReviewPeriodEnd
-	toColumn: LocalDateTable_b4f104de-773a-4da8-974e-e67d71afd7a1.Date
-
-relationship ebf68e8f-f713-4fd7-84a0-2b6be6de0acf
-	joinOnDateBehavior: datePartOnly
-	fromColumn: ReferenceDate.ReferenceDate
-	toColumn: LocalDateTable_96b398aa-b58c-475a-a839-980797a3d32a.Date
+relationship DepartmentTargets_DepartmentID_Department_DepartmentID
+	fromColumn: FactWorkforcePlan.DepartmentID
+	toColumn: DimDepartment.DepartmentID
 

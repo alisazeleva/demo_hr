@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Employees"
+                      "Entity": "DimEmployee"
                     }
                   },
                   "Property": "Gender"
                 }
               },
-              "queryRef": "Employees.Gender",
+              "queryRef": "DimEmployee.Gender",
               "nativeQueryRef": "Gender",
               "active": true
             }
@@ -78,7 +78,7 @@
                       "Column": {
                         "Expression": {
                           "SourceRef": {
-                            "Entity": "Employees"
+                            "Entity": "DimEmployee"
                           }
                         },
                         "Property": "Gender"
@@ -119,7 +119,7 @@
                       "Column": {
                         "Expression": {
                           "SourceRef": {
-                            "Entity": "Employees"
+                            "Entity": "DimEmployee"
                           }
                         },
                         "Property": "Gender"
@@ -448,37 +448,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "2db3705f89acb986100a",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Employees"
-              }
-            },
-            "Property": "Gender"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "2249d14b0704a79a4da0",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Headcount"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

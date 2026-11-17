@@ -85,6 +85,12 @@
             "alignment": "left"
           }
         ],
+        "visualTooltip": [
+          {
+            "fontSize": 10,
+            "fontFamily": "Segoe UI"
+          }
+        ],
         "subTitle": [
           {
             "fontFamily": "Segoe UI",

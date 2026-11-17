@@ -4,10 +4,10 @@
   "position": {
     "x": 1393.9001668409583,
     "y": 30.408800261836529,
-    "z": 9000,
+    "z": 7000,
     "height": 79.455252297056731,
     "width": 230.51832456553498,
-    "tabOrder": 9000
+    "tabOrder": 7000
   },
   "visual": {
     "visualType": "slicer",
@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Employees"
+                      "Entity": "DimPosition"
                     }
                   },
                   "Property": "JobLevel"
                 }
               },
-              "queryRef": "Employees.JobLevel",
+              "queryRef": "DimPosition.JobLevel",
               "nativeQueryRef": "JobLevel",
               "active": true
             }
@@ -106,7 +106,7 @@
             "textSize": {
               "expr": {
                 "Literal": {
-                  "Value": "14D"
+                  "Value": "16D"
                 }
               }
             },
@@ -504,11 +504,11 @@
         }
       ]
     },
-    "drillFilterOtherVisuals": true,
     "syncGroup": {
       "groupName": "JobLevel",
       "fieldChanges": true,
       "filterChanges": true
-    }
+    },
+    "drillFilterOtherVisuals": true
   }
 }

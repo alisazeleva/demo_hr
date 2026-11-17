@@ -7,29 +7,25 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation __PBI_TimeIntelligenceEnabled = 1
+annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_ProTooling = ["DevMode","MCP-PBIModeling"]
 
-annotation PBI_QueryOrder = ["Employees","JobHistory","Compensation","Reviews","LeaveDays","DepartmentTargets","ReferenceDate","SqlServer","SqlDatabase"]
+annotation PBI_QueryOrder = ["DimEmployee","FactJobHistory","FactCompensation","FactReviews","FactLeaveDays","FactWorkforcePlan","ReferenceDate","SqlServer","SqlDatabase","DimDepartment","DimPosition","DimManager","DimLeaveType"]
 
-ref table Employees
-ref table JobHistory
-ref table Compensation
-ref table Reviews
-ref table LeaveDays
-ref table DepartmentTargets
+ref table DimEmployee
+ref table FactJobHistory
+ref table FactCompensation
+ref table FactReviews
+ref table FactLeaveDays
+ref table FactWorkforcePlan
 ref table ReferenceDate
-ref table Date
+ref table DimDate
 ref table _Measures
-ref table DateTableTemplate_e284e506-d3ac-468e-98b7-500dac42f50f
-ref table LocalDateTable_c378c038-90d8-4dbe-9380-7f55299afb1d
-ref table LocalDateTable_0ec995b0-9a23-4998-a051-cc7ab44ed1eb
-ref table LocalDateTable_7049d1a4-67c9-4141-9826-9a785e9521bb
-ref table LocalDateTable_439503b5-e932-414b-9662-29c89bba7acf
-ref table LocalDateTable_31457bad-4597-4792-a4fd-77c02860cde6
-ref table LocalDateTable_b4f104de-773a-4da8-974e-e67d71afd7a1
-ref table LocalDateTable_96b398aa-b58c-475a-a839-980797a3d32a
+ref table DimDepartment
+ref table DimPosition
+ref table DimManager
+ref table DimLeaveType
 
 ref cultureInfo en-GB
 

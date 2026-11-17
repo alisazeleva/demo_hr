@@ -4,10 +4,10 @@
   "position": {
     "x": 1519,
     "y": 137.5,
-    "z": 14000,
+    "z": 12000,
     "height": 139.7,
     "width": 373.9,
-    "tabOrder": 14000
+    "tabOrder": 12000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -534,23 +534,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "8776514368086c2d522c",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Departments at Target"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

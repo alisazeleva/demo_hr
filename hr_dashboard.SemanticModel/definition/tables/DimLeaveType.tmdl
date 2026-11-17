@@ -1,0 +1,30 @@
+/// Leave types (vw_DimLeaveType)
+table DimLeaveType
+	lineageTag: 69523549-06e0-44c6-9db2-0fd233077e90
+
+	column LeaveTypeID
+		dataType: int64
+		isHidden
+		lineageTag: 8277267a-b91c-468d-80e7-7d385b03bdbe
+		summarizeBy: none
+		sourceColumn: LeaveTypeID
+
+	column LeaveType
+		dataType: string
+		lineageTag: 998e8522-8714-4b34-8c5c-eb7210f04493
+		sourceColumn: LeaveType
+
+	column IsPaid
+		dataType: boolean
+		lineageTag: f45a9619-0b09-4eaa-b2c4-271470c4b314
+		sourceColumn: IsPaid
+
+	partition LeaveType = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Data = Source{[Schema="dbo", Item="vw_DimLeaveType"]}[Data]
+				in
+				    Data
+

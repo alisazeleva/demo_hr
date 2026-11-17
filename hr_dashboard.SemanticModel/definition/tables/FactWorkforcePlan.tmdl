@@ -1,0 +1,26 @@
+/// Planned headcount per department (vw_FactWorkforcePlan)
+table FactWorkforcePlan
+	lineageTag: 409fced0-ae76-4880-bb48-81d86072556b
+
+	column DepartmentID
+		dataType: int64
+		isHidden
+		lineageTag: d8dd6f5d-1d3d-4473-9647-2e9cb6b6b392
+		summarizeBy: none
+		sourceColumn: DepartmentID
+
+	column TargetHeadcount
+		dataType: int64
+		lineageTag: 6b355af7-9ebf-485f-9ecf-101ac7c5ade5
+		summarizeBy: none
+		sourceColumn: TargetHeadcount
+
+	partition DepartmentTargets = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Data = Source{[Schema="dbo", Item="vw_FactWorkforcePlan"]}[Data]
+				in
+				    Data
+

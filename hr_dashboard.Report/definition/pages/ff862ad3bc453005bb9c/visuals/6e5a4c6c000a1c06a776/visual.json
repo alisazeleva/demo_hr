@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Employees"
+                      "Entity": "DimEmployee"
                     }
                   },
                   "Property": "Nationality"
                 }
               },
-              "queryRef": "Employees.Nationality",
+              "queryRef": "DimEmployee.Nationality",
               "nativeQueryRef": "Nationality",
               "active": true
             }
@@ -106,7 +106,7 @@
             "textSize": {
               "expr": {
                 "Literal": {
-                  "Value": "14D"
+                  "Value": "16D"
                 }
               }
             },

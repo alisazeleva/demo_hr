@@ -4,10 +4,10 @@
   "position": {
     "x": 329.69108199250064,
     "y": 300.45242334484766,
-    "z": 15000,
+    "z": 13000,
     "height": 749.11459914503973,
     "width": 951.76875046153089,
-    "tabOrder": 15000
+    "tabOrder": 13000
   },
   "visual": {
     "visualType": "decompositionTreeVisual",
@@ -38,13 +38,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Employees"
+                      "Entity": "DimDepartment"
                     }
                   },
                   "Property": "Department"
                 }
               },
-              "queryRef": "Employees.Department",
+              "queryRef": "DimDepartment.Department",
               "nativeQueryRef": "Department",
               "active": true
             },
@@ -53,13 +53,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Employees"
+                      "Entity": "DimManager"
                     }
                   },
                   "Property": "ManagerName"
                 }
               },
-              "queryRef": "Employees.ManagerName",
+              "queryRef": "DimManager.ManagerName",
               "nativeQueryRef": "ManagerName",
               "active": true
             },
@@ -68,14 +68,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Employees"
+                      "Entity": "DimPosition"
                     }
                   },
-                  "Property": "JobLevel"
+                  "Property": "PositionTitle"
                 }
               },
-              "queryRef": "Employees.JobLevel",
-              "nativeQueryRef": "JobLevel",
+              "queryRef": "DimPosition.PositionTitle",
+              "nativeQueryRef": "PositionTitle",
               "active": true
             },
             {
@@ -83,18 +83,36 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Employees"
+                      "Entity": "DimEmployee"
                     }
                   },
                   "Property": "FullName"
                 }
               },
-              "queryRef": "Employees.FullName",
+              "queryRef": "DimEmployee.FullName",
               "nativeQueryRef": "FullName",
-              "active": false
+              "active": true
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Measures"
+                  }
+                },
+                "Property": "Headcount"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
       }
     },
     "expansionStates": [
@@ -105,7 +123,7 @@
         "levels": [
           {
             "queryRefs": [
-              "Employees.Department"
+              "DimDepartment.Department"
             ],
             "isCollapsed": true,
             "identityKeys": [
@@ -113,7 +131,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Employees"
+                      "Entity": "DimDepartment"
                     }
                   },
                   "Property": "Department"
@@ -124,7 +142,7 @@
           },
           {
             "queryRefs": [
-              "Employees.ManagerName"
+              "DimManager.ManagerName"
             ],
             "isCollapsed": true,
             "identityKeys": [
@@ -132,7 +150,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Employees"
+                      "Entity": "DimManager"
                     }
                   },
                   "Property": "ManagerName"
@@ -143,7 +161,7 @@
           },
           {
             "queryRefs": [
-              "Employees.JobLevel"
+              "DimPosition.PositionTitle"
             ],
             "isCollapsed": true,
             "identityKeys": [
@@ -151,10 +169,10 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Employees"
+                      "Entity": "DimPosition"
                     }
                   },
-                  "Property": "JobLevel"
+                  "Property": "PositionTitle"
                 }
               }
             ],
@@ -162,9 +180,10 @@
           },
           {
             "queryRefs": [
-              "Employees.FullName"
+              "DimEmployee.FullName"
             ],
-            "isCollapsed": true
+            "isCollapsed": true,
+            "isPinned": true
           }
         ],
         "root": {
@@ -183,11 +202,23 @@
                   "identityValues": [
                     {
                       "Literal": {
-                        "Value": "'Petri Jokinen'"
+                        "Value": "'Onni Hirvonen'"
                       }
                     }
                   ],
-                  "isToggled": true
+                  "isToggled": true,
+                  "children": [
+                    {
+                      "identityValues": [
+                        {
+                          "Literal": {
+                            "Value": "'Junior Support Agent'"
+                          }
+                        }
+                      ],
+                      "isToggled": true
+                    }
+                  ]
                 }
               ]
             }
@@ -375,7 +406,7 @@
                       "Column": {
                         "Expression": {
                           "SourceRef": {
-                            "Entity": "Employees"
+                            "Entity": "DimPosition"
                           }
                         },
                         "Property": "JobLevel"
@@ -620,26 +651,12 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "4853511fc20750b4b0e9",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Headcount"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
         "name": "65d9aedfe2c0303d1bac",
         "field": {
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Employees"
+                "Entity": "DimDepartment"
               }
             },
             "Property": "Department"
@@ -651,7 +668,7 @@
           "From": [
             {
               "Name": "e",
-              "Entity": "Employees",
+              "Entity": "DimDepartment",
               "Type": 0
             }
           ],
@@ -706,12 +723,26 @@
         }
       },
       {
-        "name": "fd145998919097e45a13",
+        "name": "65bf179071497a9bc09d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Headcount"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "1e473c1db01198746693",
         "field": {
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Employees"
+                "Entity": "DimManager"
               }
             },
             "Property": "ManagerName"
@@ -720,26 +751,26 @@
         "type": "Categorical"
       },
       {
-        "name": "13da5ba86e9054230153",
+        "name": "7e2ddfd9dc8d0c127711",
         "field": {
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Employees"
+                "Entity": "DimPosition"
               }
             },
-            "Property": "JobLevel"
+            "Property": "PositionTitle"
           }
         },
         "type": "Categorical"
       },
       {
-        "name": "868c389d2381d4c37b7d",
+        "name": "9215d0d5c07a77d9c37a",
         "field": {
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Employees"
+                "Entity": "DimEmployee"
               }
             },
             "Property": "FullName"

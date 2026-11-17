@@ -1,5 +1,5 @@
-/// One row per employee (vw_EmployeeCurrent)
-table Employees
+/// One row per current employee: person attributes plus keys to Department, Position and Manager (vw_DimEmployee)
+table DimEmployee
 	lineageTag: 7096802c-7393-4515-b82d-886879a710f1
 
 	column EmployeeID
@@ -14,22 +14,6 @@ table Employees
 		lineageTag: 30ff9952-a578-4337-ba84-c89776c0b583
 		summarizeBy: none
 		sourceColumn: EmployeeNumber
-
-		annotation SummarizationSetBy = Automatic
-
-	column FirstName
-		dataType: string
-		lineageTag: d972b471-5693-46cd-8bb3-c3b53c611876
-		summarizeBy: none
-		sourceColumn: FirstName
-
-		annotation SummarizationSetBy = Automatic
-
-	column LastName
-		dataType: string
-		lineageTag: 4b4d5563-d6a4-415c-b00a-1b8319b4ef54
-		summarizeBy: none
-		sourceColumn: LastName
 
 		annotation SummarizationSetBy = Automatic
 
@@ -48,20 +32,6 @@ table Employees
 		sourceColumn: Gender
 
 		annotation SummarizationSetBy = Automatic
-
-	column DateOfBirth
-		dataType: dateTime
-		formatString: yyyy-mm-dd
-		lineageTag: a9191bd1-1ae5-42ff-bd27-9bfcc2b9c3d7
-		summarizeBy: none
-		sourceColumn: DateOfBirth
-
-		variation Variation
-			isDefault
-			relationship: d5ae22cc-f973-4bd3-95ac-481ad12dcddd
-			defaultHierarchy: LocalDateTable_c378c038-90d8-4dbe-9380-7f55299afb1d.'Date Hierarchy'
-
-		annotation UnderlyingDateTimeDataType = Date
 
 	column Age
 		dataType: int64
@@ -105,61 +75,12 @@ table Employees
 
 		annotation SummarizationSetBy = Automatic
 
-	column EmailAddress
-		dataType: string
-		lineageTag: 56d0eada-81a4-4fa5-be69-ddae08f4a113
-		summarizeBy: none
-		sourceColumn: EmailAddress
-
-		annotation SummarizationSetBy = Automatic
-
 	column PositionID
 		dataType: int64
 		isHidden
 		lineageTag: 7811f695-9446-4f57-9123-4fa02665269b
-		summarizeBy: count
+		summarizeBy: none
 		sourceColumn: PositionID
-
-		annotation SummarizationSetBy = Automatic
-
-	column PositionTitle
-		dataType: string
-		lineageTag: c0c61e40-1db2-481e-9c63-ee272717a92f
-		summarizeBy: none
-		sourceColumn: PositionTitle
-
-		annotation SummarizationSetBy = Automatic
-
-	column JobFamily
-		dataType: string
-		lineageTag: de50b9df-020a-42b8-adc6-23494c242b77
-		summarizeBy: none
-		sourceColumn: JobFamily
-
-		annotation SummarizationSetBy = Automatic
-
-	column JobLevel
-		dataType: string
-		lineageTag: 23bca32b-961a-4665-9510-74e4c2de5167
-		summarizeBy: none
-		sourceColumn: JobLevel
-		sortByColumn: JobLevelRank
-
-		annotation SummarizationSetBy = Automatic
-
-	column JobLevelRank
-		dataType: int64
-		lineageTag: 19970fdb-5f17-4024-becc-00864b3c7452
-		summarizeBy: sum
-		sourceColumn: JobLevelRank
-
-		annotation SummarizationSetBy = Automatic
-
-	column IsManagementPosition
-		dataType: boolean
-		lineageTag: 2b8767e7-db56-4d86-aca2-9674f31ca3dd
-		summarizeBy: none
-		sourceColumn: IsManagementPosition
 
 		annotation SummarizationSetBy = Automatic
 
@@ -167,16 +88,8 @@ table Employees
 		dataType: int64
 		isHidden
 		lineageTag: 21f35bf8-0071-4005-828d-ccbd132b793a
-		summarizeBy: count
-		sourceColumn: DepartmentID
-
-		annotation SummarizationSetBy = Automatic
-
-	column Department
-		dataType: string
-		lineageTag: d6e1d57f-74d2-4de0-8c3d-6e5a0983bc61
 		summarizeBy: none
-		sourceColumn: Department
+		sourceColumn: DepartmentID
 
 		annotation SummarizationSetBy = Automatic
 
@@ -184,16 +97,8 @@ table Employees
 		dataType: int64
 		isHidden
 		lineageTag: 152e803a-c0bf-4a13-bf43-521935053e76
-		summarizeBy: count
-		sourceColumn: ManagerEmployeeID
-
-		annotation SummarizationSetBy = Automatic
-
-	column ManagerName
-		dataType: string
-		lineageTag: c9c66841-f954-4eb4-bcd3-632e681366d7
 		summarizeBy: none
-		sourceColumn: ManagerName
+		sourceColumn: ManagerEmployeeID
 
 		annotation SummarizationSetBy = Automatic
 
@@ -214,14 +119,6 @@ table Employees
 
 		annotation SummarizationSetBy = Automatic
 
-	column Currency
-		dataType: string
-		lineageTag: ced90a7d-a18e-4ed2-b249-f3af00eaa528
-		summarizeBy: none
-		sourceColumn: Currency
-
-		annotation SummarizationSetBy = Automatic
-
 	column LatestRating
 		dataType: double
 		formatString: 0.0
@@ -237,11 +134,6 @@ table Employees
 		lineageTag: 216e89cb-bb6e-450c-89f9-1327c54f4751
 		summarizeBy: none
 		sourceColumn: LatestReviewDate
-
-		variation Variation
-			isDefault
-			relationship: 72e91f93-d059-4dc4-847f-1ae6fd447a6b
-			defaultHierarchy: LocalDateTable_0ec995b0-9a23-4998-a051-cc7ab44ed1eb.'Date Hierarchy'
 
 		annotation UnderlyingDateTimeDataType = Date
 
@@ -270,16 +162,6 @@ table Employees
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Employee IDs from the CEO down to this employee
-	column PathIDs
-		dataType: string
-		isHidden
-		lineageTag: 8ed8bc8d-833e-46f4-847f-645b746fa581
-		summarizeBy: none
-		sourceColumn: PathIDs
-
-		annotation SummarizationSetBy = Automatic
-
 	/// Names from the CEO down to this employee
 	column PathFromCEO
 		dataType: string
@@ -300,10 +182,10 @@ table Employees
 
 	/// Rank of the nationality by headcount (1 = largest, ties by name); 99 = grouped into Other (outside the top 6)
 	column 'Nationality Order' =
-			VAR nat = Employees[Nationality]
-			VAR counts = GROUPBY(ALL(Employees), Employees[Nationality], "@c", COUNTX(CURRENTGROUP(), 1))
-			VAR cnt = MAXX(FILTER(counts, Employees[Nationality] = nat), [@c])
-			VAR higher = COUNTROWS(FILTER(counts, [@c] > cnt || ([@c] = cnt && Employees[Nationality] < nat)))
+			VAR nat = DimEmployee[Nationality]
+			VAR counts = GROUPBY(ALL(DimEmployee), DimEmployee[Nationality], "@c", COUNTX(CURRENTGROUP(), 1))
+			VAR cnt = MAXX(FILTER(counts, DimEmployee[Nationality] = nat), [@c])
+			VAR higher = COUNTROWS(FILTER(counts, [@c] > cnt || ([@c] = cnt && DimEmployee[Nationality] < nat)))
 			RETURN IF(higher < 6, higher + 1, 99)
 		dataType: int64
 		isHidden
@@ -314,10 +196,10 @@ table Employees
 
 	/// Rank of the native language by headcount (1 = largest, ties by name); 99 = grouped into Other (outside the top 6)
 	column 'Native Language Order' =
-			VAR lang = Employees[NativeLanguage]
-			VAR counts = GROUPBY(ALL(Employees), Employees[NativeLanguage], "@c", COUNTX(CURRENTGROUP(), 1))
-			VAR cnt = MAXX(FILTER(counts, Employees[NativeLanguage] = lang), [@c])
-			VAR higher = COUNTROWS(FILTER(counts, [@c] > cnt || ([@c] = cnt && Employees[NativeLanguage] < lang)))
+			VAR lang = DimEmployee[NativeLanguage]
+			VAR counts = GROUPBY(ALL(DimEmployee), DimEmployee[NativeLanguage], "@c", COUNTX(CURRENTGROUP(), 1))
+			VAR cnt = MAXX(FILTER(counts, DimEmployee[NativeLanguage] = lang), [@c])
+			VAR higher = COUNTROWS(FILTER(counts, [@c] > cnt || ([@c] = cnt && DimEmployee[NativeLanguage] < lang)))
 			RETURN IF(higher < 6, higher + 1, 99)
 		dataType: int64
 		isHidden
@@ -327,14 +209,14 @@ table Employees
 		annotation SummarizationSetBy = Automatic
 
 	/// Nationality for the six largest groups, everything else as Other
-	column 'Nationality Top 6' = IF(Employees[Nationality Order] = 99, "Other (" & (COUNTROWS(ALL(Employees[Nationality])) - 6) & ")", Employees[Nationality])
+	column 'Nationality Top 6' = IF(DimEmployee[Nationality Order] = 99, "Other (" & (COUNTROWS(ALL(DimEmployee[Nationality])) - 6) & ")", DimEmployee[Nationality])
 		dataType: string
 		lineageTag: e50a0bd0-cf11-4d6e-aa97-6485f31be90a
 		summarizeBy: none
 		sortByColumn: 'Nationality Order'
 
 	/// Native language for the six largest groups, everything else as Other
-	column 'Native Language Top 6' = IF(Employees[Native Language Order] = 99, "Other (" & (COUNTROWS(ALL(Employees[NativeLanguage])) - 6) & ")", Employees[NativeLanguage])
+	column 'Native Language Top 6' = IF(DimEmployee[Native Language Order] = 99, "Other (" & (COUNTROWS(ALL(DimEmployee[NativeLanguage])) - 6) & ")", DimEmployee[NativeLanguage])
 		dataType: string
 		lineageTag: a7f33dd5-89ad-44ad-a707-49682f76a2e2
 		summarizeBy: none
@@ -345,7 +227,8 @@ table Employees
 		source =
 				let
 				    Source = Sql.Database(SqlServer, SqlDatabase),
-				    Data = Source{[Schema="dbo", Item="vw_EmployeeCurrent"]}[Data]
+				    Data = Source{[Schema="dbo", Item="vw_DimEmployee"]}[Data],
+				    Slim = Table.RemoveColumns(Data, {"FirstName", "LastName", "EmailAddress", "DateOfBirth", "Currency", "PathIDs"}, MissingField.Ignore)
 				in
-				    Data
+				    Slim
 

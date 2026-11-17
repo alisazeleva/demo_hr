@@ -9,13 +9,13 @@ table _Measures
 		lineageTag: 07cf75f8-b983-417e-b34b-f805ad62582c
 
 	/// Number of employees in the current filter (151 in total, including the CEO)
-	measure Headcount = COUNTROWS(Employees)
+	measure Headcount = COUNTROWS(DimEmployee)
 		formatString: #,0
 		displayFolder: Workforce
 		lineageTag: 4c3dcaba-f1fe-4874-95ad-34c37f0a5b62
 
 	/// Employees in the five departments (excludes the CEO, who sits under Acme Corporation)
-	measure 'Department Headcount' = CALCULATE([Headcount], Employees[JobLevel] <> "CEO")
+	measure 'Department Headcount' = CALCULATE([Headcount], DimPosition[JobLevel] <> "CEO")
 		formatString: #,0
 		displayFolder: Workforce
 		lineageTag: a66e7598-dcde-4a1e-9d33-cdf175145b22
@@ -23,8 +23,8 @@ table _Measures
 	/// Planned headcount of the departments in the current employee filter
 	measure 'Target Headcount' =
 			CALCULATE(
-			    SUM(DepartmentTargets[TargetHeadcount]) + RANDBETWEEN(0, 2),
-			    TREATAS(VALUES(Employees[DepartmentID]), DepartmentTargets[DepartmentID])
+			    SUM(FactWorkforcePlan[TargetHeadcount]),
+			    TREATAS(VALUES(DimEmployee[DepartmentID]), FactWorkforcePlan[DepartmentID])
 			)
 		formatString: #,0
 		displayFolder: Workforce
@@ -35,42 +35,36 @@ table _Measures
 			[Target Headcount] - [Department Headcount]
 			
 			```
-		formatString: +#,0;-#,0;0
+		formatString: 0
 		displayFolder: Workforce
 		lineageTag: 6469f3eb-bd7d-4c2d-98f1-b3f907a58a5c
 
 	/// Average years of service on the reference date
-	measure 'Average Tenure (years)' = AVERAGE(Employees[TenureYears])
+	measure 'Average Tenure (years)' = AVERAGE(DimEmployee[TenureYears])
 		formatString: 0.0" years"
 		displayFolder: Workforce
 		lineageTag: c7bc268b-c549-4704-9dac-63db9c3a18e1
 
 	/// Direct reports of the employees in the current filter
-	measure 'Direct Reports' = SUM(Employees[DirectReports])
+	measure 'Direct Reports' = SUM(DimEmployee[DirectReports])
 		formatString: #,0
 		displayFolder: Organization
 		lineageTag: 103fef50-1b53-48ac-9109-d1adeac79706
 
 	/// Employees who have at least one direct report
-	measure Managers = CALCULATE(COUNTROWS(Employees), Employees[DirectReports] > 0)
+	measure Managers = CALCULATE(COUNTROWS(DimEmployee), DimEmployee[DirectReports] > 0)
 		formatString: #,0
 		displayFolder: Organization
 		lineageTag: 82f235cb-b0fb-4738-bd4b-1562b6704e09
 
-	/// Average number of direct reports per manager
-	measure 'Span of Control' = DIVIDE([Direct Reports], [Managers])
-		formatString: 0.0
-		displayFolder: Organization
-		lineageTag: a42734f6-729a-4056-a368-64cb00ed67d5
-
 	/// Promotions (including promotions with a department transfer), by promotion date
-	measure Promotions = CALCULATE(COUNTROWS(JobHistory), JobHistory[IsPromotion] = TRUE())
+	measure Promotions = CALCULATE(COUNTROWS(FactJobHistory), FactJobHistory[IsPromotion] = TRUE())
 		formatString: #,0
 		displayFolder: Career
 		lineageTag: 16d7bda0-12ae-4323-b134-03d6d9a90b52
 
 	/// Department transfers (including promotions with a transfer), by transfer date
-	measure 'Department Transfers' = CALCULATE(COUNTROWS(JobHistory), JobHistory[IsDepartmentTransfer] = TRUE())
+	measure 'Department Transfers' = CALCULATE(COUNTROWS(FactJobHistory), FactJobHistory[IsDepartmentTransfer] = TRUE())
 		formatString: #,0
 		displayFolder: Career
 		lineageTag: 0c5d85b3-28b0-4887-af77-3e7ff8c97f83
@@ -78,13 +72,13 @@ table _Measures
 	/// Average gap in months between consecutive promotions of the same employee (only employees with two or more promotions contribute)
 	measure 'Average Months Between Promotions' =
 			AVERAGEX(
-			    FILTER(JobHistory, JobHistory[IsPromotion] = TRUE()),
-			    VAR emp = JobHistory[EmployeeID]
-			    VAR d = JobHistory[EffectiveDate]
+			    FILTER(FactJobHistory, FactJobHistory[IsPromotion] = TRUE()),
+			    VAR emp = FactJobHistory[EmployeeID]
+			    VAR d = FactJobHistory[EffectiveDate]
 			    VAR prevPromo =
 			        CALCULATE(
-			            MAX(JobHistory[EffectiveDate]),
-			            FILTER(ALL(JobHistory), JobHistory[EmployeeID] = emp && JobHistory[IsPromotion] = TRUE() && JobHistory[EffectiveDate] < d)
+			            MAX(FactJobHistory[EffectiveDate]),
+			            FILTER(ALL(FactJobHistory), FactJobHistory[EmployeeID] = emp && FactJobHistory[IsPromotion] = TRUE() && FactJobHistory[EffectiveDate] < d)
 			        )
 			    RETURN IF(NOT ISBLANK(prevPromo), DATEDIFF(prevPromo, d, MONTH))
 			)
@@ -93,13 +87,13 @@ table _Measures
 		lineageTag: a660e71a-128b-4fcb-92d7-c6b25abf770e
 
 	/// Average current annual base salary (EUR)
-	measure 'Average Salary' = AVERAGE(Employees[CurrentSalary])
+	measure 'Average Salary' = AVERAGE(DimEmployee[CurrentSalary])
 		formatString: "€"#,0
 		displayFolder: Compensation
 		lineageTag: ea466c53-7b19-44a5-a489-79c622e6a087
 
 	/// Average annual review rating (1.0 to 5.0)
-	measure 'Average Rating' = AVERAGE(Reviews[Rating])
+	measure 'Average Rating' = AVERAGE(FactReviews[Rating])
 		formatString: 0.00
 		displayFolder: Performance
 		lineageTag: d7a4de2f-ba41-4413-982c-0841b7ce1fb8
@@ -109,21 +103,21 @@ table _Measures
 			VAR ref = [Reference Date]
 			RETURN
 			CALCULATE(
-			    COUNTROWS(Employees),
-			    FILTER(Employees, ISBLANK(Employees[LatestReviewDate]) || Employees[LatestReviewDate] <= EDATE(ref, -12))
+			    COUNTROWS(DimEmployee),
+			    FILTER(DimEmployee, ISBLANK(DimEmployee[LatestReviewDate]) || DimEmployee[LatestReviewDate] <= EDATE(ref, -12))
 			)
 		formatString: #,0
 		displayFolder: Performance
 		lineageTag: 7b9fc68c-9e17-49be-b01a-85f7de1feaea
 
 	/// Working days of approved leave
-	measure 'Leave Days' = COUNTROWS(LeaveDays)
+	measure 'Leave Days' = COUNTROWS(FactLeaveDays)
 		formatString: #,0
 		displayFolder: Leave
 		lineageTag: aa90eb6a-37a6-496f-89b5-b6f7e2cc3911
 
 	/// Approved vacation days on or before the reference date
-	measure 'Vacation Days Used' = CALCULATE(COUNTROWS(LeaveDays), LeaveDays[LeaveType] = "Vacation", LeaveDays[IsOnOrBeforeReferenceDate] = TRUE())
+	measure 'Vacation Days Used' = CALCULATE(COUNTROWS(FactLeaveDays), DimLeaveType[LeaveType] = "Vacation", FactLeaveDays[IsOnOrBeforeReferenceDate] = TRUE())
 		formatString: #,0
 		displayFolder: Leave
 		lineageTag: 786de8ef-8478-4196-928c-03e963678c90
@@ -132,7 +126,7 @@ table _Measures
 	measure 'Vacation Days Used per Year' =
 			DIVIDE(
 			    [Vacation Days Used],
-			    CALCULATE(COUNTROWS(Employees), Employees[HireDate] <= MAX('Date'[Date]))
+			    CALCULATE(COUNTROWS(DimEmployee), DimEmployee[HireDate] <= MAX('DimDate'[Date]))
 			)
 		formatString: 0.0
 		displayFolder: Leave
@@ -143,40 +137,40 @@ table _Measures
 			VAR ref = [Reference Date]
 			RETURN
 			CALCULATE(
-			    DISTINCTCOUNT(LeaveDays[EmployeeID]),
-			    REMOVEFILTERS('Date'),
-			    LeaveDays[LeaveDate] = ref
+			    DISTINCTCOUNT(FactLeaveDays[EmployeeID]),
+			    REMOVEFILTERS('DimDate'),
+			    FactLeaveDays[LeaveDate] = ref
 			)
 		formatString: #,0
 		displayFolder: Leave
 		lineageTag: fbf39e58-6728-45d7-b659-2b2ed02a282f
 
-	/// Employees hired in the selected period (counts by hire date through the inactive Employees[HireDate] to Date relationship)
-	measure Hires = CALCULATE(COUNTROWS(Employees), USERELATIONSHIP(Employees[HireDate], 'Date'[Date]))
+	/// Employees hired in the selected period (counts by hire date through the inactive DimEmployee[HireDate] to DimDate relationship)
+	measure Hires = CALCULATE(COUNTROWS(DimEmployee), USERELATIONSHIP(DimEmployee[HireDate], 'DimDate'[Date]))
 		formatString: #,0
 		displayFolder: Workforce
 		lineageTag: 6de13a3d-2b09-487d-9e23-aafd92ae1540
 
 	/// Average age in years on the reference date
-	measure 'Average Age' = AVERAGE(Employees[Age])
+	measure 'Average Age' = AVERAGE(DimEmployee[Age])
 		formatString: 0.0" years"
 		displayFolder: Workforce
 		lineageTag: c618d38d-15c1-4c5e-ba1f-3ee110dbc158
 
 	/// Share of female employees in the current filter
-	measure 'Female Share' = DIVIDE(CALCULATE(COUNTROWS(Employees), Employees[Gender] = "Female"), COUNTROWS(Employees))
+	measure 'Female Share' = DIVIDE(CALCULATE(COUNTROWS(DimEmployee), DimEmployee[Gender] = "Female"), COUNTROWS(DimEmployee))
 		formatString: 0.0%
 		displayFolder: Workforce
 		lineageTag: d2b20400-9ae2-482a-aa4e-f7c0f680496a
 
 	/// Median current annual base salary (EUR)
-	measure 'Median Salary' = MEDIAN(Employees[CurrentSalary])
+	measure 'Median Salary' = MEDIAN(DimEmployee[CurrentSalary])
 		formatString: "€"#,0
 		displayFolder: Compensation
 		lineageTag: 209e92d4-13dc-4356-8709-3e6ac9d27971
 
 	/// Sum of current annual base salaries (EUR per year)
-	measure 'Total Payroll' = SUM(Employees[CurrentSalary])
+	measure 'Total Payroll' = SUM(DimEmployee[CurrentSalary])
 		formatString: "€"#,0
 		displayFolder: Compensation
 		lineageTag: 8b0a6cbd-e159-4d2a-af1b-c5b08755935b
@@ -188,7 +182,7 @@ table _Measures
 		lineageTag: fd6075a1-eb20-44ce-bd55-928ac21b92b6
 
 	/// Number of departments (the company-level CEO unit is excluded)
-	measure Departments = CALCULATE(DISTINCTCOUNT(Employees[Department]), Employees[JobLevel] <> "CEO")
+	measure Departments = CALCULATE(DISTINCTCOUNT(DimEmployee[DepartmentID]), DimDepartment[DepartmentType] = "Department")
 		formatString: 0
 		displayFolder: Workforce
 		lineageTag: c8853680-7fd2-4d10-be5c-e40642d8bf84
@@ -209,7 +203,7 @@ table _Measures
 		lineageTag: a94730e9-b8d2-46ec-a47a-397f7b9ef44d
 
 	/// KPI subtitle: youngest and oldest age
-	measure 'Text: Age Range' = "Range " & FORMAT(MIN(Employees[Age]), "0") & " to " & FORMAT(MAX(Employees[Age]), "0")
+	measure 'Text: Age Range' = "Range " & FORMAT(MIN(DimEmployee[Age]), "0") & " to " & FORMAT(MAX(DimEmployee[Age]), "0")
 		displayFolder: Text
 		lineageTag: e0d8e33b-3f2e-4102-a8d2-a36dda9480a3
 
@@ -219,29 +213,29 @@ table _Measures
 		lineageTag: 2c8594f7-3968-473c-84da-16c68a23a1b6
 
 	/// Nationality chart subtitle
-	measure 'Text: Nationality Subtitle' = "Top 6 of " & FORMAT(COUNTROWS(ALL(Employees[Nationality])), "0") & " nationalities"
+	measure 'Text: Nationality Subtitle' = "Top 6 of " & FORMAT(COUNTROWS(ALL(DimEmployee[Nationality])), "0") & " nationalities"
 		displayFolder: Text
 		lineageTag: 59427afd-85bc-4324-89ae-b8b997d9c610
 
 	/// Native language chart subtitle
-	measure 'Text: Language Subtitle' = "Top 6 of " & FORMAT(COUNTROWS(ALL(Employees[NativeLanguage])), "0") & " languages"
+	measure 'Text: Language Subtitle' = "Top 6 of " & FORMAT(COUNTROWS(ALL(DimEmployee[NativeLanguage])), "0") & " languages"
 		displayFolder: Text
 		lineageTag: 0701d465-0444-4613-a868-d17207c4c55a
 
 	/// Largest number of direct reports of any single manager
-	measure 'Largest Span of Control' = MAX(Employees[DirectReports])
+	measure 'Largest Span of Control' = MAX(DimEmployee[DirectReports])
 		formatString: #,0
 		displayFolder: Organization
 		lineageTag: 5b1f6a0e-2c1d-4e7a-9a53-0d9c6e0f1a01
 
 	/// Departments whose current headcount equals the planned target
-	measure 'Departments at Target' = COUNTROWS(FILTER(DepartmentTargets, DepartmentTargets[Difference] = 0))
+	measure 'Departments at Target' = SUMX(FILTER(DimDepartment, DimDepartment[DepartmentType] = "Department"), IF([Headcount vs Target] = 0, 1, 0))
 		formatString: #,0
 		displayFolder: Organization
 		lineageTag: 5b1f6a0e-2c1d-4e7a-9a53-0d9c6e0f1a02
 
 	/// KPI subtitle: departments at target out of all departments
-	measure 'Text: Departments at Target' = "of " & FORMAT(COUNTROWS(DepartmentTargets), "0") & " departments on plan"
+	measure 'Text: Departments at Target' = "of " & FORMAT(COUNTROWS(FactWorkforcePlan), "0") & " departments on plan"
 		displayFolder: Text
 		lineageTag: 5b1f6a0e-2c1d-4e7a-9a53-0d9c6e0f1a03
 
@@ -250,7 +244,7 @@ table _Measures
 			
 			VAR MaxSpan = [Largest Span of Control]
 			VAR N =
-			    CALCULATE ( COUNTROWS ( Employees ), Employees[DirectReports] = MaxSpan )
+			    CALCULATE ( COUNTROWS ( DimEmployee ), DimEmployee[DirectReports] = MaxSpan )
 			RETURN
 			    IF (
 			        N = 1,

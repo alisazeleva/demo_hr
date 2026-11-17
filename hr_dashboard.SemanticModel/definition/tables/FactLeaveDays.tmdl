@@ -1,13 +1,15 @@
 /// One row per working day of every approved leave (vw_LeaveDays)
-table LeaveDays
+table FactLeaveDays
 	lineageTag: 8900a3a4-2573-4496-a226-893941b6917f
 
 	column LeaveID
 		dataType: int64
 		isHidden
 		lineageTag: 92c9887c-51bf-43ca-8024-6c6aaf99bada
-		summarizeBy: none
+		summarizeBy: count
 		sourceColumn: LeaveID
+
+		annotation SummarizationSetBy = Automatic
 
 	column EmployeeID
 		dataType: int64
@@ -15,31 +17,6 @@ table LeaveDays
 		lineageTag: 9e293afd-f519-4007-a3d3-c34eb8f9bc80
 		summarizeBy: none
 		sourceColumn: EmployeeID
-
-	column EmployeeNumber
-		dataType: string
-		lineageTag: ec6ac036-e5fb-440b-b16c-f25fe32be599
-		sourceColumn: EmployeeNumber
-
-	column EmployeeName
-		dataType: string
-		lineageTag: 9ff7b464-d3e6-46be-9da9-569b87eb2cb5
-		sourceColumn: EmployeeName
-
-	column Department
-		dataType: string
-		lineageTag: e44f9c8f-409c-4296-8b07-a2f9acd3a1a0
-		sourceColumn: Department
-
-	column LeaveType
-		dataType: string
-		lineageTag: ccdaa018-6259-45b8-9996-a565955da54b
-		sourceColumn: LeaveType
-
-	column IsPaid
-		dataType: boolean
-		lineageTag: 0ab55bda-b02e-4c6a-be0b-68f480f48066
-		sourceColumn: IsPaid
 
 	column LeaveDate
 		dataType: dateTime
@@ -53,7 +30,26 @@ table LeaveDays
 	column IsOnOrBeforeReferenceDate
 		dataType: boolean
 		lineageTag: 5edfae1d-0792-43e6-8153-4c97b04e0dcf
+		summarizeBy: none
 		sourceColumn: IsOnOrBeforeReferenceDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column DepartmentID
+		dataType: int64
+		isHidden
+		lineageTag: da365b87-5428-4244-a182-93c3f0c41d27
+		summarizeBy: count
+		sourceColumn: DepartmentID
+
+		annotation SummarizationSetBy = Automatic
+
+	column LeaveTypeID
+		dataType: int64
+		isHidden
+		lineageTag: d83cb5a6-703e-4a76-af8a-617c5c7e3277
+		summarizeBy: none
+		sourceColumn: LeaveTypeID
 
 	partition LeaveDays = m
 		mode: import

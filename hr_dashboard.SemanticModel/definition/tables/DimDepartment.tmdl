@@ -1,0 +1,36 @@
+/// Departments and the company unit (vw_DimDepartment)
+table DimDepartment
+	lineageTag: fed00b12-9423-4087-b324-060b1ff21531
+
+	column DepartmentID
+		dataType: int64
+		isHidden
+		lineageTag: 575b8033-1683-4c3a-9024-63dba3044f83
+		summarizeBy: none
+		sourceColumn: DepartmentID
+
+	column Department
+		dataType: string
+		lineageTag: cca19142-143b-42e4-8968-232d3e0c2fd6
+		summarizeBy: none
+		sourceColumn: Department
+
+		annotation SummarizationSetBy = Automatic
+
+	column DepartmentType
+		dataType: string
+		lineageTag: 27a89ab0-dcfd-47fa-b716-c05e5d92b5f0
+		summarizeBy: none
+		sourceColumn: DepartmentType
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Department = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Data = Source{[Schema="dbo", Item="vw_DimDepartment"]}[Data]
+				in
+				    Data
+

@@ -270,7 +270,7 @@ Fifteen numbered scripts, one logical step each; you run one, check its result, 
 | 01\_create\_tables | All tables, keys, CHECKs, filtered unique indexes, empty | 11 tables, 0 rows |
 | 02\_seed\_organization | Acme Corporation and 5 departments | 1 company, 5 departments |
 | 03\_seed\_positions | The 67-position catalogue | Holders per department 45/25/20/35/25, plus 1 CEO |
-| 04\_seed\_workforce\_plan | Five department targets | Targets sum to 150 |
+| 04\_seed\_workforce\_plan | Five department targets | Targets sum to 155: Technology 48 and Sales 37 are above their headcount (45 and 35), so 2 of 5 departments are below target; the others equal their headcount |
 | 05\_seed\_support\_data | DummyNames, PublicHolidays, LeaveTypes (5 types) | Enough names per nationality and gender |
 | 06\_generate\_employees | 151 employees with final position, department, manager, demographics, email | 151 rows, headcount matches plan, unique numbers and emails |
 | 07\_validate\_hierarchy | Read-only checks | One CEO, no cycles, no self-reports, manager level strictly higher |

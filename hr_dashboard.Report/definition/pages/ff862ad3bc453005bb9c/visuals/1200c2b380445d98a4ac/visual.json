@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Employees"
+                      "Entity": "DimEmployee"
                     }
                   },
                   "Property": "Nationality Top 6"
                 }
               },
-              "queryRef": "Employees.Nationality Top 6",
+              "queryRef": "DimEmployee.Nationality Top 6",
               "nativeQueryRef": "Nationality Top 6",
               "active": true
             }
@@ -58,7 +58,7 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Employees"
+                    "Entity": "DimEmployee"
                   }
                 },
                 "Property": "Nationality Top 6"
@@ -429,21 +429,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "4018d73d3257d005e503",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Employees"
-              }
-            },
-            "Property": "Nationality Top 6"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "f478e846649a76722080",
+        "name": "e1cfdebbb71d902cc009",
         "field": {
           "Measure": {
             "Expression": {

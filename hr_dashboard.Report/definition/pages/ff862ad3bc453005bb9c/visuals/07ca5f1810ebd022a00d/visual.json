@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Employees"
+                      "Entity": "DimPosition"
                     }
                   },
                   "Property": "JobLevel"
                 }
               },
-              "queryRef": "Employees.JobLevel",
+              "queryRef": "DimPosition.JobLevel",
               "nativeQueryRef": "JobLevel",
               "active": true
             }
@@ -58,7 +58,7 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Employees"
+                    "Entity": "DimPosition"
                   }
                 },
                 "Property": "JobLevel"
@@ -420,37 +420,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "81e87c08dd3a7e7310e2",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Employees"
-              }
-            },
-            "Property": "JobLevel"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "01e801fb5570be166542",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Headcount"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

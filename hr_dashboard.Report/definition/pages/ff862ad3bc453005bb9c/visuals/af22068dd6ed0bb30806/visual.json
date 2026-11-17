@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Employees"
+                      "Entity": "DimPosition"
                     }
                   },
                   "Property": "JobLevel"
                 }
               },
-              "queryRef": "Employees.JobLevel",
+              "queryRef": "DimPosition.JobLevel",
               "nativeQueryRef": "JobLevel",
               "active": true
             }
@@ -106,7 +106,7 @@
             "textSize": {
               "expr": {
                 "Literal": {
-                  "Value": "14D"
+                  "Value": "16D"
                 }
               }
             },

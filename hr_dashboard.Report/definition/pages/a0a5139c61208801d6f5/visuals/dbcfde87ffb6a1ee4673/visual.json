@@ -4,10 +4,10 @@
   "position": {
     "x": 1122.1828225658383,
     "y": 30.408800261836529,
-    "z": 8000,
+    "z": 6000,
     "height": 79.455252297056731,
     "width": 253.07969250173628,
-    "tabOrder": 8000
+    "tabOrder": 6000
   },
   "visual": {
     "visualType": "slicer",
@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Employees"
+                      "Entity": "DimDepartment"
                     }
                   },
                   "Property": "Department"
                 }
               },
-              "queryRef": "Employees.Department",
+              "queryRef": "DimDepartment.Department",
               "nativeQueryRef": "Department",
               "active": true
             }
@@ -290,11 +290,11 @@
         }
       ]
     },
-    "drillFilterOtherVisuals": true,
     "syncGroup": {
       "groupName": "Department",
       "fieldChanges": true,
       "filterChanges": true
-    }
+    },
+    "drillFilterOtherVisuals": true
   }
 }

@@ -1,0 +1,59 @@
+/// Job positions with job family and level (vw_DimPosition)
+table DimPosition
+	lineageTag: 8c3d000d-5860-42e4-9844-fab1aaefa0ca
+
+	column PositionID
+		dataType: int64
+		isHidden
+		lineageTag: 7e10c768-1086-44c2-9691-56c16633ba53
+		summarizeBy: none
+		sourceColumn: PositionID
+
+	column PositionTitle
+		dataType: string
+		lineageTag: 3d9fc66d-c616-4814-9448-8404de4b18b9
+		summarizeBy: none
+		sourceColumn: PositionTitle
+
+		annotation SummarizationSetBy = Automatic
+
+	column JobFamily
+		dataType: string
+		lineageTag: d73405f5-a91a-410a-9b9c-f35b06c72541
+		summarizeBy: none
+		sourceColumn: JobFamily
+
+		annotation SummarizationSetBy = Automatic
+
+	column JobLevel
+		dataType: string
+		lineageTag: d5dd4a28-bdb9-4695-b4ec-1ec9e96ed8ed
+		summarizeBy: none
+		sourceColumn: JobLevel
+		sortByColumn: JobLevelRank
+
+		annotation SummarizationSetBy = Automatic
+
+	column JobLevelRank
+		dataType: int64
+		lineageTag: 4b86b3eb-1341-4b1c-a1e3-964362a226b7
+		summarizeBy: none
+		sourceColumn: JobLevelRank
+
+	column IsManagementPosition
+		dataType: boolean
+		lineageTag: 54adb539-7dec-4cb9-afba-603b9a374496
+		summarizeBy: none
+		sourceColumn: IsManagementPosition
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Position = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Data = Source{[Schema="dbo", Item="vw_DimPosition"]}[Data]
+				in
+				    Data
+

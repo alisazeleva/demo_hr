@@ -1,5 +1,5 @@
 /// Job history records with previous position, department and manager (vw_JobHistory)
-table JobHistory
+table FactJobHistory
 	lineageTag: 9e2b14d4-9b54-408b-9d42-262eef49a5e2
 
 	column JobHistoryID
@@ -18,22 +18,6 @@ table JobHistory
 		summarizeBy: none
 		sourceColumn: EmployeeID
 
-	column EmployeeNumber
-		dataType: string
-		lineageTag: 4b53ce01-8735-4e6e-9c43-b145c19e3722
-		summarizeBy: none
-		sourceColumn: EmployeeNumber
-
-		annotation SummarizationSetBy = Automatic
-
-	column EmployeeName
-		dataType: string
-		lineageTag: cd708ad9-53e9-4d69-8248-0a297a8b27eb
-		summarizeBy: none
-		sourceColumn: EmployeeName
-
-		annotation SummarizationSetBy = Automatic
-
 	column EffectiveDate
 		dataType: dateTime
 		formatString: yyyy-mm-dd
@@ -49,11 +33,6 @@ table JobHistory
 		lineageTag: 5fa0ce20-36b7-464c-822f-6bf802470351
 		summarizeBy: none
 		sourceColumn: EndDate
-
-		variation Variation
-			isDefault
-			relationship: c178ec67-d77d-4f2f-941e-a616adfe4625
-			defaultHierarchy: LocalDateTable_7049d1a4-67c9-4141-9826-9a785e9521bb.'Date Hierarchy'
 
 		annotation UnderlyingDateTimeDataType = Date
 
@@ -114,23 +93,6 @@ table JobHistory
 
 		annotation SummarizationSetBy = Automatic
 
-	column JobLevel
-		dataType: string
-		lineageTag: f4a25a36-bda4-4e57-904e-6eb67ca4ff40
-		summarizeBy: none
-		sourceColumn: JobLevel
-		sortByColumn: JobLevelRank
-
-		annotation SummarizationSetBy = Automatic
-
-	column JobLevelRank
-		dataType: int64
-		lineageTag: 0a1bd76e-1628-4802-b67f-075d58d03da7
-		summarizeBy: sum
-		sourceColumn: JobLevelRank
-
-		annotation SummarizationSetBy = Automatic
-
 	column DepartmentID
 		dataType: int64
 		isHidden
@@ -179,23 +141,6 @@ table JobHistory
 		lineageTag: b11d3546-a9cc-41d8-bf58-319686d1041a
 		summarizeBy: none
 		sourceColumn: PrevPositionTitle
-
-		annotation SummarizationSetBy = Automatic
-
-	column PrevJobLevel
-		dataType: string
-		lineageTag: 651c5d24-2734-4369-b2a7-4472ff6a50ea
-		summarizeBy: none
-		sourceColumn: PrevJobLevel
-		sortByColumn: PrevJobLevelRank
-
-		annotation SummarizationSetBy = Automatic
-
-	column PrevJobLevelRank
-		dataType: int64
-		lineageTag: 38199910-b0ec-4d2f-af79-d74140c0d2b9
-		summarizeBy: sum
-		sourceColumn: PrevJobLevelRank
 
 		annotation SummarizationSetBy = Automatic
 

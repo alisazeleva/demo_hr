@@ -147,23 +147,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "2d824adaed382127d9b8",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Text: Footer As Of"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }
