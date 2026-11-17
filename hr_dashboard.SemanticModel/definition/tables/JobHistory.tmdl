@@ -1,0 +1,244 @@
+/// Job history records with previous position, department and manager (vw_JobHistory)
+table JobHistory
+	lineageTag: 9e2b14d4-9b54-408b-9d42-262eef49a5e2
+
+	column JobHistoryID
+		dataType: int64
+		isHidden
+		lineageTag: a91204e9-2d9f-445b-a1ec-dac93591c38a
+		summarizeBy: count
+		sourceColumn: JobHistoryID
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmployeeID
+		dataType: int64
+		isHidden
+		lineageTag: b4e7ced3-1566-436b-9140-148d06db4b8a
+		summarizeBy: none
+		sourceColumn: EmployeeID
+
+	column EmployeeNumber
+		dataType: string
+		lineageTag: 4b53ce01-8735-4e6e-9c43-b145c19e3722
+		summarizeBy: none
+		sourceColumn: EmployeeNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmployeeName
+		dataType: string
+		lineageTag: cd708ad9-53e9-4d69-8248-0a297a8b27eb
+		summarizeBy: none
+		sourceColumn: EmployeeName
+
+		annotation SummarizationSetBy = Automatic
+
+	column EffectiveDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: f53d24c9-5c9d-4ecb-a980-90fad61bfa86
+		summarizeBy: none
+		sourceColumn: EffectiveDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column EndDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 5fa0ce20-36b7-464c-822f-6bf802470351
+		summarizeBy: none
+		sourceColumn: EndDate
+
+		variation Variation
+			isDefault
+			relationship: c178ec67-d77d-4f2f-941e-a616adfe4625
+			defaultHierarchy: LocalDateTable_7049d1a4-67c9-4141-9826-9a785e9521bb.'Date Hierarchy'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column IsCurrent
+		dataType: boolean
+		lineageTag: 4c868243-de1d-4e99-a6da-59544d3d7b98
+		summarizeBy: none
+		sourceColumn: IsCurrent
+
+		annotation SummarizationSetBy = Automatic
+
+	column ChangeType
+		dataType: string
+		lineageTag: 7a92cdf1-3691-4506-a25d-97ce95351491
+		summarizeBy: none
+		sourceColumn: ChangeType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reason
+		dataType: string
+		lineageTag: 616cd579-4a49-41ec-8558-03174aaf768d
+		summarizeBy: none
+		sourceColumn: Reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsPromotion
+		dataType: boolean
+		lineageTag: 6818690d-a225-44f1-a8f9-9b38f81f84be
+		summarizeBy: none
+		sourceColumn: IsPromotion
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsDepartmentTransfer
+		dataType: boolean
+		lineageTag: ac585ddc-3077-4d06-b3c5-0e4719cfdd80
+		summarizeBy: none
+		sourceColumn: IsDepartmentTransfer
+
+		annotation SummarizationSetBy = Automatic
+
+	column PositionID
+		dataType: int64
+		isHidden
+		lineageTag: 3d376f6f-cfeb-4541-a4e4-bdb9ab9b1234
+		summarizeBy: count
+		sourceColumn: PositionID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PositionTitle
+		dataType: string
+		lineageTag: 33918df1-8ee2-4c4a-9fb4-53cdad415d05
+		summarizeBy: none
+		sourceColumn: PositionTitle
+
+		annotation SummarizationSetBy = Automatic
+
+	column JobLevel
+		dataType: string
+		lineageTag: f4a25a36-bda4-4e57-904e-6eb67ca4ff40
+		summarizeBy: none
+		sourceColumn: JobLevel
+		sortByColumn: JobLevelRank
+
+		annotation SummarizationSetBy = Automatic
+
+	column JobLevelRank
+		dataType: int64
+		lineageTag: 0a1bd76e-1628-4802-b67f-075d58d03da7
+		summarizeBy: sum
+		sourceColumn: JobLevelRank
+
+		annotation SummarizationSetBy = Automatic
+
+	column DepartmentID
+		dataType: int64
+		isHidden
+		lineageTag: 8eda7c87-d13c-443e-8152-e496e43ff4f6
+		summarizeBy: count
+		sourceColumn: DepartmentID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Department
+		dataType: string
+		lineageTag: 6a2ff037-8940-4162-aa34-ae24bc662262
+		summarizeBy: none
+		sourceColumn: Department
+
+		annotation SummarizationSetBy = Automatic
+
+	column ManagerID
+		dataType: int64
+		isHidden
+		lineageTag: 23553238-a25b-4a62-8d64-b37e8654575d
+		summarizeBy: count
+		sourceColumn: ManagerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ManagerName
+		dataType: string
+		lineageTag: 43c12e49-cc42-4f04-a282-4aa2e5d0d227
+		summarizeBy: none
+		sourceColumn: ManagerName
+
+		annotation SummarizationSetBy = Automatic
+
+	column PrevPositionID
+		dataType: int64
+		isHidden
+		lineageTag: 414be6c6-fddf-43bd-8635-3a3004eb3500
+		summarizeBy: count
+		sourceColumn: PrevPositionID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PrevPositionTitle
+		dataType: string
+		lineageTag: b11d3546-a9cc-41d8-bf58-319686d1041a
+		summarizeBy: none
+		sourceColumn: PrevPositionTitle
+
+		annotation SummarizationSetBy = Automatic
+
+	column PrevJobLevel
+		dataType: string
+		lineageTag: 651c5d24-2734-4369-b2a7-4472ff6a50ea
+		summarizeBy: none
+		sourceColumn: PrevJobLevel
+		sortByColumn: PrevJobLevelRank
+
+		annotation SummarizationSetBy = Automatic
+
+	column PrevJobLevelRank
+		dataType: int64
+		lineageTag: 38199910-b0ec-4d2f-af79-d74140c0d2b9
+		summarizeBy: sum
+		sourceColumn: PrevJobLevelRank
+
+		annotation SummarizationSetBy = Automatic
+
+	column PrevDepartmentID
+		dataType: int64
+		isHidden
+		lineageTag: bd67a16e-56c8-43ad-a398-44d0567c5b67
+		summarizeBy: count
+		sourceColumn: PrevDepartmentID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PrevDepartment
+		dataType: string
+		lineageTag: c7611744-6ead-4090-8c66-783aaa3ebda5
+		summarizeBy: none
+		sourceColumn: PrevDepartment
+
+		annotation SummarizationSetBy = Automatic
+
+	column PrevManagerID
+		dataType: int64
+		isHidden
+		lineageTag: 96a3cb15-25c4-407a-a00c-29c74eeda1bf
+		summarizeBy: count
+		sourceColumn: PrevManagerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PrevManagerName
+		dataType: string
+		lineageTag: 7a12bdf4-c536-471c-95aa-59c4c564e4bb
+		summarizeBy: none
+		sourceColumn: PrevManagerName
+
+		annotation SummarizationSetBy = Automatic
+
+	partition JobHistory = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Data = Source{[Schema="dbo", Item="vw_JobHistory"]}[Data]
+				in
+				    Data
+

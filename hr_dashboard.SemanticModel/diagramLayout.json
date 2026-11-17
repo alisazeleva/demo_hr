@@ -1,0 +1,141 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 27.777777777777771,
+            "y": 24.313622571105377
+          },
+          "nodeIndex": "_Measures",
+          "nodeLineageTag": "2c81652f-52f6-4669-b165-de60bf05f204",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 688.8888888888888,
+            "y": 765.08405428183164
+          },
+          "nodeIndex": "Compensation",
+          "nodeLineageTag": "a8f80377-173b-40c0-9925-707d1e059464",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 940.47492704828358,
+            "y": 37.73835625332157
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "fac3adc9-ad12-486e-8d30-1663c1895fe3",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 296.29629629629625,
+            "y": 116.66666666666666
+          },
+          "nodeIndex": "DepartmentTargets",
+          "nodeLineageTag": "409fced0-ae76-4880-bb48-81d86072556b",
+          "size": {
+            "height": 72,
+            "width": 234
+          },
+          "zIndex": 8,
+          "expandedHeight": 224
+        },
+        {
+          "location": {
+            "x": 1250.33224772905,
+            "y": 305.20069585210172
+          },
+          "nodeIndex": "Employees",
+          "nodeLineageTag": "7096802c-7393-4515-b82d-886879a710f1",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1516.0953581563263,
+            "y": 770.64227434189411
+          },
+          "nodeIndex": "JobHistory",
+          "nodeLineageTag": "9e2b14d4-9b54-408b-9d42-262eef49a5e2",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 1245.2591113390833,
+            "y": 775.92592592592587
+          },
+          "nodeIndex": "LeaveDays",
+          "nodeLineageTag": "8900a3a4-2573-4496-a226-893941b6917f",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 294.02128408225241,
+            "y": 27.869178126660877
+          },
+          "nodeIndex": "ReferenceDate",
+          "nodeLineageTag": "44868812-afec-484b-b37a-52f3f18d7118",
+          "size": {
+            "height": 72,
+            "width": 234
+          },
+          "zIndex": 6,
+          "expandedHeight": 104
+        },
+        {
+          "location": {
+            "x": 958.66250168038687,
+            "y": 770.28898606748578
+          },
+          "nodeIndex": "Reviews",
+          "nodeLineageTag": "181228c8-04e7-431e-8876-7cfa22949f8a",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 7
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 54,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

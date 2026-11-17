@@ -1,0 +1,161 @@
+/// Salary periods with the previous salary and change (vw_CompensationHistory)
+table Compensation
+	lineageTag: a8f80377-173b-40c0-9925-707d1e059464
+
+	column CompensationHistoryID
+		dataType: int64
+		isHidden
+		lineageTag: 0edfc5a6-48ed-4dd6-8258-0dfd94a8a532
+		summarizeBy: count
+		sourceColumn: CompensationHistoryID
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmployeeID
+		dataType: int64
+		isHidden
+		lineageTag: 3a0cfe3b-d226-4502-9df0-999ff8ede841
+		summarizeBy: none
+		sourceColumn: EmployeeID
+
+	column EmployeeNumber
+		dataType: string
+		lineageTag: 058e70e1-869a-4cb7-9947-3610f998c85f
+		summarizeBy: none
+		sourceColumn: EmployeeNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmployeeName
+		dataType: string
+		lineageTag: fb20975a-2283-4cc8-a75c-da397da4a127
+		summarizeBy: none
+		sourceColumn: EmployeeName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Department
+		dataType: string
+		lineageTag: 60f4171c-3ca6-4074-965c-a8043830deb9
+		summarizeBy: none
+		sourceColumn: Department
+
+		annotation SummarizationSetBy = Automatic
+
+	column JobLevel
+		dataType: string
+		lineageTag: da799249-5f46-4674-9ed8-f5747479f09a
+		summarizeBy: none
+		sourceColumn: JobLevel
+		sortByColumn: JobLevelRank
+
+		annotation SummarizationSetBy = Automatic
+
+	column JobLevelRank
+		dataType: int64
+		lineageTag: a3a601c0-ba86-4a86-9b76-75356a1264e7
+		summarizeBy: sum
+		sourceColumn: JobLevelRank
+
+		annotation SummarizationSetBy = Automatic
+
+	column EffectiveDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: e700389e-def3-4067-bb93-ba08ba8aa09a
+		summarizeBy: none
+		sourceColumn: EffectiveDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column EndDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 75fb71b1-59e1-4dbe-b5dc-8bc7aff5c028
+		summarizeBy: none
+		sourceColumn: EndDate
+
+		variation Variation
+			isDefault
+			relationship: 1790921b-1f0b-4700-b874-3d822a17e1cc
+			defaultHierarchy: LocalDateTable_439503b5-e932-414b-9662-29c89bba7acf.'Date Hierarchy'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column IsCurrent
+		dataType: boolean
+		lineageTag: 2a7af0e4-5902-4ec5-b571-7a5e6c23e31a
+		summarizeBy: none
+		sourceColumn: IsCurrent
+
+		annotation SummarizationSetBy = Automatic
+
+	column Salary
+		dataType: double
+		formatString: #,0
+		lineageTag: 8cb55503-a973-49ae-ba96-713f8d867881
+		summarizeBy: sum
+		sourceColumn: Salary
+
+		annotation SummarizationSetBy = Automatic
+
+	column Currency
+		dataType: string
+		lineageTag: 2b10546c-22b6-44bc-ba2a-13dbc7879140
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column PayFrequency
+		dataType: string
+		lineageTag: 83231b5f-0cc8-4f8c-b038-bd0a881fdcdd
+		summarizeBy: none
+		sourceColumn: PayFrequency
+
+		annotation SummarizationSetBy = Automatic
+
+	column PreviousSalary
+		dataType: double
+		formatString: #,0
+		lineageTag: e3d0fd4d-88b7-43d3-ab92-2653276d1e3f
+		summarizeBy: sum
+		sourceColumn: PreviousSalary
+
+		annotation SummarizationSetBy = Automatic
+
+	column ChangeAmount
+		dataType: double
+		formatString: #,0
+		lineageTag: 96052d2b-0580-455d-8e87-a6e8db31dd7e
+		summarizeBy: sum
+		sourceColumn: ChangeAmount
+
+		annotation SummarizationSetBy = Automatic
+
+	column ChangePct
+		dataType: double
+		formatString: 0.00
+		lineageTag: 7efc9891-9df9-43e1-9dc1-ba3ffa10cd2e
+		summarizeBy: sum
+		sourceColumn: ChangePct
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reason
+		dataType: string
+		lineageTag: b5546eaf-77ef-4675-9b3f-822febf93947
+		summarizeBy: none
+		sourceColumn: Reason
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Compensation = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Data = Source{[Schema="dbo", Item="vw_CompensationHistory"]}[Data]
+				in
+				    Data
+

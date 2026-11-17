@@ -1,0 +1,351 @@
+/// One row per employee (vw_EmployeeCurrent)
+table Employees
+	lineageTag: 7096802c-7393-4515-b82d-886879a710f1
+
+	column EmployeeID
+		dataType: int64
+		isHidden
+		lineageTag: 49c1cfb6-ce62-4bf7-bddf-7b3904e6b3e1
+		summarizeBy: none
+		sourceColumn: EmployeeID
+
+	column EmployeeNumber
+		dataType: string
+		lineageTag: 30ff9952-a578-4337-ba84-c89776c0b583
+		summarizeBy: none
+		sourceColumn: EmployeeNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstName
+		dataType: string
+		lineageTag: d972b471-5693-46cd-8bb3-c3b53c611876
+		summarizeBy: none
+		sourceColumn: FirstName
+
+		annotation SummarizationSetBy = Automatic
+
+	column LastName
+		dataType: string
+		lineageTag: 4b4d5563-d6a4-415c-b00a-1b8319b4ef54
+		summarizeBy: none
+		sourceColumn: LastName
+
+		annotation SummarizationSetBy = Automatic
+
+	column FullName
+		dataType: string
+		lineageTag: 766e75f0-381c-4651-b7dc-e54161d24574
+		summarizeBy: none
+		sourceColumn: FullName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: 1ac296bd-0a6f-4e6d-9499-0d2207143263
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateOfBirth
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: a9191bd1-1ae5-42ff-bd27-9bfcc2b9c3d7
+		summarizeBy: none
+		sourceColumn: DateOfBirth
+
+		variation Variation
+			isDefault
+			relationship: d5ae22cc-f973-4bd3-95ac-481ad12dcddd
+			defaultHierarchy: LocalDateTable_c378c038-90d8-4dbe-9380-7f55299afb1d.'Date Hierarchy'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Age
+		dataType: int64
+		lineageTag: fbee5390-b3ac-4069-8d2a-8aa367102bdd
+		summarizeBy: sum
+		sourceColumn: Age
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nationality
+		dataType: string
+		lineageTag: 9937d831-b506-4ae6-b51d-487d480921ae
+		summarizeBy: none
+		sourceColumn: Nationality
+
+		annotation SummarizationSetBy = Automatic
+
+	column NativeLanguage
+		dataType: string
+		lineageTag: 42e2a3ae-0554-4a12-85e3-ee0527a0c66d
+		summarizeBy: none
+		sourceColumn: NativeLanguage
+
+		annotation SummarizationSetBy = Automatic
+
+	column HireDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 401bc397-8999-4e64-a213-34a810cffcc6
+		summarizeBy: none
+		sourceColumn: HireDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column TenureYears
+		dataType: double
+		formatString: 0.0
+		lineageTag: 8a17001f-37a0-4354-bcc1-46e3409271ab
+		summarizeBy: sum
+		sourceColumn: TenureYears
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmailAddress
+		dataType: string
+		lineageTag: 56d0eada-81a4-4fa5-be69-ddae08f4a113
+		summarizeBy: none
+		sourceColumn: EmailAddress
+
+		annotation SummarizationSetBy = Automatic
+
+	column PositionID
+		dataType: int64
+		isHidden
+		lineageTag: 7811f695-9446-4f57-9123-4fa02665269b
+		summarizeBy: count
+		sourceColumn: PositionID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PositionTitle
+		dataType: string
+		lineageTag: c0c61e40-1db2-481e-9c63-ee272717a92f
+		summarizeBy: none
+		sourceColumn: PositionTitle
+
+		annotation SummarizationSetBy = Automatic
+
+	column JobFamily
+		dataType: string
+		lineageTag: de50b9df-020a-42b8-adc6-23494c242b77
+		summarizeBy: none
+		sourceColumn: JobFamily
+
+		annotation SummarizationSetBy = Automatic
+
+	column JobLevel
+		dataType: string
+		lineageTag: 23bca32b-961a-4665-9510-74e4c2de5167
+		summarizeBy: none
+		sourceColumn: JobLevel
+		sortByColumn: JobLevelRank
+
+		annotation SummarizationSetBy = Automatic
+
+	column JobLevelRank
+		dataType: int64
+		lineageTag: 19970fdb-5f17-4024-becc-00864b3c7452
+		summarizeBy: sum
+		sourceColumn: JobLevelRank
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsManagementPosition
+		dataType: boolean
+		lineageTag: 2b8767e7-db56-4d86-aca2-9674f31ca3dd
+		summarizeBy: none
+		sourceColumn: IsManagementPosition
+
+		annotation SummarizationSetBy = Automatic
+
+	column DepartmentID
+		dataType: int64
+		isHidden
+		lineageTag: 21f35bf8-0071-4005-828d-ccbd132b793a
+		summarizeBy: count
+		sourceColumn: DepartmentID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Department
+		dataType: string
+		lineageTag: d6e1d57f-74d2-4de0-8c3d-6e5a0983bc61
+		summarizeBy: none
+		sourceColumn: Department
+
+		annotation SummarizationSetBy = Automatic
+
+	column ManagerEmployeeID
+		dataType: int64
+		isHidden
+		lineageTag: 152e803a-c0bf-4a13-bf43-521935053e76
+		summarizeBy: count
+		sourceColumn: ManagerEmployeeID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ManagerName
+		dataType: string
+		lineageTag: c9c66841-f954-4eb4-bcd3-632e681366d7
+		summarizeBy: none
+		sourceColumn: ManagerName
+
+		annotation SummarizationSetBy = Automatic
+
+	column DirectReports
+		dataType: int64
+		lineageTag: 66d00dbd-7047-4bde-8065-a43de316f134
+		summarizeBy: sum
+		sourceColumn: DirectReports
+
+		annotation SummarizationSetBy = Automatic
+
+	column CurrentSalary
+		dataType: double
+		formatString: #,0
+		lineageTag: 8e6f3680-c774-40d0-bc6a-34e1e9db6219
+		summarizeBy: sum
+		sourceColumn: CurrentSalary
+
+		annotation SummarizationSetBy = Automatic
+
+	column Currency
+		dataType: string
+		lineageTag: ced90a7d-a18e-4ed2-b249-f3af00eaa528
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column LatestRating
+		dataType: double
+		formatString: 0.0
+		lineageTag: c00b7b0d-36be-40ae-addf-d2086d741b48
+		summarizeBy: sum
+		sourceColumn: LatestRating
+
+		annotation SummarizationSetBy = Automatic
+
+	column LatestReviewDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 216e89cb-bb6e-450c-89f9-1327c54f4751
+		summarizeBy: none
+		sourceColumn: LatestReviewDate
+
+		variation Variation
+			isDefault
+			relationship: 72e91f93-d059-4dc4-847f-1ae6fd447a6b
+			defaultHierarchy: LocalDateTable_0ec995b0-9a23-4998-a051-cc7ab44ed1eb.'Date Hierarchy'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column LatestPerformanceLevel
+		dataType: string
+		lineageTag: 67676689-1902-44a9-b04d-bfb4fce1a1f5
+		summarizeBy: none
+		sourceColumn: LatestPerformanceLevel
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfileImageFileName
+		dataType: string
+		lineageTag: f6c105dd-fa50-4405-a56c-802de0a4cd22
+		summarizeBy: none
+		sourceColumn: ProfileImageFileName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Levels below the CEO (CEO = 0)
+	column OrgDepth
+		dataType: int64
+		lineageTag: f96ed6e6-8594-45d2-afc1-36ab40a88e22
+		summarizeBy: sum
+		sourceColumn: OrgDepth
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Employee IDs from the CEO down to this employee
+	column PathIDs
+		dataType: string
+		isHidden
+		lineageTag: 8ed8bc8d-833e-46f4-847f-645b746fa581
+		summarizeBy: none
+		sourceColumn: PathIDs
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Names from the CEO down to this employee
+	column PathFromCEO
+		dataType: string
+		lineageTag: 345abf25-0ba8-489d-94d9-89fdb528bcc3
+		summarizeBy: none
+		sourceColumn: PathFromCEO
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Manager, the manager's manager, and so on up to the CEO
+	column ManagerChain
+		dataType: string
+		lineageTag: 3f5cb941-31c3-4823-b881-a5e97d77d376
+		summarizeBy: none
+		sourceColumn: ManagerChain
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Rank of the nationality by headcount (1 = largest, ties by name); 99 = grouped into Other (outside the top 6)
+	column 'Nationality Order' =
+			VAR nat = Employees[Nationality]
+			VAR counts = GROUPBY(ALL(Employees), Employees[Nationality], "@c", COUNTX(CURRENTGROUP(), 1))
+			VAR cnt = MAXX(FILTER(counts, Employees[Nationality] = nat), [@c])
+			VAR higher = COUNTROWS(FILTER(counts, [@c] > cnt || ([@c] = cnt && Employees[Nationality] < nat)))
+			RETURN IF(higher < 6, higher + 1, 99)
+		dataType: int64
+		isHidden
+		lineageTag: 94fa24ec-b5c6-4c2c-9208-e5cd4ab28487
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Rank of the native language by headcount (1 = largest, ties by name); 99 = grouped into Other (outside the top 6)
+	column 'Native Language Order' =
+			VAR lang = Employees[NativeLanguage]
+			VAR counts = GROUPBY(ALL(Employees), Employees[NativeLanguage], "@c", COUNTX(CURRENTGROUP(), 1))
+			VAR cnt = MAXX(FILTER(counts, Employees[NativeLanguage] = lang), [@c])
+			VAR higher = COUNTROWS(FILTER(counts, [@c] > cnt || ([@c] = cnt && Employees[NativeLanguage] < lang)))
+			RETURN IF(higher < 6, higher + 1, 99)
+		dataType: int64
+		isHidden
+		lineageTag: dbea55b1-e6a6-4937-88ad-f9bad5191789
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Nationality for the six largest groups, everything else as Other
+	column 'Nationality Top 6' = IF(Employees[Nationality Order] = 99, "Other (" & (COUNTROWS(ALL(Employees[Nationality])) - 6) & ")", Employees[Nationality])
+		dataType: string
+		lineageTag: e50a0bd0-cf11-4d6e-aa97-6485f31be90a
+		summarizeBy: none
+		sortByColumn: 'Nationality Order'
+
+	/// Native language for the six largest groups, everything else as Other
+	column 'Native Language Top 6' = IF(Employees[Native Language Order] = 99, "Other (" & (COUNTROWS(ALL(Employees[NativeLanguage])) - 6) & ")", Employees[NativeLanguage])
+		dataType: string
+		lineageTag: a7f33dd5-89ad-44ad-a707-49682f76a2e2
+		summarizeBy: none
+		sortByColumn: 'Native Language Order'
+
+	partition Employees = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Data = Source{[Schema="dbo", Item="vw_EmployeeCurrent"]}[Data]
+				in
+				    Data
+

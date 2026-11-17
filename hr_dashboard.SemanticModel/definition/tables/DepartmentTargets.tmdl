@@ -1,0 +1,50 @@
+/// Headcount target, actual and difference per department (vw_DepartmentHeadcountVsTarget)
+table DepartmentTargets
+	lineageTag: 409fced0-ae76-4880-bb48-81d86072556b
+
+	column DepartmentID
+		dataType: int64
+		isHidden
+		lineageTag: d8dd6f5d-1d3d-4473-9647-2e9cb6b6b392
+		summarizeBy: none
+		sourceColumn: DepartmentID
+
+	column Department
+		dataType: string
+		lineageTag: 98eee1b6-0525-44d0-bd10-6039ba16b92e
+		sourceColumn: Department
+
+	column TargetHeadcount
+		dataType: int64
+		lineageTag: 6b355af7-9ebf-485f-9ecf-101ac7c5ade5
+		summarizeBy: none
+		sourceColumn: TargetHeadcount
+
+	column ActualHeadcount
+		dataType: int64
+		lineageTag: f6e17a19-861e-4e17-b836-d2090db3b1c8
+		summarizeBy: none
+		sourceColumn: ActualHeadcount
+
+	column Difference
+		dataType: int64
+		lineageTag: baffea51-56b2-4339-9f30-601f65529a42
+		summarizeBy: none
+		sourceColumn: Difference
+
+	column PctOfTarget
+		dataType: double
+		formatString: 0.0
+		lineageTag: a94ea1de-01f1-46cb-bc21-34be3dabc747
+		summarizeBy: none
+		sourceColumn: PctOfTarget
+
+	partition DepartmentTargets = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Data = Source{[Schema="dbo", Item="vw_DepartmentHeadcountVsTarget"]}[Data]
+				in
+				    Data
+

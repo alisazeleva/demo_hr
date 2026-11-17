@@ -1,0 +1,12 @@
+/// SQL Server instance (Windows authentication, no secrets stored)
+expression SqlServer = ".\SQLEXPRESS" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 8300c834-cc9c-4dd5-9d24-f8e9fa8ba7e6
+
+	annotation PBI_ResultType = Text
+
+/// Database name
+expression SqlDatabase = "DemoHR" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 323aa1fc-654f-4bbe-8c2c-554922073d90
+
+	annotation PBI_ResultType = Text
+
