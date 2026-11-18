@@ -43,7 +43,7 @@ Build a dummy HR database (SQL Server) for Acme Corporation, then a Power BI rep
 
 ## Power BI working notes
 
-Project `hr_dashboard.pbip` (PBIR report + TMDL model). Design rules and page layouts are in DESIGN.md; the model is described in PLAN.md (Power BI plan). Pages 1 to 7 are built and were adjusted by hand in Desktop, so treat them as the reference and never regenerate them over the user's changes (`tools/build_comp.py` would overwrite page 4, which has since been changed by hand: the combo chart, colours and 14 pt fonts). Page 7 is a hidden drill-through page (page 7 also needs drill-through from pages 3 and later).
+Project `hr_dashboard.pbip` (PBIR report + TMDL model). Design rules and page layouts are in DESIGN.md; the model is described in PLAN.md (Power BI plan). Pages 1 to 7 are built and were adjusted by hand in Desktop, so treat them as the reference and never regenerate them over the user's changes: every `tools/build_*.py` is a first draft and would overwrite the hand edits (page 3 has a different layout and a matrix, pages 4 to 6 differ in colours, fonts and layout, page 7 has a redesigned header). DESIGN.md records each page as it is now, including positions. Page 7 is a hidden drill-through page filtered on `DimEmployee[FullName]`; drill-through works from any visual that contains the employee name.
 
 ### How to change things safely (Desktop is usually open)
 
@@ -53,7 +53,7 @@ Project `hr_dashboard.pbip` (PBIR report + TMDL model). Design rules and page la
 4. **Tell the user to close Desktop WITHOUT saving and reopen.** Saving first would overwrite the files edited on disk with Desktop's in-memory copy.
 5. Do not touch pages the user built or adjusted by hand unless asked; copy their formatting (read the current visual.json) instead of the generator output.
 
-`tools/`: `validate_pbir.py` (validates PBIR files against Microsoft's JSON schemas; needs `pip install jsonschema referencing`), `build_career.py` (generator for page 3, also a template for new pages), `build_comp.py` (page 4 first draft; the hand-adjusted page differs), `build_profile.py` (page 7 first draft), `build_leave.py` (page 6 first draft), `build_perf.py` (page 5 first draft; page 3 has since been reworked by hand, so it takes the matrix from page 2 and the table from page 3 without positions), `build_org.py` (historical template). Visual JSON that Desktop writes uses schema version 2.14.0, which is not downloadable, so the validator falls back to 2.13.0 and ignores the version string.
+`tools/`: `validate_pbir.py` (validates PBIR files against Microsoft's JSON schemas; needs `pip install jsonschema referencing`), `build_career.py` (generator for page 3, also a template for new pages), `build_comp.py`, `build_perf.py`, `build_leave.py` and `build_profile.py` (first drafts of pages 4 to 7; the hand-adjusted pages differ), `build_org.py` (historical template). When a new page is needed, copy the current hand-adjusted visual JSON of the nearest page (find visuals by type, not by position, because positions were changed by hand). Visual JSON that Desktop writes uses schema version 2.14.0, which is not downloadable, so the validator falls back to 2.13.0 and ignores the version string.
 
 ### Decisions and conventions
 
@@ -64,14 +64,20 @@ Project `hr_dashboard.pbip` (PBIR report + TMDL model). Design rules and page la
 - **Workforce plan**: targets are Technology 48 and Sales 37 (others equal their headcount), so 2 departments are deliberately below target and `Departments at Target` is 3. Script 04 and the checks in 06 and 99 follow this.
 - **Months before promotion** replaced "months between promotions": from the previous promotion, or from hire for a first promotion, to each promotion (so every department has a value).
 - **Gender colours** are Female #E0A030 and Male #5B6472 (changed by hand; used on the page 1 donut and the page 4 gender chart).
+- **Chart text** is 14 pt (data labels, axis labels, legends); tables and matrices use 14 pt values and 16 pt column headers; category labels on a few bars are 16 pt. Department bars on pages 4, 5 and 6 use one navy colour (theme colour 8); department colours stay on pages 1 and 3.
+- **Slicers**: Department and Job level on every page 1 to 6 (synced on pages 2 to 6) plus one page-specific slicer (Nationality, Manager, Change type or Leave type). The profile page has an employee dropdown instead. Do not add header slicers to page 7.
+- **Level labels**: `DimEmployee[Latest Level Short]` (NI, ME, EE, O) is shown in the page 5 table, `FactReviews[Level Long]` (for example "Meets Expectations (ME)") in the rating distribution chart, both sorted by `FactReviews[Level Order]` where sorting applies. `Latest Level in Selection` keeps `Level` and `Level Long` so the chart still cross-filters the table.
+- **Profile text measures** read `DimPosition`, `DimDepartment` and `DimManager` with LOOKUPVALUE on keys in `DimEmployee`, because those dimensions filter `DimEmployee` and not the other way round.
 - **Year-end measures** (`Average Salary at Year End`, `Employees at Year End`): the period filter must be inside AVERAGEX/COUNTROWS over FILTER within `CALCULATE(..., REMOVEFILTERS(DimDate))`; as a CALCULATE filter argument it is evaluated under the year filter and gives wrong numbers. Early years show only the first senior hires because there are no former employees; the page 4 chart says so.
 - Theme: `powerbi/acme_hr_theme.json`, copied into the report's `StaticResources/RegisteredResources/`; keep both copies in sync. Tooltips 10 pt.
 
 ### Open items
 
-- Page 7 (Employee profile) is built: check the drill-through in Desktop (right-click a name in the page 3, 5 or 6 tables), the stepped line (`stepped` option written by hand) and the back button.
-- Page 6: `FactLeaveRequests` (new view `vw_LeaveRequests` in script 13, run) was added through the MCP; its column `IsAbsentToday` is calculated, so press Refresh in Desktop after reopening if it shows no data. `build_leave.py` is the first draft; later hand edits win.
-- Page 5: `FactReviews[Level Order]` was added through the MCP but could not be refreshed there (XMLA refresh error), so press Refresh in Desktop after reopening; the Top 10 manager filter was written by hand in JSON and should be checked in Desktop.
-- Profile pictures: script 12 was skipped, so the three picture checks in script 99 fail (46 of 49 pass). The info button next to the footer has no action yet.
-- The user's `Target Headcount` measure may still contain `RANDBETWEEN(0, 2)`, which makes target comparisons change on every refresh; suggest removing it.
-- Career matrix counts by the employee's current department (a version by department at the time of the event is possible).
+- Profile pictures: script 12 was skipped, so the three picture checks in script 99 fail (46 of 49 pass). The info button next to the footer has no action yet, and page 7 shows initials in an oval until pictures exist.
+- Page 3: the subtitle of "Career events by department" is still `Text: Months Before Promotion` (copied from the chart below it); replace it with a text that describes career events.
+- Page 7: the "Current salary" and "Latest review" cards carry a leftover visual filter on `Text: Profile Tenure`; the measure `Text: Profile Role` has no description (every measure needs one).
+- Slicers: the page 1 Department and Job level slicers are not in a sync group (pages 2 to 6 are); pages 3 to 6 keep a hidden leftover Manager slicer at x 1637; the Manager slicers of pages 2 and 5 share the sync group name "Nationality".
+- Theme: `powerbi/acme_hr_theme.json` (20 and 16 pt) and the report's copy (20.25 and 17.25 pt, written by Desktop) are not identical; decide which one is the source and copy it over the other.
+- Pending renames the user must do in Desktop (F2) because visuals use them (see Measure names): `Average Tenure (years)`, `Largest Span of Control`. `Vacation Days Used per Year` is really "per employee" and could be renamed with them.
+- Career visuals count by the employee's current department (a version by department at the time of the event is possible).
+- Page 5: `FactReviews[Level Order]` and page 6: `FactLeaveRequests[IsAbsentToday]` are calculated columns added through the MCP; press Refresh in Desktop after reopening if they show no data.

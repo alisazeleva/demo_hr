@@ -334,11 +334,11 @@ Headcount, Headcount vs Target, Average Salary, Average Salary at Year End, Empl
 | --- | --- | --- |
 | 1 Workforce | Total, by department, level, position, nationality, language, gender | Cards, bar charts, treemap, slicers |
 | 2 Organization | Hierarchy, employees per manager, department vs target | Hierarchy or decomposition tree, bar chart of span of control, target gauge |
-| 3 Career | Promotions, transfers, position and manager changes, time between promotions | Column chart by year, matrix by change type, drill-through to profile |
+| 3 Career | Promotions, transfers, position and manager changes, months before promotion | Matrix of change type by year, bars by department, latest moves table, drill-through to profile |
 | 4 Compensation | Salary by department and level, increases, promotion raises | Bar charts, combo of year-end headcount and average salary over time, clustered columns of increases, gender fairness bar |
-| 5 Performance | Latest review, average rating, by department and manager, no recent review | Bar charts, rating distribution column, heat matrix, latest-review table |
+| 5 Performance | Latest review, average rating, by department and manager, no recent review | Bar charts, rating distribution bars, heat matrix, latest-review table |
 | 6 Leave | Days by employee, department and type, vacation usage, currently absent, pending requests | Stacked columns by month, matrix, table of people absent now |
-| 7 Employee profile | One person: photo, current role, career timeline, salary history, reviews, leave | Drill-through page: card, tables, line chart |
+| 7 Employee profile | One person: picture placeholder, current role, salary and latest review, career timeline, salary history, reviews, leave | Hidden drill-through page on the employee name: header cards, tables, stepped line, charts |
 
 ### Profile pictures in Power BI
 
