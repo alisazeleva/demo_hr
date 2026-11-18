@@ -233,7 +233,7 @@
             "innerRadiusRatio": {
               "expr": {
                 "Literal": {
-                  "Value": "75L"
+                  "Value": "70L"
                 }
               }
             }
@@ -448,5 +448,37 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "7bc46592d6207c366b13",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimEmployee"
+              }
+            },
+            "Property": "Gender"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "8a4da542e833804bae30",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Headcount"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

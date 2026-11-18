@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "70d27868507712c811c6",
   "position": {
-    "x": 329.59215767667979,
-    "y": 617.98529564377463,
-    "z": 19000,
-    "height": 431.60877790993783,
-    "width": 792.59066488915857,
-    "tabOrder": 19000
+    "x": 329.92688669503076,
+    "y": 667.97505060101616,
+    "z": 18000,
+    "height": 381.70002891486638,
+    "width": 791.82452806807385,
+    "tabOrder": 18000
   },
   "visual": {
     "visualType": "pivotTable",
@@ -120,6 +120,17 @@
       "values": [
         {
           "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
             "backColor": {
               "solid": {
                 "color": {
@@ -136,18 +147,25 @@
                         }
                       },
                       "FillRule": {
-                        "linearGradient2": {
+                        "linearGradient3": {
                           "min": {
                             "color": {
                               "Literal": {
-                                "Value": "'#b7c5db'"
+                                "Value": "'#de8fa6'"
+                              }
+                            }
+                          },
+                          "mid": {
+                            "color": {
+                              "Literal": {
+                                "Value": "'#f0cdaa'"
                               }
                             }
                           },
                           "max": {
                             "color": {
                               "Literal": {
-                                "Value": "'#6e8cb7'"
+                                "Value": "'#92a9c9'"
                               }
                             }
                           },
@@ -237,6 +255,13 @@
               "expr": {
                 "Literal": {
                   "Value": "0D"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
                 }
               }
             }
@@ -529,6 +554,20 @@
             }
           ]
         }
+      },
+      {
+        "name": "f8e3585da7930927b900",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Average Rating"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

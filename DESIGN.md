@@ -163,19 +163,24 @@ Notes:
 - `FactLeaveRequests[IsAbsentToday]` is a calculated column (approved, covers the reference date). An earlier measure version was slow (about 17 s) and had to be rewritten; a column is evaluated once at refresh.
 - Unpaid Leave has no days in 2026 yet (blank in the year-to-date split).
 
-## Page 7: Employee profile (drill-through)
+## Page 7: Employee profile (built; hidden drill-through page)
 
-Drill-through target: filter on Employee. Include a back button.
+The page is hidden in view mode and filtered on `DimEmployee[FullName]` (unique across the 151 employees) through a drill-through binding. From any visual that contains the employee name (the page 3 latest career moves table, the page 5 latest review table, the page 6 absent-today table) right-click a row, then Drill through, then Employee profile. A Back button (action Back) is at the top right; there are no slicers.
 
-| Area | Content |
-| --- | --- |
-| Header | Photo (placeholder until pictures exist), name, position, department, manager, hire date, tenure |
-| Career timeline | Table of job-history records: date, change type, position, department, manager |
-| Salary history | Stepped line chart of base salary over time, with change reasons in tooltips |
-| Reviews | Column chart of rating by year |
-| Leave summary | Bar of leave days by type, last 24 months |
+Profile fields that live in `DimPosition`, `DimDepartment` and `DimManager` are read with LOOKUPVALUE on the keys in `DimEmployee` (those dimensions filter `DimEmployee`, not the other way round), so SELECTEDVALUE on them would return nothing.
 
-Photos: resize to about 160 x 160 px (under 20 KB each), have Power Query read the image folder, convert each file to base64, join on `ProfileImageFileName`, and set the column's data category to Image URL. No change to the database is needed.
+| Area | Position (x, y, w x h) | Content |
+| --- | --- | --- |
+| Header | 330, 138, 140 x 140 | Initials card (`Text: Profile Initials`) as the picture placeholder until pictures exist (script 12 was skipped) |
+| Header | band 330, 141, 1560 x 150 (shape) | Hand-adjusted by the user: photo shape, name and employee number, Position, Department, Manager (CEO: "Reports to the board"), Tenure (subtitle hire date), borderless cards with the field name as label and 16 pt left-aligned values; second row under Position: Current salary (`Text: Profile Salary`, subtitle `Text: Profile Salary Note`) and under Manager: Latest review (`Text: Profile Rating`, subtitle `Text: Profile Rating Note`) |
+| Page subtitle | 317, 74 | `Text: Profile Role`: employee number and position |
+| Career timeline | 330, 300, 792 x 298 | Table of `FactJobHistory`: Date, Change, Position, Department, Manager, oldest first |
+| Salary history | 1146, 300, 744 x 298 | Stepped line of `Base Salary` over `FactCompensation[EffectiveDate]`; tooltip with `Reason` and `Salary Change` |
+| Performance reviews | 330, 618, 792 x 432 | Column chart of `Average Rating` by `FactReviews[ReviewYear]`, scale 0 to 5 |
+| Leave summary | 330, 717, 325 x 332 | Bar of `Leave Days Last 24 Months` by `DimLeaveType[LeaveType]` (hand-adjusted layout) |
+| Review history | 1071, 717, 819 x 332 | Table of `FactReviews`: Review date, Level, Comments; titled, with card styling; the Level cell is coloured by `Review Level Colour` (same palette as `Level Colour` on page 5: Outstanding #CFEFE9, Exceeds #D6E4FA, Meets #E5E7EB, Needs Improvement #F8D4DD) |
+
+Photos: resize to about 160 x 160 px (under 20 KB each), have Power Query read the image folder, convert each file to base64, join on `ProfileImageFileName`, and set the column's data category to Image URL. No change to the database is needed. When pictures exist, replace the initials card with an image visual.
 
 ## Measures (build in the `_Measures` table; each with a description)
 

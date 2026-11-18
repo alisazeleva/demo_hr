@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "8e5199203db65e13e7be",
   "position": {
-    "x": 329.59215767667979,
-    "y": 733.7349224468943,
+    "x": 329.92688669503076,
+    "y": 712.64207526126643,
     "z": 17000,
-    "height": 315.85915110681816,
-    "width": 1045.6703573908949,
+    "height": 337.03300425461606,
+    "width": 1045.6144409104052,
     "tabOrder": 17000
   },
   "visual": {
@@ -204,7 +204,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "14D"
                 }
               }
             },
@@ -246,6 +246,78 @@
                 }
               }
             }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "240D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactJobHistory.PositionTitle"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "240D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactJobHistory.PrevPositionTitle"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "140D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactJobHistory.EffectiveDate"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "170D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "DimEmployee.FullName"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "180D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactJobHistory.ChangeType"
           }
         }
       ]
@@ -710,6 +782,62 @@
             }
           ]
         }
+      },
+      {
+        "name": "863d38c01c2082c0c0d7",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactJobHistory"
+              }
+            },
+            "Property": "EffectiveDate"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "57b47b08d076c550b417",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimEmployee"
+              }
+            },
+            "Property": "FullName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "125611bcdc0317cd8884",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactJobHistory"
+              }
+            },
+            "Property": "PrevPositionTitle"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "491331602ce2a935496b",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactJobHistory"
+              }
+            },
+            "Property": "PositionTitle"
+          }
+        },
+        "type": "Categorical"
       }
     ]
   }

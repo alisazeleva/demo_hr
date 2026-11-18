@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "46dcc11cce88c1c65068",
   "position": {
-    "x": 1386.052734515323,
-    "y": 300.16428645554765,
-    "z": 18000,
-    "height": 298.20242837413889,
-    "width": 504.19752692206373,
-    "tabOrder": 18000
+    "x": 1385.6929241191292,
+    "y": 300.48725680532033,
+    "z": 17000,
+    "height": 346.16944111694,
+    "width": 504.53434673055472,
+    "tabOrder": 17000
   },
   "visual": {
     "visualType": "barChart",
@@ -100,7 +100,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "17.25D"
+                  "Value": "14D"
                 }
               }
             },
@@ -171,6 +171,13 @@
               "expr": {
                 "Literal": {
                   "Value": "'Categorical'"
+                }
+              }
+            },
+            "innerPadding": {
+              "expr": {
+                "Literal": {
+                  "Value": "30L"
                 }
               }
             }
@@ -467,5 +474,37 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "fa21a0b512e0614101d6",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactReviews"
+              }
+            },
+            "Property": "Level Long"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "9a257c6f384920375b69",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Number of Reviews"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "aa4d4f5209e9d782804f",
   "position": {
-    "x": 858.31291061635363,
-    "y": 300.16428645554765,
-    "z": 17000,
-    "height": 298.20242837413889,
-    "width": 504.19752692206373,
-    "tabOrder": 17000
+    "x": 857.80990540708,
+    "y": 300.48725680532033,
+    "z": 16000,
+    "height": 346.16944111694,
+    "width": 504.53434673055472,
+    "tabOrder": 16000
   },
   "visual": {
     "visualType": "barChart",
@@ -186,6 +186,13 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "innerPadding": {
+              "expr": {
+                "Literal": {
+                  "Value": "30L"
                 }
               }
             }
@@ -552,6 +559,20 @@
             }
           ]
         }
+      },
+      {
+        "name": "4358ece5b563c031aa1b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Average Rating"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

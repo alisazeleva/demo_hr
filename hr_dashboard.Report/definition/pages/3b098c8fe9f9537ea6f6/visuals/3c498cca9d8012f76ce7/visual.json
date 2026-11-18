@@ -4,10 +4,10 @@
   "position": {
     "x": 1146,
     "y": 687,
-    "z": 20000,
+    "z": 19000,
     "height": 363,
     "width": 744,
-    "tabOrder": 20000
+    "tabOrder": 19000
   },
   "visual": {
     "visualType": "clusteredColumnChart",
@@ -206,6 +206,13 @@
                   "Value": "'Categorical'"
                 }
               }
+            },
+            "innerPadding": {
+              "expr": {
+                "Literal": {
+                  "Value": "30L"
+                }
+              }
             }
           }
         }
@@ -273,6 +280,19 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "layout": [
+        {
+          "properties": {
+            "clusteredGapSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "5D"
                 }
               }
             }
@@ -588,6 +608,34 @@
             }
           ]
         }
+      },
+      {
+        "name": "01e9c5447bd0227e0210",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Average Annual Increase"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "4f1e97b1791a4c02cd21",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Average Promotion Increase"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

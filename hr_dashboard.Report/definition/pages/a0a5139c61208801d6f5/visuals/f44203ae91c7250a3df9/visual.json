@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "f44203ae91c7250a3df9",
   "position": {
-    "x": 1308.6820318846051,
-    "y": 626.1105869031893,
+    "x": 1308.5407906150604,
+    "y": 675.08116816060135,
     "z": 15000,
-    "height": 423.45643558669809,
-    "width": 584.7731729530592,
+    "height": 374.59391135528108,
+    "width": 584.73195918873148,
     "tabOrder": 15000
   },
   "visual": {
@@ -141,7 +141,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "14D"
                 }
               }
             },
@@ -218,6 +218,13 @@
               "expr": {
                 "Literal": {
                   "Value": "0D"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
                 }
               }
             }
@@ -384,5 +391,65 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "ff20685cdd136a720e01",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimDepartment"
+              }
+            },
+            "Property": "Department"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2aa3de1b804a5d0bc50c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Managers"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "18a1598a23b2033c3b4d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Average Team Size"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "02d03590580eddb76928",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Largest Span of Control"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

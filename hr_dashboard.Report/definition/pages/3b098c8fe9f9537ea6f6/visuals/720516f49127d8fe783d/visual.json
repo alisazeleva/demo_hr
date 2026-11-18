@@ -4,10 +4,10 @@
   "position": {
     "x": 858,
     "y": 300,
-    "z": 17000,
+    "z": 16000,
     "height": 363,
     "width": 504.4,
-    "tabOrder": 17000
+    "tabOrder": 16000
   },
   "visual": {
     "visualType": "barChart",
@@ -125,7 +125,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -163,7 +163,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "14D"
                 }
               }
             },
@@ -187,6 +187,13 @@
                   "Value": "true"
                 }
               }
+            },
+            "innerPadding": {
+              "expr": {
+                "Literal": {
+                  "Value": "30L"
+                }
+              }
             }
           }
         }
@@ -197,7 +204,7 @@
             "gridlineShow": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },
@@ -211,7 +218,14 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1000D"
                 }
               }
             }
@@ -434,5 +448,37 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "d9901a862c9733925ec5",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimPosition"
+              }
+            },
+            "Property": "JobLevel"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "266b025203e7451c454c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Average Salary"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

@@ -427,6 +427,132 @@ table _Measures
 		displayFolder: Text
 		lineageTag: 72c2f23d-448e-4c7a-96d9-7eb126183f6c
 
+	/// Name of the employee selected through drill-through (empty when none or several are selected).
+	measure 'Text: Profile Name' = SELECTEDVALUE(DimEmployee[FullName], "No employee selected")
+		displayFolder: Profile
+		lineageTag: 0b6e55a0-0bc5-4213-9c82-ebb0ee0cd6a7
+
+	/// Employee number and position of the selected employee.
+	measure 'Text: Profile Number' =
+			VAR n = SELECTEDVALUE(DimEmployee[EmployeeNumber])
+			VAR p = LOOKUPVALUE(DimPosition[PositionTitle], DimPosition[PositionID], SELECTEDVALUE(DimEmployee[PositionID]))
+			RETURN IF(ISBLANK(n), "Drill through from another page", n)
+		displayFolder: Profile
+		lineageTag: 563576f2-ff98-44db-870c-449ce01c3fff
+
+	/// Department of the selected employee (Acme Corporation for the CEO).
+	measure 'Text: Profile Department' = COALESCE(LOOKUPVALUE(DimDepartment[Department], DimDepartment[DepartmentID], SELECTEDVALUE(DimEmployee[DepartmentID])), "-")
+		displayFolder: Profile
+		lineageTag: 23383ddd-aafa-448a-aed7-e6784b5718ee
+
+	/// Job level of the selected employee.
+	measure 'Text: Profile Job Level' =
+			VAR l = LOOKUPVALUE(DimPosition[JobLevel], DimPosition[PositionID], SELECTEDVALUE(DimEmployee[PositionID]))
+			RETURN IF(ISBLANK(l), "", "Job level: " & l)
+		displayFolder: Profile
+		lineageTag: 22662e10-30a1-4222-9f53-630dbbee7cf1
+
+	/// Direct manager of the selected employee.
+	measure 'Text: Profile Manager' =
+			VAR m = LOOKUPVALUE(DimManager[ManagerName], DimManager[ManagerEmployeeID], SELECTEDVALUE(DimEmployee[ManagerEmployeeID]))
+			RETURN IF(ISBLANK(SELECTEDVALUE(DimEmployee[EmployeeNumber])), "-", COALESCE(m, "Reports to the board"))
+		displayFolder: Profile
+		lineageTag: 49ea3f0b-d1f0-4e78-9569-305431fc38f6
+
+	/// Tenure in years of the selected employee at the reference date.
+	measure 'Text: Profile Tenure' =
+			VAR t = SELECTEDVALUE(DimEmployee[TenureYears])
+			RETURN IF(ISBLANK(t), "-", FORMAT(t, "0.0") & " years")
+		displayFolder: Profile
+		lineageTag: 32e66b48-db9b-4a85-ae6b-170f8ea3c304
+
+	/// Hire date of the selected employee.
+	measure 'Text: Profile Hire Date' =
+			VAR h = SELECTEDVALUE(DimEmployee[HireDate])
+			RETURN IF(ISBLANK(h), "", "Hired " & FORMAT(h, "d mmm yyyy"))
+		displayFolder: Profile
+		lineageTag: 932e5e8d-f68d-4edf-a90b-b9205d8ba788
+
+	/// Initials of the selected employee; shown in place of the profile picture until pictures exist.
+	measure 'Text: Profile Initials' =
+			VAR n = SELECTEDVALUE(DimEmployee[FullName])
+			RETURN IF(ISBLANK(n), "", UPPER(LEFT(n, 1)) & UPPER(MID(n, FIND(" ", n & " ") + 1, 1)))
+		displayFolder: Profile
+		lineageTag: 07ffa0ac-fbe2-4a21-ae3f-1b935ebb7872
+
+	/// Annual base salary of the salary period (one value per salary record of the selected employee).
+	measure 'Base Salary' = MAX(FactCompensation[Salary])
+		formatString: "€"#,0
+		displayFolder: Profile
+		lineageTag: ff42e7dc-0820-48b7-af3a-40ca079de283
+
+	/// Change of the salary record against the previous salary (share), for the tooltip of the salary history.
+	measure 'Salary Change' = DIVIDE(MAX(FactCompensation[ChangePct]), 100)
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: Profile
+		lineageTag: 2864200f-2b11-4a78-a902-e2d61ba647c5
+
+	/// Approved leave working days in the 24 months up to the reference date, by the selected filters.
+	measure 'Leave Days Last 24 Months' =
+			VAR ref = [Reference Date]
+			RETURN
+			CALCULATE(
+			    COUNTROWS(FactLeaveDays),
+			    REMOVEFILTERS(DimDate),
+			    FactLeaveDays[LeaveDate] > EDATE(ref, -24) && FactLeaveDays[LeaveDate] <= ref
+			)
+		formatString: #,0
+		displayFolder: Leave
+		lineageTag: ed7f4f9c-ab8a-4d2c-b613-3219ed3c39da
+
+	measure 'Text: Profile Role' =
+			
+			VAR p = LOOKUPVALUE(DimPosition[PositionTitle], DimPosition[PositionID], SELECTEDVALUE(DimEmployee[PositionID]))
+			RETURN IF(ISBLANK(p), "Drill through from another page", p)
+		lineageTag: 6f9b8a1a-78c0-4ac7-9be0-ac65c25a59e0
+
+	/// Current annual base salary of the selected employee, in EUR.
+	measure 'Text: Profile Salary' =
+			VAR s = SELECTEDVALUE(DimEmployee[CurrentSalary])
+			RETURN IF(ISBLANK(s), "-", "€" & FORMAT(s, "#,0") & " / year")
+		displayFolder: Profile
+		lineageTag: 18c83a1c-5827-428a-9ee0-8517471ae695
+
+	/// Subtitle of the salary card: the change and date of the current salary record.
+	measure 'Text: Profile Salary Note' =
+			VAR cur = CALCULATETABLE(FactCompensation, FactCompensation[IsCurrent] = TRUE())
+			VAR pct = MAXX(cur, FactCompensation[ChangePct])
+			VAR d = MAXX(cur, FactCompensation[EffectiveDate])
+			RETURN IF(ISBLANK(d), "", IF(ISBLANK(pct), "Initial salary since hire", FORMAT(pct / 100, "+0.0%") & " on " & FORMAT(d, "d mmm yyyy")))
+		displayFolder: Profile
+		lineageTag: aa858aa7-1286-43c2-9c91-e6e318170cf2
+
+	/// Latest review rating of the selected employee (scale 1 to 5).
+	measure 'Text: Profile Rating' =
+			VAR r = SELECTEDVALUE(DimEmployee[LatestRating])
+			RETURN IF(ISBLANK(SELECTEDVALUE(DimEmployee[EmployeeNumber])), "-", IF(ISBLANK(r), "No review yet", FORMAT(r, "0.0") & " / 5"))
+		displayFolder: Profile
+		lineageTag: cbf64df5-460e-4011-9cb7-ae3364aad386
+
+	/// Subtitle of the rating card: performance level and review year of the latest review.
+	measure 'Text: Profile Rating Note' =
+			VAR l = SELECTEDVALUE(DimEmployee[LatestPerformanceLevel])
+			VAR d = SELECTEDVALUE(DimEmployee[LatestReviewDate])
+			RETURN IF(ISBLANK(l), "", l & " · " & FORMAT(d, "mmm yyyy"))
+		displayFolder: Profile
+		lineageTag: 019a6f54-3500-4a28-a452-c7f8879c2f70
+
+	/// Hex colour for the performance level of each review row (same palette as Level Colour, which reads the latest level of the employee); used for conditional formatting of the review history table.
+	measure 'Review Level Colour' =
+			SWITCH(SELECTEDVALUE(FactReviews[Level]),
+			    "Outstanding", "#CFEFE9",
+			    "Exceeds Expectations", "#D6E4FA",
+			    "Meets Expectations", "#E5E7EB",
+			    "Needs Improvement", "#F8D4DD",
+			    "#FFFFFF")
+		displayFolder: Performance
+		lineageTag: 5c588b49-b527-457b-9b22-7eb12a62ec68
+
 	column Placeholder
 		isHidden
 		lineageTag: fea314cd-4a29-4eed-b760-804721d78b06

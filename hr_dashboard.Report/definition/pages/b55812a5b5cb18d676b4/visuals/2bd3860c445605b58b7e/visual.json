@@ -4,10 +4,10 @@
   "position": {
     "x": 953.2349126357966,
     "y": 304.54789541079765,
-    "z": 16000,
+    "z": 15000,
     "height": 397.94258333677556,
     "width": 936.99235821388731,
-    "tabOrder": 16000
+    "tabOrder": 15000
   },
   "visual": {
     "visualType": "columnChart",
@@ -393,6 +393,13 @@
                   "Value": "'Categorical'"
                 }
               }
+            },
+            "innerPadding": {
+              "expr": {
+                "Literal": {
+                  "Value": "30L"
+                }
+              }
             }
           }
         }
@@ -460,6 +467,19 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "layout": [
+        {
+          "properties": {
+            "stackedGapSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }
@@ -735,35 +755,7 @@
         "howCreated": "User"
       },
       {
-        "name": "5d7b96ecd0c00e1d4941",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimLeaveType"
-              }
-            },
-            "Property": "LeaveType"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "e83cf29cc8406d9e9c61",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Leave Days"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "ab5d7175c77339094a7d",
+        "name": "38a545c578503a08bab6",
         "field": {
           "Column": {
             "Expression": {
@@ -777,7 +769,7 @@
         "type": "Advanced"
       },
       {
-        "name": "909fb106c640ec1b915e",
+        "name": "3d18fc0c2792358b2e50",
         "field": {
           "Column": {
             "Expression": {
@@ -789,6 +781,34 @@
           }
         },
         "type": "Categorical"
+      },
+      {
+        "name": "d740647050ec2a4de64c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimLeaveType"
+              }
+            },
+            "Property": "LeaveType"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "62b0005a38e2e05b8231",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Leave Days"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

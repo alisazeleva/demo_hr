@@ -4,10 +4,10 @@
   "position": {
     "x": 329.92688669503076,
     "y": 304.54789541079765,
-    "z": 18000,
+    "z": 17000,
     "height": 397.94258333677556,
     "width": 596.91387500516339,
-    "tabOrder": 18000
+    "tabOrder": 17000
   },
   "visual": {
     "visualType": "pivotTable",
@@ -120,6 +120,17 @@
       "values": [
         {
           "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
             "backColor": {
               "solid": {
                 "color": {
@@ -140,7 +151,7 @@
                           "min": {
                             "color": {
                               "Literal": {
-                                "Value": "'#b7c5db'"
+                                "Value": "'#E1E6EE'"
                               }
                             }
                           },
@@ -537,6 +548,20 @@
             }
           ]
         }
+      },
+      {
+        "name": "27d69c169a0e8104e603",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Vacation Days Used per Year"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

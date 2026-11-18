@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "11442f1c2b7e9b21d10e",
   "position": {
-    "x": 1308.6820318846051,
-    "y": 300.45242334484766,
+    "x": 1308.5407906150604,
+    "y": 300.48725680532033,
     "z": 14000,
-    "height": 304.48534177900672,
-    "width": 584.7731729530592,
+    "height": 352.26039902515595,
+    "width": 584.73195918873148,
     "tabOrder": 14000
   },
   "visual": {
@@ -142,7 +142,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "15D"
+                  "Value": "14D"
                 }
               }
             },
@@ -187,7 +187,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "14D"
                 }
               }
             },
@@ -215,7 +215,7 @@
             "innerPadding": {
               "expr": {
                 "Literal": {
-                  "Value": "20L"
+                  "Value": "30L"
                 }
               }
             }
@@ -638,6 +638,34 @@
             }
           ]
         }
+      },
+      {
+        "name": "03028c66a4beb0773d75",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Department Headcount"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a85b935018b3bdcdd876",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Headcount vs Target"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

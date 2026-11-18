@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "cef74e11ac9b8ed52da2",
   "position": {
-    "x": 1400.766670125889,
-    "y": 733.7349224468943,
+    "x": 1400.920318889669,
+    "y": 712.64207526126643,
     "z": 16000,
-    "height": 314.87822206611372,
-    "width": 489.48359131149766,
+    "height": 336.01784460324671,
+    "width": 489.30695196001483,
     "tabOrder": 16000
   },
   "visual": {
@@ -310,7 +310,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "17.25D"
+                  "Value": "14D"
                 }
               }
             },
@@ -355,7 +355,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "14D"
                 }
               }
             },
@@ -383,7 +383,7 @@
             "innerPadding": {
               "expr": {
                 "Literal": {
-                  "Value": "20L"
+                  "Value": "30L"
                 }
               }
             }
@@ -685,5 +685,37 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "fe1ee616c7e321615e07",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimDepartment"
+              }
+            },
+            "Property": "Department"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2f597350ca9355261c4e",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Average Months Before Promotion"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

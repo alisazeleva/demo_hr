@@ -4,10 +4,10 @@
   "position": {
     "x": 953.2349126357966,
     "y": 729.899789334545,
-    "z": 19000,
+    "z": 18000,
     "height": 319.77529018133748,
     "width": 936.99235821388731,
-    "tabOrder": 19000
+    "tabOrder": 18000
   },
   "visual": {
     "visualType": "tableEx",
@@ -214,7 +214,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "14D"
                 }
               }
             },
@@ -723,6 +723,76 @@
           ]
         },
         "howCreated": "User"
+      },
+      {
+        "name": "1edbb00030a5e4ad08dc",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimEmployee"
+              }
+            },
+            "Property": "FullName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2c0709a30bb6560c0625",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimDepartment"
+              }
+            },
+            "Property": "Department"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "55c806c1d65ebb2a0005",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimLeaveType"
+              }
+            },
+            "Property": "LeaveType"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "50b82fe39aa521086e20",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactLeaveRequests"
+              }
+            },
+            "Property": "StartDate"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "f9540cbf45602460ae50",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactLeaveRequests"
+              }
+            },
+            "Property": "EndDate"
+          }
+        },
+        "type": "Categorical"
       }
     ]
   }

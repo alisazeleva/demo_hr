@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "8b24f861912152df830d",
   "position": {
-    "x": 1145.7251195427441,
-    "y": 617.98529564377463,
-    "z": 20000,
-    "height": 431.60877790993783,
-    "width": 744.52514189464273,
-    "tabOrder": 20000
+    "x": 1146.1152463959684,
+    "y": 667.97505060101616,
+    "z": 19000,
+    "height": 381.70002891486638,
+    "width": 744.11202445371555,
+    "tabOrder": 19000
   },
   "visual": {
     "visualType": "tableEx",
@@ -214,7 +214,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "14D"
                 }
               }
             },
@@ -283,6 +283,13 @@
               "expr": {
                 "Literal": {
                   "Value": "16D"
+                }
+              }
+            },
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
@@ -850,6 +857,76 @@
           ]
         },
         "howCreated": "User"
+      },
+      {
+        "name": "f537e2ab80e2c4a8784e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimEmployee"
+              }
+            },
+            "Property": "FullName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "4019611c7691ce13c8e8",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimDepartment"
+              }
+            },
+            "Property": "Department"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "8ece6da5ab607d6c2a49",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimEmployee"
+              }
+            },
+            "Property": "LatestReviewDate"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "07b34581bb87aae2719b",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimEmployee"
+              }
+            },
+            "Property": "LatestRating"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "8dfe8b91d7de9158ee00",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimEmployee"
+              }
+            },
+            "Property": "Latest Level Short"
+          }
+        },
+        "type": "Categorical"
       }
     ]
   }

@@ -4,10 +4,10 @@
   "position": {
     "x": 1640.1860465116279,
     "y": 29.767441860465116,
-    "z": 18001,
+    "z": 19000,
     "height": 79.455252297056731,
     "width": 253.07969250173628,
-    "tabOrder": 18001
+    "tabOrder": 19000
   },
   "visual": {
     "visualType": "slicer",
@@ -505,23 +505,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "0cf1794c9394bcc10135",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactJobHistory"
-              }
-            },
-            "Property": "ChangeType"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

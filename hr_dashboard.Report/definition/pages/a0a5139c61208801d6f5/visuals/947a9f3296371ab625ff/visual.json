@@ -183,6 +183,18 @@
               "DimEmployee.FullName"
             ],
             "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimEmployee"
+                    }
+                  },
+                  "Property": "FullName"
+                }
+              }
+            ],
             "isPinned": true
           }
         ],
@@ -192,7 +204,7 @@
               "identityValues": [
                 {
                   "Literal": {
-                    "Value": "'Customer Experience'"
+                    "Value": "'Technology'"
                   }
                 }
               ],
@@ -202,7 +214,7 @@
                   "identityValues": [
                     {
                       "Literal": {
-                        "Value": "'Onni Hirvonen'"
+                        "Value": "'Jari Ahonen'"
                       }
                     }
                   ],
@@ -212,7 +224,7 @@
                       "identityValues": [
                         {
                           "Literal": {
-                            "Value": "'Junior Support Agent'"
+                            "Value": "'Senior Software Engineer'"
                           }
                         }
                       ],
@@ -345,7 +357,7 @@
             "categoryLabelFontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "14D"
+                  "Value": "16D"
                 }
               }
             }
@@ -721,6 +733,62 @@
             }
           ]
         }
+      },
+      {
+        "name": "f6c1f72002440180015e",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Headcount"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "5f21813a51362bd1b1b4",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimManager"
+              }
+            },
+            "Property": "ManagerName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "9ae495a0e825b95424c1",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimPosition"
+              }
+            },
+            "Property": "PositionTitle"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "7db2e4da9b07aa7e6b25",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimEmployee"
+              }
+            },
+            "Property": "FullName"
+          }
+        },
+        "type": "Categorical"
       }
     ]
   }
