@@ -301,18 +301,27 @@ Power BI Desktop (Windows) loads the reporting views in Import mode, and the rep
 
 ### Model
 
-| Table | Source | Notes |
-| --- | --- | --- |
-| Employees | vw\_EmployeeCurrent | One row per employee: position, level, department, manager name, age, tenure, current salary, latest rating |
-| JobHistory | vw\_JobHistory | Change type, previous and new position, department and manager |
-| Compensation | vw\_CompensationHistory | Salary periods with the change percentage |
-| Reviews | vw\_PerformanceReviews | Rating, level, reviewer name |
-| LeaveDays | vw\_LeaveDays | One row per working day of an approved leave, so absence by day and by month is exact |
-| DepartmentTargets | vw\_DepartmentHeadcountVsTarget | Target, actual, difference |
-| OrgHierarchy | vw\_OrgHierarchy | Path from the CEO and depth, for the hierarchy visuals |
-| Date | DAX CALENDAR | 2012-01-01 to 2027-12-31, marked as the date table |
+Star schema (built in Power BI Desktop; the views are in script 13). Table names use the `Dim` and `Fact` prefixes.
 
-Employees relates one-to-many to every fact table on EmployeeID. Date relates to each fact by its main date; the others are inactive relationships used through USERELATIONSHIP.
+| Table | Source view | Notes |
+| --- | --- | --- |
+| DimEmployee | vw\_DimEmployee | One row per employee: person attributes, keys to position, department and manager, current salary and latest rating, org depth and manager chain |
+| DimDepartment | vw\_DimDepartment | Five departments plus the company unit (Acme Corporation) |
+| DimPosition | vw\_DimPosition | Title, job family, job level and rank, management flag |
+| DimManager | vw\_DimManager | The manager role of an employee (employees with direct reports) |
+| DimLeaveType | vw\_DimLeaveType | Leave types |
+| DimDate | DAX CALENDAR | 2012-01-01 to 2027-12-31, marked as the date table |
+| FactJobHistory | vw\_JobHistory | Change type, keys and labels of the old and new position, department and manager |
+| FactCompensation | vw\_CompensationHistory | Salary periods with the change percentage |
+| FactReviews | vw\_PerformanceReviews | Rating, level, reviewer |
+| FactLeaveDays | vw\_LeaveDays | One row per working day of an approved leave |
+| FactWorkforcePlan | vw\_FactWorkforcePlan | Target headcount per department |
+| ReferenceDate | vw\_ReferenceDate | The single source of "today" (2026-11-16) |
+| \_Measures | (DAX) | All measures |
+
+`vw_EmployeeCurrent` and `vw_OrgHierarchy` remain as flat views for SQL checks; the model does not load them.
+
+DimEmployee relates one-to-many to every fact on EmployeeID; DimDepartment, DimPosition and DimManager filter DimEmployee (and DimDepartment filters FactWorkforcePlan); DimLeaveType filters FactLeaveDays; DimDate relates to each fact by its main date. The facts also have inactive relationships to DimDepartment, DimPosition and DimManager (department, position, manager at the time of the event), used through USERELATIONSHIP, and DimEmployee[HireDate] has an inactive relationship to DimDate.
 
 ### Measures
 

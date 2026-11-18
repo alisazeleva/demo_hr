@@ -290,6 +290,38 @@ table _Measures
 		displayFolder: Text
 		lineageTag: 411869e0-64a1-498f-92df-89a35cf788e7
 
+	/// Average salary increase at a promotion (share of the previous salary). Promotion and Promotion + Department Transfer both have the reason Promotion in the pay history.
+	measure 'Average Promotion Increase' = DIVIDE(CALCULATE(AVERAGE(FactCompensation[ChangePct]), FactCompensation[Reason] = "Promotion"), 100)
+		formatString: 0.0%
+		displayFolder: Compensation
+		lineageTag: 45460807-b759-4808-9877-2c21f9a99745
+
+	/// Average yearly (1 January) salary increase (share of the previous salary), by the year the increase took effect.
+	measure 'Average Annual Increase' = DIVIDE(CALCULATE(AVERAGE(FactCompensation[ChangePct]), FactCompensation[Reason] = "Annual Increase"), 100)
+		formatString: 0.0%
+		displayFolder: Compensation
+		lineageTag: e5f66fe9-ab96-40ef-847e-f0e00428720a
+
+	/// Average annual salary of the employees employed on 31 December of the selected year (reference date for the current year). Uses the salary period valid on that date; later years are blank.
+	measure 'Average Salary at Year End' =
+			VAR y = MAX(DimDate[Year])
+			VAR d = MIN(DATE(y, 12, 31), [Reference Date])
+			RETURN
+			IF(y > YEAR([Reference Date]), BLANK(),
+			    CALCULATE(
+			        AVERAGEX(
+			            FILTER(FactCompensation, FactCompensation[EffectiveDate] <= d && (ISBLANK(FactCompensation[EndDate]) || FactCompensation[EndDate] > d)),
+			            FactCompensation[Salary]),
+			        REMOVEFILTERS(DimDate)))
+		formatString: "€"#,0
+		displayFolder: Compensation
+		lineageTag: 5fbd794b-1431-4885-a700-13b4e2fea72b
+
+	/// Chart subtitle: number of promotions behind the average promotion increase.
+	measure 'Text: Promotion Increase' = "Average per promotion, " & FORMAT(CALCULATE(COUNTROWS(FactCompensation), FactCompensation[Reason] = "Promotion"), "0") & " promotions"
+		displayFolder: Text
+		lineageTag: 4e82d702-3cb7-476f-b910-caf74defe9ee
+
 	column Placeholder
 		isHidden
 		lineageTag: fea314cd-4a29-4eed-b760-804721d78b06

@@ -40,3 +40,35 @@ Build a dummy HR database (SQL Server) for Acme Corporation, then a Power BI rep
 8. Do not add anything from the "not building" list: multiple companies, business units, subdepartments, former employees, termination or retirement records, recruitment, payroll, benefits, attendance, time tracking, training, expenses.
 9. Keep answers short: what was done, the validation result, and the next step.
 10. Power BI work follows DESIGN.md.
+
+## Power BI working notes
+
+Project `hr_dashboard.pbip` (PBIR report + TMDL model). Design rules and page layouts are in DESIGN.md; the model is described in PLAN.md (Power BI plan). Pages 1 to 3 are built and were adjusted by hand in Desktop, so treat them as the reference and never regenerate them over the user's changes. Pages 4 to 7 are empty placeholders (page 7 also needs drill-through from pages 3 and later).
+
+### How to change things safely (Desktop is usually open)
+
+1. **Model changes**: use the Power BI Modeling MCP server on the live Desktop session (find the port with `connection_operations ListLocalInstances`; it changes every time Desktop restarts). After the change, verify values with `dax_query_operations` against the same numbers from SQL.
+2. **Save the model to disk**: `database_operations ExportToTmdlFolder` to a scratch folder, compare with `hr_dashboard.SemanticModel/definition`, and copy the changed table files (keep the original `database.tmdl`).
+3. **Report changes**: edit the PBIR JSON under `hr_dashboard.Report/definition/pages/<id>/visuals/<id>/visual.json` directly, then run `python tools/validate_pbir.py` (must report 0 problems).
+4. **Tell the user to close Desktop WITHOUT saving and reopen.** Saving first would overwrite the files edited on disk with Desktop's in-memory copy.
+5. Do not touch pages the user built or adjusted by hand unless asked; copy their formatting (read the current visual.json) instead of the generator output.
+
+`tools/`: `validate_pbir.py` (validates PBIR files against Microsoft's JSON schemas; needs `pip install jsonschema referencing`), `build_career.py` (generator for page 3, also a template for new pages), `build_org.py` (historical template). Visual JSON that Desktop writes uses schema version 2.14.0, which is not downloadable, so the validator falls back to 2.13.0 and ignores the version string.
+
+### Decisions and conventions
+
+- **Star schema**: `DimEmployee`, `DimDepartment`, `DimPosition`, `DimManager`, `DimLeaveType`, `DimDate`; `FactJobHistory`, `FactCompensation`, `FactReviews`, `FactLeaveDays`, `FactWorkforcePlan`; helper tables `ReferenceDate` and `_Measures`. Use the attribute from its dimension only (for example `DimDepartment[Department]`, `DimPosition[JobLevel]`, `DimManager[ManagerName]`). Facts relate to DimEmployee and DimDate (active) and to the other dimensions through inactive relationships (USERELATIONSHIP for "at the time of the event").
+- **Measure names**: Title Case noun phrases, units in the number format not the name, text measures prefixed `Text: ` in the Text folder, folders by page topic. Every measure has a description. Pending renames the user must do in Desktop (F2) because visuals use them: `Average Tenure (years)` to `Average Tenure`, `Largest Span of Control` to `Largest Team Size`.
+- **Measures over a grouped column**: `CALCULATE(..., Table[Col] <> x)` replaces the visual's own filter on that column; use `KEEPFILTERS` (see `Career Events`).
+- **Colouring bars by department** needs the department as the chart legend (Series), not a rule on a column of another table.
+- **Workforce plan**: targets are Technology 48 and Sales 37 (others equal their headcount), so 2 departments are deliberately below target and `Departments at Target` is 3. Script 04 and the checks in 06 and 99 follow this.
+- **Months before promotion** replaced "months between promotions": from the previous promotion, or from hire for a first promotion, to each promotion (so every department has a value).
+- Theme: `powerbi/acme_hr_theme.json`, copied into the report's `StaticResources/RegisteredResources/`; keep both copies in sync. Tooltips 10 pt.
+
+### Open items
+
+- Pages 4 to 7 (Compensation, Performance, Leave, Employee profile) not built; build them in order following DESIGN.md.
+- Drill-through to the Employee profile page (from the career matrix and table, and others).
+- Profile pictures: script 12 was skipped, so the three picture checks in script 99 fail (46 of 49 pass). The info button next to the footer has no action yet.
+- The user's `Target Headcount` measure may still contain `RANDBETWEEN(0, 2)`, which makes target comparisons change on every refresh; suggest removing it.
+- Career matrix counts by the employee's current department (a version by department at the time of the event is possible).

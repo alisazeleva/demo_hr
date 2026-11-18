@@ -4,10 +4,10 @@
   "position": {
     "x": 329.59215767667979,
     "y": 733.7349224468943,
-    "z": 19000,
+    "z": 17000,
     "height": 315.85915110681816,
     "width": 1045.6703573908949,
-    "tabOrder": 19000
+    "tabOrder": 17000
   },
   "visual": {
     "visualType": "tableEx",
@@ -710,62 +710,6 @@
             }
           ]
         }
-      },
-      {
-        "name": "8d880b19821a9b2d6707",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimEmployee"
-              }
-            },
-            "Property": "FullName"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "91310c20e607e7ec02e5",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactJobHistory"
-              }
-            },
-            "Property": "EffectiveDate"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "f5dbe0ffe372e8380222",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactJobHistory"
-              }
-            },
-            "Property": "PrevPositionTitle"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "51c0ed546a288020675e",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactJobHistory"
-              }
-            },
-            "Property": "PositionTitle"
-          }
-        },
-        "type": "Categorical"
       }
     ]
   }
