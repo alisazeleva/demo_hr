@@ -19063,6 +19063,69 @@ cultureInfo en-GB
 			          }
 			        }
 			      ]
+			    },
+			    "dimleavetype.leavetype": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DimLeaveType",
+			          "ConceptualProperty": "LeaveType"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Leave type": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "factleaverequests.startdate": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactLeaveRequests",
+			          "ConceptualProperty": "StartDate"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "From": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "factleaverequests.enddate": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactLeaveRequests",
+			          "ConceptualProperty": "EndDate"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Until": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {

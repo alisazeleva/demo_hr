@@ -552,20 +552,6 @@
             }
           ]
         }
-      },
-      {
-        "name": "90cd4407906a241e0616",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Average Rating"
-          }
-        },
-        "type": "Advanced"
       }
     ]
   }

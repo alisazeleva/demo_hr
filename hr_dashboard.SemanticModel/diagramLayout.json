@@ -183,6 +183,19 @@
           },
           "zIndex": 8,
           "expandedHeight": 224
+        },
+        {
+          "location": {
+            "x": 2317.3333333333326,
+            "y": 549.66734312096378
+          },
+          "nodeIndex": "FactLeaveRequests",
+          "nodeLineageTag": "b1a5fa72-fbbd-4400-910e-15399e2e3e54",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",

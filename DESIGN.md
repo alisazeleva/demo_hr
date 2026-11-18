@@ -143,18 +143,25 @@ Notes:
 - `FactReviews[Level Order]` is a calculated column from `Rating` (thresholds 2.5, 3.5, 4.5), not from `Level`: sorting a column by a column calculated from itself is a circular dependency.
 - Department and manager use the current department and the reviewer's name; reviews have no inactive relationships to `DimDepartment` or `DimManager`.
 
-## Page 6: Leave
+## Page 6: Leave (built)
 
-All leave counts are working days of Approved leave, up to the reference date unless stated.
+Leave counts are working days of approved leave up to the reference date unless stated (`FactLeaveDays` has one row per approved working day, including booked future leave, which is why charts filter `IsOnOrBeforeReferenceDate`). Requests of every status are in `FactLeaveRequests` (vw_LeaveRequests, added to script 13), related to `DimEmployee` and `DimLeaveType`; it feeds Pending requests and the absent-today table.
 
-KPI cards: Leave days (year to date), Employees absent today, Average vacation days per employee (year to date), Pending requests.
+KPI cards: Leave days (approved, 1 January to the reference date, subtitle `Text: Leave Days YTD`), Absent today (`Currently Absent`), Vacation days per employee (`Vacation Days YTD per Employee`), Pending requests (`Pending Requests`, 33).
 
-| Visual | Type | Fields |
-| --- | --- | --- |
-| Leave days per month by type | Stacked column | Month, Leave type, Leave Days |
-| Leave days by department | Bar | Department, Leave Days |
-| Vacation usage by department | Matrix | Department, Vacation days per employee |
-| Absent today | Table | Employee, Department, Leave type, Until date |
+Row 1 uses the heights of page 5 (y 300, 298 high); row 2 starts at y 618 and is 432 high.
+
+| Visual | Position (x, y, w x h) | Type | Fields |
+| --- | --- | --- | --- |
+| Leave days per month by type | 330, 300, 1032 x 298 | Stacked column | `DimDate[Year-Month]`, legend `DimLeaveType[LeaveType]`, `Leave Days`; filter `IsOnOrBeforeReferenceDate` = true; Vacation #4A6FA5, Sick Leave #E0A030, Parental Leave #8FAEE8, Unpaid Leave #5B6472, Bereavement #CBD5E1 |
+| Leave days by department | 1386, 300, 504 x 298 | Bar | `DimDepartment[Department]` (department colours, Acme Corporation excluded, current department), `Leave Days`; filter `IsOnOrBeforeReferenceDate` = true |
+| Vacation days per employee | 330, 618, 504 x 432 | Matrix, heat colouring | `DimDepartment[Department]` rows, `DimDate[Year]` columns (2024 to 2026), `Vacation Days Used per Year`; 2026 is up to the reference date |
+| Absent today | 858, 618, 1032 x 432 | Table | Employee, Department, Leave type, From, Until (`FactLeaveRequests[StartDate]`, `[EndDate]`); filter `FactLeaveRequests[IsAbsentToday]` = true; subtitle `Text: Absent Today` |
+
+Notes:
+
+- `FactLeaveRequests[IsAbsentToday]` is a calculated column (approved, covers the reference date). An earlier measure version was slow (about 17 s) and had to be rewritten; a column is evaluated once at refresh.
+- Unpaid Leave has no days in 2026 yet (blank in the year-to-date split).
 
 ## Page 7: Employee profile (drill-through)
 

@@ -315,6 +315,7 @@ Star schema (built in Power BI Desktop; the views are in script 13). Table names
 | FactCompensation | vw\_CompensationHistory | Salary periods with the change percentage |
 | FactReviews | vw\_PerformanceReviews | Rating, level, reviewer |
 | FactLeaveDays | vw\_LeaveDays | One row per working day of an approved leave |
+| FactLeaveRequests | vw\_LeaveRequests | One row per leave request of any status (pending, approved, rejected), with department on the start date |
 | FactWorkforcePlan | vw\_FactWorkforcePlan | Target headcount per department |
 | ReferenceDate | vw\_ReferenceDate | The single source of "today" (2026-11-16) |
 | \_Measures | (DAX) | All measures |
@@ -336,7 +337,7 @@ Headcount, Headcount vs Target, Average Salary, Average Salary at Year End, Empl
 | 3 Career | Promotions, transfers, position and manager changes, time between promotions | Column chart by year, matrix by change type, drill-through to profile |
 | 4 Compensation | Salary by department and level, increases, promotion raises | Bar charts, combo of year-end headcount and average salary over time, clustered columns of increases, gender fairness bar |
 | 5 Performance | Latest review, average rating, by department and manager, no recent review | Bar charts, rating distribution column, heat matrix, latest-review table |
-| 6 Leave | Days by employee, department and type, vacation usage, currently absent | Stacked columns by month, matrix, table of people absent now |
+| 6 Leave | Days by employee, department and type, vacation usage, currently absent, pending requests | Stacked columns by month, matrix, table of people absent now |
 | 7 Employee profile | One person: photo, current role, career timeline, salary history, reviews, leave | Drill-through page: card, tables, line chart |
 
 ### Profile pictures in Power BI

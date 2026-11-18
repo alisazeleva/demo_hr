@@ -803,62 +803,6 @@
         }
       },
       {
-        "name": "f1e6c4bbb03286d3c961",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimEmployee"
-              }
-            },
-            "Property": "FullName"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "1e617dd71c40ac85133b",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimDepartment"
-              }
-            },
-            "Property": "Department"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "2b7211344d753568bbd6",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimEmployee"
-              }
-            },
-            "Property": "LatestReviewDate"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "2550d9b9c46a3c1c2680",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimEmployee"
-              }
-            },
-            "Property": "LatestRating"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
         "name": "4c7e1b9a2d5f8036a1b4",
         "field": {
           "Measure": {
@@ -906,20 +850,6 @@
           ]
         },
         "howCreated": "User"
-      },
-      {
-        "name": "1d24977bd5485958e1ea",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimEmployee"
-              }
-            },
-            "Property": "Latest Level Short"
-          }
-        },
-        "type": "Categorical"
       }
     ]
   }

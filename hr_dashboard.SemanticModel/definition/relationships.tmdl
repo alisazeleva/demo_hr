@@ -50,3 +50,11 @@ relationship DepartmentTargets_DepartmentID_Department_DepartmentID
 	fromColumn: FactWorkforcePlan.DepartmentID
 	toColumn: DimDepartment.DepartmentID
 
+relationship LeaveRequests_EmployeeID_Employees_EmployeeID
+	fromColumn: FactLeaveRequests.EmployeeID
+	toColumn: DimEmployee.EmployeeID
+
+relationship LeaveRequests_LeaveTypeID_LeaveType_LeaveTypeID
+	fromColumn: FactLeaveRequests.LeaveTypeID
+	toColumn: DimLeaveType.LeaveTypeID
+

@@ -381,6 +381,52 @@ table _Measures
 		displayFolder: Performance
 		lineageTag: a3df9c8d-485a-47a5-83c1-fc6fffe1b4c7
 
+	/// Approved leave working days from 1 January of the reference year up to the reference date, regardless of date filters.
+	measure 'Leave Days YTD' =
+			VAR ref = [Reference Date]
+			RETURN
+			CALCULATE(
+			    COUNTROWS(FactLeaveDays),
+			    REMOVEFILTERS(DimDate),
+			    FactLeaveDays[LeaveDate] >= DATE(YEAR(ref), 1, 1) && FactLeaveDays[LeaveDate] <= ref
+			)
+		formatString: #,0
+		displayFolder: Leave
+		lineageTag: e896cfc5-cbd8-4f24-ba81-92dcb848d6df
+
+	/// Approved vacation working days from 1 January of the reference year up to the reference date, divided by the current headcount.
+	measure 'Vacation Days YTD per Employee' =
+			VAR ref = [Reference Date]
+			RETURN
+			DIVIDE(
+			    CALCULATE(
+			        COUNTROWS(FactLeaveDays),
+			        REMOVEFILTERS(DimDate),
+			        DimLeaveType[LeaveType] = "Vacation",
+			        FactLeaveDays[LeaveDate] >= DATE(YEAR(ref), 1, 1) && FactLeaveDays[LeaveDate] <= ref
+			    ),
+			    [Headcount]
+			)
+		formatString: 0.0
+		displayFolder: Leave
+		lineageTag: 86d19afa-d26a-47e9-b597-96f113119218
+
+	/// Number of leave requests with status Pending (booked in the future, not yet approved).
+	measure 'Pending Requests' = CALCULATE(COUNTROWS(FactLeaveRequests), FactLeaveRequests[Status] = "Pending")
+		formatString: #,0
+		displayFolder: Leave
+		lineageTag: 209edb44-dadb-4b6d-b8b7-9e2b17812a64
+
+	/// KPI subtitle for the year-to-date leave days.
+	measure 'Text: Leave Days YTD' = "Approved, 1 Jan to " & FORMAT([Reference Date], "d mmm yyyy")
+		displayFolder: Text
+		lineageTag: f290eca6-f558-403d-a55b-85946e2379a9
+
+	/// Subtitle of the absent-today table: number of employees on approved leave on the reference date.
+	measure 'Text: Absent Today' = FORMAT([Currently Absent], "0") & " employees on approved leave on " & FORMAT([Reference Date], "d mmm yyyy")
+		displayFolder: Text
+		lineageTag: 72c2f23d-448e-4c7a-96d9-7eb126183f6c
+
 	column Placeholder
 		isHidden
 		lineageTag: fea314cd-4a29-4eed-b760-804721d78b06

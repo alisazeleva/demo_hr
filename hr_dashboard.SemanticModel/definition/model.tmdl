@@ -26,6 +26,7 @@ ref table DimDepartment
 ref table DimPosition
 ref table DimManager
 ref table DimLeaveType
+ref table FactLeaveRequests
 
 ref cultureInfo en-GB
 

@@ -1,0 +1,69 @@
+/// One row per leave request of any status (vw_LeaveRequests); used for pending requests and the absent-today list
+table FactLeaveRequests
+	lineageTag: b1a5fa72-fbbd-4400-910e-15399e2e3e54
+
+	column LeaveID
+		dataType: int64
+		isHidden
+		lineageTag: 3ae5d3ed-c405-4ecd-aab7-563208be26f9
+		summarizeBy: none
+		sourceColumn: LeaveID
+
+	column EmployeeID
+		dataType: int64
+		isHidden
+		lineageTag: 82153efa-31d5-48a9-9c8e-cf1fc1074e99
+		summarizeBy: none
+		sourceColumn: EmployeeID
+
+	column DepartmentID
+		dataType: int64
+		isHidden
+		lineageTag: c9cabf1f-1c78-4d67-b43e-5b194bab9caf
+		summarizeBy: none
+		sourceColumn: DepartmentID
+
+	column LeaveTypeID
+		dataType: int64
+		isHidden
+		lineageTag: 7034f6cc-2869-4fdc-bbea-81b079bebde2
+		summarizeBy: none
+		sourceColumn: LeaveTypeID
+
+	column Status
+		dataType: string
+		lineageTag: 3fe6ddad-b705-49e3-9b2d-7665989c5316
+		summarizeBy: none
+		sourceColumn: Status
+
+	column StartDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: e9c583a6-ebb5-4d5d-9ac1-64e032182293
+		summarizeBy: none
+		sourceColumn: StartDate
+
+	column EndDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: a954f450-72c5-4f99-8a4c-f41ee9eac88a
+		summarizeBy: none
+		sourceColumn: EndDate
+
+	/// True when the request is approved and covers the reference date (the people absent today). Computed from the reference date in the data, not from today's date.
+	column IsAbsentToday =
+			VAR ref = MAX(ReferenceDate[ReferenceDate])
+			RETURN FactLeaveRequests[Status] = "Approved" && FactLeaveRequests[StartDate] <= ref && FactLeaveRequests[EndDate] >= ref
+		dataType: boolean
+		lineageTag: a1b8048e-ea9a-47af-b6e4-afdbdd84f3ea
+		summarizeBy: none
+
+	partition LeaveRequests = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SqlServer, SqlDatabase),
+				    Data = Source{[Schema="dbo", Item="vw_LeaveRequests"]}[Data]
+				in
+				    Data
+
