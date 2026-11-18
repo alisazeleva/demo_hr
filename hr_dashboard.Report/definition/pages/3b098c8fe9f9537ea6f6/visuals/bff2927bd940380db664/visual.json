@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "bff2927bd940380db664",
   "position": {
-    "x": 1386.052734515323,
-    "y": 300.16428645554765,
+    "x": 1386,
+    "y": 300,
     "z": 18000,
-    "height": 399.23811956669249,
-    "width": 504.19752692206373,
+    "height": 363,
+    "width": 504.4,
     "tabOrder": 18000
   },
   "visual": {
@@ -46,7 +46,8 @@
                 }
               },
               "queryRef": "DimEmployee.Gender",
-              "nativeQueryRef": "Gender"
+              "nativeQueryRef": "Gender",
+              "active": true
             }
           ]
         },
@@ -251,7 +252,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "14D"
                 }
               }
             },
@@ -369,33 +370,6 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "smallMultiplesLayout": [
-        {
-          "properties": {
-            "rowCount": {
-              "expr": {
-                "Literal": {
-                  "Value": "2L"
-                }
-              }
-            },
-            "columnCount": {
-              "expr": {
-                "Literal": {
-                  "Value": "4L"
-                }
-              }
-            },
-            "gridPadding": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
                 }
               }
             }
@@ -616,7 +590,7 @@
             "bottom": {
               "expr": {
                 "Literal": {
-                  "Value": "20D"
+                  "Value": "4D"
                 }
               }
             }
@@ -644,6 +618,19 @@
               "expr": {
                 "Literal": {
                   "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "spacing": [
+        {
+          "properties": {
+            "spaceAbovePlotArea": {
+              "expr": {
+                "Literal": {
+                  "Value": "4D"
                 }
               }
             }
@@ -728,21 +715,7 @@
         }
       },
       {
-        "name": "0df3e2c40149c0c577d0",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Average Salary"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "dbb59f7fc3ea2b808073",
+        "name": "c6f4278dea2d801c3bd5",
         "field": {
           "Column": {
             "Expression": {
@@ -754,6 +727,20 @@
           }
         },
         "type": "Categorical"
+      },
+      {
+        "name": "3d08920988a7d88481d1",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Average Salary"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

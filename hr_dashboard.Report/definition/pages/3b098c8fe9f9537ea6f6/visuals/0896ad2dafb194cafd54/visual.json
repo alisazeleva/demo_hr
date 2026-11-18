@@ -2,15 +2,15 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "0896ad2dafb194cafd54",
   "position": {
-    "x": 329.59215767667979,
-    "y": 720.982844917737,
+    "x": 330,
+    "y": 687,
     "z": 19000,
-    "height": 328.61122863597541,
-    "width": 792.59066488915857,
+    "height": 363,
+    "width": 792,
     "tabOrder": 19000
   },
   "visual": {
-    "visualType": "lineChart",
+    "visualType": "lineStackedColumnComboChart",
     "query": {
       "queryState": {
         "Category": {
@@ -32,7 +32,43 @@
             }
           ]
         },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Employees at Year End"
+                }
+              },
+              "queryRef": "_Measures.Employees at Year End",
+              "nativeQueryRef": "Employees at Year End"
+            }
+          ]
+        },
         "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Employees at Year End"
+                }
+              },
+              "queryRef": "_Measures.Employees at Year End",
+              "nativeQueryRef": "Employees at Year End"
+            }
+          ]
+        },
+        "Y2": {
           "projections": [
             {
               "field": {
@@ -50,10 +86,43 @@
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DimDate"
+                  }
+                },
+                "Property": "Year"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
       }
     },
     "objects": {
       "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 4,
+                      "Percent": 0.6
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         {
           "properties": {
             "fill": {
@@ -67,6 +136,9 @@
                 }
               }
             }
+          },
+          "selector": {
+            "metadata": "_Measures.Average Salary at Year End"
           }
         }
       ],
@@ -120,7 +192,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "14D"
                 }
               }
             },
@@ -165,7 +237,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "14D"
                 }
               }
             },
@@ -201,7 +273,21 @@
                 }
               }
             },
-            "labelDisplayUnits": {
+            "secShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "secFontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "secLabelDisplayUnits": {
               "expr": {
                 "Literal": {
                   "Value": "1000D"
@@ -218,6 +304,26 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "legend": [
+        {
+          "properties": {
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'BottomCenter'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
                 }
               }
             }
@@ -360,7 +466,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'EUR per year, employees on payroll at year end (reference date for 2026)'"
+                  "Value": "'Employees on payroll at year end; early years rest on few first hires'"
                 }
               }
             },
@@ -530,7 +636,21 @@
         }
       },
       {
-        "name": "138212c913686409de2a",
+        "name": "de4ac1d28d77a7d6a8b8",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Employees at Year End"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "96b272107e2c0c80e030",
         "field": {
           "Measure": {
             "Expression": {

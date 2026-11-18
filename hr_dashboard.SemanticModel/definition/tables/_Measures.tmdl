@@ -322,6 +322,19 @@ table _Measures
 		displayFolder: Text
 		lineageTag: 4e82d702-3cb7-476f-b910-caf74defe9ee
 
+	/// Number of employees on payroll on 31 December of the selected year (reference date for the current year). Shows how many people stand behind each point of Average Salary at Year End.
+	measure 'Employees at Year End' =
+			VAR y = MAX(DimDate[Year])
+			VAR d = MIN(DATE(y, 12, 31), [Reference Date])
+			RETURN
+			IF(y > YEAR([Reference Date]), BLANK(),
+			    CALCULATE(
+			        COUNTROWS(FILTER(FactCompensation, FactCompensation[EffectiveDate] <= d && (ISBLANK(FactCompensation[EndDate]) || FactCompensation[EndDate] > d))),
+			        REMOVEFILTERS(DimDate)))
+		formatString: #,0
+		displayFolder: Compensation
+		lineageTag: 53564075-e921-4f33-b1ea-ee8716552a3b
+
 	column Placeholder
 		isHidden
 		lineageTag: fea314cd-4a29-4eed-b760-804721d78b06

@@ -138,7 +138,8 @@ add('gender', gb)
 ln = {"$schema": SCHEMA, "name": '', "position": {"x": 330, "y": 687, "z": 1, "height": H, "width": 792, "tabOrder": 1},
       "visual": {"visualType": "lineChart",
                  "query": {"queryState": {"Category": {"projections": [cproj('DimDate', 'Year')]},
-                                           "Y": {"projections": [mproj('Average Salary at Year End')]}}},
+                                           "Y": {"projections": [mproj('Average Salary at Year End')]},
+                                           "Tooltips": {"projections": [mproj('Employees at Year End')]}}},
                  "objects": {"dataPoint": [{"properties": {"fill": SOL('#4A6FA5')}}],
                              "lineStyles": [{"properties": {"strokeWidth": L("3L"), "showMarker": L("true")}}],
                              "labels": [{"properties": {"show": L("false")}}],
@@ -151,7 +152,7 @@ ln = {"$schema": SCHEMA, "name": '', "position": {"x": 330, "y": 687, "z": 1, "h
           "filter": {"Version": 2, "From": [{"Name": "d", "Entity": "DimDate", "Type": 0}],
                      "Where": [{"Condition": {"Between": {"Expression": {"Column": {"Expression": {"SourceRef": {"Source": "d"}}, "Property": "Year"}},
                                 "LowerBound": {"Literal": {"Value": "2012L"}}, "UpperBound": {"Literal": {"Value": "2026L"}}}}}]}}]}}
-titles(ln, 'Average salary over time', 'EUR per year, employees on payroll at year end (reference date for 2026)',
+titles(ln, 'Average salary over time', 'Employees on payroll at year end; early years rest on few first hires',
        'Line chart: average annual salary of employees employed at each year end, in EUR.')
 add('line', ln)
 

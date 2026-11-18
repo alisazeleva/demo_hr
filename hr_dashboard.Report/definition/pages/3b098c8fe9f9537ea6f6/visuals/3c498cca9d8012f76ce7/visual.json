@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "3c498cca9d8012f76ce7",
   "position": {
-    "x": 1145.7251195427441,
-    "y": 720.982844917737,
+    "x": 1146,
+    "y": 687,
     "z": 20000,
-    "height": 328.61122863597541,
-    "width": 744.52514189464273,
+    "height": 363,
+    "width": 744,
     "tabOrder": 20000
   },
   "visual": {
@@ -74,8 +74,9 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "Literal": {
-                      "Value": "'#4A6FA5'"
+                    "ThemeDataColor": {
+                      "ColorId": 7,
+                      "Percent": 0.4
                     }
                   }
                 }
@@ -92,8 +93,9 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "Literal": {
-                      "Value": "'#2563EB'"
+                    "ThemeDataColor": {
+                      "ColorId": 7,
+                      "Percent": -0.25
                     }
                   }
                 }
@@ -138,7 +140,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "14D"
                 }
               }
             },
@@ -180,7 +182,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "14D"
                 }
               }
             },
@@ -225,7 +227,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "14D"
                 }
               }
             },
@@ -588,7 +590,7 @@
         }
       },
       {
-        "name": "9bc179c0d03ecea17883",
+        "name": "59044230272c01c34551",
         "field": {
           "Measure": {
             "Expression": {
@@ -602,7 +604,7 @@
         "type": "Advanced"
       },
       {
-        "name": "ae194f02708905208b8e",
+        "name": "bec60d182d20e9040870",
         "field": {
           "Measure": {
             "Expression": {
