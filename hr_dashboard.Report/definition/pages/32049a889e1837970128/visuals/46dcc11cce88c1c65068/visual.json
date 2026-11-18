@@ -23,11 +23,11 @@
                       "Entity": "FactReviews"
                     }
                   },
-                  "Property": "Level"
+                  "Property": "Level Long"
                 }
               },
-              "queryRef": "FactReviews.Level",
-              "nativeQueryRef": "Level",
+              "queryRef": "FactReviews.Level Long",
+              "nativeQueryRef": "Level Long",
               "active": true
             }
           ]
@@ -61,10 +61,10 @@
                     "Entity": "FactReviews"
                   }
                 },
-                "Property": "Level"
+                "Property": "Level Long"
               }
             },
-            "direction": "Ascending"
+            "direction": "Descending"
           }
         ]
       }
@@ -471,20 +471,6 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "dff643976e5806b3da92",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactReviews"
-              }
-            },
-            "Property": "Level"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
         "name": "df3158209b4a3c2528e8",
         "field": {
           "Measure": {
@@ -497,6 +483,20 @@
           }
         },
         "type": "Advanced"
+      },
+      {
+        "name": "57d2f9b43a5817b62291",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactReviews"
+              }
+            },
+            "Property": "Level Long"
+          }
+        },
+        "type": "Categorical"
       }
     ]
   }

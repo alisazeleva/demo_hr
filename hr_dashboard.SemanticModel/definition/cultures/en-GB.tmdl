@@ -19020,19 +19020,7 @@ cultureInfo en-GB
 			          "ConceptualProperty": "LatestPerformanceLevel"
 			        }
 			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Level": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
+			      "State": "Generated"
 			    },
 			    "dimdepartment.department": {
 			      "Definition": {
@@ -19045,6 +19033,27 @@ cultureInfo en-GB
 			      "Terms": [
 			        {
 			          "Department": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dimemployee.latest_level_short": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DimEmployee",
+			          "ConceptualProperty": "Latest Level Short"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Level": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",

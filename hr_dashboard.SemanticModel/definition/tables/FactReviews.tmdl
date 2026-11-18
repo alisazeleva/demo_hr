@@ -111,6 +111,15 @@ table FactReviews
 		lineageTag: c880f123-ffae-42b3-bb32-6c76fa46c65e
 		summarizeBy: none
 
+	column 'Level Long' = [Level] & " ("& SWITCH([Level], "Needs Improvement", "NI", "Meets Expectations", "ME", "Exceeds Expectations", "EE", "Outstanding", "O") & ")"
+		lineageTag: 6a881733-8b37-4238-8f71-cb6ab21e1bf1
+		summarizeBy: none
+		sortByColumn: 'Level Order'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Reviews = m
 		mode: import
 		source =

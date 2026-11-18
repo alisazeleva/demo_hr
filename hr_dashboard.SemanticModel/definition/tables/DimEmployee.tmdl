@@ -222,6 +222,12 @@ table DimEmployee
 		summarizeBy: none
 		sortByColumn: 'Native Language Order'
 
+	/// Initials of the latest performance level: NI Needs Improvement, ME Meets Expectations, EE Exceeds Expectations, O Outstanding. Blank when the employee has no review.
+	column 'Latest Level Short' = SWITCH(DimEmployee[LatestPerformanceLevel], "Needs Improvement", "NI", "Meets Expectations", "ME", "Exceeds Expectations", "EE", "Outstanding", "O")
+		dataType: string
+		lineageTag: 274b3979-a11b-4ce3-954d-eeaccbb5c353
+		summarizeBy: none
+
 	partition Employees = m
 		mode: import
 		source =

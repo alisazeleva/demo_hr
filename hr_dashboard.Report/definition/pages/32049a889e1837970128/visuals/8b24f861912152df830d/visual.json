@@ -87,11 +87,11 @@
                       "Entity": "DimEmployee"
                     }
                   },
-                  "Property": "LatestPerformanceLevel"
+                  "Property": "Latest Level Short"
                 }
               },
-              "queryRef": "DimEmployee.LatestPerformanceLevel",
-              "nativeQueryRef": "LatestPerformanceLevel",
+              "queryRef": "DimEmployee.Latest Level Short",
+              "nativeQueryRef": "Latest Level Short",
               "active": true,
               "displayName": "Level"
             }
@@ -265,7 +265,7 @@
                 }
               }
             ],
-            "metadata": "DimEmployee.LatestPerformanceLevel"
+            "metadata": "DimEmployee.Latest Level Short"
           }
         }
       ],
@@ -286,6 +286,44 @@
                 }
               }
             }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {},
+          "selector": {
+            "metadata": "DimEmployee.Latest Level Short"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "226D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "DimEmployee.FullName"
+          }
+        }
+      ],
+      "columnFormatting": [
+        {
+          "properties": {
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Right'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "DimEmployee.Latest Level Short"
           }
         }
       ]
@@ -701,7 +739,7 @@
           "Version": 2,
           "From": [
             {
-              "Name": "e",
+              "Name": "d",
               "Entity": "DimEmployee",
               "Type": 0
             }
@@ -717,7 +755,7 @@
                           "Column": {
                             "Expression": {
                               "SourceRef": {
-                                "Source": "e"
+                                "Source": "d"
                               }
                             },
                             "Property": "LatestPerformanceLevel"
@@ -731,6 +769,13 @@
                               "Value": "'null'"
                             }
                           }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "null"
+                            }
+                          }
                         ]
                       ]
                     }
@@ -740,6 +785,7 @@
             }
           ]
         },
+        "howCreated": "User",
         "objects": {
           "general": [
             {
@@ -811,6 +857,69 @@
           }
         },
         "type": "Advanced"
+      },
+      {
+        "name": "4c7e1b9a2d5f8036a1b4",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Latest Level in Selection"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "m",
+              "Entity": "_Measures",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Comparison": {
+                  "ComparisonKind": 0,
+                  "Left": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "m"
+                        }
+                      },
+                      "Property": "Latest Level in Selection"
+                    }
+                  },
+                  "Right": {
+                    "Literal": {
+                      "Value": "1L"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      },
+      {
+        "name": "1d24977bd5485958e1ea",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimEmployee"
+              }
+            },
+            "Property": "Latest Level Short"
+          }
+        },
+        "type": "Categorical"
       }
     ]
   }

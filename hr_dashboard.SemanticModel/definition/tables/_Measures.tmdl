@@ -366,6 +366,21 @@ table _Measures
 		displayFolder: Text
 		lineageTag: e851c37a-fa5f-4cde-aa97-151b1d7e4c57
 
+	/// Helper for the latest review table: 1 when the employee's latest performance level is among the levels selected in FactReviews[Level] (all levels when nothing is selected), otherwise 0. Used as a visual filter so a click on the rating distribution cross-filters the table.
+	measure 'Latest Level in Selection' =
+			VAR lvl = SELECTEDVALUE(DimEmployee[LatestPerformanceLevel])
+			VAR selected =
+			    CALCULATETABLE(
+			        VALUES(FactReviews[Level]),
+			        ALLEXCEPT(FactReviews, FactReviews[Level], FactReviews[Level Long])
+			    )
+			RETURN
+			    IF(lvl IN selected, 1, 0)
+		formatString: 0
+		isHidden
+		displayFolder: Performance
+		lineageTag: a3df9c8d-485a-47a5-83c1-fc6fffe1b4c7
+
 	column Placeholder
 		isHidden
 		lineageTag: fea314cd-4a29-4eed-b760-804721d78b06
