@@ -434,37 +434,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "0753384fa1b5900395e9",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimPosition"
-              }
-            },
-            "Property": "JobLevel"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "28cf2310b0279d99b238",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Average Salary"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

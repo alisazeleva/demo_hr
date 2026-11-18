@@ -335,7 +335,7 @@ Headcount, Headcount vs Target, Average Salary, Average Salary at Year End, Empl
 | 2 Organization | Hierarchy, employees per manager, department vs target | Hierarchy or decomposition tree, bar chart of span of control, target gauge |
 | 3 Career | Promotions, transfers, position and manager changes, time between promotions | Column chart by year, matrix by change type, drill-through to profile |
 | 4 Compensation | Salary by department and level, increases, promotion raises | Bar charts, combo of year-end headcount and average salary over time, clustered columns of increases, gender fairness bar |
-| 5 Performance | Latest review, average rating, by department and manager, no recent review | Bar charts, heat matrix, table |
+| 5 Performance | Latest review, average rating, by department and manager, no recent review | Bar charts, rating distribution column, heat matrix, latest-review table |
 | 6 Leave | Days by employee, department and type, vacation usage, currently absent | Stacked columns by month, matrix, table of people absent now |
 | 7 Employee profile | One person: photo, current role, career timeline, salary history, reviews, leave | Drill-through page: card, tables, line chart |
 

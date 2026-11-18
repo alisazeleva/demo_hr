@@ -634,34 +634,6 @@
             }
           ]
         }
-      },
-      {
-        "name": "de4ac1d28d77a7d6a8b8",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Employees at Year End"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "96b272107e2c0c80e030",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Average Salary at Year End"
-          }
-        },
-        "type": "Advanced"
       }
     ]
   }

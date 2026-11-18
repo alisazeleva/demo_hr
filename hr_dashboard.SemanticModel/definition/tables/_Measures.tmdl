@@ -335,6 +335,37 @@ table _Measures
 		displayFolder: Compensation
 		lineageTag: 53564075-e921-4f33-b1ea-ee8716552a3b
 
+	/// Number of annual performance reviews in the current filter (CEO has none).
+	measure 'Number of Reviews' = COUNTROWS(FactReviews)
+		formatString: #,0
+		displayFolder: Performance
+		lineageTag: 99e0bb0e-87b0-4871-812b-6b47a2bd9cbd
+
+	/// Share of employees with a latest review whose latest level is Exceeds Expectations or Outstanding.
+	measure 'Exceeds or Outstanding Share' =
+			DIVIDE(
+			    CALCULATE(COUNTROWS(DimEmployee), DimEmployee[LatestPerformanceLevel] IN {"Exceeds Expectations", "Outstanding"}),
+			    CALCULATE(COUNTROWS(DimEmployee), NOT ISBLANK(DimEmployee[LatestPerformanceLevel])))
+		formatString: 0%
+		displayFolder: Performance
+		lineageTag: 8850129e-2715-455d-9dab-9b2842a2cbf0
+
+	/// Hex colour for the latest performance level of the employee (used for conditional formatting in the latest review table).
+	measure 'Level Colour' =
+			SWITCH(SELECTEDVALUE(DimEmployee[LatestPerformanceLevel]),
+			    "Outstanding", "#CFEFE9",
+			    "Exceeds Expectations", "#D6E4FA",
+			    "Meets Expectations", "#E5E7EB",
+			    "Needs Improvement", "#F8D4DD",
+			    "#FFFFFF")
+		displayFolder: Performance
+		lineageTag: 5b1c84ed-16f6-44b6-aed8-f043b7752c27
+
+	/// Chart subtitle: how many employees have a latest review and how many have none within 12 months.
+	measure 'Text: Latest Reviews' = FORMAT(CALCULATE(COUNTROWS(DimEmployee), NOT ISBLANK(DimEmployee[LatestPerformanceLevel])), "0") & " employees with a latest review"
+		displayFolder: Text
+		lineageTag: e851c37a-fa5f-4cde-aa97-151b1d7e4c57
+
 	column Placeholder
 		isHidden
 		lineageTag: fea314cd-4a29-4eed-b760-804721d78b06

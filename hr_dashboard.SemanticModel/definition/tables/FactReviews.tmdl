@@ -66,6 +66,7 @@ table FactReviews
 		lineageTag: 1d7ad926-b12c-4c50-a5cf-de6bb9e64d20
 		summarizeBy: none
 		sourceColumn: Level
+		sortByColumn: 'Level Order'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -102,6 +103,13 @@ table FactReviews
 		sourceColumn: DepartmentID
 
 		annotation SummarizationSetBy = Automatic
+
+	/// Sort order of Level: 1 Needs Improvement to 4 Outstanding. Derived from Rating with the thresholds in PLAN.md (below 2.5, below 3.5, below 4.5, 4.5 or more); derived from Rating, not Level, so Level can be sorted by it.
+	column 'Level Order' = SWITCH(TRUE(), FactReviews[Rating] < 2.5, 1, FactReviews[Rating] < 3.5, 2, FactReviews[Rating] < 4.5, 3, 4)
+		dataType: int64
+		isHidden
+		lineageTag: c880f123-ffae-42b3-bb32-6c76fa46c65e
+		summarizeBy: none
 
 	partition Reviews = m
 		mode: import

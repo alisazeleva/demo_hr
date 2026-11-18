@@ -588,34 +588,6 @@
             }
           ]
         }
-      },
-      {
-        "name": "59044230272c01c34551",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Average Annual Increase"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "bec60d182d20e9040870",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Average Promotion Increase"
-          }
-        },
-        "type": "Advanced"
       }
     ]
   }

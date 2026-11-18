@@ -124,17 +124,24 @@ Notes:
 - `Average Salary at Year End` and `Employees at Year End` use the salary period valid on 31 December of the year (the reference date for 2026). Do not put the period filter in the CALCULATE filter argument: it would be evaluated under the year filter. Iterate with AVERAGEX/COUNTROWS over FILTER inside CALCULATE(..., REMOVEFILTERS(DimDate)).
 - Axis labels and legends on the line/column and increases charts are 14 pt (the minimum), not 16 pt, so the year labels fit.
 
-## Page 5: Performance
+## Page 5: Performance (built)
 
-KPI cards: Average rating (all reviews), Exceeds or Outstanding (% of latest reviews), Employees without a recent review, Number of reviews.
+Ratings are 1.0 to 5.0 from the annual reviews 2012 to 2025 (557 reviews, none for the CEO). "Latest" means the employee's latest review (`DimEmployee[LatestReviewDate]`, `LatestRating`, `LatestPerformanceLevel`).
 
-| Visual | Type | Fields |
-| --- | --- | --- |
-| Average rating by department | Bar | Department, Average Rating |
-| Average rating by manager | Bar, top 10 managers | Reviewer name, Average Rating |
-| Rating distribution | Column | Performance level (4 levels in order), count |
-| Rating by department and year | Matrix with heat colouring | Department (rows), Review year (columns), Average Rating |
-| Latest review per employee | Table | Employee, Department, Review date, Rating, Level; conditional colour on Level |
+KPI cards: Average rating (all reviews, 3.47), Exceeds or Outstanding (share of latest reviews, 47 %: 54 of 114), Without a recent review (no review in the 12 months before the reference date, 40), Reviews (number of reviews, 557).
+
+| Visual | Position (x, y, w x h) | Type | Fields |
+| --- | --- | --- | --- |
+| Average rating by department | 330, 300, 504 x 363 | Bar | `DimDepartment[Department]` (department colours, Acme Corporation excluded), `Average Rating`; value axis fixed 0 to 5 |
+| Average rating by manager | 858, 300, 504 x 363 | Bar, Top N filter 10 | `FactReviews[ReviewerName]`, `Average Rating` (Top 10 by the measure); neutral colour |
+| Rating distribution | 1386, 300, 504 x 363 | Column | `FactReviews[Level]` (sorted by hidden `Level Order`, Needs Improvement to Outstanding), `Number of Reviews` |
+| Rating by department and year | 330, 687, 792 x 363 | Matrix, heat colouring | `DimDepartment[Department]` rows, `FactReviews[ReviewYear]` columns (2018 to 2025), `Average Rating`; gradient #b7c5db to #6e8cb7 |
+| Latest review per employee | 1146, 687, 744 x 363 | Table | Employee, Department, Review date, Rating, Level (all `DimEmployee`/`DimDepartment`); sorted by rating, employees without a review excluded; Level cell colour from `Level Colour` (Outstanding #CFEFE9, Exceeds #D6E4FA, Meets #E5E7EB, Needs Improvement #F8D4DD) |
+
+Notes:
+
+- `FactReviews[Level Order]` is a calculated column from `Rating` (thresholds 2.5, 3.5, 4.5), not from `Level`: sorting a column by a column calculated from itself is a circular dependency.
+- Department and manager use the current department and the reviewer's name; reviews have no inactive relationships to `DimDepartment` or `DimManager`.
 
 ## Page 6: Leave
 
@@ -178,6 +185,7 @@ Photos: resize to about 160 x 160 px (under 20 KB each), have Power Query read t
 | Department Transfers | Job-history rows whose change type contains "Department Transfer" |
 | Average Months Before Promotion | Average months in the job before a promotion: from the previous promotion, or from hire for a first promotion, to each promotion date (every promoted employee contributes) |
 | Average Rating | Average of OverallRating |
+| Number of Reviews / Exceeds or Outstanding Share | Review count; share of employees with a latest review whose latest level is Exceeds Expectations or Outstanding |
 | Employees Without Recent Review | Employees with no review dated within 12 months before the reference date |
 | Leave Days | Count of rows in `vw_LeaveDays` (one row per working day) |
 | Vacation Days per Employee | Vacation Leave Days divided by Headcount |

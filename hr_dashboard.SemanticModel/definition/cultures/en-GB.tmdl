@@ -18921,7 +18921,19 @@ cultureInfo en-GB
 			          "ConceptualProperty": "FullName"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Employee": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    },
 			    "factjobhistory.effectivedate": {
 			      "Definition": {
@@ -18958,6 +18970,90 @@ cultureInfo en-GB
 			        }
 			      },
 			      "State": "Generated"
+			    },
+			    "dimemployee.latestreviewdate": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DimEmployee",
+			          "ConceptualProperty": "LatestReviewDate"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Review date": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dimemployee.latestrating": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DimEmployee",
+			          "ConceptualProperty": "LatestRating"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Rating": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dimemployee.latestperformancelevel": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DimEmployee",
+			          "ConceptualProperty": "LatestPerformanceLevel"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Level": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dimdepartment.department": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DimDepartment",
+			          "ConceptualProperty": "Department"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Department": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {
