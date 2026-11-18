@@ -325,7 +325,7 @@ DimEmployee relates one-to-many to every fact on EmployeeID; DimDepartment, DimP
 
 ### Measures
 
-Headcount, Headcount vs Target, Average Salary, Average Tenure (years), Promotions, Department Transfers, Average Months Before Promotion, Average Rating, Employees Without Recent Review, Leave Days, Vacation Days Used per Year, Currently Absent (on 2026-11-16), Direct Reports and Span of Control.
+Headcount, Headcount vs Target, Average Salary, Average Salary at Year End, Employees at Year End, Average Annual Increase, Average Promotion Increase, Average Tenure (years), Promotions, Department Transfers, Average Months Before Promotion, Average Rating, Employees Without Recent Review, Leave Days, Vacation Days Used per Year, Currently Absent (on 2026-11-16), Direct Reports and Span of Control.
 
 ### Report pages
 
@@ -334,7 +334,7 @@ Headcount, Headcount vs Target, Average Salary, Average Tenure (years), Promotio
 | 1 Workforce | Total, by department, level, position, nationality, language, gender | Cards, bar charts, treemap, slicers |
 | 2 Organization | Hierarchy, employees per manager, department vs target | Hierarchy or decomposition tree, bar chart of span of control, target gauge |
 | 3 Career | Promotions, transfers, position and manager changes, time between promotions | Column chart by year, matrix by change type, drill-through to profile |
-| 4 Compensation | Salary by department and level, increases, promotion raises | Bar charts, line chart of average salary over time |
+| 4 Compensation | Salary by department and level, increases, promotion raises | Bar charts, combo of year-end headcount and average salary over time, clustered columns of increases, gender fairness bar |
 | 5 Performance | Latest review, average rating, by department and manager, no recent review | Bar charts, heat matrix, table |
 | 6 Leave | Days by employee, department and type, vacation usage, currently absent | Stacked columns by month, matrix, table of people absent now |
 | 7 Employee profile | One person: photo, current role, career timeline, salary history, reviews, leave | Drill-through page: card, tables, line chart |

@@ -43,7 +43,7 @@ Build a dummy HR database (SQL Server) for Acme Corporation, then a Power BI rep
 
 ## Power BI working notes
 
-Project `hr_dashboard.pbip` (PBIR report + TMDL model). Design rules and page layouts are in DESIGN.md; the model is described in PLAN.md (Power BI plan). Pages 1 to 3 are built and were adjusted by hand in Desktop, so treat them as the reference and never regenerate them over the user's changes. Pages 4 to 7 are empty placeholders (page 7 also needs drill-through from pages 3 and later).
+Project `hr_dashboard.pbip` (PBIR report + TMDL model). Design rules and page layouts are in DESIGN.md; the model is described in PLAN.md (Power BI plan). Pages 1 to 4 are built and were adjusted by hand in Desktop, so treat them as the reference and never regenerate them over the user's changes (`tools/build_comp.py` would overwrite page 4, which has since been changed by hand: the combo chart, colours and 14 pt fonts). Pages 5 to 7 are empty placeholders (page 7 also needs drill-through from pages 3 and later).
 
 ### How to change things safely (Desktop is usually open)
 
@@ -53,7 +53,7 @@ Project `hr_dashboard.pbip` (PBIR report + TMDL model). Design rules and page la
 4. **Tell the user to close Desktop WITHOUT saving and reopen.** Saving first would overwrite the files edited on disk with Desktop's in-memory copy.
 5. Do not touch pages the user built or adjusted by hand unless asked; copy their formatting (read the current visual.json) instead of the generator output.
 
-`tools/`: `validate_pbir.py` (validates PBIR files against Microsoft's JSON schemas; needs `pip install jsonschema referencing`), `build_career.py` (generator for page 3, also a template for new pages), `build_org.py` (historical template). Visual JSON that Desktop writes uses schema version 2.14.0, which is not downloadable, so the validator falls back to 2.13.0 and ignores the version string.
+`tools/`: `validate_pbir.py` (validates PBIR files against Microsoft's JSON schemas; needs `pip install jsonschema referencing`), `build_career.py` (generator for page 3, also a template for new pages), `build_comp.py` (page 4 first draft; the hand-adjusted page differs), `build_org.py` (historical template). Visual JSON that Desktop writes uses schema version 2.14.0, which is not downloadable, so the validator falls back to 2.13.0 and ignores the version string.
 
 ### Decisions and conventions
 
@@ -63,11 +63,13 @@ Project `hr_dashboard.pbip` (PBIR report + TMDL model). Design rules and page la
 - **Colouring bars by department** needs the department as the chart legend (Series), not a rule on a column of another table.
 - **Workforce plan**: targets are Technology 48 and Sales 37 (others equal their headcount), so 2 departments are deliberately below target and `Departments at Target` is 3. Script 04 and the checks in 06 and 99 follow this.
 - **Months before promotion** replaced "months between promotions": from the previous promotion, or from hire for a first promotion, to each promotion (so every department has a value).
+- **Gender colours** are Female #E0A030 and Male #5B6472 (changed by hand; used on the page 1 donut and the page 4 gender chart).
+- **Year-end measures** (`Average Salary at Year End`, `Employees at Year End`): the period filter must be inside AVERAGEX/COUNTROWS over FILTER within `CALCULATE(..., REMOVEFILTERS(DimDate))`; as a CALCULATE filter argument it is evaluated under the year filter and gives wrong numbers. Early years show only the first senior hires because there are no former employees; the page 4 chart says so.
 - Theme: `powerbi/acme_hr_theme.json`, copied into the report's `StaticResources/RegisteredResources/`; keep both copies in sync. Tooltips 10 pt.
 
 ### Open items
 
-- Pages 4 to 7 (Compensation, Performance, Leave, Employee profile) not built; build them in order following DESIGN.md.
+- Pages 5 to 7 (Performance, Leave, Employee profile) not built; build them in order following DESIGN.md.
 - Drill-through to the Employee profile page (from the career matrix and table, and others).
 - Profile pictures: script 12 was skipped, so the three picture checks in script 99 fail (46 of 49 pass). The info button next to the footer has no action yet.
 - The user's `Target Headcount` measure may still contain `RANDBETWEEN(0, 2)`, which makes target comparisons change on every refresh; suggest removing it.

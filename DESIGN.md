@@ -43,7 +43,7 @@ The Workforce page as built in Power BI Desktop is the reference. Copy it for ev
 | Human Resources | #D9822B |
 | Sales | #7C5CD6 |
 | Customer Experience | #C8446A |
-| Female / Male | #7C5CD6 / #E0A030 |
+| Female / Male | #E0A030 / #5B6472 (changed by hand in Desktop; used on the page 1 donut and the page 4 gender chart) |
 
 Department colours are fixed and identical on every page. Do not rely on colour alone: bars carry value labels and legends carry names.
 
@@ -73,7 +73,7 @@ Header subtitle, KPI cards and subtitles as built:
 | Row 1, col 3 | Headcount by position | Bar | `DimPosition[PositionTitle]`, Headcount, legend `DimDepartment[Department]` | Top N positions by headcount (Top N filter), bars coloured by department through the legend; subtitle "Positions, coloured by department" |
 | Row 2, col 1 | Employees by nationality | Bar | `Nationality Top 6`, Headcount | Top 6 plus "Other"; subtitle `Text: Nationality Subtitle` |
 | Row 2, col 2 | Employees by native language | Bar | `Native Language Top 6`, Headcount | Top 6 plus "Other"; subtitle `Text: Language Subtitle` |
-| Row 2, col 3 | Gender split | Donut | Gender, Headcount | Female #7C5CD6, Male #E0A030; subtitle `Text: Gender Subtitle` |
+| Row 2, col 3 | Gender split | Donut | Gender, Headcount | Female #E0A030, Male #5B6472; subtitle `Text: Gender Subtitle` |
 
 ## Page 2: Organization (built)
 
@@ -104,19 +104,25 @@ Change-type colours (stacked column): Promotion #2563EB, Promotion + Department 
 
 Not built yet: drill-through from the matrix and table rows to page 7 (page 7 does not exist yet). Add it when page 7 is built.
 
-## Page 4: Compensation
+## Page 4: Compensation (built)
 
-All values are EUR per year, current salary unless stated.
+All values are EUR per year, current salary unless stated. Pay history comes from `FactCompensation`. A promotion and a promotion with a transfer both have the reason Promotion there, so the promotion increase covers both.
 
-KPI cards: Average salary, Median salary, Total annual payroll, Average promotion increase (%).
+KPI cards: Average salary, Median salary, Total annual payroll, Average promotion increase (share of the previous salary, about 9.0 %).
 
-| Visual | Type | Fields |
-| --- | --- | --- |
-| Average salary by department | Bar | Department, Average Salary |
-| Average salary by job level | Bar | Job level (rank order), Average Salary |
-| Average salary over time | Line | Year-end, Average salary of employees employed at that date |
-| Increases by year | Clustered column | Year, Annual-increase % vs Promotion-increase % |
-| Average salary by gender within level | Clustered bar | Job level, Gender, Average Salary (fairness check) |
+| Visual | Position (x, y, w x h) | Type | Fields |
+| --- | --- | --- | --- |
+| Average salary by department | 330, 300, 504 x 363 | Bar | `DimDepartment[Department]` (department colours, Acme Corporation excluded), `Average Salary`; subtitle "EUR per year, excluding the CEO" |
+| Average salary by job level | 858, 300, 504 x 363 | Bar | `DimPosition[JobLevel]` (rank order), `Average Salary`; neutral colour |
+| Salary by gender within level | 1386, 300, 504 x 363 | Clustered bar | `DimPosition[JobLevel]` (CEO excluded), legend `DimEmployee[Gender]`, `Average Salary`; labels in thousands with one decimal; subtitle "EUR per year, excluding the CEO (fairness check)" |
+| Average salary over time | 330, 687, 792 x 363 | Line and clustered column | `DimDate[Year]` (2012 to 2026); columns `Employees at Year End` (primary axis, light tint), line `Average Salary at Year End` (secondary axis in thousands, #4A6FA5); the headcount is also in the tooltip; subtitle "Employees on payroll at year end; early years rest on few first hires" |
+| Salary increases by year | 1146, 687, 744 x 363 | Clustered column | `DimDate[Year]` (2013 to 2026), `Average Annual Increase`, `Average Promotion Increase`; subtitle `Text: Promotion Increase`; navy tints (theme colour 8 lightened and darkened) instead of the bar blues |
+
+Notes:
+
+- Average salary over time falls from about 170k in 2012 to 69k in 2026. That is not a pay cut: the data holds only current employees, so the early years contain only the first (senior) hires, 2 people at the end of 2012 and 151 in 2026. The columns and the subtitle make this visible.
+- `Average Salary at Year End` and `Employees at Year End` use the salary period valid on 31 December of the year (the reference date for 2026). Do not put the period filter in the CALCULATE filter argument: it would be evaluated under the year filter. Iterate with AVERAGEX/COUNTROWS over FILTER inside CALCULATE(..., REMOVEFILTERS(DimDate)).
+- Axis labels and legends on the line/column and increases charts are 14 pt (the minimum), not 16 pt, so the year labels fit.
 
 ## Page 5: Performance
 
@@ -164,6 +170,8 @@ Photos: resize to about 160 x 160 px (under 20 KB each), have Power Query read t
 | Headcount | Count of current employees (respecting slicers) |
 | Headcount vs Target | Headcount minus department target |
 | Average Salary / Median Salary | Over current salaries |
+| Average Salary at Year End / Employees at Year End | Average salary and headcount on 31 December of the selected year (reference date for 2026), from the salary period valid on that date |
+| Average Annual Increase / Average Promotion Increase | Average ChangePct of the pay-history rows with reason Annual Increase / Promotion, as a share |
 | Total Payroll | Sum of current annual salaries |
 | Average Tenure (years) | Average of (reference date minus hire date) in years |
 | Promotions | Job-history rows whose change type contains "Promotion" |
