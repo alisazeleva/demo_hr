@@ -3,9 +3,6 @@ table DimDate
 	lineageTag: fac3adc9-ad12-486e-8d30-1663c1895fe3
 	dataCategory: Time
 
-	measure 'Text: Info Note' = "Demo report with fictional data. Acme Corporation and all employees are synthetic, generated for demonstration only, and any resemblance to real people is coincidental. Figures are as " & [Reference Date] & "."
-		lineageTag: 01f97653-b652-4988-bb6a-29df0e9bc453
-
 	column Date
 		isUnique
 		formatString: yyyy-mm-dd

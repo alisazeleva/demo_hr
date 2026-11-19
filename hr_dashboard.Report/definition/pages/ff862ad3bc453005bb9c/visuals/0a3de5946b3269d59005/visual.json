@@ -83,7 +83,7 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "DimDate"
+                      "Entity": "_Measures"
                     }
                   },
                   "Property": "Text: Info Note"

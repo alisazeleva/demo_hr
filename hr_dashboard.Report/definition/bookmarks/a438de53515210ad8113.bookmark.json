@@ -1,0 +1,47 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "Career Info OFF",
+  "name": "a438de53515210ad8113",
+  "options": {
+    "targetVisualNames": [
+      "789eaa2fcbfcce69a194",
+      "a47be8166485c4300f98",
+      "94480c8fd810bc78686a"
+    ],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.0",
+    "activeSection": "48f2971a9ff6cfb17906",
+    "sections": {
+      "48f2971a9ff6cfb17906": {
+        "visualContainers": {
+          "789eaa2fcbfcce69a194": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "a47be8166485c4300f98": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "94480c8fd810bc78686a": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "Leave Info ON",
+  "name": "e0c34a303d6ad710f26c",
+  "options": {
+    "targetVisualNames": [
+      "20aa6b650b941e827490",
+      "bbb8e797e6a77364a456",
+      "9bc00f6a90eefe901b19"
+    ],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.0",
+    "activeSection": "b55812a5b5cb18d676b4",
+    "sections": {
+      "b55812a5b5cb18d676b4": {
+        "visualContainers": {
+          "20aa6b650b941e827490": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "bbb8e797e6a77364a456": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "9bc00f6a90eefe901b19": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}

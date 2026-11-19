@@ -1,0 +1,44 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "Compensation Info ON",
+  "name": "e5a8541635ea7ba31b90",
+  "options": {
+    "targetVisualNames": [
+      "442ce22fe3b138230b7d",
+      "1ec99ed99a54d675f5d1",
+      "da2f1a5cc81bcebb910a"
+    ],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.0",
+    "activeSection": "3b098c8fe9f9537ea6f6",
+    "sections": {
+      "3b098c8fe9f9537ea6f6": {
+        "visualContainers": {
+          "442ce22fe3b138230b7d": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "1ec99ed99a54d675f5d1": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "da2f1a5cc81bcebb910a": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}

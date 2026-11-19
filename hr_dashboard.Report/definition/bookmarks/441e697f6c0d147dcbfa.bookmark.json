@@ -1,0 +1,44 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "Employee profile Info ON",
+  "name": "441e697f6c0d147dcbfa",
+  "options": {
+    "targetVisualNames": [
+      "e745c129049624c92575",
+      "344faa12144f81f42e52",
+      "699165c622678947b66b"
+    ],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.0",
+    "activeSection": "183b9dacf76e4e6435ea",
+    "sections": {
+      "183b9dacf76e4e6435ea": {
+        "visualContainers": {
+          "e745c129049624c92575": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "344faa12144f81f42e52": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "699165c622678947b66b": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}

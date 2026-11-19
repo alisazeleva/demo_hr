@@ -678,6 +678,16 @@ table _Measures
 		displayFolder: Performance
 		lineageTag: 5c588b49-b527-457b-9b22-7eb12a62ec68
 
+	/// Disclaimer shown in the info pop-up on every page: the data is synthetic and the figures are as of the reference date
+	measure 'Text: Info Note' =
+			// Static disclaimer text plus the reference date, so the "as of" date follows the ReferenceDate table
+			// and is formatted like the footer ("Data as of ..."). Used by the info panel on pages 1 to 7.
+			"Demo report with fictional data. Acme Corporation and all employees are synthetic, generated for demonstration only, "
+			    & "and any resemblance to real people is coincidental. Figures are as of "
+			    & FORMAT([Reference Date], "d mmm yyyy") & "."
+		displayFolder: Text
+		lineageTag: 01f97653-b652-4988-bb6a-29df0e9bc453
+
 	column Placeholder
 		isHidden
 		lineageTag: fea314cd-4a29-4eed-b760-804721d78b06

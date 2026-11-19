@@ -1,0 +1,47 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "Performance Info OFF",
+  "name": "029ecea0c14b9d3a5754",
+  "options": {
+    "targetVisualNames": [
+      "90e96da414cb515168d8",
+      "aa869c301ba26c568847",
+      "0da572cafe7f68b55e11"
+    ],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.0",
+    "activeSection": "32049a889e1837970128",
+    "sections": {
+      "32049a889e1837970128": {
+        "visualContainers": {
+          "90e96da414cb515168d8": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "aa869c301ba26c568847": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "0da572cafe7f68b55e11": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

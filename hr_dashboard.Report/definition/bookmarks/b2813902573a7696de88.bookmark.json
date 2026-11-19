@@ -1,0 +1,44 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "Organization Info ON",
+  "name": "b2813902573a7696de88",
+  "options": {
+    "targetVisualNames": [
+      "10781cbd7a6324d37359",
+      "0f649ea6583391ef0652",
+      "bd5ef1097ed789a678e5"
+    ],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.0",
+    "activeSection": "a0a5139c61208801d6f5",
+    "sections": {
+      "a0a5139c61208801d6f5": {
+        "visualContainers": {
+          "10781cbd7a6324d37359": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "0f649ea6583391ef0652": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "bd5ef1097ed789a678e5": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
