@@ -2,3 +2,5 @@
 **/.pbi/cache.abf
 **/.mcp.json
 **/sql
+**/__pycache__/
+.pytest_cache/

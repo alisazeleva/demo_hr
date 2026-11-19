@@ -644,6 +644,8 @@ table _Measures
 
 	/// Latest review rating of the selected employee (scale 1 to 5).
 	measure 'Text: Profile Rating' =
+			// "-" when no employee is selected (the page has not been drilled through), "No review yet" when the
+			// selected employee has no review, otherwise the latest rating on the 1 to 5 scale.
 			VAR rating = SELECTEDVALUE(DimEmployee[LatestRating])
 			RETURN
 			    IF(

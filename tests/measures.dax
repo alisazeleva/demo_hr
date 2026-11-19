@@ -1,0 +1,37 @@
+// Measure tests: one row per check, Result is PASS or FAIL.
+// Run it against the open model (Desktop DAX query view, or the Power BI Modeling MCP dax_query_operations Execute)
+// and expect no FAIL row. Expected values come from the SQL database (sql/99_full_validation.sql) and PLAN.md.
+// All Actual and Expected values must be numbers (a text check is written as IF(..., 1, 0) against 1).
+// To add a test: copy a ROW line, change the name, the measure (or CALCULATE filter) and the expected value.
+EVALUATE
+VAR tests =
+    UNION(
+        // ---- Workforce
+        ROW("Test", "Headcount", "Actual", [Headcount], "Expected", 151),
+        ROW("Test", "Department Headcount (CEO excluded)", "Actual", [Department Headcount], "Expected", 150),
+        ROW("Test", "Departments", "Actual", [Departments], "Expected", 5),
+        ROW("Test", "Technology headcount", "Actual", CALCULATE([Headcount], DimDepartment[Department] = "Technology"), "Expected", 45),
+        ROW("Test", "Finance headcount", "Actual", CALCULATE([Headcount], DimDepartment[Department] = "Finance"), "Expected", 25),
+        ROW("Test", "Human Resources headcount", "Actual", CALCULATE([Headcount], DimDepartment[Department] = "Human Resources"), "Expected", 20),
+        ROW("Test", "Sales headcount", "Actual", CALCULATE([Headcount], DimDepartment[Department] = "Sales"), "Expected", 35),
+        ROW("Test", "Customer Experience headcount", "Actual", CALCULATE([Headcount], DimDepartment[Department] = "Customer Experience"), "Expected", 25),
+        // ---- Workforce plan (Technology 48 and Sales 37 are above their headcount, so 3 of 5 are at target)
+        ROW("Test", "Technology target", "Actual", CALCULATE([Target Headcount], DimDepartment[Department] = "Technology"), "Expected", 48),
+        ROW("Test", "Sales target", "Actual", CALCULATE([Target Headcount], DimDepartment[Department] = "Sales"), "Expected", 37),
+        ROW("Test", "Departments at target", "Actual", [Departments at Target], "Expected", 3),
+        // ---- Compensation
+        ROW("Test", "Total payroll", "Actual", [Total Payroll], "Expected", 10484400),
+        ROW("Test", "Average salary (rounded)", "Actual", ROUND([Average Salary], 0), "Expected", 69433),
+        // ---- Performance
+        ROW("Test", "Number of reviews", "Actual", [Number of Reviews], "Expected", 557),
+        // ---- Leave (reference date 2026-11-16)
+        ROW("Test", "Currently absent", "Actual", [Currently Absent], "Expected", 17),
+        ROW("Test", "Pending requests", "Actual", [Pending Requests], "Expected", 33),
+        // ---- Reference date
+        ROW("Test", "Reference date", "Actual", VALUE(FORMAT([Reference Date], "yyyymmdd")), "Expected", 20261116),
+        // ---- Profile text for the CEO
+        ROW("Test", "Profile number of EMP-000001", "Actual", IF(CALCULATE([Text: Profile Number], DimEmployee[EmployeeNumber] = "EMP-000001") = "EMP-000001", 1, 0), "Expected", 1)
+    )
+RETURN
+    ADDCOLUMNS(tests, "Result", IF([Actual] = [Expected], "PASS", "FAIL"))
+ORDER BY [Result] DESC, [Test]
