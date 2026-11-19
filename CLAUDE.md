@@ -65,19 +65,15 @@ Project `hr_dashboard.pbip` (PBIR report + TMDL model). Design rules and page la
 - **Months before promotion** replaced "months between promotions": from the previous promotion, or from hire for a first promotion, to each promotion (so every department has a value).
 - **Gender colours** are Female #E0A030 and Male #5B6472 (changed by hand; used on the page 1 donut and the page 4 gender chart).
 - **Chart text** is 14 pt (data labels, axis labels, legends); tables and matrices use 14 pt values and 16 pt column headers; category labels on a few bars are 16 pt. Department bars on pages 4, 5 and 6 use one navy colour (theme colour 8); department colours stay on pages 1 and 3.
-- **Slicers**: Department and Job level on every page 1 to 6 (synced on pages 2 to 6) plus one page-specific slicer (Nationality, Manager, Change type or Leave type). The profile page has an employee dropdown instead. Do not add header slicers to page 7.
+- **Slicers**: Department and Job level on every page 1 to 6 (synced across all of them) plus one page-specific slicer (Nationality, Manager, Change type or Leave type). The profile page has an employee dropdown instead. Do not add header slicers to page 7.
 - **Level labels**: `DimEmployee[Latest Level Short]` (NI, ME, EE, O) is shown in the page 5 table, `FactReviews[Level Long]` (for example "Meets Expectations (ME)") in the rating distribution chart, both sorted by `FactReviews[Level Order]` where sorting applies. `Latest Level in Selection` keeps `Level` and `Level Long` so the chart still cross-filters the table.
 - **Profile text measures** read `DimPosition`, `DimDepartment` and `DimManager` with LOOKUPVALUE on keys in `DimEmployee`, because those dimensions filter `DimEmployee` and not the other way round.
 - **Year-end measures** (`Average Salary at Year End`, `Employees at Year End`): the period filter must be inside AVERAGEX/COUNTROWS over FILTER within `CALCULATE(..., REMOVEFILTERS(DimDate))`; as a CALCULATE filter argument it is evaluated under the year filter and gives wrong numbers. Early years show only the first senior hires because there are no former employees; the page 4 chart says so.
-- Theme: `powerbi/acme_hr_theme.json`, copied into the report's `StaticResources/RegisteredResources/`; keep both copies in sync. Tooltips 10 pt.
+- Theme: `powerbi/acme_hr_theme.json`, copied into the report's `StaticResources/RegisteredResources/`; keep both copies identical (they are; the sizes are Desktop's 20.25 and 17.25 pt). Tooltips 10 pt.
 
 ### Open items
 
 - Profile pictures: script 12 was skipped, so the three picture checks in script 99 fail (46 of 49 pass). The info button next to the footer has no action yet, and page 7 shows initials in an oval until pictures exist.
-- Page 3: the subtitle of "Career events by department" is still `Text: Months Before Promotion` (copied from the chart below it); replace it with a text that describes career events.
-- Page 7: the "Current salary" and "Latest review" cards carry a leftover visual filter on `Text: Profile Tenure`; the measure `Text: Profile Role` has no description (every measure needs one).
-- Slicers: the page 1 Department and Job level slicers are not in a sync group (pages 2 to 6 are); pages 3 to 6 keep a hidden leftover Manager slicer at x 1637; the Manager slicers of pages 2 and 5 share the sync group name "Nationality".
-- Theme: `powerbi/acme_hr_theme.json` (20 and 16 pt) and the report's copy (20.25 and 17.25 pt, written by Desktop) are not identical; decide which one is the source and copy it over the other.
 - Pending renames the user must do in Desktop (F2) because visuals use them (see Measure names): `Average Tenure (years)`, `Largest Span of Control`. `Vacation Days Used per Year` is really "per employee" and could be renamed with them.
 - Career visuals count by the employee's current department (a version by department at the time of the event is possible).
 - Page 5: `FactReviews[Level Order]` and page 6: `FactLeaveRequests[IsAbsentToday]` are calculated columns added through the MCP; press Refresh in Desktop after reopening if they show no data.

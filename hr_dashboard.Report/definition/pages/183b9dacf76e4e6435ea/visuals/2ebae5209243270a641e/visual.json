@@ -3,7 +3,7 @@
   "name": "2ebae5209243270a641e",
   "position": {
     "x": 1558.2700648519144,
-    "y": 41.621545706142342,
+    "y": 31,
     "z": 23000,
     "height": 79.182452806807376,
     "width": 324.85108843818415,
@@ -106,7 +106,7 @@
             "textSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "14D"
                 }
               }
             },
@@ -505,5 +505,23 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "6212bf870410b9dea0bb",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimEmployee"
+              }
+            },
+            "Property": "FullName"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

@@ -565,13 +565,8 @@
             },
             "text": {
               "expr": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Measures"
-                    }
-                  },
-                  "Property": "Text: Months Before Promotion"
+                "Literal": {
+                  "Value": "'Number of career events, current department'"
                 }
               }
             },

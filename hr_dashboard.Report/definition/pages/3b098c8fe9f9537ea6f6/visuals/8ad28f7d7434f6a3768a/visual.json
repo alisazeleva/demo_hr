@@ -3,7 +3,7 @@
   "name": "8ad28f7d7434f6a3768a",
   "position": {
     "x": 1122.1828225658383,
-    "y": 30.408800261836529,
+    "y": 31,
     "z": 8000,
     "height": 79.455252297056731,
     "width": 253.07969250173628,
@@ -99,7 +99,7 @@
             "textSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "14D"
                 }
               }
             },
@@ -148,6 +148,13 @@
                       "Percent": 0
                     }
                   }
+                }
+              }
+            },
+            "selfFilterEnabled": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }
@@ -296,5 +303,23 @@
       "filterChanges": true
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "2af8efe60d0353080e64",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimDepartment"
+              }
+            },
+            "Property": "Department"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

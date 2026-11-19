@@ -3,7 +3,7 @@
   "name": "d24d0ff00bd3b0638386",
   "position": {
     "x": 1640.1860465116279,
-    "y": 29.767441860465116,
+    "y": 31,
     "z": 20000,
     "height": 79.455252297056731,
     "width": 253.07969250173628,
@@ -106,7 +106,7 @@
             "textSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "14D"
                 }
               }
             },
@@ -148,6 +148,13 @@
                       "Percent": 0
                     }
                   }
+                }
+              }
+            },
+            "selfFilterEnabled": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }
@@ -505,7 +512,7 @@
       ]
     },
     "syncGroup": {
-      "groupName": "Nationality",
+      "groupName": "Manager",
       "fieldChanges": false,
       "filterChanges": false
     },

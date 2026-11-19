@@ -505,10 +505,12 @@ table _Measures
 		displayFolder: Leave
 		lineageTag: ed7f4f9c-ab8a-4d2c-b613-3219ed3c39da
 
+	/// Position title of the selected employee (shown in the Position card of the profile header); a prompt to drill through when no employee is selected.
 	measure 'Text: Profile Role' =
 			
 			VAR p = LOOKUPVALUE(DimPosition[PositionTitle], DimPosition[PositionID], SELECTEDVALUE(DimEmployee[PositionID]))
 			RETURN IF(ISBLANK(p), "Drill through from another page", p)
+		displayFolder: Profile
 		lineageTag: 6f9b8a1a-78c0-4ac7-9be0-ac65c25a59e0
 
 	/// Current annual base salary of the selected employee, in EUR.

@@ -3,7 +3,7 @@
   "name": "90bdac0b9950d48a5ae7",
   "position": {
     "x": 1393.9001668409583,
-    "y": 30.408800261836529,
+    "y": 31,
     "z": 9000,
     "height": 79.455252297056731,
     "width": 230.51832456553498,
@@ -106,7 +106,7 @@
             "textSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "14D"
                 }
               }
             },
@@ -148,6 +148,13 @@
                       "Percent": 0
                     }
                   }
+                }
+              }
+            },
+            "selfFilterEnabled": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }
@@ -510,5 +517,23 @@
       "filterChanges": true
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "a58566fe060b87a65ace",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimPosition"
+              }
+            },
+            "Property": "JobLevel"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }
