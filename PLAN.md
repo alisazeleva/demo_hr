@@ -305,7 +305,7 @@ Star schema (built in Power BI Desktop; the views are in script 13). Table names
 
 | Table | Source view | Notes |
 | --- | --- | --- |
-| DimEmployee | vw\_DimEmployee | One row per employee: person attributes, keys to position, department and manager, current salary and latest rating, org depth and manager chain |
+| DimEmployee | vw\_DimEmployee | One row per employee: person attributes, keys to position, department and manager, current salary and latest rating (org depth, manager chain and other unused columns are dropped in the model) |
 | DimDepartment | vw\_DimDepartment | Five departments plus the company unit (Acme Corporation) |
 | DimPosition | vw\_DimPosition | Title, job family, job level and rank, management flag |
 | DimManager | vw\_DimManager | The manager role of an employee (employees with direct reports) |
@@ -322,7 +322,7 @@ Star schema (built in Power BI Desktop; the views are in script 13). Table names
 
 `vw_EmployeeCurrent` and `vw_OrgHierarchy` remain as flat views for SQL checks; the model does not load them.
 
-DimEmployee relates one-to-many to every fact on EmployeeID; DimDepartment, DimPosition and DimManager filter DimEmployee (and DimDepartment filters FactWorkforcePlan); DimLeaveType filters FactLeaveDays; DimDate relates to each fact by its main date. The facts also have inactive relationships to DimDepartment, DimPosition and DimManager (department, position, manager at the time of the event), used through USERELATIONSHIP, and DimEmployee[HireDate] has an inactive relationship to DimDate.
+DimEmployee relates one-to-many to every fact on EmployeeID; DimDepartment, DimPosition and DimManager filter DimEmployee (and DimDepartment filters FactWorkforcePlan); DimLeaveType filters FactLeaveDays; DimDate relates to each fact by its main date. There are no inactive relationships: every department, position and manager in the report is the employee's current one, and the job-history table carries the department, position and manager at the time of each event as text columns. Columns that no visual, measure, relationship or sort order uses are removed in the Power Query step of each table (see DESIGN.md).
 
 ### Measures
 

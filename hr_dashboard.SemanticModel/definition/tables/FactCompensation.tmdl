@@ -2,15 +2,6 @@
 table FactCompensation
 	lineageTag: a8f80377-173b-40c0-9925-707d1e059464
 
-	column CompensationHistoryID
-		dataType: int64
-		isHidden
-		lineageTag: 0edfc5a6-48ed-4dd6-8258-0dfd94a8a532
-		summarizeBy: count
-		sourceColumn: CompensationHistoryID
-
-		annotation SummarizationSetBy = Automatic
-
 	column EmployeeID
 		dataType: int64
 		isHidden
@@ -53,24 +44,6 @@ table FactCompensation
 
 		annotation SummarizationSetBy = Automatic
 
-	column PreviousSalary
-		dataType: double
-		formatString: #,0
-		lineageTag: e3d0fd4d-88b7-43d3-ab92-2653276d1e3f
-		summarizeBy: sum
-		sourceColumn: PreviousSalary
-
-		annotation SummarizationSetBy = Automatic
-
-	column ChangeAmount
-		dataType: double
-		formatString: #,0
-		lineageTag: 96052d2b-0580-455d-8e87-a6e8db31dd7e
-		summarizeBy: sum
-		sourceColumn: ChangeAmount
-
-		annotation SummarizationSetBy = Automatic
-
 	column ChangePct
 		dataType: double
 		formatString: 0.00
@@ -94,7 +67,7 @@ table FactCompensation
 				let
 				    Source = Sql.Database(SqlServer, SqlDatabase),
 				    Data = Source{[Schema="dbo", Item="vw_CompensationHistory"]}[Data],
-				    Slim = Table.RemoveColumns(Data, {"Currency", "PayFrequency"}, MissingField.Ignore)
+				    Slim = Table.RemoveColumns(Data, {"Currency", "PayFrequency", "CompensationHistoryID", "PreviousSalary", "ChangeAmount"}, MissingField.Ignore)
 				in
 				    Slim
 

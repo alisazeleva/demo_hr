@@ -17,14 +17,6 @@ table DimPosition
 
 		annotation SummarizationSetBy = Automatic
 
-	column JobFamily
-		dataType: string
-		lineageTag: d73405f5-a91a-410a-9b9c-f35b06c72541
-		summarizeBy: none
-		sourceColumn: JobFamily
-
-		annotation SummarizationSetBy = Automatic
-
 	column JobLevel
 		dataType: string
 		lineageTag: d5dd4a28-bdb9-4695-b4ec-1ec9e96ed8ed
@@ -40,20 +32,13 @@ table DimPosition
 		summarizeBy: none
 		sourceColumn: JobLevelRank
 
-	column IsManagementPosition
-		dataType: boolean
-		lineageTag: 54adb539-7dec-4cb9-afba-603b9a374496
-		summarizeBy: none
-		sourceColumn: IsManagementPosition
-
-		annotation SummarizationSetBy = Automatic
-
 	partition Position = m
 		mode: import
 		source =
 				let
 				    Source = Sql.Database(SqlServer, SqlDatabase),
-				    Data = Source{[Schema="dbo", Item="vw_DimPosition"]}[Data]
+				    Data = Source{[Schema="dbo", Item="vw_DimPosition"]}[Data],
+				    Slim = Table.RemoveColumns(Data, {"JobFamily", "IsManagementPosition"}, MissingField.Ignore)
 				in
-				    Data
+				    Slim
 

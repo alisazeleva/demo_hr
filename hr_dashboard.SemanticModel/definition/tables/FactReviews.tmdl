@@ -2,30 +2,12 @@
 table FactReviews
 	lineageTag: 181228c8-04e7-431e-8876-7cfa22949f8a
 
-	column PerformanceReviewID
-		dataType: int64
-		isHidden
-		lineageTag: 03c11c7a-d586-4e9d-8708-4b94ad55b4ce
-		summarizeBy: count
-		sourceColumn: PerformanceReviewID
-
-		annotation SummarizationSetBy = Automatic
-
 	column EmployeeID
 		dataType: int64
 		isHidden
 		lineageTag: 066eb01e-6000-4d30-a5c8-41c9b6f633f5
 		summarizeBy: none
 		sourceColumn: EmployeeID
-
-	column ReviewerID
-		dataType: int64
-		isHidden
-		lineageTag: 06358ba9-245c-4f07-94b8-a8f32d9b22c8
-		summarizeBy: count
-		sourceColumn: ReviewerID
-
-		annotation SummarizationSetBy = Automatic
 
 	column ReviewerName
 		dataType: string
@@ -78,32 +60,6 @@ table FactReviews
 
 		annotation SummarizationSetBy = Automatic
 
-	column IsRecentReview
-		dataType: boolean
-		lineageTag: 25ca13fd-a80e-45f3-8672-776c77490292
-		summarizeBy: none
-		sourceColumn: IsRecentReview
-
-		annotation SummarizationSetBy = Automatic
-
-	column PositionID
-		dataType: int64
-		isHidden
-		lineageTag: 7cb47bd8-bb6c-4646-b29b-5908ef4c568b
-		summarizeBy: count
-		sourceColumn: PositionID
-
-		annotation SummarizationSetBy = Automatic
-
-	column DepartmentID
-		dataType: int64
-		isHidden
-		lineageTag: c3b47b13-e7a9-44e8-8efe-90e97771827f
-		summarizeBy: count
-		sourceColumn: DepartmentID
-
-		annotation SummarizationSetBy = Automatic
-
 	/// Sort order of Level: 1 Needs Improvement to 4 Outstanding. Derived from Rating with the thresholds in PLAN.md (below 2.5, below 3.5, below 4.5, 4.5 or more); derived from Rating, not Level, so Level can be sorted by it.
 	column 'Level Order' = SWITCH(TRUE(), FactReviews[Rating] < 2.5, 1, FactReviews[Rating] < 3.5, 2, FactReviews[Rating] < 4.5, 3, 4)
 		dataType: int64
@@ -126,7 +82,7 @@ table FactReviews
 				let
 				    Source = Sql.Database(SqlServer, SqlDatabase),
 				    Data = Source{[Schema="dbo", Item="vw_PerformanceReviews"]}[Data],
-				    Slim = Table.RemoveColumns(Data, {"ReviewPeriodStart", "ReviewPeriodEnd"}, MissingField.Ignore)
+				    Slim = Table.RemoveColumns(Data, {"ReviewPeriodStart", "ReviewPeriodEnd", "PerformanceReviewID", "ReviewerID", "IsRecentReview", "PositionID", "DepartmentID"}, MissingField.Ignore)
 				in
 				    Slim
 

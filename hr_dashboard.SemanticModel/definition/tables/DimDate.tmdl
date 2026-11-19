@@ -20,14 +20,6 @@ table DimDate
 
 		annotation SummarizationSetBy = Automatic
 
-	column Quarter
-		lineageTag: aa6c793e-2bb9-4c7c-be3a-387f694b265e
-		summarizeBy: none
-		isNameInferred
-		sourceColumn: [Quarter]
-
-		annotation SummarizationSetBy = Automatic
-
 	column 'Month Number'
 		isHidden
 		lineageTag: 785141b2-af20-41e0-b986-6b10ddda711d
@@ -46,43 +38,13 @@ table DimDate
 
 		annotation SummarizationSetBy = Automatic
 
-	column Year-Month
-		lineageTag: a9b5110f-f7e6-41c0-a60f-7b6beb11ae02
-		summarizeBy: none
-		isNameInferred
-		sourceColumn: [Year-Month]
-
-		annotation SummarizationSetBy = Automatic
-
-	column 'Weekday Number'
-		isHidden
-		lineageTag: 5de83c06-5bfb-4bc1-a5fb-c938889c8aee
-		summarizeBy: sum
-		isNameInferred
-		sourceColumn: [Weekday Number]
-
-		annotation SummarizationSetBy = Automatic
-
-	column Weekday
-		lineageTag: 3b0b5ca6-2d7b-4aa4-9bae-08faf8bd2e57
-		summarizeBy: none
-		isNameInferred
-		sourceColumn: [Weekday]
-		sortByColumn: 'Weekday Number'
-
-		annotation SummarizationSetBy = Automatic
-
 	partition Date = calculated
 		mode: import
 		source =
 				ADDCOLUMNS(
 				    CALENDAR(DATE(2012, 1, 1), DATE(2027, 12, 31)),
 				    "Year", YEAR([Date]),
-				    "Quarter", "Q" & QUARTER([Date]),
 				    "Month Number", MONTH([Date]),
-				    "Month", FORMAT([Date], "MMM"),
-				    "Year-Month", FORMAT([Date], "YYYY-MM"),
-				    "Weekday Number", WEEKDAY([Date], 2),
-				    "Weekday", FORMAT([Date], "ddd")
+				    "Month", FORMAT([Date], "MMM")
 				)
 

@@ -153,33 +153,6 @@ table DimEmployee
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Levels below the CEO (CEO = 0)
-	column OrgDepth
-		dataType: int64
-		lineageTag: f96ed6e6-8594-45d2-afc1-36ab40a88e22
-		summarizeBy: sum
-		sourceColumn: OrgDepth
-
-		annotation SummarizationSetBy = Automatic
-
-	/// Names from the CEO down to this employee
-	column PathFromCEO
-		dataType: string
-		lineageTag: 345abf25-0ba8-489d-94d9-89fdb528bcc3
-		summarizeBy: none
-		sourceColumn: PathFromCEO
-
-		annotation SummarizationSetBy = Automatic
-
-	/// Manager, the manager's manager, and so on up to the CEO
-	column ManagerChain
-		dataType: string
-		lineageTag: 3f5cb941-31c3-4823-b881-a5e97d77d376
-		summarizeBy: none
-		sourceColumn: ManagerChain
-
-		annotation SummarizationSetBy = Automatic
-
 	/// Rank of the nationality by headcount (1 = largest, ties by name); 99 = grouped into Other (outside the top 6)
 	column 'Nationality Order' =
 			VAR nat = DimEmployee[Nationality]
@@ -234,7 +207,7 @@ table DimEmployee
 				let
 				    Source = Sql.Database(SqlServer, SqlDatabase),
 				    Data = Source{[Schema="dbo", Item="vw_DimEmployee"]}[Data],
-				    Slim = Table.RemoveColumns(Data, {"FirstName", "LastName", "EmailAddress", "DateOfBirth", "Currency", "PathIDs"}, MissingField.Ignore)
+				    Slim = Table.RemoveColumns(Data, {"FirstName", "LastName", "EmailAddress", "DateOfBirth", "Currency", "PathIDs", "OrgDepth", "PathFromCEO", "ManagerChain"}, MissingField.Ignore)
 				in
 				    Slim
 

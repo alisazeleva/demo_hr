@@ -2,15 +2,6 @@
 table FactLeaveDays
 	lineageTag: 8900a3a4-2573-4496-a226-893941b6917f
 
-	column LeaveID
-		dataType: int64
-		isHidden
-		lineageTag: 92c9887c-51bf-43ca-8024-6c6aaf99bada
-		summarizeBy: count
-		sourceColumn: LeaveID
-
-		annotation SummarizationSetBy = Automatic
-
 	column EmployeeID
 		dataType: int64
 		isHidden
@@ -35,15 +26,6 @@ table FactLeaveDays
 
 		annotation SummarizationSetBy = Automatic
 
-	column DepartmentID
-		dataType: int64
-		isHidden
-		lineageTag: da365b87-5428-4244-a182-93c3f0c41d27
-		summarizeBy: count
-		sourceColumn: DepartmentID
-
-		annotation SummarizationSetBy = Automatic
-
 	column LeaveTypeID
 		dataType: int64
 		isHidden
@@ -56,7 +38,8 @@ table FactLeaveDays
 		source =
 				let
 				    Source = Sql.Database(SqlServer, SqlDatabase),
-				    Data = Source{[Schema="dbo", Item="vw_LeaveDays"]}[Data]
+				    Data = Source{[Schema="dbo", Item="vw_LeaveDays"]}[Data],
+				    Slim = Table.RemoveColumns(Data, {"LeaveID", "DepartmentID"}, MissingField.Ignore)
 				in
-				    Data
+				    Slim
 

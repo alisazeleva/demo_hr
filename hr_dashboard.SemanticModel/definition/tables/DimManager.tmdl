@@ -9,14 +9,6 @@ table DimManager
 		summarizeBy: none
 		sourceColumn: ManagerEmployeeID
 
-	column ManagerNumber
-		dataType: string
-		lineageTag: 819c079b-ad0a-47fd-9212-73b4f20a8053
-		summarizeBy: none
-		sourceColumn: ManagerNumber
-
-		annotation SummarizationSetBy = Automatic
-
 	column ManagerName
 		dataType: string
 		lineageTag: 24555b9f-c97e-460c-8f20-591d84e1bfd5
@@ -30,7 +22,8 @@ table DimManager
 		source =
 				let
 				    Source = Sql.Database(SqlServer, SqlDatabase),
-				    Data = Source{[Schema="dbo", Item="vw_DimManager"]}[Data]
+				    Data = Source{[Schema="dbo", Item="vw_DimManager"]}[Data],
+				    Slim = Table.RemoveColumns(Data, {"ManagerNumber"}, MissingField.Ignore)
 				in
-				    Data
+				    Slim
 

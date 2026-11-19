@@ -14,17 +14,13 @@ table DimLeaveType
 		lineageTag: 998e8522-8714-4b34-8c5c-eb7210f04493
 		sourceColumn: LeaveType
 
-	column IsPaid
-		dataType: boolean
-		lineageTag: f45a9619-0b09-4eaa-b2c4-271470c4b314
-		sourceColumn: IsPaid
-
 	partition LeaveType = m
 		mode: import
 		source =
 				let
 				    Source = Sql.Database(SqlServer, SqlDatabase),
-				    Data = Source{[Schema="dbo", Item="vw_DimLeaveType"]}[Data]
+				    Data = Source{[Schema="dbo", Item="vw_DimLeaveType"]}[Data],
+				    Slim = Table.RemoveColumns(Data, {"IsPaid"}, MissingField.Ignore)
 				in
-				    Data
+				    Slim
 
