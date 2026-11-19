@@ -20,8 +20,10 @@ table _Measures
 		displayFolder: Workforce
 		lineageTag: a66e7598-dcde-4a1e-9d33-cdf175145b22
 
-	/// Planned headcount of the departments in the current employee filter
+	/// Planned headcount of the departments in the current employee filter (from the workforce plan; the CEO unit has no target).
 	measure 'Target Headcount' =
+			// FactWorkforcePlan is keyed by department; TREATAS applies the departments
+			// that are visible through the current DimEmployee filter.
 			CALCULATE(
 			    SUM(FactWorkforcePlan[TargetHeadcount]),
 			    TREATAS(VALUES(DimEmployee[DepartmentID]), FactWorkforcePlan[DepartmentID])
@@ -30,11 +32,10 @@ table _Measures
 		displayFolder: Workforce
 		lineageTag: 2aba32ae-24ca-4e58-af91-3986e603831d
 
-	/// Department headcount minus target headcount (0 = on target)
-	measure 'Headcount vs Target' = ```
+	/// Target headcount minus department headcount: positive = below target (open positions), 0 = on target, negative = above target.
+	measure 'Headcount vs Target' =
+			// Target minus actual (not actual minus target): Technology 48 - 45 = +3
 			[Target Headcount] - [Department Headcount]
-			
-			```
 		formatString: 0
 		displayFolder: Workforce
 		lineageTag: 6469f3eb-bd7d-4c2d-98f1-b3f907a58a5c
@@ -71,21 +72,30 @@ table _Measures
 
 	/// Average months in the job before a promotion: from the previous promotion, or from hire for a first promotion, to the promotion date. Every promoted employee contributes, so every department has a value.
 	measure 'Average Months Before Promotion' =
+			// One value per promotion: months in the job before the promotion, counted from the
+			// previous promotion or, for a first promotion, from the hire date (first job-history record).
+			// Every promoted employee contributes, so every department has a value.
 			AVERAGEX(
 			    FILTER(FactJobHistory, FactJobHistory[IsPromotion] = TRUE()),
 			    VAR emp = FactJobHistory[EmployeeID]
-			    VAR d = FactJobHistory[EffectiveDate]
-			    VAR prevPromo =
+			    VAR promotionDate = FactJobHistory[EffectiveDate]
+			    VAR previousPromotion =
 			        CALCULATE(
 			            MAX(FactJobHistory[EffectiveDate]),
-			            FILTER(ALL(FactJobHistory), FactJobHistory[EmployeeID] = emp && FactJobHistory[IsPromotion] = TRUE() && FactJobHistory[EffectiveDate] < d)
+			            FILTER(
+			                ALL(FactJobHistory),
+			                FactJobHistory[EmployeeID] = emp
+			                    && FactJobHistory[IsPromotion] = TRUE()
+			                    && FactJobHistory[EffectiveDate] < promotionDate
+			            )
 			        )
 			    VAR hired =
 			        CALCULATE(
 			            MIN(FactJobHistory[EffectiveDate]),
 			            FILTER(ALL(FactJobHistory), FactJobHistory[EmployeeID] = emp)
 			        )
-			    RETURN DATEDIFF(IF(ISBLANK(prevPromo), hired, prevPromo), d, MONTH)
+			    RETURN
+			        DATEDIFF(IF(ISBLANK(previousPromotion), hired, previousPromotion), promotionDate, MONTH)
 			)
 		formatString: 0.0
 		displayFolder: Career
@@ -105,33 +115,47 @@ table _Measures
 
 	/// Employees with no review in the 12 months before the reference date (includes the CEO and recent hires)
 	measure 'Employees Without Recent Review' =
+			// Recent = a review dated within the 12 months before the reference date.
+			// Employees without any review (the CEO, recent hires) are counted too.
 			VAR ref = [Reference Date]
 			RETURN
-			CALCULATE(
-			    COUNTROWS(DimEmployee),
-			    FILTER(DimEmployee, ISBLANK(DimEmployee[LatestReviewDate]) || DimEmployee[LatestReviewDate] <= EDATE(ref, -12))
-			)
+			    CALCULATE(
+			        COUNTROWS(DimEmployee),
+			        FILTER(
+			            DimEmployee,
+			            ISBLANK(DimEmployee[LatestReviewDate])
+			                || DimEmployee[LatestReviewDate] <= EDATE(ref, -12)
+			        )
+			    )
 		formatString: #,0
 		displayFolder: Performance
 		lineageTag: 7b9fc68c-9e17-49be-b01a-85f7de1feaea
 
-	/// Working days of approved leave
+	/// Working days of approved leave in the current filter (one row per day in FactLeaveDays). Includes booked future days; filter IsOnOrBeforeReferenceDate for days to date.
 	measure 'Leave Days' = COUNTROWS(FactLeaveDays)
 		formatString: #,0
 		displayFolder: Leave
 		lineageTag: aa90eb6a-37a6-496f-89b5-b6f7e2cc3911
 
-	/// Approved vacation days on or before the reference date
-	measure 'Vacation Days Used' = CALCULATE(COUNTROWS(FactLeaveDays), DimLeaveType[LeaveType] = "Vacation", FactLeaveDays[IsOnOrBeforeReferenceDate] = TRUE())
+	/// Approved vacation working days on or before the reference date (future booked vacation is not counted).
+	measure 'Vacation Days Used' =
+			CALCULATE(
+			    COUNTROWS(FactLeaveDays),
+			    DimLeaveType[LeaveType] = "Vacation",
+			    FactLeaveDays[IsOnOrBeforeReferenceDate] = TRUE()
+			)
 		formatString: #,0
 		displayFolder: Leave
 		lineageTag: 786de8ef-8478-4196-928c-03e963678c90
 
 	/// Vacation days used per employee in the selected year(s): used days divided by employees hired by the end of the period. Use with a Year slicer or axis.
 	measure 'Vacation Days Used per Year' =
+			// Numerator: vacation days used in the period of the filter context (Year on an axis or slicer).
+			// Denominator: employees hired by the end of that period (an employee hired part-way
+			// through the year counts as one full person).
 			DIVIDE(
 			    [Vacation Days Used],
-			    CALCULATE(COUNTROWS(DimEmployee), DimEmployee[HireDate] <= MAX('DimDate'[Date]))
+			    CALCULATE(COUNTROWS(DimEmployee), DimEmployee[HireDate] <= MAX(DimDate[Date]))
 			)
 		formatString: 0.0
 		displayFolder: Leave
@@ -139,34 +163,24 @@ table _Measures
 
 	/// Employees on approved leave on the reference date (ignores the Date filter)
 	measure 'Currently Absent' =
+			// Distinct employees with an approved leave day on the reference date.
+			// REMOVEFILTERS(DimDate) makes the measure ignore any Date or Year filter.
 			VAR ref = [Reference Date]
 			RETURN
-			CALCULATE(
-			    DISTINCTCOUNT(FactLeaveDays[EmployeeID]),
-			    REMOVEFILTERS('DimDate'),
-			    FactLeaveDays[LeaveDate] = ref
-			)
+			    CALCULATE(
+			        DISTINCTCOUNT(FactLeaveDays[EmployeeID]),
+			        REMOVEFILTERS(DimDate),
+			        FactLeaveDays[LeaveDate] = ref
+			    )
 		formatString: #,0
 		displayFolder: Leave
 		lineageTag: fbf39e58-6728-45d7-b659-2b2ed02a282f
-
-	/// Employees hired in the selected period (counts by hire date through the inactive DimEmployee[HireDate] to DimDate relationship)
-	measure Hires = CALCULATE(COUNTROWS(DimEmployee), USERELATIONSHIP(DimEmployee[HireDate], 'DimDate'[Date]))
-		formatString: #,0
-		displayFolder: Workforce
-		lineageTag: 6de13a3d-2b09-487d-9e23-aafd92ae1540
 
 	/// Average age in years on the reference date
 	measure 'Average Age' = AVERAGE(DimEmployee[Age])
 		formatString: 0.0" years"
 		displayFolder: Workforce
 		lineageTag: c618d38d-15c1-4c5e-ba1f-3ee110dbc158
-
-	/// Share of female employees in the current filter
-	measure 'Female Share' = DIVIDE(CALCULATE(COUNTROWS(DimEmployee), DimEmployee[Gender] = "Female"), COUNTROWS(DimEmployee))
-		formatString: 0.0%
-		displayFolder: Workforce
-		lineageTag: d2b20400-9ae2-482a-aa4e-f7c0f680496a
 
 	/// Median current annual base salary (EUR)
 	measure 'Median Salary' = MEDIAN(DimEmployee[CurrentSalary])
@@ -179,12 +193,6 @@ table _Measures
 		formatString: "€"#,0
 		displayFolder: Compensation
 		lineageTag: 8b0a6cbd-e159-4d2a-af1b-c5b08755935b
-
-	/// Approved vacation working days on or before the reference date divided by headcount
-	measure 'Vacation Days Used per Employee' = DIVIDE([Vacation Days Used], [Headcount])
-		formatString: 0.0
-		displayFolder: Leave
-		lineageTag: fd6075a1-eb20-44ce-bd55-928ac21b92b6
 
 	/// Number of departments (the company-level CEO unit is excluded)
 	measure Departments = CALCULATE(DISTINCTCOUNT(DimEmployee[DepartmentID]), DimDepartment[DepartmentType] = "Department")
@@ -234,7 +242,13 @@ table _Measures
 		lineageTag: 5b1f6a0e-2c1d-4e7a-9a53-0d9c6e0f1a01
 
 	/// Departments whose current headcount equals the planned target
-	measure 'Departments at Target' = SUMX(FILTER(DimDepartment, DimDepartment[DepartmentType] = "Department"), IF([Headcount vs Target] = 0, 1, 0))
+	measure 'Departments at Target' =
+			// Counts the departments (not the CEO unit) whose headcount equals the plan.
+			// Headcount vs Target is evaluated per department row; 0 means on target.
+			SUMX(
+			    FILTER(DimDepartment, DimDepartment[DepartmentType] = "Department"),
+			    IF([Headcount vs Target] = 0, 1, 0)
+			)
 		formatString: #,0
 		displayFolder: Organization
 		lineageTag: 5b1f6a0e-2c1d-4e7a-9a53-0d9c6e0f1a02
@@ -245,19 +259,18 @@ table _Measures
 		lineageTag: 5b1f6a0e-2c1d-4e7a-9a53-0d9c6e0f1a03
 
 	/// KPI subtitle: the manager with the largest span
-	measure 'Text: Teams with Largest Span' = ```
-			
-			VAR MaxSpan = [Largest Span of Control]
-			VAR N =
-			    CALCULATE ( COUNTROWS ( DimEmployee ), DimEmployee[DirectReports] = MaxSpan )
+	measure 'Text: Teams with Largest Span' =
+			// Subtitle of the Largest team card. The card shows the number; this text explains it.
+			// The 1-team text keeps its trailing space as originally written.
+			VAR maxSpan = [Largest Span of Control]
+			VAR managersWithMaxSpan =
+			    CALCULATE(COUNTROWS(DimEmployee), DimEmployee[DirectReports] = maxSpan)
 			RETURN
-			    IF (
-			        N = 1,
+			    IF(
+			        managersWithMaxSpan = 1,
 			        "1 team with size of ",
-			        FORMAT ( N, "0" ) & " teams with size of"
+			        FORMAT(managersWithMaxSpan, "0") & " teams with size of"
 			    )
-			
-			```
 		displayFolder: Text
 		lineageTag: 5b1f6a0e-2c1d-4e7a-9a53-0d9c6e0f1a04
 
@@ -268,7 +281,13 @@ table _Measures
 		lineageTag: 5b1f6a0e-2c1d-4e7a-9a53-0d9c6e0f1a05
 
 	/// Job-history records that are career changes (excludes the Initial Assignment at hire)
-	measure 'Career Events' = CALCULATE(COUNTROWS(FactJobHistory), KEEPFILTERS(FactJobHistory[ChangeType] <> "Initial Assignment"))
+	measure 'Career Events' =
+			// KEEPFILTERS keeps the visual's own ChangeType filter (rows, legend or slicer)
+			// instead of replacing it, so the measure can be split by change type.
+			CALCULATE(
+			    COUNTROWS(FactJobHistory),
+			    KEEPFILTERS(FactJobHistory[ChangeType] <> "Initial Assignment")
+			)
 		formatString: #,0
 		displayFolder: Career
 		lineageTag: 1acf39d0-a826-4f8f-b5a5-d52fc92d22df
@@ -291,28 +310,50 @@ table _Measures
 		lineageTag: 411869e0-64a1-498f-92df-89a35cf788e7
 
 	/// Average salary increase at a promotion (share of the previous salary). Promotion and Promotion + Department Transfer both have the reason Promotion in the pay history.
-	measure 'Average Promotion Increase' = DIVIDE(CALCULATE(AVERAGE(FactCompensation[ChangePct]), FactCompensation[Reason] = "Promotion"), 100)
+	measure 'Average Promotion Increase' =
+			// ChangePct is stored in percent (8.96 = 8.96 %), hence the division by 100.
+			DIVIDE(
+			    CALCULATE(AVERAGE(FactCompensation[ChangePct]), FactCompensation[Reason] = "Promotion"),
+			    100
+			)
 		formatString: 0.0%
 		displayFolder: Compensation
 		lineageTag: 45460807-b759-4808-9877-2c21f9a99745
 
 	/// Average yearly (1 January) salary increase (share of the previous salary), by the year the increase took effect.
-	measure 'Average Annual Increase' = DIVIDE(CALCULATE(AVERAGE(FactCompensation[ChangePct]), FactCompensation[Reason] = "Annual Increase"), 100)
+	measure 'Average Annual Increase' =
+			// ChangePct is stored in percent (3.03 = 3.03 %), hence the division by 100.
+			DIVIDE(
+			    CALCULATE(AVERAGE(FactCompensation[ChangePct]), FactCompensation[Reason] = "Annual Increase"),
+			    100
+			)
 		formatString: 0.0%
 		displayFolder: Compensation
 		lineageTag: e5f66fe9-ab96-40ef-847e-f0e00428720a
 
 	/// Average annual salary of the employees employed on 31 December of the selected year (reference date for the current year). Uses the salary period valid on that date; later years are blank.
 	measure 'Average Salary at Year End' =
-			VAR y = MAX(DimDate[Year])
-			VAR d = MIN(DATE(y, 12, 31), [Reference Date])
+			// Salary period valid on 31 December of the selected year (the reference date for the current year).
+			// The period test sits inside AVERAGEX: as a CALCULATE filter argument it would be evaluated
+			// under the Year filter and see only the records that started in that year.
+			VAR yearSelected = MAX(DimDate[Year])
+			VAR asOf = MIN(DATE(yearSelected, 12, 31), [Reference Date])
 			RETURN
-			IF(y > YEAR([Reference Date]), BLANK(),
-			    CALCULATE(
-			        AVERAGEX(
-			            FILTER(FactCompensation, FactCompensation[EffectiveDate] <= d && (ISBLANK(FactCompensation[EndDate]) || FactCompensation[EndDate] > d)),
-			            FactCompensation[Salary]),
-			        REMOVEFILTERS(DimDate)))
+			    IF(
+			        yearSelected > YEAR([Reference Date]),
+			        BLANK(),
+			        CALCULATE(
+			            AVERAGEX(
+			                FILTER(
+			                    FactCompensation,
+			                    FactCompensation[EffectiveDate] <= asOf
+			                        && (ISBLANK(FactCompensation[EndDate]) || FactCompensation[EndDate] > asOf)
+			                ),
+			                FactCompensation[Salary]
+			            ),
+			            REMOVEFILTERS(DimDate)
+			        )
+			    )
 		formatString: "€"#,0
 		displayFolder: Compensation
 		lineageTag: 5fbd794b-1431-4885-a700-13b4e2fea72b
@@ -324,13 +365,25 @@ table _Measures
 
 	/// Number of employees on payroll on 31 December of the selected year (reference date for the current year). Shows how many people stand behind each point of Average Salary at Year End.
 	measure 'Employees at Year End' =
-			VAR y = MAX(DimDate[Year])
-			VAR d = MIN(DATE(y, 12, 31), [Reference Date])
+			// Same period test as Average Salary at Year End (see the comment there): one salary
+			// record is valid per employee on 31 December, so the row count is the headcount.
+			VAR yearSelected = MAX(DimDate[Year])
+			VAR asOf = MIN(DATE(yearSelected, 12, 31), [Reference Date])
 			RETURN
-			IF(y > YEAR([Reference Date]), BLANK(),
-			    CALCULATE(
-			        COUNTROWS(FILTER(FactCompensation, FactCompensation[EffectiveDate] <= d && (ISBLANK(FactCompensation[EndDate]) || FactCompensation[EndDate] > d))),
-			        REMOVEFILTERS(DimDate)))
+			    IF(
+			        yearSelected > YEAR([Reference Date]),
+			        BLANK(),
+			        CALCULATE(
+			            COUNTROWS(
+			                FILTER(
+			                    FactCompensation,
+			                    FactCompensation[EffectiveDate] <= asOf
+			                        && (ISBLANK(FactCompensation[EndDate]) || FactCompensation[EndDate] > asOf)
+			                )
+			            ),
+			            REMOVEFILTERS(DimDate)
+			        )
+			    )
 		formatString: #,0
 		displayFolder: Compensation
 		lineageTag: 53564075-e921-4f33-b1ea-ee8716552a3b
@@ -343,39 +396,57 @@ table _Measures
 
 	/// Share of employees with a latest review whose latest level is Exceeds Expectations or Outstanding.
 	measure 'Exceeds or Outstanding Share' =
+			// Latest review level only; employees without a review are left out of the denominator.
 			DIVIDE(
-			    CALCULATE(COUNTROWS(DimEmployee), DimEmployee[LatestPerformanceLevel] IN {"Exceeds Expectations", "Outstanding"}),
-			    CALCULATE(COUNTROWS(DimEmployee), NOT ISBLANK(DimEmployee[LatestPerformanceLevel])))
+			    CALCULATE(
+			        COUNTROWS(DimEmployee),
+			        DimEmployee[LatestPerformanceLevel] IN {"Exceeds Expectations", "Outstanding"}
+			    ),
+			    CALCULATE(COUNTROWS(DimEmployee), NOT ISBLANK(DimEmployee[LatestPerformanceLevel]))
+			)
 		formatString: 0%
 		displayFolder: Performance
 		lineageTag: 8850129e-2715-455d-9dab-9b2842a2cbf0
 
 	/// Hex colour for the latest performance level of the employee (used for conditional formatting in the latest review table).
 	measure 'Level Colour' =
-			SWITCH(SELECTEDVALUE(DimEmployee[LatestPerformanceLevel]),
+			// Fill colour for the latest level of ONE employee (use on rows with a single employee).
+			// Same palette as Review Level Colour.
+			SWITCH(
+			    SELECTEDVALUE(DimEmployee[LatestPerformanceLevel]),
 			    "Outstanding", "#CFEFE9",
 			    "Exceeds Expectations", "#D6E4FA",
 			    "Meets Expectations", "#E5E7EB",
 			    "Needs Improvement", "#F8D4DD",
-			    "#FFFFFF")
+			    "#FFFFFF"
+			)
 		displayFolder: Performance
 		lineageTag: 5b1c84ed-16f6-44b6-aed8-f043b7752c27
 
-	/// Chart subtitle: how many employees have a latest review and how many have none within 12 months.
-	measure 'Text: Latest Reviews' = FORMAT(CALCULATE(COUNTROWS(DimEmployee), NOT ISBLANK(DimEmployee[LatestPerformanceLevel])), "0") & " employees with a latest review"
+	/// Subtitle of the latest review table: number of employees that have a latest review.
+	measure 'Text: Latest Reviews' =
+			FORMAT(
+			    CALCULATE(COUNTROWS(DimEmployee), NOT ISBLANK(DimEmployee[LatestPerformanceLevel])),
+			    "0"
+			) & " employees with a latest review"
 		displayFolder: Text
 		lineageTag: e851c37a-fa5f-4cde-aa97-151b1d7e4c57
 
 	/// Helper for the latest review table: 1 when the employee's latest performance level is among the levels selected in FactReviews[Level] (all levels when nothing is selected), otherwise 0. Used as a visual filter so a click on the rating distribution cross-filters the table.
 	measure 'Latest Level in Selection' =
-			VAR lvl = SELECTEDVALUE(DimEmployee[LatestPerformanceLevel])
-			VAR selected =
+			// Visual filter (= 1) of the latest review table. FactReviews filters nothing in DimEmployee
+			// (the relationship runs the other way), so the level selected in the rating distribution
+			// chart is read here and compared with the employee's latest level.
+			// ALLEXCEPT keeps only the Level and Level Long filters (either may be on the chart);
+			// with nothing selected VALUES returns all levels and every employee passes.
+			VAR latestLevel = SELECTEDVALUE(DimEmployee[LatestPerformanceLevel])
+			VAR selectedLevels =
 			    CALCULATETABLE(
 			        VALUES(FactReviews[Level]),
 			        ALLEXCEPT(FactReviews, FactReviews[Level], FactReviews[Level Long])
 			    )
 			RETURN
-			    IF(lvl IN selected, 1, 0)
+			    IF(latestLevel IN selectedLevels, 1, 0)
 		formatString: 0
 		isHidden
 		displayFolder: Performance
@@ -383,30 +454,33 @@ table _Measures
 
 	/// Approved leave working days from 1 January of the reference year up to the reference date, regardless of date filters.
 	measure 'Leave Days YTD' =
+			// 1 January of the reference year up to the reference date; ignores the Date filter.
 			VAR ref = [Reference Date]
 			RETURN
-			CALCULATE(
-			    COUNTROWS(FactLeaveDays),
-			    REMOVEFILTERS(DimDate),
-			    FactLeaveDays[LeaveDate] >= DATE(YEAR(ref), 1, 1) && FactLeaveDays[LeaveDate] <= ref
-			)
+			    CALCULATE(
+			        COUNTROWS(FactLeaveDays),
+			        REMOVEFILTERS(DimDate),
+			        FactLeaveDays[LeaveDate] >= DATE(YEAR(ref), 1, 1) && FactLeaveDays[LeaveDate] <= ref
+			    )
 		formatString: #,0
 		displayFolder: Leave
 		lineageTag: e896cfc5-cbd8-4f24-ba81-92dcb848d6df
 
 	/// Approved vacation working days from 1 January of the reference year up to the reference date, divided by the current headcount.
 	measure 'Vacation Days YTD per Employee' =
+			// Vacation days from 1 January of the reference year up to the reference date,
+			// divided by the headcount of the current filter; ignores the Date filter.
 			VAR ref = [Reference Date]
 			RETURN
-			DIVIDE(
-			    CALCULATE(
-			        COUNTROWS(FactLeaveDays),
-			        REMOVEFILTERS(DimDate),
-			        DimLeaveType[LeaveType] = "Vacation",
-			        FactLeaveDays[LeaveDate] >= DATE(YEAR(ref), 1, 1) && FactLeaveDays[LeaveDate] <= ref
-			    ),
-			    [Headcount]
-			)
+			    DIVIDE(
+			        CALCULATE(
+			            COUNTROWS(FactLeaveDays),
+			            REMOVEFILTERS(DimDate),
+			            DimLeaveType[LeaveType] = "Vacation",
+			            FactLeaveDays[LeaveDate] >= DATE(YEAR(ref), 1, 1) && FactLeaveDays[LeaveDate] <= ref
+			        ),
+			        [Headcount]
+			    )
 		formatString: 0.0
 		displayFolder: Leave
 		lineageTag: 86d19afa-d26a-47e9-b597-96f113119218
@@ -432,51 +506,75 @@ table _Measures
 		displayFolder: Profile
 		lineageTag: 0b6e55a0-0bc5-4213-9c82-ebb0ee0cd6a7
 
-	/// Employee number and position of the selected employee.
+	/// Employee number of the selected employee (shown under the name in the profile header); a prompt to drill through when no employee is selected.
 	measure 'Text: Profile Number' =
-			VAR n = SELECTEDVALUE(DimEmployee[EmployeeNumber])
-			VAR p = LOOKUPVALUE(DimPosition[PositionTitle], DimPosition[PositionID], SELECTEDVALUE(DimEmployee[PositionID]))
-			RETURN IF(ISBLANK(n), "Drill through from another page", n)
+			VAR employeeNumber = SELECTEDVALUE(DimEmployee[EmployeeNumber])
+			RETURN
+			    IF(ISBLANK(employeeNumber), "Drill through from another page", employeeNumber)
 		displayFolder: Profile
 		lineageTag: 563576f2-ff98-44db-870c-449ce01c3fff
 
 	/// Department of the selected employee (Acme Corporation for the CEO).
-	measure 'Text: Profile Department' = COALESCE(LOOKUPVALUE(DimDepartment[Department], DimDepartment[DepartmentID], SELECTEDVALUE(DimEmployee[DepartmentID])), "-")
+	measure 'Text: Profile Department' =
+			// Looked up by key (the dimension does not receive the employee filter).
+			COALESCE(
+			    LOOKUPVALUE(DimDepartment[Department], DimDepartment[DepartmentID], SELECTEDVALUE(DimEmployee[DepartmentID])),
+			    "-"
+			)
 		displayFolder: Profile
 		lineageTag: 23383ddd-aafa-448a-aed7-e6784b5718ee
 
 	/// Job level of the selected employee.
 	measure 'Text: Profile Job Level' =
-			VAR l = LOOKUPVALUE(DimPosition[JobLevel], DimPosition[PositionID], SELECTEDVALUE(DimEmployee[PositionID]))
-			RETURN IF(ISBLANK(l), "", "Job level: " & l)
+			// Looked up by key (the dimension does not receive the employee filter).
+			VAR jobLevel =
+			    LOOKUPVALUE(DimPosition[JobLevel], DimPosition[PositionID], SELECTEDVALUE(DimEmployee[PositionID]))
+			RETURN
+			    IF(ISBLANK(jobLevel), "", "Job level: " & jobLevel)
 		displayFolder: Profile
 		lineageTag: 22662e10-30a1-4222-9f53-630dbbee7cf1
 
 	/// Direct manager of the selected employee.
 	measure 'Text: Profile Manager' =
-			VAR m = LOOKUPVALUE(DimManager[ManagerName], DimManager[ManagerEmployeeID], SELECTEDVALUE(DimEmployee[ManagerEmployeeID]))
-			RETURN IF(ISBLANK(SELECTEDVALUE(DimEmployee[EmployeeNumber])), "-", COALESCE(m, "Reports to the board"))
+			// Looked up by key (the dimension does not receive the employee filter).
+			// The CEO has no manager row, so the fallback text is shown for the CEO only.
+			VAR managerName =
+			    LOOKUPVALUE(DimManager[ManagerName], DimManager[ManagerEmployeeID], SELECTEDVALUE(DimEmployee[ManagerEmployeeID]))
+			RETURN
+			    IF(
+			        ISBLANK(SELECTEDVALUE(DimEmployee[EmployeeNumber])),
+			        "-",
+			        COALESCE(managerName, "Reports to the board")
+			    )
 		displayFolder: Profile
 		lineageTag: 49ea3f0b-d1f0-4e78-9569-305431fc38f6
 
 	/// Tenure in years of the selected employee at the reference date.
 	measure 'Text: Profile Tenure' =
-			VAR t = SELECTEDVALUE(DimEmployee[TenureYears])
-			RETURN IF(ISBLANK(t), "-", FORMAT(t, "0.0") & " years")
+			VAR tenureYears = SELECTEDVALUE(DimEmployee[TenureYears])
+			RETURN
+			    IF(ISBLANK(tenureYears), "-", FORMAT(tenureYears, "0.0") & " years")
 		displayFolder: Profile
 		lineageTag: 32e66b48-db9b-4a85-ae6b-170f8ea3c304
 
 	/// Hire date of the selected employee.
 	measure 'Text: Profile Hire Date' =
-			VAR h = SELECTEDVALUE(DimEmployee[HireDate])
-			RETURN IF(ISBLANK(h), "", "Hired " & FORMAT(h, "d mmm yyyy"))
+			VAR hireDate = SELECTEDVALUE(DimEmployee[HireDate])
+			RETURN
+			    IF(ISBLANK(hireDate), "", "Hired " & FORMAT(hireDate, "d mmm yyyy"))
 		displayFolder: Profile
 		lineageTag: 932e5e8d-f68d-4edf-a90b-b9205d8ba788
 
 	/// Initials of the selected employee; shown in place of the profile picture until pictures exist.
 	measure 'Text: Profile Initials' =
-			VAR n = SELECTEDVALUE(DimEmployee[FullName])
-			RETURN IF(ISBLANK(n), "", UPPER(LEFT(n, 1)) & UPPER(MID(n, FIND(" ", n & " ") + 1, 1)))
+			// First letter of the first name and of the first word after the first space.
+			VAR fullName = SELECTEDVALUE(DimEmployee[FullName])
+			RETURN
+			    IF(
+			        ISBLANK(fullName),
+			        "",
+			        UPPER(LEFT(fullName, 1)) & UPPER(MID(fullName, FIND(" ", fullName & " ") + 1, 1))
+			    )
 		displayFolder: Profile
 		lineageTag: 07ffa0ac-fbe2-4a21-ae3f-1b935ebb7872
 
@@ -494,64 +592,89 @@ table _Measures
 
 	/// Approved leave working days in the 24 months up to the reference date, by the selected filters.
 	measure 'Leave Days Last 24 Months' =
+			// The 24 months ending on the reference date (start date exclusive); ignores the Date filter.
 			VAR ref = [Reference Date]
 			RETURN
-			CALCULATE(
-			    COUNTROWS(FactLeaveDays),
-			    REMOVEFILTERS(DimDate),
-			    FactLeaveDays[LeaveDate] > EDATE(ref, -24) && FactLeaveDays[LeaveDate] <= ref
-			)
+			    CALCULATE(
+			        COUNTROWS(FactLeaveDays),
+			        REMOVEFILTERS(DimDate),
+			        FactLeaveDays[LeaveDate] > EDATE(ref, -24) && FactLeaveDays[LeaveDate] <= ref
+			    )
 		formatString: #,0
 		displayFolder: Leave
 		lineageTag: ed7f4f9c-ab8a-4d2c-b613-3219ed3c39da
 
 	/// Position title of the selected employee (shown in the Position card of the profile header); a prompt to drill through when no employee is selected.
 	measure 'Text: Profile Role' =
-			
-			VAR p = LOOKUPVALUE(DimPosition[PositionTitle], DimPosition[PositionID], SELECTEDVALUE(DimEmployee[PositionID]))
-			RETURN IF(ISBLANK(p), "Drill through from another page", p)
+			// DimPosition filters DimEmployee, not the other way round, so the title is looked up by key.
+			VAR position =
+			    LOOKUPVALUE(DimPosition[PositionTitle], DimPosition[PositionID], SELECTEDVALUE(DimEmployee[PositionID]))
+			RETURN
+			    IF(ISBLANK(position), "Drill through from another page", position)
 		displayFolder: Profile
 		lineageTag: 6f9b8a1a-78c0-4ac7-9be0-ac65c25a59e0
 
 	/// Current annual base salary of the selected employee, in EUR.
 	measure 'Text: Profile Salary' =
-			VAR s = SELECTEDVALUE(DimEmployee[CurrentSalary])
-			RETURN IF(ISBLANK(s), "-", "€" & FORMAT(s, "#,0") & " / year")
+			VAR salary = SELECTEDVALUE(DimEmployee[CurrentSalary])
+			RETURN
+			    IF(ISBLANK(salary), "-", "€" & FORMAT(salary, "#,0") & " / year")
 		displayFolder: Profile
 		lineageTag: 18c83a1c-5827-428a-9ee0-8517471ae695
 
 	/// Subtitle of the salary card: the change and date of the current salary record.
 	measure 'Text: Profile Salary Note' =
-			VAR cur = CALCULATETABLE(FactCompensation, FactCompensation[IsCurrent] = TRUE())
-			VAR pct = MAXX(cur, FactCompensation[ChangePct])
-			VAR d = MAXX(cur, FactCompensation[EffectiveDate])
-			RETURN IF(ISBLANK(d), "", IF(ISBLANK(pct), "Initial salary since hire", FORMAT(pct / 100, "+0.0%") & " on " & FORMAT(d, "d mmm yyyy")))
+			// The current salary record: its change against the previous salary and its start date.
+			// The first record (initial salary) has no change percentage.
+			VAR currentRecord = CALCULATETABLE(FactCompensation, FactCompensation[IsCurrent] = TRUE())
+			VAR changePct = MAXX(currentRecord, FactCompensation[ChangePct])
+			VAR effectiveDate = MAXX(currentRecord, FactCompensation[EffectiveDate])
+			RETURN
+			    IF(
+			        ISBLANK(effectiveDate),
+			        "",
+			        IF(
+			            ISBLANK(changePct),
+			            "Initial salary since hire",
+			            FORMAT(changePct / 100, "+0.0%") & " on " & FORMAT(effectiveDate, "d mmm yyyy")
+			        )
+			    )
 		displayFolder: Profile
 		lineageTag: aa858aa7-1286-43c2-9c91-e6e318170cf2
 
 	/// Latest review rating of the selected employee (scale 1 to 5).
 	measure 'Text: Profile Rating' =
-			VAR r = SELECTEDVALUE(DimEmployee[LatestRating])
-			RETURN IF(ISBLANK(SELECTEDVALUE(DimEmployee[EmployeeNumber])), "-", IF(ISBLANK(r), "No review yet", FORMAT(r, "0.0") & " / 5"))
+			VAR rating = SELECTEDVALUE(DimEmployee[LatestRating])
+			RETURN
+			    IF(
+			        ISBLANK(SELECTEDVALUE(DimEmployee[EmployeeNumber])),
+			        "-",
+			        IF(ISBLANK(rating), "No review yet", FORMAT(rating, "0.0") & " / 5")
+			    )
 		displayFolder: Profile
 		lineageTag: cbf64df5-460e-4011-9cb7-ae3364aad386
 
 	/// Subtitle of the rating card: performance level and review year of the latest review.
 	measure 'Text: Profile Rating Note' =
-			VAR l = SELECTEDVALUE(DimEmployee[LatestPerformanceLevel])
-			VAR d = SELECTEDVALUE(DimEmployee[LatestReviewDate])
-			RETURN IF(ISBLANK(l), "", l & " · " & FORMAT(d, "mmm yyyy"))
+			VAR latestLevel = SELECTEDVALUE(DimEmployee[LatestPerformanceLevel])
+			VAR reviewDate = SELECTEDVALUE(DimEmployee[LatestReviewDate])
+			RETURN
+			    IF(ISBLANK(latestLevel), "", latestLevel & " · " & FORMAT(reviewDate, "mmm yyyy"))
 		displayFolder: Profile
 		lineageTag: 019a6f54-3500-4a28-a452-c7f8879c2f70
 
 	/// Hex colour for the performance level of each review row (same palette as Level Colour, which reads the latest level of the employee); used for conditional formatting of the review history table.
 	measure 'Review Level Colour' =
-			SWITCH(SELECTEDVALUE(FactReviews[Level]),
+			// Fill colour for the level of ONE review row (use on rows with a single review).
+			// Same palette as Level Colour, which reads the employee's latest level instead.
+			SWITCH(
+			    SELECTEDVALUE(FactReviews[Level]),
 			    "Outstanding", "#CFEFE9",
 			    "Exceeds Expectations", "#D6E4FA",
 			    "Meets Expectations", "#E5E7EB",
 			    "Needs Improvement", "#F8D4DD",
-			    "#FFFFFF")
+			    "#FFFFFF"
+			)
 		displayFolder: Performance
 		lineageTag: 5c588b49-b527-457b-9b22-7eb12a62ec68
 

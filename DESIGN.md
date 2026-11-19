@@ -196,7 +196,7 @@ Photos: resize to about 160 x 160 px (under 20 KB each), have Power Query read t
 | Measure | Definition |
 | --- | --- |
 | Headcount | Count of current employees (respecting slicers) |
-| Headcount vs Target | Headcount minus department target |
+| Headcount vs Target | Target headcount minus department headcount: positive = below target (open positions), 0 = on target |
 | Average Salary / Median Salary | Over current salaries |
 | Average Salary at Year End / Employees at Year End | Average salary and headcount on 31 December of the selected year (reference date for 2026), from the salary period valid on that date |
 | Average Annual Increase / Average Promotion Increase | Average ChangePct of the pay-history rows with reason Annual Increase / Promotion, as a share |
@@ -209,7 +209,7 @@ Photos: resize to about 160 x 160 px (under 20 KB each), have Power Query read t
 | Number of Reviews / Exceeds or Outstanding Share | Review count; share of employees with a latest review whose latest level is Exceeds Expectations or Outstanding |
 | Employees Without Recent Review | Employees with no review dated within 12 months before the reference date |
 | Leave Days | Count of rows in `vw_LeaveDays` (one row per working day) |
-| Vacation Days per Employee | Vacation Leave Days divided by Headcount |
+| Vacation Days Used / Vacation Days Used per Year | Approved vacation days up to the reference date; per year: divided by employees hired by the end of the year |
 | Leave Days YTD / Vacation Days YTD per Employee | Approved leave days (vacation days divided by Headcount) from 1 January of the reference year to the reference date, regardless of date filters |
 | Pending Requests | Leave requests with status Pending (`FactLeaveRequests`) |
 | Leave Days Last 24 Months | Approved leave days in the 24 months up to the reference date |
