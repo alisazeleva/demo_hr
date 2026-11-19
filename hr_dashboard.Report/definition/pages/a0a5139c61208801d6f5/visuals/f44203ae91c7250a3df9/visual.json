@@ -4,10 +4,10 @@
   "position": {
     "x": 1308.5407906150604,
     "y": 675.08116816060135,
-    "z": 15000,
+    "z": 14000,
     "height": 374.59391135528108,
     "width": 584.73195918873148,
-    "tabOrder": 15000
+    "tabOrder": 14000
   },
   "visual": {
     "visualType": "pivotTable",
@@ -287,6 +287,13 @@
               "expr": {
                 "Literal": {
                   "Value": "'Segoe UI Semibold'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "20D"
                 }
               }
             }

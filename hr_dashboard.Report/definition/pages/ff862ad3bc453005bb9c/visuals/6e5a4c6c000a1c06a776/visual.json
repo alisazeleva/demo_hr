@@ -359,7 +359,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "'17.25'"
+                  "Value": "16D"
                 }
               }
             },

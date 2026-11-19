@@ -493,8 +493,22 @@ table _Measures
 		displayFolder: Text
 		lineageTag: f290eca6-f558-403d-a55b-85946e2379a9
 
-	/// Subtitle of the absent-today table: number of employees on approved leave on the reference date.
-	measure 'Text: Absent Today' = FORMAT([Currently Absent], "0") & " employees on approved leave on " & FORMAT([Reference Date], "d mmm yyyy")
+	/// Subtitle of the absent-and-upcoming-leave chart: employees on approved leave on the reference date, the approved absences that start after it inside the window, and the last day of the window.
+	measure 'Text: Absent and Upcoming Leave' =
+			// Employees absent on the reference date (ignores the Date filter, like Currently Absent) and approved requests that start
+			// after the reference date and no later than the last day of the window (Absence Window End Date, the same rule as
+			// FactLeaveRequests[IsInAbsenceWindow]); both follow the page slicers.
+			VAR ref = [Reference Date]
+			VAR lastDay = [Absence Window End Date]
+			VAR upcoming =
+			    CALCULATE(
+			        COUNTROWS(FactLeaveRequests),
+			        FactLeaveRequests[Status] = "Approved",
+			        FactLeaveRequests[StartDate] > ref,
+			        FactLeaveRequests[StartDate] <= lastDay
+			    )
+			RETURN
+			    FORMAT([Currently Absent], "0") & " absent on " & FORMAT(ref, "d mmm yyyy") & " and " & FORMAT(upcoming, "0") & " approved absences to " & FORMAT(lastDay, "d mmm yyyy")
 		displayFolder: Text
 		lineageTag: 72c2f23d-448e-4c7a-96d9-7eb126183f6c
 
@@ -711,6 +725,40 @@ table _Measures
 	measure 'Text: Footer As Of' = "Data as of " & FORMAT([Reference Date], "d mmm yyyy")
 		displayFolder: Text
 		lineageTag: 2c346ea9-7d11-423f-b36c-35807aacff86
+
+	/// Days of absence left, in calendar days. For an absence in progress: days from the reference date to its last day (0 = it ends today). For an absence that has not started: its full length from first to last day. Blank when there is no approved absence in the window. Meant for the tooltip of the absent-and-upcoming-leave chart.
+	measure 'Days Left in Absence' =
+			// Picks the absence that ends first among the approved requests in the window (IsInAbsenceWindow): the current absence if there
+			// is one, otherwise the next one. In progress: days from the reference date to the last day. Not started: its full length,
+			// first to last day inclusive, because no day of it has passed. Calendar days, weekends included.
+			VAR ref = [Reference Date]
+			VAR endDate = CALCULATE(MIN(FactLeaveRequests[EndDate]), FactLeaveRequests[IsInAbsenceWindow] = TRUE())
+			VAR startDate =
+			    CALCULATE(
+			        MIN(FactLeaveRequests[StartDate]),
+			        FactLeaveRequests[IsInAbsenceWindow] = TRUE(),
+			        FactLeaveRequests[EndDate] = endDate
+			    )
+			RETURN
+			    IF(
+			        ISBLANK(endDate),
+			        BLANK(),
+			        IF(startDate <= ref, DATEDIFF(ref, endDate, DAY), DATEDIFF(startDate, endDate, DAY) + 1)
+			    )
+		formatString: 0
+		displayFolder: Leave
+		lineageTag: d4a7c1e2-5b3f-4e86-9a0d-2c8f6b1e7a93
+
+	/// Last day of the absence window of the absent-and-upcoming-leave chart: 30 calendar days after the reference date.
+	measure 'Absence Window End Date' =
+			// The window is the next 30 calendar days after the reference date. Change windowDays to widen or narrow it;
+			// the IsInAbsenceWindow column, the chart subtitle and Days Left in Absence all read this measure.
+			VAR windowDays = 30
+			RETURN
+			    [Reference Date] + windowDays
+		formatString: d mmm yyyy
+		displayFolder: Leave
+		lineageTag: 661d28d3-b6bc-4dcf-a80f-222aac9e0bc4
 
 	column Placeholder
 		isHidden

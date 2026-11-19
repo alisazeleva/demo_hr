@@ -4,10 +4,10 @@
   "position": {
     "x": 21.964896750140447,
     "y": 137.01911782230471,
-    "z": 22002,
+    "z": 22000,
     "height": 56.481163071789723,
     "width": 253.11928635876134,
-    "tabOrder": 22002
+    "tabOrder": 22000
   },
   "visual": {
     "visualType": "actionButton",
@@ -437,7 +437,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "'20.25'"
+                  "Value": "20D"
                 }
               }
             },
@@ -475,7 +475,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "'17.25'"
+                  "Value": "16D"
                 }
               }
             },

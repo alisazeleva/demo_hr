@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "2bd3860c445605b58b7e",
   "position": {
-    "x": 953.2349126357966,
-    "y": 304.54789541079765,
-    "z": 15000,
-    "height": 397.94258333677556,
-    "width": 936.99235821388731,
-    "tabOrder": 15000
+    "x": 923.05422730284431,
+    "y": 304.08800261836529,
+    "z": 13000,
+    "height": 398.25719052598811,
+    "width": 967.19603413454251,
+    "tabOrder": 13000
   },
   "visual": {
     "visualType": "columnChart",
@@ -400,6 +400,13 @@
                   "Value": "30L"
                 }
               }
+            },
+            "initialScrollPosition": {
+              "expr": {
+                "Literal": {
+                  "Value": "'start'"
+                }
+              }
             }
           }
         }
@@ -622,7 +629,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Approved working days from January 2024 up to the reference date'"
+                  "Value": "'Approved working days from January 2025 up to the reference date'"
                 }
               }
             },
@@ -751,8 +758,103 @@
             "Property": "Date"
           }
         },
-        "type": "RelativeDate",
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "d",
+              "Entity": "DimDate",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Comparison": {
+                  "ComparisonKind": 2,
+                  "Left": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "d"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  },
+                  "Right": {
+                    "DateSpan": {
+                      "Expression": {
+                        "Literal": {
+                          "Value": "datetime'2025-01-01T00:00:00'"
+                        }
+                      },
+                      "TimeUnit": 5
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
         "howCreated": "User"
+      },
+      {
+        "name": "6134e029e654044150bc",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimDate"
+              }
+            },
+            "Property": "Year"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "95a148370c14d366a93b",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimDate"
+              }
+            },
+            "Property": "Month"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "a8fcc727336803a09415",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimLeaveType"
+              }
+            },
+            "Property": "LeaveType"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "b2092881a89239323b02",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Leave Days"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

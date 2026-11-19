@@ -166,7 +166,7 @@ KPI cards: Leave days (approved, 1 January to the reference date, subtitle `Text
 | Vacation days per employee | 330, 305, 597 x 398 | Matrix, heat colouring | `DimDepartment[Department]` rows, `DimDate[Year]` columns (2024 to 2026), `Vacation Days Used per Year`; 2026 is up to the reference date |
 | Leave days per month by type | 953, 305, 937 x 398 | Stacked column | axis `DimDate[Year]` and `DimDate[Month]` (hierarchy), legend `DimLeaveType[LeaveType]`, `Leave Days`; a relative-date filter on `DimDate[Date]` is set; Vacation #4A6FA5, Sick Leave #E0A030, Parental Leave #8FAEE8, Unpaid Leave #5B6472, Bereavement #CBD5E1 |
 | Leave days by department | 329, 730, 602 x 320 | Bar | `DimDepartment[Department]` (one navy colour, Acme Corporation excluded, current department), `Leave Days`; filter `IsOnOrBeforeReferenceDate` = true; category labels 16 pt |
-| Absent today | 953, 730, 937 x 320 | Table | Employee, Department, Leave type, From, Until (`FactLeaveRequests[StartDate]`, `[EndDate]`); filter `FactLeaveRequests[IsAbsentToday]` = true; subtitle `Text: Absent Today` |
+| Absent today and approved absences, next 30 days | 953, 730, 937 x 320 | Gantt chart | Leave type (category), Employee (task), From (`FactLeaveRequests[StartDate]`), Until (`[EndDate]`); filter `FactLeaveRequests[IsInAbsenceWindow]` = true (approved, not ended on the reference date and starting by `Absence Window End Date`, 30 days after the reference date); subtitle `Text: Absent and Upcoming Leave`; the tooltip shows `Days Left in Absence` |
 
 Notes:
 

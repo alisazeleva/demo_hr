@@ -4,10 +4,10 @@
   "position": {
     "x": 21.964896750140447,
     "y": 224.8787048228665,
-    "z": 21001,
+    "z": 20000,
     "height": 548.07647128921883,
     "width": 253.11928635876134,
-    "tabOrder": 21001
+    "tabOrder": 20000
   },
   "visual": {
     "visualType": "pageNavigator",
@@ -400,7 +400,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "20D"
                 }
               }
             },

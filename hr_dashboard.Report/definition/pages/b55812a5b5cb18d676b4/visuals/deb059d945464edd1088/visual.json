@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "deb059d945464edd1088",
   "position": {
-    "x": 328.91172704366141,
-    "y": 729.899789334545,
-    "z": 16000,
-    "height": 319.77529018133748,
-    "width": 601.98967326201,
-    "tabOrder": 16000
+    "x": 328.61122863597541,
+    "y": 730.792135324781,
+    "z": 14000,
+    "height": 318.80193822893136,
+    "width": 564.03419840503238,
+    "tabOrder": 14000
   },
   "visual": {
     "visualType": "barChart",
@@ -604,6 +604,20 @@
           ]
         },
         "howCreated": "User"
+      },
+      {
+        "name": "6479d180009bec828b2b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Leave Days"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

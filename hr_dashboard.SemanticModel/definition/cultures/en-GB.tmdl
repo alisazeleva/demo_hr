@@ -252,72 +252,6 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "fact_leave_request.department_ID": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "FactLeaveRequests",
-			          "ConceptualProperty": "DepartmentID"
-			        }
-			      },
-			      "State": "Generated",
-			      "Visibility": {
-			        "Value": "Hidden"
-			      },
-			      "Terms": [
-			        {
-			          "department ID": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "DepartmentID": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "department identification": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "department identity": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "department identifier": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "department credential": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.727
-			          }
-			        }
-			      ]
-			    },
 			    "fact_leave_request.employee_ID": {
 			      "Definition": {
 			        "Binding": {
@@ -380,138 +314,6 @@ cultureInfo en-GB
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.727
-			          }
-			        }
-			      ]
-			    },
-			    "fact_leave_request.leave_ID": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "FactLeaveRequests",
-			          "ConceptualProperty": "LeaveID"
-			        }
-			      },
-			      "State": "Generated",
-			      "Visibility": {
-			        "Value": "Hidden"
-			      },
-			      "Terms": [
-			        {
-			          "leave ID": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "LeaveID": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "leave": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "leave identification": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "leave identity": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "leave identifier": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "leave credential": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.727
-			          }
-			        },
-			        {
-			          "permission": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.491
-			          }
-			        },
-			        {
-			          "authority": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.491
-			          }
-			        },
-			        {
-			          "authorization": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.491
-			          }
-			        },
-			        {
-			          "dispensation": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.491
-			          }
-			        },
-			        {
-			          "consent": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
-			          "vacation": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.452
 			          }
 			        }
 			      ]
@@ -646,29 +448,6 @@ cultureInfo en-GB
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.492
-			          }
-			        }
-			      ]
-			    },
-			    "dim_leave_type.is_paid": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "DimLeaveType",
-			          "ConceptualProperty": "IsPaid"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "is paid": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "IsPaid": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
 			          }
 			        }
 			      ]
@@ -1002,39 +781,6 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "dim_manager.manager_number": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "DimManager",
-			          "ConceptualProperty": "ManagerNumber"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "manager number": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "ManagerNumber": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "manager no": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.727
-			          }
-			        }
-			      ]
-			    },
 			    "dim_manager.manager_employee_ID": {
 			      "Definition": {
 			        "Binding": {
@@ -1275,135 +1021,6 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "dim_position.is_management_position": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "DimPosition",
-			          "ConceptualProperty": "IsManagementPosition"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "is management position": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "IsManagementPosition": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "management position": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "is management location": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.508
-			          }
-			        },
-			        {
-			          "is management situation": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.508
-			          }
-			        },
-			        {
-			          "management location": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.5
-			          }
-			        },
-			        {
-			          "management situation": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.5
-			          }
-			        },
-			        {
-			          "is management place": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.492
-			          }
-			        },
-			        {
-			          "is management site": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.492
-			          }
-			        },
-			        {
-			          "is management spot": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.492
-			          }
-			        },
-			        {
-			          "is management point": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.492
-			          }
-			        },
-			        {
-			          "is management station": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.492
-			          }
-			        },
-			        {
-			          "management place": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
-			          }
-			        }
-			      ]
-			    },
 			    "dim_position.job_level_rank": {
 			      "Definition": {
 			        "Binding": {
@@ -1622,135 +1239,6 @@ cultureInfo en-GB
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.727
-			          }
-			        }
-			      ]
-			    },
-			    "dim_position.job_family": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "DimPosition",
-			          "ConceptualProperty": "JobFamily"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "job family": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "JobFamily": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "family": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "domestic": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
-			          "household": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
-			          "personal": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
-			          "intimate": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
-			          "private": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
-			          "job clan": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.475
-			          }
-			        },
-			        {
-			          "job person": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.475
-			          }
-			        },
-			        {
-			          "job kinfolk": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.475
-			          }
-			        },
-			        {
-			          "clan": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.466
-			          }
-			        },
-			        {
-			          "person": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.466
 			          }
 			        }
 			      ]
@@ -3289,22 +2777,6 @@ cultureInfo en-GB
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.748
-			          }
-			        }
-			      ]
-			    },
-			    "entity__measure.text_absent_today": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "_Measures",
-			          "ConceptualProperty": "Text: Absent Today"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "text: absent today": {
-			            "State": "Generated"
 			          }
 			        }
 			      ]
@@ -5132,122 +4604,6 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "entity__measure.vacation_days_used_per_employee": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "_Measures",
-			          "ConceptualProperty": "Vacation Days Used per Employee"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "vacation days used per employee": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "vacation existence used per employee": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.52
-			          }
-			        },
-			        {
-			          "vacation being used per employee": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.504
-			          }
-			        },
-			        {
-			          "vacation living used per employee": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.504
-			          }
-			        },
-			        {
-			          "vacation eras used per employee": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.494
-			          }
-			        },
-			        {
-			          "vacation generation used per employee": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.494
-			          }
-			        },
-			        {
-			          "vacation epoch used per employee": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.494
-			          }
-			        },
-			        {
-			          "vacation period used per employee": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.479
-			          }
-			        },
-			        {
-			          "vacation age used per employee": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.479
-			          }
-			        },
-			        {
-			          "vacation daylight used per employee": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.455
-			          }
-			        },
-			        {
-			          "vacation daytime used per employee": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.455
-			          }
-			        }
-			      ]
-			    },
 			    "entity__measure.average_months_before_promotion": {
 			      "Definition": {
 			        "Binding": {
@@ -5316,153 +4672,6 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "dim_date.weekday": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "DimDate",
-			          "ConceptualProperty": "Weekday"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "weekday": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "ordinary": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
-			          "standard": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
-			          "basic": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
-			          "routine": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        }
-			      ]
-			    },
-			    "dim_date.weekday_number": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "DimDate",
-			          "ConceptualProperty": "Weekday Number"
-			        }
-			      },
-			      "State": "Generated",
-			      "Visibility": {
-			        "Value": "Hidden"
-			      },
-			      "Terms": [
-			        {
-			          "weekday number": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "weekday no": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.727
-			          }
-			        }
-			      ]
-			    },
-			    "dim_date.yearmonth": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "DimDate",
-			          "ConceptualProperty": "Year-Month"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "year-month": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "year month": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "year-mth": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.762
-			          }
-			        },
-			        {
-			          "year mth": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "yr -month": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.609
-			          }
-			        },
-			        {
-			          "yr month": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.6
-			          }
-			        }
-			      ]
-			    },
 			    "dim_date.month": {
 			      "Definition": {
 			        "Binding": {
@@ -5524,32 +4733,6 @@ cultureInfo en-GB
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.6
-			          }
-			        }
-			      ]
-			    },
-			    "dim_date.quarter": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "DimDate",
-			          "ConceptualProperty": "Quarter"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "quarter": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "qtr": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.818
 			          }
 			        }
 			      ]
@@ -6051,72 +5234,6 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "fact_leave_day.department_ID": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "FactLeaveDays",
-			          "ConceptualProperty": "DepartmentID"
-			        }
-			      },
-			      "State": "Generated",
-			      "Visibility": {
-			        "Value": "Hidden"
-			      },
-			      "Terms": [
-			        {
-			          "department ID": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "DepartmentID": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "department identification": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "department identity": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "department identifier": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "department credential": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.727
-			          }
-			        }
-			      ]
-			    },
 			    "fact_leave_day.is_on_or_before_reference_date": {
 			      "Definition": {
 			        "Binding": {
@@ -6374,138 +5491,6 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "fact_leave_day.leave_ID": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "FactLeaveDays",
-			          "ConceptualProperty": "LeaveID"
-			        }
-			      },
-			      "State": "Generated",
-			      "Visibility": {
-			        "Value": "Hidden"
-			      },
-			      "Terms": [
-			        {
-			          "leave ID": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "LeaveID": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "leave": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "leave identification": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "leave identity": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "leave identifier": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "leave credential": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.727
-			          }
-			        },
-			        {
-			          "permission": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.491
-			          }
-			        },
-			        {
-			          "authority": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.491
-			          }
-			        },
-			        {
-			          "authorization": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.491
-			          }
-			        },
-			        {
-			          "dispensation": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.491
-			          }
-			        },
-			        {
-			          "consent": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
-			          "vacation": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.452
-			          }
-			        }
-			      ]
-			    },
 			    "fact_leave_day": {
 			      "Definition": {
 			        "Binding": {
@@ -6741,261 +5726,6 @@ cultureInfo en-GB
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.5
-			          }
-			        }
-			      ]
-			    },
-			    "fact_review.department_ID": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "FactReviews",
-			          "ConceptualProperty": "DepartmentID"
-			        }
-			      },
-			      "State": "Generated",
-			      "Visibility": {
-			        "Value": "Hidden"
-			      },
-			      "Terms": [
-			        {
-			          "department ID": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "DepartmentID": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "department identification": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "department identity": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "department identifier": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "department credential": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.727
-			          }
-			        }
-			      ]
-			    },
-			    "fact_review.position_ID": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "FactReviews",
-			          "ConceptualProperty": "PositionID"
-			        }
-			      },
-			      "State": "Generated",
-			      "Visibility": {
-			        "Value": "Hidden"
-			      },
-			      "Terms": [
-			        {
-			          "position ID": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "PositionID": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "position identification": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "position identity": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "position identifier": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "position credential": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.727
-			          }
-			        }
-			      ]
-			    },
-			    "fact_review.is_recent_review": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "FactReviews",
-			          "ConceptualProperty": "IsRecentReview"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "is recent review": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "IsRecentReview": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "is recent appraisal": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.508
-			          }
-			        },
-			        {
-			          "is recent evaluation": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.508
-			          }
-			        },
-			        {
-			          "is recent assessment": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.508
-			          }
-			        },
-			        {
-			          "is recent examination": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.508
-			          }
-			        },
-			        {
-			          "is recent analysis": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.508
-			          }
-			        },
-			        {
-			          "is recent criticism": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.508
-			          }
-			        },
-			        {
-			          "is recent journal": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.482
-			          }
-			        },
-			        {
-			          "is recent publication": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.482
-			          }
-			        },
-			        {
-			          "is recent periodical": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.468
-			          }
-			        },
-			        {
-			          "is recent magazine": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.468
 			          }
 			        }
 			      ]
@@ -7437,118 +6167,6 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "fact_review.reviewer_ID": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "FactReviews",
-			          "ConceptualProperty": "ReviewerID"
-			        }
-			      },
-			      "State": "Generated",
-			      "Visibility": {
-			        "Value": "Hidden"
-			      },
-			      "Terms": [
-			        {
-			          "reviewer ID": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "ReviewerID": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "reviewer": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "reviewer identification": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "reviewer identity": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "reviewer identifier": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "reviewer credential": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.727
-			          }
-			        },
-			        {
-			          "critic": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.491
-			          }
-			        },
-			        {
-			          "commentator": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.491
-			          }
-			        },
-			        {
-			          "assessor": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.491
-			          }
-			        },
-			        {
-			          "referee": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        }
-			      ]
-			    },
 			    "fact_review.employee_ID": {
 			      "Definition": {
 			        "Binding": {
@@ -7611,150 +6229,6 @@ cultureInfo en-GB
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.727
-			          }
-			        }
-			      ]
-			    },
-			    "fact_review.performance_review_ID": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "FactReviews",
-			          "ConceptualProperty": "PerformanceReviewID"
-			        }
-			      },
-			      "State": "Generated",
-			      "Visibility": {
-			        "Value": "Hidden"
-			      },
-			      "Terms": [
-			        {
-			          "performance review ID": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "PerformanceReviewID": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "review": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "performance review": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "review ID": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "performance review identification": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.762
-			          }
-			        },
-			        {
-			          "performance review identity": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.762
-			          }
-			        },
-			        {
-			          "performance review identifier": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.762
-			          }
-			        },
-			        {
-			          "review identification": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "review identity": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "review identifier": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "performance review credential": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.739
-			          }
-			        },
-			        {
-			          "review credential": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.727
-			          }
-			        },
-			        {
-			          "performance appraisal": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.5
-			          }
-			        },
-			        {
-			          "performance evaluation": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.5
 			          }
 			        }
 			      ]
@@ -8022,182 +6496,6 @@ cultureInfo en-GB
 			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.99
-			          }
-			        }
-			      ]
-			    },
-			    "fact_compensation.change_amount": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "FactCompensation",
-			          "ConceptualProperty": "ChangeAmount"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "change amount": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "ChangeAmount": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "change quantity": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.5
-			          }
-			        },
-			        {
-			          "change volume": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.5
-			          }
-			        },
-			        {
-			          "change expanse": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.5
-			          }
-			        },
-			        {
-			          "change extent": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.5
-			          }
-			        },
-			        {
-			          "change sum": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
-			          }
-			        },
-			        {
-			          "change total": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
-			          }
-			        },
-			        {
-			          "change aggregate": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
-			          }
-			        }
-			      ]
-			    },
-			    "fact_compensation.previous_salary": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "FactCompensation",
-			          "ConceptualProperty": "PreviousSalary"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "previous salary": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "PreviousSalary": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "previous income": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.5
-			          }
-			        },
-			        {
-			          "previous money": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.5
-			          }
-			        },
-			        {
-			          "previous remuneration": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.5
-			          }
-			        },
-			        {
-			          "previous payment": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.5
-			          }
-			        },
-			        {
-			          "previous pay": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
-			          }
-			        },
-			        {
-			          "previous wage": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
 			          }
 			        }
 			      ]
@@ -8597,150 +6895,6 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "fact_compensation.compensation_history_ID": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "FactCompensation",
-			          "ConceptualProperty": "CompensationHistoryID"
-			        }
-			      },
-			      "State": "Generated",
-			      "Visibility": {
-			        "Value": "Hidden"
-			      },
-			      "Terms": [
-			        {
-			          "compensation history ID": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "CompensationHistoryID": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "history": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "compensation history": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "history ID": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "compensation history identification": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.762
-			          }
-			        },
-			        {
-			          "compensation history identity": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.762
-			          }
-			        },
-			        {
-			          "compensation history identifier": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.762
-			          }
-			        },
-			        {
-			          "history identification": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "history identity": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "history identifier": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "compensation history credential": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.739
-			          }
-			        },
-			        {
-			          "history credential": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.727
-			          }
-			        },
-			        {
-			          "compensation antiquity": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.5
-			          }
-			        },
-			        {
-			          "antiquity": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.491
-			          }
-			        }
-			      ]
-			    },
 			    "fact_compensation": {
 			      "Definition": {
 			        "Binding": {
@@ -8869,158 +7023,87 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "fact_job_history.prev_manager_name": {
+			    "fact_leave_request.is_in_absence_window": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "FactJobHistory",
-			          "ConceptualProperty": "PrevManagerName"
+			          "ConceptualEntity": "FactLeaveRequests",
+			          "ConceptualProperty": "IsInAbsenceWindow"
 			        }
 			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "prev manager name": {
+			          "is in absence window": {
 			            "State": "Generated"
 			          }
 			        },
 			        {
-			          "PrevManagerName": {
+			          "IsInAbsenceWindow": {
 			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.99
 			          }
 			        },
 			        {
-			          "prev manager nickname": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.739
-			          }
-			        },
-			        {
-			          "prev manager title": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.739
-			          }
-			        },
-			        {
-			          "prev manager label": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.739
-			          }
-			        },
-			        {
-			          "prev manager tag": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.739
-			          }
-			        }
-			      ]
-			    },
-			    "fact_job_history.prev_manager_ID": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "FactJobHistory",
-			          "ConceptualProperty": "PrevManagerID"
-			        }
-			      },
-			      "State": "Generated",
-			      "Visibility": {
-			        "Value": "Hidden"
-			      },
-			      "Terms": [
-			        {
-			          "prev manager ID": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "PrevManagerID": {
-			            "Type": "Noun",
+			          "window": {
 			            "State": "Generated",
-			            "Weight": 0.99
+			            "Weight": 0.97
 			          }
 			        },
 			        {
-			          "prev manager identification": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.762
-			          }
-			        },
-			        {
-			          "prev manager identity": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.762
-			          }
-			        },
-			        {
-			          "prev manager identifier": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.762
-			          }
-			        },
-			        {
-			          "prev manager credential": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.739
-			          }
-			        }
-			      ]
-			    },
-			    "fact_job_history.prev_department": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "FactJobHistory",
-			          "ConceptualProperty": "PrevDepartment"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "prev department": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "PrevDepartment": {
-			            "Type": "Noun",
+			          "absence window": {
 			            "State": "Generated",
-			            "Weight": 0.99
+			            "Weight": 0.97
 			          }
 			        },
 			        {
-			          "prev subdivision": {
+			          "in absence window": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "in nonappearance window": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "in absenteeism window": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "in nonattendance window": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "in absence booth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "absence booth": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
@@ -9030,423 +7113,53 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "prev division": {
+			          "in absence gap": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.5
+			            "Weight": 0.492
 			          }
 			        },
 			        {
-			          "prev unit": {
+			          "in absence space": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.5
+			            "Weight": 0.492
 			          }
 			        },
 			        {
-			          "prev section": {
+			          "in absence opening": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.485
+			            "Weight": 0.492
 			          }
 			        },
 			        {
-			          "prev branch": {
+			          "in absence hole": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.485
+			            "Weight": 0.492
 			          }
 			        },
 			        {
-			          "prev sector": {
+			          "in absence hole-in-the-wall": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.485
-			          }
-			        },
-			        {
-			          "prev responsibility": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.475
-			          }
-			        },
-			        {
-			          "prev specialty": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.475
-			          }
-			        },
-			        {
-			          "prev realm": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.475
-			          }
-			        },
-			        {
-			          "prev area": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.461
-			          }
-			        }
-			      ]
-			    },
-			    "fact_job_history.prev_department_ID": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "FactJobHistory",
-			          "ConceptualProperty": "PrevDepartmentID"
-			        }
-			      },
-			      "State": "Generated",
-			      "Visibility": {
-			        "Value": "Hidden"
-			      },
-			      "Terms": [
-			        {
-			          "prev department ID": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "PrevDepartmentID": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "prev department identification": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.762
-			          }
-			        },
-			        {
-			          "prev department identity": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.762
-			          }
-			        },
-			        {
-			          "prev department identifier": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.762
-			          }
-			        },
-			        {
-			          "prev department credential": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.739
-			          }
-			        }
-			      ]
-			    },
-			    "fact_job_history.prev_position_ID": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "FactJobHistory",
-			          "ConceptualProperty": "PrevPositionID"
-			        }
-			      },
-			      "State": "Generated",
-			      "Visibility": {
-			        "Value": "Hidden"
-			      },
-			      "Terms": [
-			        {
-			          "prev position ID": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "PrevPositionID": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "prev position identification": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.762
-			          }
-			        },
-			        {
-			          "prev position identity": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.762
-			          }
-			        },
-			        {
-			          "prev position identifier": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.762
-			          }
-			        },
-			        {
-			          "prev position credential": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.739
-			          }
-			        }
-			      ]
-			    },
-			    "fact_job_history.manager_ID": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "FactJobHistory",
-			          "ConceptualProperty": "ManagerID"
-			        }
-			      },
-			      "State": "Generated",
-			      "Visibility": {
-			        "Value": "Hidden"
-			      },
-			      "Terms": [
-			        {
-			          "manager ID": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "ManagerID": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "manager identification": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "manager identity": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "manager identifier": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "manager credential": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.727
-			          }
-			        }
-			      ]
-			    },
-			    "fact_job_history.department_ID": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "FactJobHistory",
-			          "ConceptualProperty": "DepartmentID"
-			        }
-			      },
-			      "State": "Generated",
-			      "Visibility": {
-			        "Value": "Hidden"
-			      },
-			      "Terms": [
-			        {
-			          "department ID": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "DepartmentID": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "department identification": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "department identity": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "department identifier": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "department credential": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.727
-			          }
-			        }
-			      ]
-			    },
-			    "fact_job_history.position_ID": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "FactJobHistory",
-			          "ConceptualProperty": "PositionID"
-			        }
-			      },
-			      "State": "Generated",
-			      "Visibility": {
-			        "Value": "Hidden"
-			      },
-			      "Terms": [
-			        {
-			          "position ID": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "PositionID": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "position identification": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "position identity": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "position identifier": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "position credential": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.727
+			            "Weight": 0.492
 			          }
 			        }
 			      ]
@@ -9715,318 +7428,396 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "fact_job_history.reason": {
+			    "entity__measure.absence_window_end_date": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "FactJobHistory",
-			          "ConceptualProperty": "Reason"
+			          "ConceptualEntity": "_Measures",
+			          "ConceptualProperty": "Absence Window End Date"
 			        }
 			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "reason": {
+			          "absence window end date": {
 			            "State": "Generated"
 			          }
 			        },
 			        {
-			          "motivation": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.491
-			          }
-			        },
-			        {
-			          "intention": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.491
-			          }
-			        },
-			        {
-			          "aim": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
-			          "motive": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
-			          "cause": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
-			          "goal": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
-			          "purpose": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
-			          "object": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
-			          "end": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
-			          "intelligence": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.466
-			          }
-			        }
-			      ]
-			    },
-			    "fact_job_history.is_current": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "FactJobHistory",
-			          "ConceptualProperty": "IsCurrent"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "is current": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "IsCurrent": {
-			            "Type": "Noun",
+			          "date": {
 			            "State": "Generated",
-			            "Weight": 0.99
+			            "Weight": 0.7
 			          }
 			        },
 			        {
-			          "is latest": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.727
-			          }
-			        },
-			        {
-			          "is contemporary": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.727
-			          }
-			        },
-			        {
-			          "is present": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.727
-			          }
-			        },
-			        {
-			          "is present day": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.589
-			          }
-			        },
-			        {
-			          "is up to date": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.524
-			          }
-			        }
-			      ]
-			    },
-			    "fact_job_history.end_date": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "FactJobHistory",
-			          "ConceptualProperty": "EndDate"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "end date": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "EndDate": {
-			            "Type": "Noun",
+			          "window end date": {
 			            "State": "Generated",
-			            "Weight": 0.99
+			            "Weight": 0.97
 			          }
 			        },
 			        {
-			          "end moment": {
+			          "absence window end moment": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.75
+			            "Weight": 0.771
 			          }
 			        },
 			        {
-			          "end period": {
+			          "window end moment": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.727
+			            "Weight": 0.762
 			          }
 			        },
 			        {
-			          "culmination date": {
+			          "absence window end period": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.6
+			            "Weight": 0.748
 			          }
 			        },
 			        {
-			          "completion date": {
+			          "window end period": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.6
+			            "Weight": 0.739
 			          }
 			        },
 			        {
-			          "conclusion date": {
+			          "absence window culmination date": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.6
+			            "Weight": 0.629
 			          }
 			        },
 			        {
-			          "expiration date": {
+			          "absence window completion date": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.6
+			            "Weight": 0.617
 			          }
 			        },
 			        {
-			          "cease date": {
+			          "absence window conclusion date": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.582
+			            "Weight": 0.617
 			          }
 			        },
 			        {
-			          "end time": {
+			          "absence window expiration date": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.582
+			            "Weight": 0.617
 			          }
 			        },
 			        {
-			          "close date": {
+			          "window culmination date": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.582
+			            "Weight": 0.615
 			          }
 			        },
 			        {
-			          "finish date": {
+			          "absence window cease date": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.582
+			            "Weight": 0.61
 			          }
 			        }
 			      ],
 			      "SemanticType": "Time"
+			    },
+			    "entity__measure.days_left_in_absence": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Measures",
+			          "ConceptualProperty": "Days Left in Absence"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "days left in absence": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "absence": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "in absence": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "left in absence": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "left": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "days left": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "in nonappearance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "in absenteeism": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "in nonattendance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "nonappearance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "absenteeism": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "nonattendance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "left-hand": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "port": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "in nonexistence": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "in deficiency": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.475
+			          }
+			        }
+			      ]
+			    },
+			    "entity__measure.text_footer_as_of": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Measures",
+			          "ConceptualProperty": "Text: Footer As Of"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "text: footer as of": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "text: addendum as of": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.52
+			          }
+			        },
+			        {
+			          "text: footnote as of": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        },
+			        {
+			          "text: note as of": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        },
+			        {
+			          "text: gloss as of": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        },
+			        {
+			          "text: text as of": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        },
+			        {
+			          "text: title as of": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        },
+			        {
+			          "text: slogan as of": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.494
+			          }
+			        },
+			        {
+			          "text: description as of": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.494
+			          }
+			        },
+			        {
+			          "text: legend as of": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.494
+			          }
+			        },
+			        {
+			          "text: header as of": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.494
+			          }
+			        }
+			      ]
 			    },
 			    "fact_job_history.employee_ID": {
 			      "Definition": {
@@ -10094,146 +7885,118 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "fact_job_history.job_history_ID": {
+			    "entity__measure.text_home_data_note": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "FactJobHistory",
-			          "ConceptualProperty": "JobHistoryID"
+			          "ConceptualEntity": "_Measures",
+			          "ConceptualProperty": "Text: Home Data Note"
 			        }
 			      },
 			      "State": "Generated",
-			      "Visibility": {
-			        "Value": "Hidden"
-			      },
 			      "Terms": [
 			        {
-			          "job history ID": {
+			          "text: home data note": {
 			            "State": "Generated"
 			          }
 			        },
 			        {
-			          "JobHistoryID": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "history": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "job history": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "history ID": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "job history identification": {
+			          "text: home information note": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.762
+			            "Weight": 0.624
 			          }
 			        },
 			        {
-			          "job history identity": {
+			          "text: home fact note": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.762
+			            "Weight": 0.624
 			          }
 			        },
 			        {
-			          "job history identifier": {
+			          "text: home info note": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.762
+			            "Weight": 0.624
 			          }
 			        },
 			        {
-			          "history identification": {
+			          "text: home statistic note": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.75
+			            "Weight": 0.624
 			          }
 			        },
 			        {
-			          "history identity": {
+			          "text: home document note": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.75
+			            "Weight": 0.605
 			          }
 			        },
 			        {
-			          "history identifier": {
+			          "text: home figure note": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.75
+			            "Weight": 0.605
 			          }
 			        },
 			        {
-			          "job history credential": {
+			          "text: home record note": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.739
+			            "Weight": 0.605
 			          }
 			        },
 			        {
-			          "history credential": {
+			          "text: home data memo": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.727
+			            "Weight": 0.52
 			          }
 			        },
 			        {
-			          "job antiquity": {
+			          "text: home data memorandum": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.5
+			            "Weight": 0.52
 			          }
 			        },
 			        {
-			          "antiquity": {
+			          "text: home data reminder": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.491
+			            "Weight": 0.52
 			          }
 			        }
 			      ]
@@ -10971,389 +8734,326 @@ cultureInfo en-GB
 			      ],
 			      "SemanticType": "Time"
 			    },
-			    "dim_employee.manager_chain": {
+			    "entity__measure.text_info_note": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DimEmployee",
-			          "ConceptualProperty": "ManagerChain"
+			          "ConceptualEntity": "_Measures",
+			          "ConceptualProperty": "Text: Info Note"
 			        }
 			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "manager chain": {
+			          "text: info note": {
 			            "State": "Generated"
 			          }
 			        },
 			        {
-			          "ManagerChain": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "chain": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "manager hawser": {
+			          "text: info memo": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.5
+			            "Weight": 0.514
 			          }
 			        },
 			        {
-			          "manager restraint": {
+			          "text: info memorandum": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.5
+			            "Weight": 0.514
 			          }
 			        },
 			        {
-			          "hawser": {
+			          "text: info reminder": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.491
+			            "Weight": 0.514
 			          }
 			        },
 			        {
-			          "restraint": {
+			          "text: info letter": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.491
+			            "Weight": 0.499
 			          }
 			        },
 			        {
-			          "manager cable": {
+			          "text: info message": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.485
+			            "Weight": 0.499
 			          }
 			        },
 			        {
-			          "manager shackle": {
+			          "text: info communication": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.485
+			            "Weight": 0.499
 			          }
 			        },
 			        {
-			          "manager manacle": {
+			          "text: info annotation": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.485
+			            "Weight": 0.489
 			          }
 			        },
 			        {
-			          "manager fetter": {
+			          "text: info addendum": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.485
+			            "Weight": 0.489
 			          }
 			        },
 			        {
-			          "cable": {
+			          "text: info commentary": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.476
+			            "Weight": 0.489
 			          }
 			        },
 			        {
-			          "shackle": {
+			          "text: info footnote": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.476
+			            "Weight": 0.474
 			          }
 			        }
 			      ]
 			    },
-			    "dim_employee.path_from_CEO": {
+			    "entity__measure.review_level_colour": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DimEmployee",
-			          "ConceptualProperty": "PathFromCEO"
+			          "ConceptualEntity": "_Measures",
+			          "ConceptualProperty": "Review Level Colour"
 			        }
 			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "path from CEO": {
+			          "review level colour": {
 			            "State": "Generated"
 			          }
 			        },
 			        {
-			          "PathFromCEO": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "path": {
+			          "colour": {
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
 			        },
 			        {
-			          "pathway from ceo": {
+			          "review quantity colour": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.508
+			            "Weight": 0.609
 			          }
 			        },
 			        {
-			          "footpath from ceo": {
+			          "review threshold colour": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.508
+			            "Weight": 0.609
 			          }
 			        },
 			        {
-			          "trail from ceo": {
+			          "review amount colour": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.492
+			            "Weight": 0.591
 			          }
 			        },
 			        {
-			          "track from ceo": {
+			          "review grade colour": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.492
+			            "Weight": 0.591
 			          }
 			        },
 			        {
-			          "route from ceo": {
+			          "review point colour": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.492
+			            "Weight": 0.591
 			          }
 			        },
 			        {
-			          "pathway": {
+			          "review rank colour": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.491
+			            "Weight": 0.591
 			          }
 			        },
 			        {
-			          "footpath": {
+			          "review tier colour": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.491
-			          }
-			        },
-			        {
-			          "lane from ceo": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.482
-			          }
-			        },
-			        {
-			          "alleyway from ceo": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.482
-			          }
-			        },
-			        {
-			          "conduit from ceo": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.482
+			            "Weight": 0.591
 			          }
 			        }
 			      ]
 			    },
-			    "dim_employee.org_depth": {
+			    "entity__measure.text_profile_rating_note": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DimEmployee",
-			          "ConceptualProperty": "OrgDepth"
+			          "ConceptualEntity": "_Measures",
+			          "ConceptualProperty": "Text: Profile Rating Note"
 			        }
 			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "org depth": {
+			          "text: profile rating note": {
 			            "State": "Generated"
 			          }
 			        },
 			        {
-			          "OrgDepth": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "depth": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "org complexity": {
+			          "text: profile rating memo": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.5
+			            "Weight": 0.52
 			          }
 			        },
 			        {
-			          "org penetration": {
+			          "text: profile rating memorandum": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.5
+			            "Weight": 0.52
 			          }
 			        },
 			        {
-			          "org profundity": {
+			          "text: profile rating reminder": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.5
+			            "Weight": 0.52
 			          }
 			        },
 			        {
-			          "org deepness": {
+			          "text: profile rating letter": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.5
+			            "Weight": 0.504
 			          }
 			        },
 			        {
-			          "org wisdom": {
+			          "text: profile rating message": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.5
+			            "Weight": 0.504
 			          }
 			        },
 			        {
-			          "org seriousness": {
+			          "text: profile rating communication": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.5
+			            "Weight": 0.504
 			          }
 			        },
 			        {
-			          "org gravity": {
+			          "text: profile rating annotation": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.5
+			            "Weight": 0.494
 			          }
 			        },
 			        {
-			          "complexity": {
+			          "text: profile rating addendum": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.491
+			            "Weight": 0.494
 			          }
 			        },
 			        {
-			          "penetration": {
+			          "text: profile rating commentary": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.491
+			            "Weight": 0.494
 			          }
 			        },
 			        {
-			          "profundity": {
+			          "text: profile rating footnote": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.491
+			            "Weight": 0.479
 			          }
 			        }
 			      ]
@@ -13949,58 +11649,118 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "entity__measure.hires": {
+			    "entity__measure.text_profile_salary_note": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "_Measures",
-			          "ConceptualProperty": "Hires"
+			          "ConceptualProperty": "Text: Profile Salary Note"
 			        }
 			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "hires": {
+			          "text: profile salary note": {
 			            "State": "Generated"
 			          }
 			        },
 			        {
-			          "rental": {
+			          "text: profile salary memo": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.476
+			            "Weight": 0.52
 			          }
 			        },
 			        {
-			          "rent": {
+			          "text: profile salary memorandum": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.476
+			            "Weight": 0.52
 			          }
 			        },
 			        {
-			          "letting": {
+			          "text: profile salary reminder": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.476
+			            "Weight": 0.52
 			          }
 			        },
 			        {
-			          "lease": {
+			          "text: profile salary letter": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.476
+			            "Weight": 0.504
+			          }
+			        },
+			        {
+			          "text: profile salary message": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        },
+			        {
+			          "text: profile salary communication": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        },
+			        {
+			          "text: profile salary annotation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.494
+			          }
+			        },
+			        {
+			          "text: profile salary addendum": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.494
+			          }
+			        },
+			        {
+			          "text: profile salary commentary": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.494
+			          }
+			        },
+			        {
+			          "text: profile salary footnote": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.479
 			          }
 			        }
 			      ]
@@ -14081,28 +11841,126 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "entity__measure.female_share": {
+			    "entity__measure.text_absent_and_upcoming_leave": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "_Measures",
-			          "ConceptualProperty": "Female Share"
+			          "ConceptualProperty": "Text: Absent and Upcoming Leave"
 			        }
 			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "female share": {
+			          "text: absent and upcoming leave": {
 			            "State": "Generated"
 			          }
 			        },
 			        {
-			          "share": {
+			          "text: absent": {
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
 			        },
 			        {
-			          "female part": {
+			          "text : absent upcoming leave": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "upcoming leave": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "leave": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "upcoming permission": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "upcoming authority": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "upcoming authorization": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "upcoming dispensation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "permission": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "authority": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "authorization": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "dispensation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "upcoming consent": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
@@ -14112,87 +11970,7 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "female portion": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
-			          }
-			        },
-			        {
-			          "female segment": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
-			          }
-			        },
-			        {
-			          "female cut": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
-			          }
-			        },
-			        {
-			          "female stake": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
-			          }
-			        },
-			        {
-			          "female bit": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
-			          }
-			        },
-			        {
-			          "female piece": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
-			          }
-			        },
-			        {
-			          "part": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
-			          "portion": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.476
-			          }
-			        },
-			        {
-			          "segment": {
+			          "consent": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
@@ -17139,16 +14917,6 @@ cultureInfo en-GB
 			            },
 			            "Weight": 0.466
 			          }
-			        },
-			        {
-			          "From": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ],
 			      "SemanticType": "Time"
@@ -17278,16 +15046,6 @@ cultureInfo en-GB
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.582
-			          }
-			        },
-			        {
-			          "Until": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
 			          }
 			        }
 			      ],
@@ -17608,7 +15366,7 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "table_measures.text_profile_salary": {
+			    "entity__measure.text_profile_salary": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "_Measures",
@@ -17617,6 +15375,71 @@ cultureInfo en-GB
 			      },
 			      "State": "Generated",
 			      "Terms": [
+			        {
+			          "text: profile salary": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "text: profile income": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "text: profile money": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "text: profile remuneration": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "text: profile payment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "text: profile pay": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "text: profile wage": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
 			        {
 			          "Current salary": {
 			            "State": "Suggested",
@@ -17629,7 +15452,7 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "table_measures.text_profile_rating": {
+			    "entity__measure.text_profile_rating": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "_Measures",
@@ -17638,6 +15461,101 @@ cultureInfo en-GB
 			      },
 			      "State": "Generated",
 			      "Terms": [
+			        {
+			          "text: profile rating": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "text: profile assessment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "text: profile evaluation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "text: profile score": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "text: profile grade": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "text: profile ranking": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "text: profile mark": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "text: profile sailor": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.489
+			          }
+			        },
+			        {
+			          "text: profile seaman": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.489
+			          }
+			        },
+			        {
+			          "text: profile hand": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.474
+			          }
+			        },
 			        {
 			          "Latest review": {
 			            "State": "Suggested",
@@ -17650,7 +15568,7 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "table_measures.years_of_history": {
+			    "entity__measure.years_of_history": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "_Measures",
@@ -17659,6 +15577,91 @@ cultureInfo en-GB
 			      },
 			      "State": "Generated",
 			      "Terms": [
+			        {
+			          "years of history": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "century of history": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "eon of history": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "age of history": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "existence of history": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "duration of history": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "being of history": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.468
+			          }
+			        },
+			        {
+			          "living of history": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.468
+			          }
+			        },
+			        {
+			          "lifetime of history": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.468
+			          }
+			        },
 			        {
 			          "of history": {
 			            "State": "Suggested",
@@ -17673,6 +15676,381 @@ cultureInfo en-GB
 			    }
 			  },
 			  "Relationships": {
+			    "dim_employee_has_dim_manager1": {
+			      "Binding": {
+			        "ConceptualEntity": "DimEmployee"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_employee": {
+			          "Target": {
+			            "Entity": "dim_employee"
+			          }
+			        },
+			        "dim_manager": {
+			          "Target": {
+			            "Entity": "dim_manager"
+			          },
+			          "Nouns": [
+			            {
+			              "manager employee": {
+			                "State": "Generated"
+			              }
+			            }
+			          ]
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_employee"
+			            },
+			            "Object": {
+			              "Role": "dim_manager"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_employees_have_dim_managers"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_manager"
+			            },
+			            "Object": {
+			              "Role": "dim_employee"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_managers_have_dim_employees"
+			        }
+			      ]
+			    },
+			    "dim_employee_has_dim_position": {
+			      "Binding": {
+			        "ConceptualEntity": "DimEmployee"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_employee": {
+			          "Target": {
+			            "Entity": "dim_employee"
+			          }
+			        },
+			        "dim_position": {
+			          "Target": {
+			            "Entity": "dim_position"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_employee"
+			            },
+			            "Object": {
+			              "Role": "dim_position"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_employees_have_dim_positions"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_position"
+			            },
+			            "Object": {
+			              "Role": "dim_employee"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_positions_have_dim_employees"
+			        }
+			      ]
+			    },
+			    "dim_employee_has_dim_department": {
+			      "Binding": {
+			        "ConceptualEntity": "DimEmployee"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_employee": {
+			          "Target": {
+			            "Entity": "dim_employee"
+			          }
+			        },
+			        "dim_department": {
+			          "Target": {
+			            "Entity": "dim_department"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_employee"
+			            },
+			            "Object": {
+			              "Role": "dim_department"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_employees_have_dim_departments"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_department"
+			            },
+			            "Object": {
+			              "Role": "dim_employee"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_departments_have_dim_employees"
+			        }
+			      ]
+			    },
+			    "fact_job_history_has_dim_date": {
+			      "Binding": {
+			        "ConceptualEntity": "FactJobHistory"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_job_history": {
+			          "Target": {
+			            "Entity": "fact_job_history"
+			          }
+			        },
+			        "dim_date": {
+			          "Target": {
+			            "Entity": "dim_date"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_job_history"
+			            },
+			            "Object": {
+			              "Role": "dim_date"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_job_histories_have_dim_dates"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_date"
+			            },
+			            "Object": {
+			              "Role": "fact_job_history"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_dates_have_fact_job_histories"
+			        }
+			      ]
+			    },
+			    "fact_job_history_has_dim_employee": {
+			      "Binding": {
+			        "ConceptualEntity": "FactJobHistory"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_job_history": {
+			          "Target": {
+			            "Entity": "fact_job_history"
+			          }
+			        },
+			        "dim_employee": {
+			          "Target": {
+			            "Entity": "dim_employee"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_job_history"
+			            },
+			            "Object": {
+			              "Role": "dim_employee"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_job_histories_have_dim_employees"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_employee"
+			            },
+			            "Object": {
+			              "Role": "fact_job_history"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_employees_have_fact_job_histories"
+			        }
+			      ]
+			    },
+			    "fact_compensation_has_dim_date": {
+			      "Binding": {
+			        "ConceptualEntity": "FactCompensation"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_compensation": {
+			          "Target": {
+			            "Entity": "fact_compensation"
+			          }
+			        },
+			        "dim_date": {
+			          "Target": {
+			            "Entity": "dim_date"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_compensation"
+			            },
+			            "Object": {
+			              "Role": "dim_date"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_compensations_have_dim_dates"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_date"
+			            },
+			            "Object": {
+			              "Role": "fact_compensation"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_dates_have_fact_compensations"
+			        }
+			      ]
+			    },
+			    "fact_compensation_has_dim_employee": {
+			      "Binding": {
+			        "ConceptualEntity": "FactCompensation"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_compensation": {
+			          "Target": {
+			            "Entity": "fact_compensation"
+			          }
+			        },
+			        "dim_employee": {
+			          "Target": {
+			            "Entity": "dim_employee"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_compensation"
+			            },
+			            "Object": {
+			              "Role": "dim_employee"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_compensations_have_dim_employees"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_employee"
+			            },
+			            "Object": {
+			              "Role": "fact_compensation"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_employees_have_fact_compensations"
+			        }
+			      ]
+			    },
+			    "fact_review_has_dim_date": {
+			      "Binding": {
+			        "ConceptualEntity": "FactReviews"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_review": {
+			          "Target": {
+			            "Entity": "fact_review"
+			          }
+			        },
+			        "dim_date": {
+			          "Target": {
+			            "Entity": "dim_date"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_review"
+			            },
+			            "Object": {
+			              "Role": "dim_date"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_reviews_have_dim_dates"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_date"
+			            },
+			            "Object": {
+			              "Role": "fact_review"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_dates_have_fact_reviews"
+			        }
+			      ]
+			    },
 			    "fact_review_has_dim_employee": {
 			      "Binding": {
 			        "ConceptualEntity": "FactReviews"
@@ -17992,6 +16370,138 @@ cultureInfo en-GB
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "dim_employees_have_fact_leave_requests"
+			        }
+			      ]
+			    },
+			    "reference_date_has_entity__measure_years_of_history": {
+			      "Binding": {
+			        "ConceptualEntity": "ReferenceDate"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "reference_date": {
+			          "Target": {
+			            "Entity": "reference_date"
+			          }
+			        },
+			        "entity__measure.years_of_history": {
+			          "Target": {
+			            "Entity": "entity__measure.years_of_history"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "reference_date"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.years_of_history"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "reference_dates_have_years_of_history"
+			        }
+			      ]
+			    },
+			    "dim_employee_has_entity__measure_years_of_history": {
+			      "Binding": {
+			        "ConceptualEntity": "DimEmployee"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_employee": {
+			          "Target": {
+			            "Entity": "dim_employee"
+			          }
+			        },
+			        "entity__measure.years_of_history": {
+			          "Target": {
+			            "Entity": "entity__measure.years_of_history"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_employee"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.years_of_history"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_employees_have_years_of_history"
+			        }
+			      ]
+			    },
+			    "dim_employee_has_entity__measure_text_profile_rating": {
+			      "Binding": {
+			        "ConceptualEntity": "DimEmployee"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_employee": {
+			          "Target": {
+			            "Entity": "dim_employee"
+			          }
+			        },
+			        "entity__measure.text_profile_rating": {
+			          "Target": {
+			            "Entity": "entity__measure.text_profile_rating"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_employee"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.text_profile_rating"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_employees_have_text_profile_rating"
+			        }
+			      ]
+			    },
+			    "dim_employee_has_entity__measure_text_profile_salary": {
+			      "Binding": {
+			        "ConceptualEntity": "DimEmployee"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_employee": {
+			          "Target": {
+			            "Entity": "dim_employee"
+			          }
+			        },
+			        "entity__measure.text_profile_salary": {
+			          "Target": {
+			            "Entity": "entity__measure.text_profile_salary"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_employee"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.text_profile_salary"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_employees_have_text_profile_salary"
 			        }
 			      ]
 			    },
@@ -18998,39 +17508,6 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "reference_date_has_entity__measure_text_footer_as_of": {
-			      "Binding": {
-			        "ConceptualEntity": "ReferenceDate"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "reference_date": {
-			          "Target": {
-			            "Entity": "reference_date"
-			          }
-			        },
-			        "entity__measure.text_footer_as_of": {
-			          "Target": {
-			            "Entity": "entity__measure.text_footer_as_of"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "reference_date"
-			            },
-			            "Object": {
-			              "Role": "entity__measure.text_footer_as_of"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "reference_dates_have_text_footer_as_of"
-			        }
-			      ]
-			    },
 			    "reference_date_has_entity__measure_text_header_subtitle": {
 			      "Binding": {
 			        "ConceptualEntity": "ReferenceDate"
@@ -19196,20 +17673,20 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "dim_employee_has_entity__measure_female_share": {
+			    "reference_date_has_entity__measure_text_absent_and_upcoming_leave": {
 			      "Binding": {
-			        "ConceptualEntity": "DimEmployee"
+			        "ConceptualEntity": "ReferenceDate"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "dim_employee": {
+			        "reference_date": {
 			          "Target": {
-			            "Entity": "dim_employee"
+			            "Entity": "reference_date"
 			          }
 			        },
-			        "entity__measure.female_share": {
+			        "entity__measure.text_absent_and_upcoming_leave": {
 			          "Target": {
-			            "Entity": "entity__measure.female_share"
+			            "Entity": "entity__measure.text_absent_and_upcoming_leave"
 			          }
 			        }
 			      },
@@ -19217,15 +17694,81 @@ cultureInfo en-GB
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "dim_employee"
+			              "Role": "reference_date"
 			            },
 			            "Object": {
-			              "Role": "entity__measure.female_share"
+			              "Role": "entity__measure.text_absent_and_upcoming_leave"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "dim_employees_have_female_share"
+			          "ID": "reference_dates_have_text_absent_and_upcoming_leave"
+			        }
+			      ]
+			    },
+			    "fact_leave_request_has_entity__measure_text_absent_and_upcoming_leave": {
+			      "Binding": {
+			        "ConceptualEntity": "FactLeaveRequests"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_leave_request": {
+			          "Target": {
+			            "Entity": "fact_leave_request"
+			          }
+			        },
+			        "entity__measure.text_absent_and_upcoming_leave": {
+			          "Target": {
+			            "Entity": "entity__measure.text_absent_and_upcoming_leave"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_leave_request"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.text_absent_and_upcoming_leave"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_leave_requests_have_text_absent_and_upcoming_leave"
+			        }
+			      ]
+			    },
+			    "fact_leave_day_has_entity__measure_text_absent_and_upcoming_leave": {
+			      "Binding": {
+			        "ConceptualEntity": "FactLeaveDays"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_leave_day": {
+			          "Target": {
+			            "Entity": "fact_leave_day"
+			          }
+			        },
+			        "entity__measure.text_absent_and_upcoming_leave": {
+			          "Target": {
+			            "Entity": "entity__measure.text_absent_and_upcoming_leave"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_leave_day"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.text_absent_and_upcoming_leave"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_leave_days_have_text_absent_and_upcoming_leave"
 			        }
 			      ]
 			    },
@@ -19262,20 +17805,20 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "entity__measure_has_hires": {
+			    "fact_compensation_has_entity__measure_text_profile_salary_note": {
 			      "Binding": {
-			        "ConceptualEntity": "_Measures"
+			        "ConceptualEntity": "FactCompensation"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "entity__measure": {
+			        "fact_compensation": {
 			          "Target": {
-			            "Entity": "entity__measure"
+			            "Entity": "fact_compensation"
 			          }
 			        },
-			        "entity__measure.hires": {
+			        "entity__measure.text_profile_salary_note": {
 			          "Target": {
-			            "Entity": "entity__measure.hires"
+			            "Entity": "entity__measure.text_profile_salary_note"
 			          }
 			        }
 			      },
@@ -19283,15 +17826,15 @@ cultureInfo en-GB
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "entity__measure"
+			              "Role": "fact_compensation"
 			            },
 			            "Object": {
-			              "Role": "entity__measure.hires"
+			              "Role": "entity__measure.text_profile_salary_note"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "Phrasing_measures_have_hires"
+			          "ID": "fact_compensations_have_text_profile_salary_note"
 			        }
 			      ]
 			    },
@@ -20213,7 +18756,7 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "dim_employee_has_org_depth": {
+			    "dim_employee_has_entity__measure_text_profile_rating_note": {
 			      "Binding": {
 			        "ConceptualEntity": "DimEmployee"
 			      },
@@ -20224,9 +18767,9 @@ cultureInfo en-GB
 			            "Entity": "dim_employee"
 			          }
 			        },
-			        "dim_employee.org_depth": {
+			        "entity__measure.text_profile_rating_note": {
 			          "Target": {
-			            "Entity": "dim_employee.org_depth"
+			            "Entity": "entity__measure.text_profile_rating_note"
 			          }
 			        }
 			      },
@@ -20237,29 +18780,29 @@ cultureInfo en-GB
 			              "Role": "dim_employee"
 			            },
 			            "Object": {
-			              "Role": "dim_employee.org_depth"
+			              "Role": "entity__measure.text_profile_rating_note"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "dim_employees_have_org_depths"
+			          "ID": "dim_employees_have_text_profile_rating_note"
 			        }
 			      ]
 			    },
-			    "dim_employee_has_path_from_CEO": {
+			    "fact_review_has_entity__measure_review_level_colour": {
 			      "Binding": {
-			        "ConceptualEntity": "DimEmployee"
+			        "ConceptualEntity": "FactReviews"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "dim_employee": {
+			        "fact_review": {
 			          "Target": {
-			            "Entity": "dim_employee"
+			            "Entity": "fact_review"
 			          }
 			        },
-			        "dim_employee.path_from_CEO": {
+			        "entity__measure.review_level_colour": {
 			          "Target": {
-			            "Entity": "dim_employee.path_from_CEO"
+			            "Entity": "entity__measure.review_level_colour"
 			          }
 			        }
 			      },
@@ -20267,32 +18810,32 @@ cultureInfo en-GB
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "dim_employee"
+			              "Role": "fact_review"
 			            },
 			            "Object": {
-			              "Role": "dim_employee.path_from_CEO"
+			              "Role": "entity__measure.review_level_colour"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "dim_employees_have_path_from_CEO"
+			          "ID": "fact_reviews_have_review_level_colour"
 			        }
 			      ]
 			    },
-			    "dim_employee_has_manager_chain": {
+			    "reference_date_has_entity__measure_text_info_note": {
 			      "Binding": {
-			        "ConceptualEntity": "DimEmployee"
+			        "ConceptualEntity": "ReferenceDate"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "dim_employee": {
+			        "reference_date": {
 			          "Target": {
-			            "Entity": "dim_employee"
+			            "Entity": "reference_date"
 			          }
 			        },
-			        "dim_employee.manager_chain": {
+			        "entity__measure.text_info_note": {
 			          "Target": {
-			            "Entity": "dim_employee.manager_chain"
+			            "Entity": "entity__measure.text_info_note"
 			          }
 			        }
 			      },
@@ -20300,15 +18843,15 @@ cultureInfo en-GB
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "dim_employee"
+			              "Role": "reference_date"
 			            },
 			            "Object": {
-			              "Role": "dim_employee.manager_chain"
+			              "Role": "entity__measure.text_info_note"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "dim_employees_have_manager_chains"
+			          "ID": "reference_dates_have_text_info_note"
 			        }
 			      ]
 			    },
@@ -20411,20 +18954,20 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "fact_job_history_has_end_date": {
+			    "entity__measure_has_text_home_data_note": {
 			      "Binding": {
-			        "ConceptualEntity": "FactJobHistory"
+			        "ConceptualEntity": "_Measures"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "fact_job_history": {
+			        "entity__measure": {
 			          "Target": {
-			            "Entity": "fact_job_history"
+			            "Entity": "entity__measure"
 			          }
 			        },
-			        "fact_job_history.end_date": {
+			        "entity__measure.text_home_data_note": {
 			          "Target": {
-			            "Entity": "fact_job_history.end_date"
+			            "Entity": "entity__measure.text_home_data_note"
 			          }
 			        }
 			      },
@@ -20432,32 +18975,32 @@ cultureInfo en-GB
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "fact_job_history"
+			              "Role": "entity__measure"
 			            },
 			            "Object": {
-			              "Role": "fact_job_history.end_date"
+			              "Role": "entity__measure.text_home_data_note"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "fact_job_histories_have_end_dates"
+			          "ID": "Phrasing_measures_have_text_home_data_note"
 			        }
 			      ]
 			    },
-			    "fact_job_history_has_is_current": {
+			    "reference_date_has_entity__measure_text_footer_as_of": {
 			      "Binding": {
-			        "ConceptualEntity": "FactJobHistory"
+			        "ConceptualEntity": "ReferenceDate"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "fact_job_history": {
+			        "reference_date": {
 			          "Target": {
-			            "Entity": "fact_job_history"
+			            "Entity": "reference_date"
 			          }
 			        },
-			        "fact_job_history.is_current": {
+			        "entity__measure.text_footer_as_of": {
 			          "Target": {
-			            "Entity": "fact_job_history.is_current"
+			            "Entity": "entity__measure.text_footer_as_of"
 			          }
 			        }
 			      },
@@ -20465,32 +19008,32 @@ cultureInfo en-GB
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "fact_job_history"
+			              "Role": "reference_date"
 			            },
 			            "Object": {
-			              "Role": "fact_job_history.is_current"
+			              "Role": "entity__measure.text_footer_as_of"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "fact_job_histories_have_is_currents"
+			          "ID": "reference_dates_have_text_footer_as_of"
 			        }
 			      ]
 			    },
-			    "fact_job_history_has_reason": {
+			    "entity__measure_has_days_left_in_absence": {
 			      "Binding": {
-			        "ConceptualEntity": "FactJobHistory"
+			        "ConceptualEntity": "_Measures"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "fact_job_history": {
+			        "entity__measure": {
 			          "Target": {
-			            "Entity": "fact_job_history"
+			            "Entity": "entity__measure"
 			          }
 			        },
-			        "fact_job_history.reason": {
+			        "entity__measure.days_left_in_absence": {
 			          "Target": {
-			            "Entity": "fact_job_history.reason"
+			            "Entity": "entity__measure.days_left_in_absence"
 			          }
 			        }
 			      },
@@ -20498,15 +19041,48 @@ cultureInfo en-GB
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "fact_job_history"
+			              "Role": "entity__measure"
 			            },
 			            "Object": {
-			              "Role": "fact_job_history.reason"
+			              "Role": "entity__measure.days_left_in_absence"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "fact_job_histories_have_reasons"
+			          "ID": "Phrasing_measures_have_days_left_in_absence"
+			        }
+			      ]
+			    },
+			    "reference_date_has_entity__measure_absence_window_end_date": {
+			      "Binding": {
+			        "ConceptualEntity": "ReferenceDate"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "reference_date": {
+			          "Target": {
+			            "Entity": "reference_date"
+			          }
+			        },
+			        "entity__measure.absence_window_end_date": {
+			          "Target": {
+			            "Entity": "entity__measure.absence_window_end_date"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "reference_date"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.absence_window_end_date"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "reference_dates_have_absence_window_end_date"
 			        }
 			      ]
 			    },
@@ -20576,20 +19152,20 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "fact_job_history_has_prev_department": {
+			    "fact_leave_request_has_is_in_absence_window": {
 			      "Binding": {
-			        "ConceptualEntity": "FactJobHistory"
+			        "ConceptualEntity": "FactLeaveRequests"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "fact_job_history": {
+			        "fact_leave_request": {
 			          "Target": {
-			            "Entity": "fact_job_history"
+			            "Entity": "fact_leave_request"
 			          }
 			        },
-			        "fact_job_history.prev_department": {
+			        "fact_leave_request.is_in_absence_window": {
 			          "Target": {
-			            "Entity": "fact_job_history.prev_department"
+			            "Entity": "fact_leave_request.is_in_absence_window"
 			          }
 			        }
 			      },
@@ -20597,48 +19173,15 @@ cultureInfo en-GB
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "fact_job_history"
+			              "Role": "fact_leave_request"
 			            },
 			            "Object": {
-			              "Role": "fact_job_history.prev_department"
+			              "Role": "fact_leave_request.is_in_absence_window"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "fact_job_histories_have_prev_departments"
-			        }
-			      ]
-			    },
-			    "fact_job_history_has_prev_manager_name": {
-			      "Binding": {
-			        "ConceptualEntity": "FactJobHistory"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_job_history": {
-			          "Target": {
-			            "Entity": "fact_job_history"
-			          }
-			        },
-			        "fact_job_history.prev_manager_name": {
-			          "Target": {
-			            "Entity": "fact_job_history.prev_manager_name"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_job_history"
-			            },
-			            "Object": {
-			              "Role": "fact_job_history.prev_manager_name"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "fact_job_histories_have_prev_manager_names"
+			          "ID": "fact_leave_requests_have_is_in_absence_window"
 			        }
 			      ]
 			    },
@@ -20771,72 +19314,6 @@ cultureInfo en-GB
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "fact_compensations_have_salaries"
-			        }
-			      ]
-			    },
-			    "fact_compensation_has_previous_salary": {
-			      "Binding": {
-			        "ConceptualEntity": "FactCompensation"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_compensation": {
-			          "Target": {
-			            "Entity": "fact_compensation"
-			          }
-			        },
-			        "fact_compensation.previous_salary": {
-			          "Target": {
-			            "Entity": "fact_compensation.previous_salary"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_compensation"
-			            },
-			            "Object": {
-			              "Role": "fact_compensation.previous_salary"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "fact_compensations_have_previous_salaries"
-			        }
-			      ]
-			    },
-			    "fact_compensation_has_change_amount": {
-			      "Binding": {
-			        "ConceptualEntity": "FactCompensation"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_compensation": {
-			          "Target": {
-			            "Entity": "fact_compensation"
-			          }
-			        },
-			        "fact_compensation.change_amount": {
-			          "Target": {
-			            "Entity": "fact_compensation.change_amount"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_compensation"
-			            },
-			            "Object": {
-			              "Role": "fact_compensation.change_amount"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "fact_compensations_have_change_amounts"
 			        }
 			      ]
 			    },
@@ -21137,39 +19614,6 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "fact_review_has_is_recent_review": {
-			      "Binding": {
-			        "ConceptualEntity": "FactReviews"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_review": {
-			          "Target": {
-			            "Entity": "fact_review"
-			          }
-			        },
-			        "fact_review.is_recent_review": {
-			          "Target": {
-			            "Entity": "fact_review.is_recent_review"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_review"
-			            },
-			            "Object": {
-			              "Role": "fact_review.is_recent_review"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "fact_reviews_have_is_recent_reviews"
-			        }
-			      ]
-			    },
 			    "fact_review_has_level_long": {
 			      "Binding": {
 			        "ConceptualEntity": "FactReviews"
@@ -21368,39 +19812,6 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "dim_date_has_quarter": {
-			      "Binding": {
-			        "ConceptualEntity": "DimDate"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_date": {
-			          "Target": {
-			            "Entity": "dim_date"
-			          }
-			        },
-			        "dim_date.quarter": {
-			          "Target": {
-			            "Entity": "dim_date.quarter"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_date"
-			            },
-			            "Object": {
-			              "Role": "dim_date.quarter"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_dates_have_quarters"
-			        }
-			      ]
-			    },
 			    "dim_date_has_month": {
 			      "Binding": {
 			        "ConceptualEntity": "DimDate"
@@ -21431,72 +19842,6 @@ cultureInfo en-GB
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "dim_dates_have_months"
-			        }
-			      ]
-			    },
-			    "dim_date_has_yearmonth": {
-			      "Binding": {
-			        "ConceptualEntity": "DimDate"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_date": {
-			          "Target": {
-			            "Entity": "dim_date"
-			          }
-			        },
-			        "dim_date.yearmonth": {
-			          "Target": {
-			            "Entity": "dim_date.yearmonth"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_date"
-			            },
-			            "Object": {
-			              "Role": "dim_date.yearmonth"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_dates_have_yearmonths"
-			        }
-			      ]
-			    },
-			    "dim_date_has_weekday": {
-			      "Binding": {
-			        "ConceptualEntity": "DimDate"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_date": {
-			          "Target": {
-			            "Entity": "dim_date"
-			          }
-			        },
-			        "dim_date.weekday": {
-			          "Target": {
-			            "Entity": "dim_date.weekday"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_date"
-			            },
-			            "Object": {
-			              "Role": "dim_date.weekday"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_dates_have_weekdays"
 			        }
 			      ]
 			    },
@@ -21596,72 +19941,6 @@ cultureInfo en-GB
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "Phrasing_measures_have_average_months_before_promotion"
-			        }
-			      ]
-			    },
-			    "fact_leave_day_has_entity__measure_vacation_days_used_per_employee": {
-			      "Binding": {
-			        "ConceptualEntity": "FactLeaveDays"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_leave_day": {
-			          "Target": {
-			            "Entity": "fact_leave_day"
-			          }
-			        },
-			        "entity__measure.vacation_days_used_per_employee": {
-			          "Target": {
-			            "Entity": "entity__measure.vacation_days_used_per_employee"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_leave_day"
-			            },
-			            "Object": {
-			              "Role": "entity__measure.vacation_days_used_per_employee"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "fact_leave_days_have_vacation_days_used_per_employee"
-			        }
-			      ]
-			    },
-			    "dim_employee_has_entity__measure_vacation_days_used_per_employee": {
-			      "Binding": {
-			        "ConceptualEntity": "DimEmployee"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_employee": {
-			          "Target": {
-			            "Entity": "dim_employee"
-			          }
-			        },
-			        "entity__measure.vacation_days_used_per_employee": {
-			          "Target": {
-			            "Entity": "entity__measure.vacation_days_used_per_employee"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_employee"
-			            },
-			            "Object": {
-			              "Role": "entity__measure.vacation_days_used_per_employee"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_employees_have_vacation_days_used_per_employee"
 			        }
 			      ]
 			    },
@@ -22391,72 +20670,6 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "reference_date_has_entity__measure_text_absent_today": {
-			      "Binding": {
-			        "ConceptualEntity": "ReferenceDate"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "reference_date": {
-			          "Target": {
-			            "Entity": "reference_date"
-			          }
-			        },
-			        "entity__measure.text_absent_today": {
-			          "Target": {
-			            "Entity": "entity__measure.text_absent_today"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "reference_date"
-			            },
-			            "Object": {
-			              "Role": "entity__measure.text_absent_today"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "reference_dates_have_text_absent_today"
-			        }
-			      ]
-			    },
-			    "fact_leave_day_has_entity__measure_text_absent_today": {
-			      "Binding": {
-			        "ConceptualEntity": "FactLeaveDays"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_leave_day": {
-			          "Target": {
-			            "Entity": "fact_leave_day"
-			          }
-			        },
-			        "entity__measure.text_absent_today": {
-			          "Target": {
-			            "Entity": "entity__measure.text_absent_today"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_leave_day"
-			            },
-			            "Object": {
-			              "Role": "entity__measure.text_absent_today"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "fact_leave_days_have_text_absent_today"
-			        }
-			      ]
-			    },
 			    "dim_employee_has_entity__measure_text_profile_name": {
 			      "Binding": {
 			        "ConceptualEntity": "DimEmployee"
@@ -23051,39 +21264,6 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "dim_position_has_job_family": {
-			      "Binding": {
-			        "ConceptualEntity": "DimPosition"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_position": {
-			          "Target": {
-			            "Entity": "dim_position"
-			          }
-			        },
-			        "dim_position.job_family": {
-			          "Target": {
-			            "Entity": "dim_position.job_family"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_position"
-			            },
-			            "Object": {
-			              "Role": "dim_position.job_family"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_positions_have_job_families"
-			        }
-			      ]
-			    },
 			    "dim_position_has_job_level": {
 			      "Binding": {
 			        "ConceptualEntity": "DimPosition"
@@ -23150,72 +21330,6 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "dim_position_has_is_management_position": {
-			      "Binding": {
-			        "ConceptualEntity": "DimPosition"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_position": {
-			          "Target": {
-			            "Entity": "dim_position"
-			          }
-			        },
-			        "dim_position.is_management_position": {
-			          "Target": {
-			            "Entity": "dim_position.is_management_position"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_position"
-			            },
-			            "Object": {
-			              "Role": "dim_position.is_management_position"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_positions_have_is_management_positions"
-			        }
-			      ]
-			    },
-			    "dim_manager_has_manager_number": {
-			      "Binding": {
-			        "ConceptualEntity": "DimManager"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_manager": {
-			          "Target": {
-			            "Entity": "dim_manager"
-			          }
-			        },
-			        "dim_manager.manager_number": {
-			          "Target": {
-			            "Entity": "dim_manager.manager_number"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_manager"
-			            },
-			            "Object": {
-			              "Role": "dim_manager.manager_number"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_managers_have_manager_numbers"
-			        }
-			      ]
-			    },
 			    "dim_manager_has_manager_name": {
 			      "Binding": {
 			        "ConceptualEntity": "DimManager"
@@ -23246,39 +21360,6 @@ cultureInfo en-GB
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "dim_managers_have_manager_names"
-			        }
-			      ]
-			    },
-			    "dim_leave_type_has_is_paid": {
-			      "Binding": {
-			        "ConceptualEntity": "DimLeaveType"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_leave_type": {
-			          "Target": {
-			            "Entity": "dim_leave_type"
-			          }
-			        },
-			        "dim_leave_type.is_paid": {
-			          "Target": {
-			            "Entity": "dim_leave_type.is_paid"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_leave_type"
-			            },
-			            "Object": {
-			              "Role": "dim_leave_type.is_paid"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_leave_types_have_is_paid"
 			        }
 			      ]
 			    },
@@ -23613,48 +21694,6 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "fact_job_history_is_ended_on_end_date": {
-			      "Binding": {
-			        "ConceptualEntity": "FactJobHistory"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_job_history": {
-			          "Target": {
-			            "Entity": "fact_job_history"
-			          }
-			        },
-			        "fact_job_history.end_date": {
-			          "Target": {
-			            "Entity": "fact_job_history.end_date"
-			          }
-			        }
-			      },
-			      "SemanticSlots": {
-			        "When": {
-			          "Role": "fact_job_history.end_date"
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Verb": {
-			            "Verbs": [
-			              {
-			                "end": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ],
-			            "Object": {
-			              "Role": "fact_job_history"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.9,
-			          "ID": "fact_job_histories_are_ended_on_end_dates"
-			        }
-			      ]
-			    },
 			    "fact_compensation_is_ended_on_end_date": {
 			      "Binding": {
 			        "ConceptualEntity": "FactCompensation"
@@ -23823,56 +21862,6 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "fact_job_history_is_current": {
-			      "Binding": {
-			        "ConceptualEntity": "FactJobHistory"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_job_history": {
-			          "Target": {
-			            "Entity": "fact_job_history"
-			          }
-			        },
-			        "fact_job_history.is_current": {
-			          "Target": {
-			            "Entity": "fact_job_history.is_current"
-			          }
-			        }
-			      },
-			      "Conditions": [
-			        {
-			          "Target": {
-			            "Role": "fact_job_history.is_current"
-			          },
-			          "Operator": "Equals",
-			          "Value": {
-			            "Boolean": [
-			              true
-			            ]
-			          }
-			        }
-			      ],
-			      "Phrasings": [
-			        {
-			          "Adjective": {
-			            "Subject": {
-			              "Role": "fact_job_history"
-			            },
-			            "Adjectives": [
-			              {
-			                "current": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ]
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "some_fact_job_histories_are_current_fact_job_histories"
-			        }
-			      ]
-			    },
 			    "fact_compensation_is_current": {
 			      "Binding": {
 			        "ConceptualEntity": "FactCompensation"
@@ -23970,431 +21959,6 @@ cultureInfo en-GB
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "some_fact_leave_days_are_on_fact_leave_days"
-			        }
-			      ]
-			    },
-			    "dim_leave_type_is_paid": {
-			      "Binding": {
-			        "ConceptualEntity": "DimLeaveType"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_leave_type": {
-			          "Target": {
-			            "Entity": "dim_leave_type"
-			          }
-			        },
-			        "dim_leave_type.is_paid": {
-			          "Target": {
-			            "Entity": "dim_leave_type.is_paid"
-			          }
-			        }
-			      },
-			      "Conditions": [
-			        {
-			          "Target": {
-			            "Role": "dim_leave_type.is_paid"
-			          },
-			          "Operator": "Equals",
-			          "Value": {
-			            "Boolean": [
-			              true
-			            ]
-			          }
-			        }
-			      ],
-			      "Phrasings": [
-			        {
-			          "Adjective": {
-			            "Subject": {
-			              "Role": "dim_leave_type"
-			            },
-			            "Adjectives": [
-			              {
-			                "paid": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ]
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "some_dim_leave_types_are_paid_dim_leave_types"
-			        }
-			      ]
-			    },
-			    "fact_review_has_dim_date": {
-			      "Binding": {
-			        "ConceptualEntity": "FactReviews"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_review": {
-			          "Target": {
-			            "Entity": "fact_review"
-			          }
-			        },
-			        "dim_date": {
-			          "Target": {
-			            "Entity": "dim_date"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_review"
-			            },
-			            "Object": {
-			              "Role": "dim_date"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "fact_reviews_have_dim_dates"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_date"
-			            },
-			            "Object": {
-			              "Role": "fact_review"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_dates_have_fact_reviews"
-			        }
-			      ]
-			    },
-			    "fact_compensation_has_dim_employee": {
-			      "Binding": {
-			        "ConceptualEntity": "FactCompensation"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_compensation": {
-			          "Target": {
-			            "Entity": "fact_compensation"
-			          }
-			        },
-			        "dim_employee": {
-			          "Target": {
-			            "Entity": "dim_employee"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_compensation"
-			            },
-			            "Object": {
-			              "Role": "dim_employee"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "fact_compensations_have_dim_employees"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_employee"
-			            },
-			            "Object": {
-			              "Role": "fact_compensation"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_employees_have_fact_compensations"
-			        }
-			      ]
-			    },
-			    "fact_compensation_has_dim_date": {
-			      "Binding": {
-			        "ConceptualEntity": "FactCompensation"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_compensation": {
-			          "Target": {
-			            "Entity": "fact_compensation"
-			          }
-			        },
-			        "dim_date": {
-			          "Target": {
-			            "Entity": "dim_date"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_compensation"
-			            },
-			            "Object": {
-			              "Role": "dim_date"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "fact_compensations_have_dim_dates"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_date"
-			            },
-			            "Object": {
-			              "Role": "fact_compensation"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_dates_have_fact_compensations"
-			        }
-			      ]
-			    },
-			    "fact_job_history_has_dim_employee": {
-			      "Binding": {
-			        "ConceptualEntity": "FactJobHistory"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_job_history": {
-			          "Target": {
-			            "Entity": "fact_job_history"
-			          }
-			        },
-			        "dim_employee": {
-			          "Target": {
-			            "Entity": "dim_employee"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_job_history"
-			            },
-			            "Object": {
-			              "Role": "dim_employee"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "fact_job_histories_have_dim_employees"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_employee"
-			            },
-			            "Object": {
-			              "Role": "fact_job_history"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_employees_have_fact_job_histories"
-			        }
-			      ]
-			    },
-			    "fact_job_history_has_dim_date": {
-			      "Binding": {
-			        "ConceptualEntity": "FactJobHistory"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_job_history": {
-			          "Target": {
-			            "Entity": "fact_job_history"
-			          }
-			        },
-			        "dim_date": {
-			          "Target": {
-			            "Entity": "dim_date"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_job_history"
-			            },
-			            "Object": {
-			              "Role": "dim_date"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "fact_job_histories_have_dim_dates"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_date"
-			            },
-			            "Object": {
-			              "Role": "fact_job_history"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_dates_have_fact_job_histories"
-			        }
-			      ]
-			    },
-			    "dim_employee_has_dim_department": {
-			      "Binding": {
-			        "ConceptualEntity": "DimEmployee"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_employee": {
-			          "Target": {
-			            "Entity": "dim_employee"
-			          }
-			        },
-			        "dim_department": {
-			          "Target": {
-			            "Entity": "dim_department"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_employee"
-			            },
-			            "Object": {
-			              "Role": "dim_department"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_employees_have_dim_departments"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_department"
-			            },
-			            "Object": {
-			              "Role": "dim_employee"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_departments_have_dim_employees"
-			        }
-			      ]
-			    },
-			    "dim_employee_has_dim_position": {
-			      "Binding": {
-			        "ConceptualEntity": "DimEmployee"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_employee": {
-			          "Target": {
-			            "Entity": "dim_employee"
-			          }
-			        },
-			        "dim_position": {
-			          "Target": {
-			            "Entity": "dim_position"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_employee"
-			            },
-			            "Object": {
-			              "Role": "dim_position"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_employees_have_dim_positions"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_position"
-			            },
-			            "Object": {
-			              "Role": "dim_employee"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_positions_have_dim_employees"
-			        }
-			      ]
-			    },
-			    "dim_employee_has_dim_manager": {
-			      "Binding": {
-			        "ConceptualEntity": "DimEmployee"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_employee": {
-			          "Target": {
-			            "Entity": "dim_employee"
-			          }
-			        },
-			        "dim_manager": {
-			          "Target": {
-			            "Entity": "dim_manager"
-			          },
-			          "Nouns": [
-			            {
-			              "manager employee": {
-			                "State": "Generated"
-			              }
-			            }
-			          ]
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_employee"
-			            },
-			            "Object": {
-			              "Role": "dim_manager"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_employees_have_dim_managers"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_manager"
-			            },
-			            "Object": {
-			              "Role": "dim_employee"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_managers_have_dim_employees"
 			        }
 			      ]
 			    }

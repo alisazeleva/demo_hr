@@ -4,10 +4,10 @@
   "position": {
     "x": 956.28039158990453,
     "y": 151.25878805402948,
-    "z": 18000,
+    "z": 16000,
     "height": 60.909579082159524,
     "width": 348.19976041967863,
-    "tabOrder": 24000
+    "tabOrder": 22000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -256,7 +256,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "'17.25'"
+                  "Value": "16D"
                 }
               }
             },

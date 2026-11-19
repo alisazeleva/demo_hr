@@ -4,10 +4,10 @@
   "position": {
     "x": 1637.1705689356506,
     "y": 31,
-    "z": 8000,
+    "z": 7000,
     "height": 79.455252297056731,
     "width": 253.07969250173628,
-    "tabOrder": 8000
+    "tabOrder": 7000
   },
   "visual": {
     "visualType": "slicer",
@@ -359,7 +359,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "'17.25'"
+                  "Value": "16D"
                 }
               }
             },

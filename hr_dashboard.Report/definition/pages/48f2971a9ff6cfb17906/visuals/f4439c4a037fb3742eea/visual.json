@@ -4,10 +4,10 @@
   "position": {
     "x": 329.92688669503076,
     "y": 300.48725680532033,
-    "z": 15000,
+    "z": 13000,
     "height": 379.66970961212769,
     "width": 1045.6144409104052,
-    "tabOrder": 15000
+    "tabOrder": 13000
   },
   "visual": {
     "visualType": "pivotTable",
@@ -261,6 +261,13 @@
                   "Value": "'Segoe UI Semibold'"
                 }
               }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "20D"
+                }
+              }
             }
           }
         }
@@ -304,6 +311,13 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "16D"
                 }
               }
             }

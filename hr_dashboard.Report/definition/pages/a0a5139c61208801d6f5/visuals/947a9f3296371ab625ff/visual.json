@@ -4,10 +4,10 @@
   "position": {
     "x": 329.69108199250064,
     "y": 300.45242334484766,
-    "z": 13000,
+    "z": 12000,
     "height": 749.11459914503973,
     "width": 951.76875046153089,
-    "tabOrder": 13000
+    "tabOrder": 12000
   },
   "visual": {
     "visualType": "decompositionTreeVisual",

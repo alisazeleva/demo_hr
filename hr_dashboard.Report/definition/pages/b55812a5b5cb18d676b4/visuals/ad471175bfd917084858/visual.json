@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "ad471175bfd917084858",
   "position": {
-    "x": 329.92688669503076,
-    "y": 304.54789541079765,
-    "z": 17000,
-    "height": 397.94258333677556,
-    "width": 596.91387500516339,
-    "tabOrder": 17000
+    "x": 329.59215767667979,
+    "y": 304.08800261836529,
+    "z": 15000,
+    "height": 398.25719052598811,
+    "width": 563.053269364328,
+    "tabOrder": 15000
   },
   "visual": {
     "visualType": "pivotTable",
@@ -312,6 +312,13 @@
                   "Value": "'Segoe UI Semibold'"
                 }
               }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "20D"
+                }
+              }
             }
           }
         }
@@ -362,6 +369,13 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "16D"
                 }
               }
             }
@@ -548,6 +562,20 @@
             }
           ]
         }
+      },
+      {
+        "name": "43117287162bddaac90a",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Vacation Days Used per Year"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }
