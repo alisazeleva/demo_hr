@@ -205,11 +205,6 @@ table _Measures
 		displayFolder: Text
 		lineageTag: 8bc23b69-7915-459a-b1e0-c12a57855cd1
 
-	/// Navigation footer: data as of the reference date
-	measure 'Text: Footer As Of' = "Data as of " & FORMAT([Reference Date], "d mmm yyyy")
-		displayFolder: Text
-		lineageTag: 00d74c33-981c-4e26-a914-e33a30653257
-
 	/// KPI subtitle: CEO and department headcount
 	measure 'Text: Headcount Split' = FORMAT([Headcount] - [Department Headcount], "0") & " CEO + " & FORMAT([Department Headcount], "0") & " in departments"
 		displayFolder: Text
@@ -701,9 +696,15 @@ table _Measures
 		lineageTag: 6f2f6a53-3c1e-4d52-9b50-8d0a6c7a41e1
 
 	/// Note in the "Using the report" card on the home page: the data is dummy data and the reference date
-	measure 'Text: Home Data Note' = "Dummy data for demonstration. " & [Text: Footer As Of] & "."
+	measure 'Text: Home Data Note' = "Dummy data for demonstration. "
 		displayFolder: Text
 		lineageTag: b3c5e0a4-2a57-4f43-8d2e-0f7c1d9a6b32
+
+	measure 'Text: Footer As Of' =
+			/// Navigation footer: data as of the reference date
+			"Data as of " & FORMAT([Reference Date], "d mmm yyyy")
+		displayFolder: Text
+		lineageTag: 2c346ea9-7d11-423f-b36c-35807aacff86
 
 	column Placeholder
 		isHidden
