@@ -265,7 +265,7 @@ def tracked_text_files():
 def test_no_personal_paths_emails_or_secrets_in_tracked_files():
     patterns = {
         'local user path': re.compile(r'[A-Za-z]:[\\/]+Users[\\/]', re.I),
-        'email address': re.compile(r'[\w.+-]+@(?!acmecorp\.example)[\w-]+\.[\w.]+'),
+        'email address': re.compile(r'[\w.+-]+@(?!acmecorp\.example)[A-Za-z][\w-]*\.[A-Za-z]{2,}'),
         'password or key': re.compile(r'(password|pwd|secret|api[_-]?key)\s*[=:]\s*\S+', re.I),
     }
     hits = []

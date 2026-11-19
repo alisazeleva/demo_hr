@@ -426,51 +426,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "0cf94bb4760ea635077a",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactReviews"
-              }
-            },
-            "Property": "ReviewDate"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "57a6a23a52312ad06ca9",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactReviews"
-              }
-            },
-            "Property": "Level"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "b6652fa074dd74740ad3",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactReviews"
-              }
-            },
-            "Property": "Comments"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

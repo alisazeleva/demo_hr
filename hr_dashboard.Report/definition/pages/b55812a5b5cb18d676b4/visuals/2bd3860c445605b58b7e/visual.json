@@ -753,62 +753,6 @@
         },
         "type": "RelativeDate",
         "howCreated": "User"
-      },
-      {
-        "name": "38a545c578503a08bab6",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimDate"
-              }
-            },
-            "Property": "Year"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "3d18fc0c2792358b2e50",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimDate"
-              }
-            },
-            "Property": "Month"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "d740647050ec2a4de64c",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimLeaveType"
-              }
-            },
-            "Property": "LeaveType"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "62b0005a38e2e05b8231",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Leave Days"
-          }
-        },
-        "type": "Advanced"
       }
     ]
   }

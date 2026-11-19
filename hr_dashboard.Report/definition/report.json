@@ -68,6 +68,11 @@
           "name": "acme_hr_theme.json",
           "path": "acme_hr_theme.json",
           "type": "CustomTheme"
+        },
+        {
+          "name": "home10121149013130015.svg",
+          "path": "home10121149013130015.svg",
+          "type": "Image"
         }
       ]
     }

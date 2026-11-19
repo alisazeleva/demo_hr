@@ -564,20 +564,6 @@
             }
           ]
         }
-      },
-      {
-        "name": "990968f68300109a6aa8",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Average Salary"
-          }
-        },
-        "type": "Advanced"
       }
     ]
   }

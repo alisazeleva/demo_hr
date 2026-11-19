@@ -740,34 +740,6 @@
             }
           ]
         }
-      },
-      {
-        "name": "7883cbc1b72b0346b735",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimEmployee"
-              }
-            },
-            "Property": "Gender"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "2b0fa5428c08cd238049",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Average Salary"
-          }
-        },
-        "type": "Advanced"
       }
     ]
   }

@@ -638,34 +638,6 @@
             }
           ]
         }
-      },
-      {
-        "name": "03028c66a4beb0773d75",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Department Headcount"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "a85b935018b3bdcdd876",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Headcount vs Target"
-          }
-        },
-        "type": "Advanced"
       }
     ]
   }

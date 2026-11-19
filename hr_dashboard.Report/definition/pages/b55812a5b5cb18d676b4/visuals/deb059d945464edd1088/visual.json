@@ -604,20 +604,6 @@
           ]
         },
         "howCreated": "User"
-      },
-      {
-        "name": "ea226709601007a9b55c",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Leave Days"
-          }
-        },
-        "type": "Advanced"
       }
     ]
   }

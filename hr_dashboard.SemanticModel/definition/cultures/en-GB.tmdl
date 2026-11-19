@@ -12537,6 +12537,16 @@ cultureInfo en-GB
 			          "headcount": {
 			            "State": "Generated"
 			          }
+			        },
+			        {
+			          "employees": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -17746,6 +17756,27 @@ cultureInfo en-GB
 			      "Terms": [
 			        {
 			          "Latest review": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_measures.years_of_history": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Measures",
+			          "ConceptualProperty": "Years of History"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "of history": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",

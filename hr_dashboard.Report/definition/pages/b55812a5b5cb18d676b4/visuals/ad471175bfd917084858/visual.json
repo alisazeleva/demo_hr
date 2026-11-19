@@ -548,20 +548,6 @@
             }
           ]
         }
-      },
-      {
-        "name": "27d69c169a0e8104e603",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Vacation Days Used per Year"
-          }
-        },
-        "type": "Advanced"
       }
     ]
   }

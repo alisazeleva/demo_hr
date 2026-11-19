@@ -14,7 +14,7 @@ The Workforce page as built in Power BI Desktop is the reference. Copy it for ev
 
 - **Left navigation**, full height, x 0, y 0, 300 x 1080, navy #14213D, radius 12, no title or header.
   - "Acme HR": text box at (36, 36), 27 pt Segoe UI Semibold bold, white. "People analytics": text box at (36, 84), 16 pt, #CBD5E1.
-  - Page navigator (native `pageNavigator` visual) at (24, 178), 254 x 587, vertical, cell padding 10. Text 16 pt, centred, white. Fill: default navy lightened 20 % (theme colour 8, #14213D, +20 %), hover +40 %, current page and press #2563EB. No outline, no accent bar, rounded 15, hidden pages not shown, no background or border.
+  - Page navigator (native `pageNavigator` visual) at (22, 216.5), 253 x 556 (as adjusted by hand on the Home page and the same on every page), vertical, cell padding 10, hidden pages shown (so the Employee profile page is listed) but the Home page not (`showPage` off for Home). Text 16 pt, centred, white. Fill: default navy lightened 20 % (theme colour 8, #14213D, +20 %), hover +40 %, current page and press #2563EB. No outline, no accent bar, rounded 15, hidden pages not shown, no background or border.
   - "Data as of {reference date}": card at (0, 978), 300 x 72, 14 pt #CBD5E1, no background, border or label (measure `Text: Footer As Of`). Next to it an "information" action button icon at (100, 1029), 100 x 40, no fill, icon #CBD5E1 (reserved for a data-source note; no action yet).
 - **Main area**: starts at x 330 and ends at x 1890 (30 px right padding); 24 px gaps.
   - Header: page title text box at (330, 19), 33 pt Semibold bold, #1F2937. Under it, a subtitle card at (317, 74), 16 pt #5B6472, no background or border, showing "Acme Corporation · {n} current employees · as of {reference date}" (measure `Text: Header Subtitle`).
@@ -57,6 +57,15 @@ Segoe UI, sized for the 1920 x 1080 canvas. Page title 33 pt bold; navigation ti
 ### Accessibility
 
 Alt text on every visual, sensible tab order, text contrast of at least 4.5:1, no emoji.
+
+## Page 0: Home (built from `desing/0 Home@1x.png`, first draft by `tools/build_home.py`)
+
+First page and the page the report opens on. Same left menu as the other pages (copied from Workforce; the page navigator lists Home first), no slicers. Every mockup size x 1.5.
+
+- **Header banner**: navy #14213D, (330, 30), 1560 x 162, radius 15. Title "Acme Corporation people analytics" 33 pt Semibold bold white at (354, 48); short description 16 pt #CBD5E1 at (354, 108). On the right three `card` visuals with white 33 pt values and 14 pt #CBD5E1 labels: `Headcount` (employees), `Departments` (departments) and `Years of History` (of history, formatted `0 "yrs"`).
+- **Page cards**: seven cards 372 x 405 at columns x 330, 726, 1122, 1518 and rows y 216 and 645 (24 px gaps). Each card is a coloured rounded rectangle with a white one 6 px lower (the coloured top edge), a navy numbered circle, the page title (20 pt Semibold), a tagline (16 pt bold) with a description (14 pt #5B6472), "Answers: ..." (14 pt) and an outlined blue button "Open ... →" (action: page navigation). Accent colours: Workforce and Leave #2563EB, Organization and Employee profile #0E9F8E, Career #D9822B, Compensation #7C5CD6, Performance #C8446A.
+- **Using the report** card (#EEF2FF, border #D6DDF5) at column 4, row 2: four tips and the note `Text: Home Data Note` ("Dummy data for demonstration. Data as of ...").
+- **Info pop-up**: the same button, hidden panel and `Home Info ON` / `Home Info OFF` bookmarks as on every page.
 
 ## Page 1: Workforce (built; this is the reference)
 

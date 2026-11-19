@@ -512,23 +512,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "bc9fb29d4421e8e32c48",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactJobHistory"
-              }
-            },
-            "Property": "ChangeType"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

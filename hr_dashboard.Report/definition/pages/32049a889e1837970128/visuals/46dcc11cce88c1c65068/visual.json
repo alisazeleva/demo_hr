@@ -474,37 +474,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "fa21a0b512e0614101d6",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactReviews"
-              }
-            },
-            "Property": "Level Long"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "9a257c6f384920375b69",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Number of Reviews"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

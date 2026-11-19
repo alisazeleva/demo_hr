@@ -432,37 +432,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "cd5511dc86cee22000c4",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimEmployee"
-              }
-            },
-            "Property": "Native Language Top 6"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "9337a1307ed096604a26",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Headcount"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

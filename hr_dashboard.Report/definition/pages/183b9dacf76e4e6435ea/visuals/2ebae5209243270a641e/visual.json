@@ -505,23 +505,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "6212bf870410b9dea0bb",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimEmployee"
-              }
-            },
-            "Property": "FullName"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

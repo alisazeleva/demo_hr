@@ -442,37 +442,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "1bbcd7c5eb3767563d8e",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimLeaveType"
-              }
-            },
-            "Property": "LeaveType"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "a8dfc4a9bb4b56284eec",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Leave Days Last 24 Months"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

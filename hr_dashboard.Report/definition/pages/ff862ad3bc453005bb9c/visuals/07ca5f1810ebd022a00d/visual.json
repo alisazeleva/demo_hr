@@ -427,37 +427,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "253cd55d8384ecea3d06",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimPosition"
-              }
-            },
-            "Property": "JobLevel"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "23d87eb0ce24cb06bb4a",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Headcount"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

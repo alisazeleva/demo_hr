@@ -43,7 +43,7 @@ Build a dummy HR database (SQL Server) for Acme Corporation, then a Power BI rep
 
 ## Power BI working notes
 
-Project `hr_dashboard.pbip` (PBIR report + TMDL model). Design rules and page layouts are in DESIGN.md; the model is described in PLAN.md (Power BI plan). Pages 1 to 7 are built and were adjusted by hand in Desktop, so treat them as the reference and never regenerate them over the user's changes: every `tools/build_*.py` is a first draft and would overwrite the hand edits (page 3 has a different layout and a matrix, pages 4 to 6 differ in colours, fonts and layout, page 7 has a redesigned header). DESIGN.md records each page as it is now, including positions. Page 7 is a hidden drill-through page filtered on `DimEmployee[FullName]`; drill-through works from any visual that contains the employee name.
+Project `hr_dashboard.pbip` (PBIR report + TMDL model). Design rules and page layouts are in DESIGN.md; the model is described in PLAN.md (Power BI plan). The Home page (page 0, `tools/build_home.py`, first draft from the mockup in `desing/`) and pages 1 to 7 are built; pages 1 to 7 were adjusted by hand in Desktop, so treat them as the reference and never regenerate them over the user's changes: every `tools/build_*.py` is a first draft and would overwrite the hand edits (page 3 has a different layout and a matrix, pages 4 to 6 differ in colours, fonts and layout, page 7 has a redesigned header). DESIGN.md records each page as it is now, including positions. Page 7 is a hidden drill-through page filtered on `DimEmployee[FullName]`; drill-through works from any visual that contains the employee name.
 
 ### How to change things safely (Desktop is usually open)
 

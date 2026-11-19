@@ -690,6 +690,21 @@ table _Measures
 		displayFolder: Text
 		lineageTag: 01f97653-b652-4988-bb6a-29df0e9bc453
 
+	/// Full years from the first hire to the reference date (shown on the home page header as "14 yrs of history")
+	measure 'Years of History' =
+			// The first hire date is read without any filter, so the value does not change with slicers on other pages.
+			VAR firstHire = CALCULATE(MIN(DimEmployee[HireDate]), REMOVEFILTERS())
+			RETURN
+			    INT(YEARFRAC(firstHire, [Reference Date]))
+		formatString: 0 "yrs"
+		displayFolder: Home
+		lineageTag: 6f2f6a53-3c1e-4d52-9b50-8d0a6c7a41e1
+
+	/// Note in the "Using the report" card on the home page: the data is dummy data and the reference date
+	measure 'Text: Home Data Note' = "Dummy data for demonstration. " & [Text: Footer As Of] & "."
+		displayFolder: Text
+		lineageTag: b3c5e0a4-2a57-4f43-8d2e-0f7c1d9a6b32
+
 	column Placeholder
 		isHidden
 		lineageTag: fea314cd-4a29-4eed-b760-804721d78b06

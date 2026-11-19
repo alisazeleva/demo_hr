@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "e65dcc70c228282a90dc",
   "position": {
-    "x": 23.63444202673298,
-    "y": 178.33260801989431,
+    "x": 21.964896750140447,
+    "y": 224.8787048228665,
     "z": 6000,
-    "height": 586.5638793907367,
-    "width": 253.53310537768107,
+    "height": 548.07647128921883,
+    "width": 253.11928635876134,
     "tabOrder": 6000
   },
   "visual": {
@@ -57,7 +57,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "14D"
                 }
               }
             }
@@ -71,7 +71,19 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "14D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
                 }
               }
             }
@@ -85,7 +97,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "16D"
+                  "Value": "14D"
                 }
               }
             }
@@ -170,8 +182,9 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "Literal": {
-                      "Value": "'#2563EB'"
+                    "ThemeDataColor": {
+                      "ColorId": 9,
+                      "Percent": 0.2
                     }
                   }
                 }
@@ -297,10 +310,24 @@
             "showHiddenPages": {
               "expr": {
                 "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "showPage": {
+              "expr": {
+                "Literal": {
                   "Value": "false"
                 }
               }
             }
+          },
+          "selector": {
+            "id": "e3a91c5d7b2f4086a1c4"
           }
         }
       ],
@@ -342,6 +369,45 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Pages'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 9,
+                      "Percent": 0.6
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "16D"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'''Segoe UI'', wf_segoe-ui_normal, helvetica, arial, sans-serif'"
                 }
               }
             }

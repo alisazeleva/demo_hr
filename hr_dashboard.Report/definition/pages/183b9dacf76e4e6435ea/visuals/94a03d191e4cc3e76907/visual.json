@@ -198,23 +198,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "8fb200b5040a71037542",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Text: Profile Number"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

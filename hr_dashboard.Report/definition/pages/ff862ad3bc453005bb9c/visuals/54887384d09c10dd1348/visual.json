@@ -680,37 +680,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "82c1a39b818c73360d80",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimDepartment"
-              }
-            },
-            "Property": "Department"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "10d39c7100251ab00ec6",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Department Headcount"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

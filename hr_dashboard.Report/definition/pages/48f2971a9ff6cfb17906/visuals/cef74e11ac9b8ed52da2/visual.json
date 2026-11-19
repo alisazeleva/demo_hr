@@ -685,37 +685,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "fe1ee616c7e321615e07",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimDepartment"
-              }
-            },
-            "Property": "Department"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "2f597350ca9355261c4e",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Average Months Before Promotion"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }
