@@ -80,16 +80,16 @@ def test_every_measure_is_in_the_measures_table():
     assert not bad, f'measures outside _Measures: {bad}'
 
 
-def formula_lines(m):
-    """Lines of the DAX formula (before the first property such as formatString or displayFolder)."""
-    lines = m['body'].split('\n')[1:]
-    return [l for l in lines if l.startswith('\t\t\t')]
+def test_multiline_measures_have_comments():
+    """CLAUDE.md: every non-trivial measure has a // comment; here, any measure whose formula is on more than one line."""
+    bad = [n for n, m in MEASURES.items() if m['multiline'] and '//' not in m['body']]
+    assert not bad, f'multi-line measures without a // comment: {bad}'
 
 
-def test_non_trivial_measures_have_comments():
-    """CLAUDE.md: a // comment for every non-trivial measure; here, a formula of more than 6 lines."""
-    bad = [n for n, m in MEASURES.items() if len(formula_lines(m)) > 6 and '//' not in m['body']]
-    assert not bad, f'measures with a long formula and no // comment: {bad}'
+def test_descriptions_are_not_inside_the_formula():
+    """A /// line inside the formula is a DAX comment, not the description (Desktop can write it there when a measure is edited)."""
+    bad = [n for n, m in MEASURES.items() if re.search(r'^			\s*///', m['body'], re.M)]
+    assert not bad, f'/// description inside the formula (move it above the measure): {bad}'
 
 
 def test_text_measures_are_filed_in_text_or_profile_folder():
