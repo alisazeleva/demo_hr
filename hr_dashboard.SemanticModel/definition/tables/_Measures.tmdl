@@ -139,6 +139,7 @@ table _Measures
 
 	/// Approved vacation working days on or before the reference date (future booked vacation is not counted).
 	measure 'Vacation Days Used' =
+			// One row of FactLeaveDays is one working day; booked vacation after the reference date is left out.
 			CALCULATE(
 			    COUNTROWS(FactLeaveDays),
 			    DimLeaveType[LeaveType] = "Vacation",
@@ -420,6 +421,7 @@ table _Measures
 
 	/// Subtitle of the latest review table: number of employees that have a latest review.
 	measure 'Text: Latest Reviews' =
+			// Counts employees with a latest performance level (employees without a review are left out).
 			FORMAT(
 			    CALCULATE(COUNTROWS(DimEmployee), NOT ISBLANK(DimEmployee[LatestPerformanceLevel])),
 			    "0"
@@ -503,6 +505,7 @@ table _Measures
 
 	/// Employee number of the selected employee (shown under the name in the profile header); a prompt to drill through when no employee is selected.
 	measure 'Text: Profile Number' =
+			// SELECTEDVALUE is blank unless exactly one employee is in the filter, so the page prompts for a drill-through.
 			VAR employeeNumber = SELECTEDVALUE(DimEmployee[EmployeeNumber])
 			RETURN
 			    IF(ISBLANK(employeeNumber), "Drill through from another page", employeeNumber)
@@ -546,6 +549,7 @@ table _Measures
 
 	/// Tenure in years of the selected employee at the reference date.
 	measure 'Text: Profile Tenure' =
+			// A dash when no single employee is selected.
 			VAR tenureYears = SELECTEDVALUE(DimEmployee[TenureYears])
 			RETURN
 			    IF(ISBLANK(tenureYears), "-", FORMAT(tenureYears, "0.0") & " years")
@@ -554,6 +558,7 @@ table _Measures
 
 	/// Hire date of the selected employee.
 	measure 'Text: Profile Hire Date' =
+			// Empty text when no single employee is selected, so the line under the name stays blank.
 			VAR hireDate = SELECTEDVALUE(DimEmployee[HireDate])
 			RETURN
 			    IF(ISBLANK(hireDate), "", "Hired " & FORMAT(hireDate, "d mmm yyyy"))
@@ -611,6 +616,7 @@ table _Measures
 
 	/// Current annual base salary of the selected employee, in EUR.
 	measure 'Text: Profile Salary' =
+			// A dash when no single employee is selected; the salary is the current annual base salary in EUR.
 			VAR salary = SELECTEDVALUE(DimEmployee[CurrentSalary])
 			RETURN
 			    IF(ISBLANK(salary), "-", "€" & FORMAT(salary, "#,0") & " / year")
@@ -653,6 +659,7 @@ table _Measures
 
 	/// Subtitle of the rating card: performance level and review year of the latest review.
 	measure 'Text: Profile Rating Note' =
+			// Empty text when the employee has no review (or no single employee is selected).
 			VAR latestLevel = SELECTEDVALUE(DimEmployee[LatestPerformanceLevel])
 			VAR reviewDate = SELECTEDVALUE(DimEmployee[LatestReviewDate])
 			RETURN
@@ -700,9 +707,8 @@ table _Measures
 		displayFolder: Text
 		lineageTag: b3c5e0a4-2a57-4f43-8d2e-0f7c1d9a6b32
 
-	measure 'Text: Footer As Of' =
-			/// Navigation footer: data as of the reference date
-			"Data as of " & FORMAT([Reference Date], "d mmm yyyy")
+	/// Navigation footer: data as of the reference date
+	measure 'Text: Footer As Of' = "Data as of " & FORMAT([Reference Date], "d mmm yyyy")
 		displayFolder: Text
 		lineageTag: 2c346ea9-7d11-423f-b36c-35807aacff86
 
