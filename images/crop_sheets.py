@@ -2,7 +2,7 @@
 
 Reads   images/sheets/sheet_01.png ... sheet_10.png   (4 x 4 grid, cell 1 top-left, then left to right, top to bottom)
 and     images/sheet_map.csv                          (Sheet, Cell, EmployeeNumber, Gender, Nationality, Age)
-Writes  images/profiles/EMP-000001.jpg ...            (160 x 160 px, JPEG under 20 KB)
+Writes  images/profiles/EMP-000001.jpg ...            (240 x 240 px, JPEG under 20 KB)
 
 Only the cells listed in sheet_map.csv are cut, so the empty cells 8 to 16 of sheet 10 are skipped.
 A sheet that is not square is reported (its cells are still cut, each cropped to a centred square).
@@ -12,7 +12,7 @@ Usage (from the repo root):
     python images/crop_sheets.py --margin 0.06       # cut 6 % off every side of each cell (default 0.01)
     python images/crop_sheets.py --top-pad 0.12      # more empty space above the head (default 0.05)
     python images/crop_sheets.py --top-pad 0         # no extra space
-    python images/crop_sheets.py --size 160 --max-kb 20
+    python images/crop_sheets.py --size 240 --max-kb 20
 
 Needs: pip install pillow
 """
@@ -86,7 +86,7 @@ def main():
     ap.add_argument('--root', default=here, help='images folder (default: the folder of this script)')
     ap.add_argument('--margin', type=float, default=0.01, help='inner margin per cell side as a fraction of the cell (default 0.01)')
     ap.add_argument('--top-pad', type=float, default=0.05, help='empty space added above the head as a fraction of the picture (default 0.05)')
-    ap.add_argument('--size', type=int, default=160, help='output size in pixels (default 160)')
+    ap.add_argument('--size', type=int, default=240, help='output size in pixels (default 240)')
     ap.add_argument('--max-kb', type=float, default=20, help='maximum JPEG size in KB (default 20)')
     args = ap.parse_args()
     if not 0 <= args.margin < 0.5:

@@ -199,7 +199,7 @@ Header band: a rounded rectangle (330, 141, 1560 x 150, border only) holding bor
 | Performance reviews | 680, 717, 366 x 332 | Column chart of `Average Rating` by `FactReviews[ReviewYear]`; bars coloured by a 3-colour gradient on the rating (#C8446A low, #92a9c9 mid, #4A6FA5 high) |
 | Review history | 1071, 717, 819 x 332 | Table of `FactReviews`: Review date, Level, Comments; the Level cell is coloured by `Review Level Colour` (same palette as `Level Colour`) |
 
-Photos: resize to about 160 x 160 px (under 20 KB each), have Power Query read the image folder into the `ProfilePictures` table (file name and base64 text, data category Image URL), related to `DimEmployee[ProfileImageFileName]`. The oval in the header uses the measure `Profile Picture` as its image fill.
+Photos: resize to about 240 x 240 px (under 20 KB each), have Power Query read the image folder into the `ProfilePictures` table (file name and base64 text, data category Image URL), related to `DimEmployee[ProfileImageFileName]`. The oval in the header uses the measure `Profile Picture` as its image fill.
 
 ## Measures (build in the `_Measures` table; each with a description)
 

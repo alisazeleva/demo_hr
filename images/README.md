@@ -8,7 +8,7 @@ The 151 profile pictures are fictional faces made in an image tool (ChatGPT), 16
 | `sheet_map.csv` | Maps Sheet and Cell to EmployeeNumber (cell 1 is top-left, then left to right, top to bottom) |
 | `sheets/sheet_NN.png` | The sheet saved from the image tool |
 | `crop_sheets.py` | Cuts the sheets into pictures |
-| `profiles/EMP-######.jpg` | The pictures: 160 x 160 px, JPEG, under 20 KB |
+| `profiles/EMP-######.jpg` | The pictures: 240 x 240 px, JPEG, under 20 KB (the circle on page 7 is 120 px wide, so this is sharp on high-resolution screens; the sheets hold about 313 px per face, which is the most they can give) |
 
 ## Add a sheet
 
