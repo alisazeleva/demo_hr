@@ -46,7 +46,7 @@ pip install -r tests/requirements.txt
 python -m pytest tests -q
 ```
 
-The tests check the report and model files without Desktop: JSON schemas, measure descriptions and comments, fields and bookmarks that exist, the info pop-up on every page, and that no personal paths, e-mail addresses or secrets are in tracked files. `tests/measures.dax` holds expected values for the measures; run it against the open model in Power BI Desktop's DAX query view and expect no `FAIL` row.
+The tests check the report and model files without Desktop: JSON schemas, measure descriptions and comments, fields and bookmarks that exist, the info pop-up on every page, that no filter or slicer selection (for example an employee name) is saved in the report files, and that no personal paths, e-mail addresses or secrets are in tracked files. `tests/measures.dax` holds expected values for the measures; run it against the open model in Power BI Desktop's DAX query view and expect no `FAIL` row.
 
 ## Validation note
 

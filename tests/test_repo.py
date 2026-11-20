@@ -186,6 +186,17 @@ def test_page_order_lists_every_page_once():
     assert meta['activePageName'] in PAGES
 
 
+def test_report_opens_on_the_home_page():
+    """Desktop saves the page that was showing as the active page; the report must open on Home, not on a hidden page."""
+    meta = load(os.path.join(REPORT, 'pages', 'pages.json'))
+    home = [pid for pid, p in PAGES.items() if p['page']['displayName'] == 'Home']
+    assert len(home) == 1, 'there must be exactly one page named Home'
+    assert meta['activePageName'] == home[0], (
+        'the report opens on "%s", not on Home: select the Home page in Desktop and save'
+        % PAGES.get(meta['activePageName'], {}).get('page', {}).get('displayName', meta['activePageName']))
+    assert meta['pageOrder'][0] == home[0], 'Home must be the first page'
+
+
 def test_bookmark_list_matches_bookmark_files():
     listed = [i['name'] for i in load(os.path.join(REPORT, 'bookmarks', 'bookmarks.json'))['items']]
     assert len(listed) == len(set(listed)), 'duplicate bookmark in bookmarks.json'
@@ -281,6 +292,82 @@ def test_no_personal_paths_emails_or_secrets_in_tracked_files():
             if m:
                 hits.append(f'{rel(f)}: {label}: {m.group(0)[:60]}')
     assert not hits, '\n'.join(hits)
+
+
+# ---------------------------------------------------------------- saved filter selections
+# Desktop saves whatever slicer, filter-pane or drill-through selection is active when the report is saved, and a PBIP
+# project writes it into the report files, so a selected value (for example an employee name) would go to git and make the
+# report open already filtered. Excluding a value (a "Not In" condition, for example "everyone except the CEO") is part of
+# the design and is fine; only a selected text value is reported. Add a (file, value) pair here for a deliberate default.
+ALLOWED_SELECTIONS = set()
+# Places where a filter state is stored: the filter pane and drill-through (filterConfig), a slicer's selection (filter)
+# and bookmarks (filters). The same condition shape is also used for formatting rules (for example a bar colour per
+# department), which are not filters and are not checked.
+FILTER_KEYS = ('filterConfig', 'filters', 'filter')
+
+
+def selected_text_values(node, negated=False, in_filter=False):
+    """Yield (column, values) for every positive text selection inside a filter: an "In" or "=" condition not under "Not"."""
+    if isinstance(node, dict):
+        if 'Not' in node:
+            yield from selected_text_values(node['Not'], not negated, in_filter)
+            rest = {k: v for k, v in node.items() if k != 'Not'}
+        else:
+            rest = node
+        in_cond = rest.get('In')
+        if isinstance(in_cond, dict) and not negated and in_filter:
+            vals = [v['Literal']['Value'] for row in in_cond.get('Values', []) for v in row
+                    if isinstance(v, dict) and isinstance(v.get('Literal', {}).get('Value'), str) and v['Literal']['Value'].startswith("'")]
+            cols = [e.get('Column', {}).get('Property', '?') for e in in_cond.get('Expressions', []) if isinstance(e, dict)]
+            if vals:
+                yield (', '.join(cols), vals)
+        cmp_cond = rest.get('Comparison')
+        if isinstance(cmp_cond, dict) and not negated and in_filter and cmp_cond.get('ComparisonKind') == 0:
+            right = cmp_cond.get('Right', {}).get('Literal', {}).get('Value')
+            left = cmp_cond.get('Left', {}).get('Column', {}).get('Property')
+            if left and isinstance(right, str) and right.startswith("'"):
+                yield (left, [right])
+        for k, v in rest.items():
+            if k not in ('In', 'Comparison'):
+                yield from selected_text_values(v, negated, in_filter or k in FILTER_KEYS)
+    elif isinstance(node, list):
+        for v in node:
+            yield from selected_text_values(v, negated, in_filter)
+
+
+def test_no_saved_filter_selections_in_report_files():
+    """No slicer, filter or drill-through selection (a chosen text value) may be saved in the report or its bookmarks."""
+    found = []
+    for f, text in REPORT_TEXT.items():
+        try:
+            doc = json.loads(text)
+        except ValueError:
+            continue
+        for column, values in selected_text_values(doc):
+            for v in values:
+                if (rel(f), v) not in ALLOWED_SELECTIONS:
+                    found.append(f'{rel(f)}: {column} = {v}')
+    assert not found, ('saved selections found; clear the slicer, filter or drill-through selection in Desktop before saving '
+                       '(or add a deliberate default to ALLOWED_SELECTIONS):\n' + '\n'.join(found))
+
+
+def test_selection_check_tells_selections_from_exclusions():
+    """The check itself: a chosen value is found, an excluded value and a number or boolean are not."""
+    sel = {'Where': [{'Condition': {'In': {'Expressions': [{'Column': {'Property': 'FullName'}}],
+                                           'Values': [[{'Literal': {'Value': "'Anna Example'"}}]]}}}]}
+    exc = {'Where': [{'Condition': {'Not': {'Expression': {'In': {'Expressions': [{'Column': {'Property': 'JobLevel'}}],
+                                                                  'Values': [[{'Literal': {'Value': "'CEO'"}}]]}}}}}]}
+    flag = {'Where': [{'Condition': {'In': {'Expressions': [{'Column': {'Property': 'IsInAbsenceWindow'}}],
+                                            'Values': [[{'Literal': {'Value': 'true'}}]]}}}]}
+    eq = {'Condition': {'Comparison': {'ComparisonKind': 0, 'Left': {'Column': {'Property': 'Department'}},
+                                       'Right': {'Literal': {'Value': "'Sales'"}}}}}
+    inside = lambda x: {'filterConfig': {'filters': [{'filter': x}]}}
+    assert list(selected_text_values(inside(sel))) == [('FullName', ["'Anna Example'"])]
+    assert list(selected_text_values(inside(eq))) == [('Department', ["'Sales'"])]
+    assert list(selected_text_values(inside(exc))) == []
+    assert list(selected_text_values(inside(flag))) == []
+    # the same condition outside a filter (a formatting rule, for example a bar colour per department) is not reported
+    assert list(selected_text_values({'objects': {'dataPoint': [{'selector': sel}]}})) == []
 
 
 # ---------------------------------------------------------------- DAX test file
