@@ -9,7 +9,9 @@ A sheet that is not square is reported (its cells are still cut, each cropped to
 
 Usage (from the repo root):
     python images/crop_sheets.py
-    python images/crop_sheets.py --margin 0.06       # cut 6 % off every side of each cell
+    python images/crop_sheets.py --margin 0.06       # cut 6 % off every side of each cell (default 0.01)
+    python images/crop_sheets.py --top-pad 0.12      # more empty space above the head (default 0.05)
+    python images/crop_sheets.py --top-pad 0         # no extra space
     python images/crop_sheets.py --size 160 --max-kb 20
 
 Needs: pip install pillow
@@ -29,14 +31,39 @@ except ImportError:
 GRID = 4
 
 
-def cell_box(width, height, cell, margin):
-    """Box (left, top, right, bottom) of a cell, shrunk by the margin and made square around its centre."""
+def background_colour(img, left, top, side):
+    """Median colour of two small patches in the top corners of a cell (the plain grey backdrop)."""
+    patches = [(left + 0.02 * side, left + 0.14 * side), (left + 0.86 * side, left + 0.98 * side)]
+    px = []
+    for x0, x1 in patches:
+        patch = img.crop((round(x0), round(top + 0.02 * side), round(x1), round(top + 0.06 * side)))
+        pix = patch.load()
+        px.extend(pix[x, y] for x in range(patch.width) for y in range(patch.height))
+    return tuple(sorted(c[i] for c in px)[len(px) // 2] for i in range(3))
+
+
+def cut_cell(img, cell, margin, top_pad):
+    """Cut one cell as a square of side L = cell side minus the margin on both sides, then add top_pad * L of empty
+    backdrop above the head. The sheets leave almost no room above the heads, so the space is painted with the
+    cell's own background colour (with a soft edge) and the same amount is dropped from the bottom (shoulders)."""
+    w, h = img.size
     row, col = divmod(cell - 1, GRID)
-    cw, ch = width / GRID, height / GRID
-    cx, cy = (col + 0.5) * cw, (row + 0.5) * ch
-    side = min(cw, ch) * (1 - 2 * margin)
-    half = side / 2
-    return (round(cx - half), round(cy - half), round(cx + half), round(cy + half))
+    cw, ch = w / GRID, h / GRID
+    side = min(cw, ch)
+    left, top = col * cw + (cw - side) / 2, row * ch + (ch - side) / 2
+    length = round(side * (1 - 2 * margin))
+    x0 = round(left + (side - length) / 2)
+    pad = round(length * top_pad)
+    bg = background_colour(img, left, top, side)
+    out = Image.new('RGB', (length, length), bg)
+    # the photo part: from the top of the cell (no margin there, the padding replaces it) down to fill the square
+    piece = img.crop((x0, round(top), x0 + length, round(top) + length - pad))
+    mask = Image.new('L', piece.size, 255)
+    fade = max(1, round(length * 0.03))
+    for y in range(min(fade, piece.height)):
+        mask.paste(round(255 * (y + 1) / (fade + 1)), (0, y, piece.width, y + 1))
+    out.paste(piece, (0, pad), mask)
+    return out
 
 
 def save_jpeg(img, path, max_bytes):
@@ -57,12 +84,15 @@ def main():
     here = os.path.dirname(os.path.abspath(__file__))
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--root', default=here, help='images folder (default: the folder of this script)')
-    ap.add_argument('--margin', type=float, default=0.03, help='inner margin per cell side as a fraction of the cell (default 0.03)')
+    ap.add_argument('--margin', type=float, default=0.01, help='inner margin per cell side as a fraction of the cell (default 0.01)')
+    ap.add_argument('--top-pad', type=float, default=0.05, help='empty space added above the head as a fraction of the picture (default 0.05)')
     ap.add_argument('--size', type=int, default=160, help='output size in pixels (default 160)')
     ap.add_argument('--max-kb', type=float, default=20, help='maximum JPEG size in KB (default 20)')
     args = ap.parse_args()
     if not 0 <= args.margin < 0.5:
         sys.exit('--margin must be from 0 to 0.49')
+    if not 0 <= args.top_pad < 0.5:
+        sys.exit('--top-pad must be from 0 to 0.49')
 
     sheets_dir = os.path.join(args.root, 'sheets')
     out_dir = os.path.join(args.root, 'profiles')
@@ -87,7 +117,7 @@ def main():
             print(f'sheet {sheet:02d}: NOT SQUARE ({w} x {h}); check the picture before using it')
             problems += 1
         for cell, emp in sorted(by_sheet[sheet]):
-            face = img.crop(cell_box(w, h, cell, args.margin)).resize((args.size, args.size), Image.LANCZOS)
+            face = cut_cell(img, cell, args.margin, args.top_pad).resize((args.size, args.size), Image.LANCZOS)
             size, quality = save_jpeg(face, os.path.join(out_dir, f'{emp}.jpg'), max_bytes)
             written += 1
             if size > max_bytes:
