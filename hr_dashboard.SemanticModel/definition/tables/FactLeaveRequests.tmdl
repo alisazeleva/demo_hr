@@ -29,12 +29,16 @@ table FactLeaveRequests
 		summarizeBy: none
 		sourceColumn: StartDate
 
+		annotation UnderlyingDateTimeDataType = Date
+
 	column EndDate
 		dataType: dateTime
 		formatString: yyyy-mm-dd
 		lineageTag: a954f450-72c5-4f99-8a4c-f41ee9eac88a
 		summarizeBy: none
 		sourceColumn: EndDate
+
+		annotation UnderlyingDateTimeDataType = Date
 
 	/// True when the request is approved and covers the reference date (the people absent today). Computed from the reference date in the data, not from today's date.
 	column IsAbsentToday =

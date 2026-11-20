@@ -185,7 +185,7 @@ Header band: a rounded rectangle (330, 141, 1560 x 150, border only) holding bor
 
 | Area | Position (x, y, w x h) | Content |
 | --- | --- | --- |
-| Picture placeholder | 351, 152, 120 x 120 | Oval shape (theme colour 8 at +60 %) with the initials (`Text: Profile Initials`, 32 pt bold) until pictures exist (script 12 was skipped) |
+| Picture placeholder | 351, 152, 120 x 120 | Oval shape with the picture of the selected employee as its image fill (the measure `Profile Picture`, from `ProfilePictures[Picture]`) |
 | Name | 479, 146, 477 x 81 | `Text: Profile Name`, subtitle `Text: Profile Job Level`; below it `Text: Profile Number` (488, 212) |
 | Position | 956, 151, 348 x 61 | `Text: Profile Role` (position) |
 | Department | 1304, 151, 283 x 61 | `Text: Profile Department` |
@@ -199,7 +199,7 @@ Header band: a rounded rectangle (330, 141, 1560 x 150, border only) holding bor
 | Performance reviews | 680, 717, 366 x 332 | Column chart of `Average Rating` by `FactReviews[ReviewYear]`; bars coloured by a 3-colour gradient on the rating (#C8446A low, #92a9c9 mid, #4A6FA5 high) |
 | Review history | 1071, 717, 819 x 332 | Table of `FactReviews`: Review date, Level, Comments; the Level cell is coloured by `Review Level Colour` (same palette as `Level Colour`) |
 
-Photos: resize to about 160 x 160 px (under 20 KB each), have Power Query read the image folder, convert each file to base64, join on `ProfileImageFileName`, and set the column's data category to Image URL. No change to the database is needed. When pictures exist, replace the initials in the oval with an image visual.
+Photos: resize to about 160 x 160 px (under 20 KB each), have Power Query read the image folder into the `ProfilePictures` table (file name and base64 text, data category Image URL), related to `DimEmployee[ProfileImageFileName]`. The oval in the header uses the measure `Profile Picture` as its image fill.
 
 ## Measures (build in the `_Measures` table; each with a description)
 
@@ -226,7 +226,7 @@ Photos: resize to about 160 x 160 px (under 20 KB each), have Power Query read t
 | Level Colour / Review Level Colour | Hex colour of the latest level of the employee (page 5 table) / of the level of each review row (page 7 table), for conditional formatting |
 | Latest Level in Selection | 1 when the employee's latest level is among the levels selected in the rating distribution chart (visual filter of the page 5 table) |
 | Base Salary / Salary Change | Salary of a pay-history record and its change against the previous salary, for the profile salary history |
-| Text: Profile ... | Name, number, role, department, job level, manager, tenure, hire date, salary, salary note, rating, rating note and initials of the selected employee (page 7 header) |
+| Text: Profile ... | Name, number, role, department, job level, manager, tenure, hire date, salary, salary note, rating and rating note of the selected employee (page 7 header) |
 | Currently Absent | Distinct employees with an approved leave day equal to the reference date |
 | Direct Reports | Count of employees whose manager is the current employee |
 | Span of Control | Average Direct Reports over managers |
@@ -239,6 +239,6 @@ Calculated columns added for the report: `DimEmployee[Latest Level Short]` (NI, 
 2. Model: connect to the views in Import mode, relationships Employees (1) to every fact table on EmployeeID, a Date table marked as the date table.
 3. Measures. Check against SQL before building visuals: Headcount 151, departments 45/25/20/35/25, one open job-history and one open compensation record per employee, at least 6 employees absent on the reference date.
 4. Pages in order 1 to 7; after each page, compare its numbers with the same queries in SQL.
-5. Profile photos last, once script 12 has run.
+5. Profile photos last: script 12 has run; the pictures are added sheet by sheet (images/ workflow).
 
 If the project format does not allow editing visuals as text, build the model, the measures and the theme, then give the user the page layout (sizes and positions above) to place the visuals in Power BI Desktop.

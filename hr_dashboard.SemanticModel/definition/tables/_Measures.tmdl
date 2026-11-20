@@ -579,19 +579,6 @@ table _Measures
 		displayFolder: Profile
 		lineageTag: 932e5e8d-f68d-4edf-a90b-b9205d8ba788
 
-	/// Initials of the selected employee; shown in place of the profile picture until pictures exist.
-	measure 'Text: Profile Initials' =
-			// First letter of the first name and of the first word after the first space.
-			VAR fullName = SELECTEDVALUE(DimEmployee[FullName])
-			RETURN
-			    IF(
-			        ISBLANK(fullName),
-			        "",
-			        UPPER(LEFT(fullName, 1)) & UPPER(MID(fullName, FIND(" ", fullName & " ") + 1, 1))
-			    )
-		displayFolder: Profile
-		lineageTag: 07ffa0ac-fbe2-4a21-ae3f-1b935ebb7872
-
 	/// Annual base salary of the salary period (one value per salary record of the selected employee).
 	measure 'Base Salary' = MAX(FactCompensation[Salary])
 		formatString: "€"#,0
@@ -759,6 +746,15 @@ table _Measures
 		formatString: d mmm yyyy
 		displayFolder: Leave
 		lineageTag: 661d28d3-b6bc-4dcf-a80f-222aac9e0bc4
+
+	/// Profile picture of the selected employee as an image (base64 data URI); blank when no single employee is selected or the employee has no picture file. Bind it to an image field of a visual on the profile page, for example the Fill image of the picture placeholder.
+	measure 'Profile Picture' =
+			// ProfilePictures is filtered by the selected employee through the relationship on the file name, so it has one row for
+			// an employee with a picture file and none otherwise; SELECTEDVALUE returns blank in both unwanted cases.
+			SELECTEDVALUE(ProfilePictures[Picture])
+		displayFolder: Profile
+		lineageTag: 3e8d5a76-1c40-4b9f-a2d7-6f0b94c8e5a1
+		dataCategory: ImageUrl
 
 	column Placeholder
 		isHidden

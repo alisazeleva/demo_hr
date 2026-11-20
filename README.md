@@ -33,7 +33,7 @@ sqlcmd -S ".\SQLEXPRESS" -E -C -b -d DemoHR -f 65001 -i sql/01_create_tables.sql
 sqlcmd -S ".\SQLEXPRESS" -E -C -b -d DemoHR -f 65001 -W -i sql/99_full_validation.sql
 ```
 
-Run every file from `01` to `13` the same way, in numeric order (there is no script 12). No passwords or secrets are stored anywhere.
+Run every file from `01` to `13` the same way, in numeric order (`12` sets the profile picture file names). No passwords or secrets are stored anywhere.
 
 ## Open the report
 
@@ -50,8 +50,8 @@ The tests check the report and model files without Desktop: JSON schemas, measur
 
 ## Validation note
 
-`sql/99_full_validation.sql` runs 49 checks. The 3 picture checks are expected to fail (46 of 49 pass) because the profile pictures are not created: script 12 is skipped and the database stores only the `EMP-######.jpg` file names.
+`sql/99_full_validation.sql` runs 49 checks and all of them pass once script 12 has run. The database stores only the picture file names (`EMP-######.jpg`); the pictures themselves are outside it.
 
 ## Profile pictures
 
-Not created yet. `images/prompts/` has ten prompts for 4 x 4 contact sheets of fictional faces (made by hand in an image tool), `images/sheet_map.csv` maps each cell to an employee number, and `python images/crop_sheets.py` cuts the saved sheets into 160 x 160 JPEGs named `EMP-######.jpg`. The report shows initials until the pictures exist.
+Work in progress. `images/prompts/` has ten prompts for 4 x 4 contact sheets of fictional faces (made by hand in an image tool), `images/sheet_map.csv` maps each cell to an employee number, and `python images/crop_sheets.py` cuts the saved sheets into 160 x 160 JPEGs named `EMP-######.jpg`. Power BI reads the JPEGs from the folder in the `ProfilePicturesFolder` parameter (`C:\DemoHR\profiles`, a folder outside the repo: copy the files from `images/profiles/` there, or change the parameter in Power BI Desktop) into the `ProfilePictures` table (one row per file, related to `DimEmployee[ProfileImageFileName]`); an employee without a file simply has no picture, and the picture circle on page 7 stays plain for them.

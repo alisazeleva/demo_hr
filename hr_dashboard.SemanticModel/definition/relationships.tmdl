@@ -58,3 +58,7 @@ relationship LeaveRequests_LeaveTypeID_LeaveType_LeaveTypeID
 	fromColumn: FactLeaveRequests.LeaveTypeID
 	toColumn: DimLeaveType.LeaveTypeID
 
+relationship ProfilePictures_FileName_Employees_ProfileImageFileName
+	fromColumn: ProfilePictures.FileName
+	toColumn: DimEmployee.ProfileImageFileName
+

@@ -1,0 +1,33 @@
+/// One row per picture file in the profile pictures folder: the file name (EmployeeNumber.jpg) and the picture as a base64 data URI, ready for an Image URL column. An employee without a file has no row.
+table ProfilePictures
+	lineageTag: 2af15fac-fda3-4c5a-a68f-0fe7fc8b3621
+
+	column FileName
+		dataType: string
+		isHidden
+		lineageTag: edc9bfc6-e644-4af3-9423-c5f6fefd801f
+		summarizeBy: none
+		sourceColumn: FileName
+
+	/// The picture as a "data:image/jpeg;base64,..." text (data category Image URL). Keep the files small: a text cell in the model holds about 32,000 characters, and base64 adds a third to the file size.
+	column Picture
+		dataType: string
+		isHidden
+		lineageTag: bc252590-21dc-4a31-a186-2847223d79af
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: Picture
+
+	partition ProfilePictures = m
+		mode: import
+		source =
+				let
+				    Source = Folder.Files(ProfilePicturesFolder),
+				    Jpeg = Table.SelectRows(Source, each Text.Lower([Extension]) = ".jpg"),
+				    WithPicture = Table.AddColumn(Jpeg, "Picture", each "data:image/jpeg;base64," & Binary.ToText([Content], BinaryEncoding.Base64), type text),
+				    Slim = Table.RenameColumns(Table.SelectColumns(WithPicture, {"Name", "Picture"}), {{"Name", "FileName"}})
+				in
+				    Slim
+
+	annotation PBI_ResultType = Table
+

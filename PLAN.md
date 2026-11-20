@@ -284,7 +284,7 @@ Fifteen numbered scripts, one logical step each; you run one, check its result, 
 
 Profile pictures stay the last data step, as in your plan: nothing is generated until the employee data is final. I will produce the prompt list (EmployeeNumber, gender, rough age, a style line identical for all), you create the images in your image tool and save them as `EMP-000001.jpg` to `EMP-000151.jpg`, then script 12 fills the column.
 
-**Prepared workflow (nothing generated yet).** `images/prompts/sheet_01.txt` to `sheet_10.txt` hold ChatGPT prompts for 4 x 4 contact sheets of 16 people (sheet 10: 7 people and 9 empty cells), built from `vw_EmployeeCurrent` in EmployeeNumber order with a fixed seed (gender, age rounded to 5 on the reference date, nationality as appearance, one varied detail; no names). `images/sheet_map.csv` maps Sheet and Cell to EmployeeNumber. After the sheets are saved as `images/sheets/sheet_NN.png`, `python images/crop_sheets.py` cuts them into `images/profiles/EMP-######.jpg` (160 x 160, under 20 KB). Script 12 is still to be written.
+**Prepared workflow (nothing generated yet).** `images/prompts/sheet_01.txt` to `sheet_10.txt` hold ChatGPT prompts for 4 x 4 contact sheets of 16 people (sheet 10: 7 people and 9 empty cells), built from `vw_EmployeeCurrent` in EmployeeNumber order with a fixed seed (gender, age rounded to 5 on the reference date, nationality as appearance, one varied detail; no names). `images/sheet_map.csv` maps Sheet and Cell to EmployeeNumber. After the sheets are saved as `images/sheets/sheet_NN.png`, `python images/crop_sheets.py` cuts them into `images/profiles/EMP-######.jpg` (160 x 160, under 20 KB). Script 12 (`12_assign_profile_pictures.sql`) sets `ProfileImageFileName` to `EmployeeNumber.jpg` for all employees, including those whose picture does not exist yet.
 
 ## Refreshing the data
 
@@ -345,7 +345,7 @@ Headcount, Headcount vs Target, Average Salary, Average Salary at Year End, Empl
 
 ### Profile pictures in Power BI
 
-Power BI does not show images from a local file path. Plan: resize the photos to about 160 by 160 pixels (under 20 KB), have Power Query read the image folder, convert each file to base64 and join it to Employees on the filename, and set the column's data category to Image URL. No change to the database schema is needed.
+Power BI does not show images from a local file path, so the pictures are loaded into the model. A `ProfilePictures` table reads the JPEG files from the folder in the `ProfilePicturesFolder` parameter with `Folder.Files`, and adds a `Picture` column with `"data:image/jpeg;base64," & Binary.ToText([Content], BinaryEncoding.Base64)`; its data category is Image URL. It is a separate table, related many-to-one to `DimEmployee[ProfileImageFileName]` (the employee filters the picture), because merging the folder into the SQL query would trigger the Power Query privacy-level error. An employee without a file has no row. The photos are about 160 by 160 pixels and under 20 KB, so each data URI stays far below the 32,766 characters a model text cell can hold. The page 7 picture is the oval in the header with the measure `Profile Picture` (`SELECTEDVALUE(ProfilePictures[Picture])`, data category Image URL) as its image fill.
 
 ### Order of work
 

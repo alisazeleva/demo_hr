@@ -11,7 +11,7 @@ annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_ProTooling = ["DevMode","MCP-PBIModeling"]
 
-annotation PBI_QueryOrder = ["DimEmployee","FactJobHistory","FactCompensation","FactReviews","FactLeaveDays","FactWorkforcePlan","ReferenceDate","SqlServer","SqlDatabase","DimDepartment","DimPosition","DimManager","DimLeaveType"]
+annotation PBI_QueryOrder = ["DimEmployee","FactJobHistory","FactCompensation","FactReviews","FactLeaveDays","FactWorkforcePlan","ReferenceDate","SqlServer","SqlDatabase","DimDepartment","DimPosition","DimManager","DimLeaveType","ProfilePicturesFolder","ProfilePictures","FactLeaveRequests"]
 
 ref table DimEmployee
 ref table FactJobHistory
@@ -27,6 +27,7 @@ ref table DimPosition
 ref table DimManager
 ref table DimLeaveType
 ref table FactLeaveRequests
+ref table ProfilePictures
 
 ref cultureInfo en-GB
 
