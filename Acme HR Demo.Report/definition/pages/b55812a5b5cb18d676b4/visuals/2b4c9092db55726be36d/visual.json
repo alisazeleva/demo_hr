@@ -662,6 +662,13 @@
                   "Value": "'e3a91c5d7b2f4086a1c4'"
                 }
               }
+            },
+            "tooltip": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Go to the Home page'"
+                }
+              }
             }
           }
         }

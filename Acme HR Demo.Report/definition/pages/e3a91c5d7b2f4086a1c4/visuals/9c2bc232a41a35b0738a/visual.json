@@ -268,7 +268,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Open workforce: go to the Workforce page'"
+                  "Value": "'Open the Organization page'"
                 }
               }
             }
@@ -365,6 +365,13 @@
               "expr": {
                 "Literal": {
                   "Value": "'a0a5139c61208801d6f5'"
+                }
+              }
+            },
+            "tooltip": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Open the Organization page'"
                 }
               }
             }

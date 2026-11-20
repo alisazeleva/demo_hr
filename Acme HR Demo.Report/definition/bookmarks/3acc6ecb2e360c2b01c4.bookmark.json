@@ -1,0 +1,984 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "Employee profile RESET",
+  "name": "3acc6ecb2e360c2b01c4",
+  "options": {
+    "targetVisualNames": [
+      "35424d590de91ecb7721"
+    ]
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "183b9dacf76e4e6435ea",
+    "sections": {
+      "183b9dacf76e4e6435ea": {
+        "filters": {
+          "byExpr": [
+            {
+              "name": "drill_12c71a2f084947c1",
+              "type": "Categorical",
+              "expression": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimEmployee"
+                    }
+                  },
+                  "Property": "FullName"
+                }
+              },
+              "howCreated": 5
+            }
+          ]
+        },
+        "visualContainers": {
+          "03ed02e16c2528c5cd24": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "0dd6056518b183603ebc": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "9f05a9a0a5cc045c4d40",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactReviews"
+                        }
+                      },
+                      "Property": "ReviewDate"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "f4d993a0879ad0126052",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactReviews"
+                        }
+                      },
+                      "Property": "Level"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "713e8b6ce0abdb309d20",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactReviews"
+                        }
+                      },
+                      "Property": "Comments"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "tableEx",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactReviews"
+                        }
+                      },
+                      "Property": "ReviewDate"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "0dfe38a30dfc0e6bc43c": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "c35990210838bd015664",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Text: Profile Manager"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Text: Profile Manager"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "14d19f0528d0d60aac9b": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "1787501ec4a4a5c79bb8": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "189a1faf481c31ab0e8d": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "0f11633d473e50730210",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Text: Profile Salary"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Text: Profile Salary"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "1c261fedab83fdcab0a4": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2c5d5cc6c6dd0da81dd1",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactJobHistory"
+                        }
+                      },
+                      "Property": "EffectiveDate"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "9cec997bb95689110c99",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactJobHistory"
+                        }
+                      },
+                      "Property": "ChangeType"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "3c5efb7d05bcd737ba09",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactJobHistory"
+                        }
+                      },
+                      "Property": "PositionTitle"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "7d1caa1600e8b8c0e6c5",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactJobHistory"
+                        }
+                      },
+                      "Property": "Department"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "a55f8adb1748b56a0800",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactJobHistory"
+                        }
+                      },
+                      "Property": "ManagerName"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "tableEx",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactJobHistory"
+                        }
+                      },
+                      "Property": "ChangeType"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactJobHistory"
+                        }
+                      },
+                      "Property": "EffectiveDate"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactJobHistory"
+                        }
+                      },
+                      "Property": "ChangeType"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactJobHistory"
+                        }
+                      },
+                      "Property": "PositionTitle"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactJobHistory"
+                        }
+                      },
+                      "Property": "Department"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactJobHistory"
+                        }
+                      },
+                      "Property": "ManagerName"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "21f49d35c610c0d31aa1": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "d10af842047b66cbc29d",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Text: Profile Role"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "2ebae5209243270a641e": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "e4a258f18e3748edeb7e",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimEmployee"
+                        }
+                      },
+                      "Property": "FullName"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimEmployee"
+                        }
+                      },
+                      "Property": "FullName"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "316b3f3d9fdbf939060d": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "560b8539de549d2b1080",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactCompensation"
+                        }
+                      },
+                      "Property": "EffectiveDate"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "c4cab193d480ead0ac82",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactCompensation"
+                        }
+                      },
+                      "Property": "Reason"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "7d5a3052aa1262c1b1a8",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Salary Change"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "ca4a89bc0845c203b228",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Base Salary"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "lineChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactCompensation"
+                        }
+                      },
+                      "Property": "EffectiveDate"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactCompensation"
+                        }
+                      },
+                      "Property": "EffectiveDate"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "3413d9e09d190451ee04": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "fbec8de5b20b2e40b20e",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimLeaveType"
+                        }
+                      },
+                      "Property": "LeaveType"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "6b3cbba5670e1083d08a",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Leave Days Last 24 Months"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "barChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Leave Days Last 24 Months"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimLeaveType"
+                        }
+                      },
+                      "Property": "LeaveType"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "344faa12144f81f42e52": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "379f5c688ec720f0777a": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "56a604ce45b0fb985393": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2f0b4ae3676112627410",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Text: Profile Name"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Text: Profile Name"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "5862646abc8bbfea4aa0": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "678bf79069809a35749c": {
+            "singleVisual": {
+              "visualType": "pageNavigator",
+              "objects": {}
+            }
+          },
+          "699165c622678947b66b": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "8210ea76a872161f1c95": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "0f3c135a26b5b00002a3",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactReviews"
+                        }
+                      },
+                      "Property": "ReviewYear"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "5a7abe609a6dd040a03a",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Average Rating"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "columnChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactReviews"
+                        }
+                      },
+                      "Property": "ReviewYear"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactReviews"
+                        }
+                      },
+                      "Property": "ReviewYear"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "84505954003dbaa74aeb": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "89d64e290f4cc289e095": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "8041210b0d6501d4d803",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Text: Footer As Of"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "919e0360162eb80cc6b4": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "9e9b6433cbd03a03b10b",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Text: Profile Rating"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Text: Profile Rating"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "94a03d191e4cc3e76907": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "b8dae54132c09b00c80b",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Text: Profile Number"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {}
+            }
+          },
+          "ae328cb78091369b4a85": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "b56b7c0450c0d607b29f": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2f9a9db906000106ab00",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Text: Profile Tenure"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Text: Profile Tenure"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "b5b715455c3bdb58519f": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "b6cc113f31f856074956": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "b08388f0105e1e64e094",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Text: Profile Department"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Text: Profile Department"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "c72934e0e3180e1b7c68": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "e745c129049624c92575": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "35424d590de91ecb7721": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "true"
+                  }
+                }
+              },
+              "visible": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -93,7 +93,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Open Performance →'"
+                  "Value": "'Performance →'"
                 }
               }
             },
@@ -268,7 +268,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Open workforce: go to the Workforce page'"
+                  "Value": "'Open the Performance page'"
                 }
               }
             }
@@ -365,6 +365,13 @@
               "expr": {
                 "Literal": {
                   "Value": "'32049a889e1837970128'"
+                }
+              }
+            },
+            "tooltip": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Open the Performance page'"
                 }
               }
             }

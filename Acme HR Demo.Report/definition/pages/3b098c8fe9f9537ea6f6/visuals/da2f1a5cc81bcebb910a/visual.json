@@ -154,6 +154,13 @@
                   "Value": "'968100a088a1bb212865'"
                 }
               }
+            },
+            "tooltip": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Close the information panel'"
+                }
+              }
             }
           }
         }

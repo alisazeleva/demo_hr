@@ -268,7 +268,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Open workforce: go to the Workforce page'"
+                  "Value": "'Open the Employee profile page (or drill through from an employee name)'"
                 }
               }
             }
@@ -365,6 +365,13 @@
               "expr": {
                 "Literal": {
                   "Value": "'183b9dacf76e4e6435ea'"
+                }
+              }
+            },
+            "tooltip": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Open the Employee profile page (or drill through from an employee name)'"
                 }
               }
             }

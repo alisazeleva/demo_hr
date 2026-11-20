@@ -154,6 +154,13 @@
                   "Value": "'e5a8541635ea7ba31b90'"
                 }
               }
+            },
+            "tooltip": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Show information about this report'"
+                }
+              }
             }
           }
         }

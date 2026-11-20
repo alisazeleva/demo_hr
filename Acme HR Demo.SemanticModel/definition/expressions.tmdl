@@ -14,5 +14,5 @@ expression SqlDatabase = "DemoHR" meta [IsParameterQuery=true, Type="Text", IsPa
 expression ProfilePicturesFolder = "C:\DemoHR\profiles" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
 	lineageTag: aaa4a8b6-db38-4311-85ef-bbce42479255
 
-	annotation PBI_ResultType = Exception
+	annotation PBI_ResultType = Text
 

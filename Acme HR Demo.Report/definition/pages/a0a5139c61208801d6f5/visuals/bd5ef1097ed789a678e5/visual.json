@@ -154,6 +154,13 @@
                   "Value": "'feda96d22c956e4b520b'"
                 }
               }
+            },
+            "tooltip": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Close the information panel'"
+                }
+              }
             }
           }
         }
