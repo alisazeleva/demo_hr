@@ -284,6 +284,8 @@ Fifteen numbered scripts, one logical step each; you run one, check its result, 
 
 Profile pictures stay the last data step, as in your plan: nothing is generated until the employee data is final. I will produce the prompt list (EmployeeNumber, gender, rough age, a style line identical for all), you create the images in your image tool and save them as `EMP-000001.jpg` to `EMP-000151.jpg`, then script 12 fills the column.
 
+**Prepared workflow (nothing generated yet).** `images/prompts/sheet_01.txt` to `sheet_10.txt` hold ChatGPT prompts for 4 x 4 contact sheets of 16 people (sheet 10: 7 people and 9 empty cells), built from `vw_EmployeeCurrent` in EmployeeNumber order with a fixed seed (gender, age rounded to 5 on the reference date, nationality as appearance, one varied detail; no names). `images/sheet_map.csv` maps Sheet and Cell to EmployeeNumber. After the sheets are saved as `images/sheets/sheet_NN.png`, `python images/crop_sheets.py` cuts them into `images/profiles/EMP-######.jpg` (160 x 160, under 20 KB). Script 12 is still to be written.
+
 ## Refreshing the data
 
 The generated data is anchored to one reference date, so it can be refreshed later by changing that date and rerunning the generation scripts.
@@ -297,7 +299,7 @@ The generated data is anchored to one reference date, so it can be refreshed lat
 
 ## Power BI plan
 
-Power BI Desktop (Windows) loads the reporting views in Import mode, and the report has seven pages that answer the reports listed in your plan. I write the views, the DAX measures, the Power Query steps and a colour theme; you build the visuals in Power BI Desktop following the page specs below. I cannot open Power BI Desktop myself, but I can try generating a Power BI Project (`.pbip`) folder with the model and measures already in it.
+Power BI Desktop (Windows) loads the reporting views in Import mode, and the report has a Home page and seven analysis pages that answer the reports listed in your plan. I write the views, the DAX measures, the Power Query steps and a colour theme; you build the visuals in Power BI Desktop following the page specs below. I cannot open Power BI Desktop myself, but I can try generating a Power BI Project (`.pbip`) folder with the model and measures already in it.
 
 ### Model
 
@@ -332,12 +334,13 @@ Headcount, Headcount vs Target, Average Salary, Average Salary at Year End, Empl
 
 | Page | Answers | Main visuals |
 | --- | --- | --- |
+| 0 Home | Index of the report: what each page answers, how to use the report | Header banner with headcount, departments and years of history, seven page cards with buttons, a how-to card |
 | 1 Workforce | Total, by department, level, position, nationality, language, gender | Cards, bar charts, treemap, slicers |
 | 2 Organization | Hierarchy, employees per manager, department vs target | Hierarchy or decomposition tree, bar chart of span of control, target gauge |
 | 3 Career | Promotions, transfers, position and manager changes, months before promotion | Matrix of change type by year, bars by department, latest moves table, drill-through to profile |
 | 4 Compensation | Salary by department and level, increases, promotion raises | Bar charts, combo of year-end headcount and average salary over time, clustered columns of increases, gender fairness bar |
 | 5 Performance | Latest review, average rating, by department and manager, no recent review | Bar charts, rating distribution bars, heat matrix, latest-review table |
-| 6 Leave | Days by employee, department and type, vacation usage, currently absent, pending requests | Stacked columns by month, matrix, table of people absent now |
+| 6 Leave | Days by employee, department and type, vacation usage, currently absent, pending requests | Stacked columns by month, matrix, Gantt chart of people absent now and approved absences in the next 30 days |
 | 7 Employee profile | One person: picture placeholder, current role, salary and latest review, career timeline, salary history, reviews, leave | Hidden drill-through page on the employee name: header cards, tables, stepped line, charts |
 
 ### Profile pictures in Power BI

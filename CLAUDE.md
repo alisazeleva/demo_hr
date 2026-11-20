@@ -6,8 +6,12 @@ Build a dummy HR database (SQL Server) for Acme Corporation, then a Power BI rep
 
 - `PLAN.md`: the authoritative data structure, generation rules and script sequence. If anything disagrees with another file, PLAN.md wins.
 - `CONTEXT.md`: the original project description. Kept for background; superseded where PLAN.md says otherwise (see the note at its top).
-- `sql/`: numbered scripts, one logical step each (`00_create_database.sql` ... `99_full_validation.sql`).
-- `powerbi/`: Power BI project, DAX measures, theme (created later).
+- `sql/`: numbered scripts, one logical step each (`00_create_database.sql` ... `99_full_validation.sql`; there is no script 12, see Open items).
+- `hr_dashboard.pbip`, `hr_dashboard.Report/` (PBIR) and `hr_dashboard.SemanticModel/` (TMDL): the Power BI project. `DESIGN.md` has the design rules and page layouts.
+- `powerbi/`: the report theme `acme_hr_theme.json`.
+- `tools/`: Python helpers for the report (`validate_pbir.py` and first-draft page builders, see `tools/README.md`).
+- `tests/`: repository checks and the measure tests (see Power BI working notes).
+- `images/`: profile picture workflow (ChatGPT prompts, `sheet_map.csv`, `crop_sheets.py`); `desing/` (sic): PNG mockups of the pages.
 
 ## Environment
 
@@ -36,7 +40,7 @@ Build a dummy HR database (SQL Server) for Acme Corporation, then a Power BI rep
 4. Use transactions for destructive or rebuild steps. Generation scripts clear only their own tables, so they can be re-run.
 5. Make generated data deterministic (fixed seed; hash of seed, employee ID and a label) so re-runs give identical data.
 6. Generate the final state first, then derive history backwards from it (see PLAN.md, Generation rules).
-7. Do not generate profile pictures until the employee dataset is finalized.
+7. Do not generate profile pictures until the employee dataset is finalized. The workflow is prepared in `images/` (prompts, map and crop script); the pictures themselves are made by hand in an image tool.
 8. Do not add anything from the "not building" list: multiple companies, business units, subdepartments, former employees, termination or retirement records, recruitment, payroll, benefits, attendance, time tracking, training, expenses.
 9. Keep answers short: what was done, the validation result, and the next step.
 10. Power BI work follows DESIGN.md.
@@ -72,11 +76,15 @@ Project `hr_dashboard.pbip` (PBIR report + TMDL model). Design rules and page la
 - **Level labels**: `DimEmployee[Latest Level Short]` (NI, ME, EE, O) is shown in the page 5 table, `FactReviews[Level Long]` (for example "Meets Expectations (ME)") in the rating distribution chart, both sorted by `FactReviews[Level Order]` where sorting applies. `Latest Level in Selection` keeps `Level` and `Level Long` so the chart still cross-filters the table.
 - **Profile text measures** read `DimPosition`, `DimDepartment` and `DimManager` with LOOKUPVALUE on keys in `DimEmployee`, because those dimensions filter `DimEmployee` and not the other way round.
 - **Year-end measures** (`Average Salary at Year End`, `Employees at Year End`): the period filter must be inside AVERAGEX/COUNTROWS over FILTER within `CALCULATE(..., REMOVEFILTERS(DimDate))`; as a CALCULATE filter argument it is evaluated under the year filter and gives wrong numbers. Early years show only the first senior hires because there are no former employees; the page 4 chart says so.
-- Theme: `powerbi/acme_hr_theme.json`, copied into the report's `StaticResources/RegisteredResources/`; keep both copies identical (they are; the sizes are Desktop's 20.25 and 17.25 pt). Tooltips 10 pt.
+- Theme: `powerbi/acme_hr_theme.json`, copied into the report's `StaticResources/RegisteredResources/`; keep both copies identical (they are; the sizes are Desktop's 20.25 and 17.25 pt). Every visible visual title and subtitle also carries an explicit size (20 and 16 pt), so the theme no longer decides it. Tooltips 10 pt.
+- **Home page** (page 0, first page, the page the report opens on; no slicers): header banner with three figures (`Headcount`, `Departments`, `Years of History`), seven page cards with navigation buttons, a "Using the report" card (`Text: Home Data Note`). The page navigator on every page hides it (`showPage` off for Home in the navigator's `pages` object) and shows hidden pages, so the Employee profile page is listed. The navigator sits at (22, 216.5), 253 x 556 on every page.
+- **Info pop-up** on every page (Home and the profile page included): the info button in the left menu opens the bookmark `<Page> Info ON`, which shows a hidden navy panel with `Text: Info Note` (the data is fictional, figures as of the reference date) and a hidden close button linked to `<Page> Info OFF`. The bookmarks act only on those three visuals (`targetVisualNames`), with data and filter state off, and must not contain `preserveNewVisualVisibility` (the schema rejects it). The tests check that every page has the pair and a working button.
+- **Absent today chart** (page 6, Gantt): shows approved absences in progress on the reference date plus those that start within 30 days (`Absence Window End Date` = reference date + 30, `FactLeaveRequests[IsInAbsenceWindow]` as the visual filter); the tooltip shows `Days Left in Absence` (in progress: days left after the reference date; not started: full length; calendar days).
 
 ### Open items
 
-- Profile pictures: script 12 was skipped, so the three picture checks in script 99 fail (46 of 49 pass). The info button next to the footer has no action yet, and page 7 shows initials in an oval until pictures exist.
+- Profile pictures: script 12 was skipped, so the three picture checks in script 99 fail (46 of 49 pass), and page 7 shows initials in an oval until pictures exist. The workflow is prepared and nothing is generated: paste `images/prompts/sheet_01.txt` ... `sheet_10.txt` into ChatGPT one by one (4 x 4 contact sheets of 16 people; sheet 10 has 7 people and 9 empty cells), save the results as `images/sheets/sheet_01.png` ... `sheet_10.png`, run `python images/crop_sheets.py` (160 x 160 JPEGs under 20 KB into `images/profiles/EMP-######.jpg`, named from `images/sheet_map.csv`), then write the missing script 12 and load the pictures into Power BI as described in PLAN.md. Check the terms of the image tool before publishing the pictures; consider keeping the large sheet PNGs out of git.
 - Pending renames the user must do in Desktop (F2) because visuals use them (see Measure names): `Average Tenure (years)`, `Largest Span of Control`. `Vacation Days Used per Year` is really "per employee" and could be renamed with them (a visual uses it).
 - Career visuals count by the employee's current department (a version by department at the time of the event is possible).
-- Page 5: `FactReviews[Level Order]` and page 6: `FactLeaveRequests[IsAbsentToday]` are calculated columns added through the MCP; press Refresh in Desktop after reopening if they show no data.
+- Page 5: `FactReviews[Level Order]` and page 6: `FactLeaveRequests[IsAbsentToday]` and `[IsInAbsenceWindow]` are calculated columns added through the MCP; press Refresh in Desktop after reopening if they show no data.
+- The `Absent today` KPI card on page 6 counts only the reference date; the Gantt chart next to it also lists upcoming absences (different measures on purpose).
