@@ -522,7 +522,7 @@ table _Measures
 			// SELECTEDVALUE is blank unless exactly one employee is in the filter, so the page prompts for a drill-through.
 			VAR employeeNumber = SELECTEDVALUE(DimEmployee[EmployeeNumber])
 			RETURN
-			    IF(ISBLANK(employeeNumber), "Drill through from another page", employeeNumber)
+			    IF(ISBLANK(employeeNumber), "Use drill through from another page or a slicer", employeeNumber)
 		displayFolder: Profile
 		lineageTag: 563576f2-ff98-44db-870c-449ce01c3fff
 

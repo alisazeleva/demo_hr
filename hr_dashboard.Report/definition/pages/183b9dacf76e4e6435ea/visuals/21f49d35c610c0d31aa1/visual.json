@@ -531,5 +531,23 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "d10af842047b66cbc29d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Text: Profile Role"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

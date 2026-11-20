@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "8210ea76a872161f1c95",
   "position": {
-    "x": 725.59618737649657,
-    "y": 717.978379635011,
+    "x": 689.5931156151961,
+    "y": 718.04005779562385,
     "z": 13000,
-    "height": 331.3746367546205,
-    "width": 396.12600255724749,
+    "height": 331.55401575808861,
+    "width": 432.58970695064221,
     "tabOrder": 12000
   },
   "visual": {
@@ -514,5 +514,37 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "0f3c135a26b5b00002a3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactReviews"
+              }
+            },
+            "Property": "ReviewYear"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "5a7abe609a6dd040a03a",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Average Rating"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }
