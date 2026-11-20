@@ -11,7 +11,7 @@ import secrets
 import shutil
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DEF = os.path.join(REPO, 'hr_dashboard.Report', 'definition')
+DEF = os.path.join(REPO, 'Acme HR Demo.Report', 'definition')
 PAGES = os.path.join(DEF, 'pages')
 SCHEMA = 'https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json'
 WORKFORCE = 'ff862ad3bc453005bb9c'

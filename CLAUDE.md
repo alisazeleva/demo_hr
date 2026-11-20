@@ -7,7 +7,7 @@ Build a dummy HR database (SQL Server) for Acme Corporation, then a Power BI rep
 - `PLAN.md`: the authoritative data structure, generation rules and script sequence. If anything disagrees with another file, PLAN.md wins.
 - `CONTEXT.md`: the original project description. Kept for background; superseded where PLAN.md says otherwise (see the note at its top).
 - `sql/`: numbered scripts, one logical step each (`00_create_database.sql` ... `99_full_validation.sql`; `12_assign_profile_pictures.sql` sets `ProfileImageFileName` to `EmployeeNumber.jpg` for everyone).
-- `hr_dashboard.pbip`, `hr_dashboard.Report/` (PBIR) and `hr_dashboard.SemanticModel/` (TMDL): the Power BI project. `DESIGN.md` has the design rules and page layouts.
+- `Acme HR Demo.pbip`, `Acme HR Demo.Report/` (PBIR) and `Acme HR Demo.SemanticModel/` (TMDL): the Power BI project. `DESIGN.md` has the design rules and page layouts.
 - `powerbi/`: the report theme `acme_hr_theme.json`.
 - `tools/`: Python helpers for the report (`validate_pbir.py` and first-draft page builders, see `tools/README.md`).
 - `tests/`: repository checks and the measure tests (see Power BI working notes).
@@ -47,13 +47,13 @@ Build a dummy HR database (SQL Server) for Acme Corporation, then a Power BI rep
 
 ## Power BI working notes
 
-Project `hr_dashboard.pbip` (PBIR report + TMDL model). Design rules and page layouts are in DESIGN.md; the model is described in PLAN.md (Power BI plan). The Home page (page 0, `tools/build_home.py`, first draft from the mockup in `desing/`) and pages 1 to 7 are built; pages 1 to 7 were adjusted by hand in Desktop, so treat them as the reference and never regenerate them over the user's changes: every `tools/build_*.py` is a first draft and would overwrite the hand edits (page 3 has a different layout and a matrix, pages 4 to 6 differ in colours, fonts and layout, page 7 has a redesigned header). DESIGN.md records each page as it is now, including positions. Page 7 is a hidden drill-through page filtered on `DimEmployee[FullName]`; drill-through works from any visual that contains the employee name.
+Project `Acme HR Demo.pbip` (PBIR report + TMDL model). Design rules and page layouts are in DESIGN.md; the model is described in PLAN.md (Power BI plan). The Home page (page 0, `tools/build_home.py`, first draft from the mockup in `desing/`) and pages 1 to 7 are built; pages 1 to 7 were adjusted by hand in Desktop, so treat them as the reference and never regenerate them over the user's changes: every `tools/build_*.py` is a first draft and would overwrite the hand edits (page 3 has a different layout and a matrix, pages 4 to 6 differ in colours, fonts and layout, page 7 has a redesigned header). DESIGN.md records each page as it is now, including positions. Page 7 is a hidden drill-through page filtered on `DimEmployee[FullName]`; drill-through works from any visual that contains the employee name.
 
 ### How to change things safely (Desktop is usually open)
 
 1. **Model changes**: use the Power BI Modeling MCP server on the live Desktop session (find the port with `connection_operations ListLocalInstances`; it changes every time Desktop restarts). After the change, verify values with `dax_query_operations` against the same numbers from SQL.
-2. **Save the model to disk**: `database_operations ExportToTmdlFolder` to a scratch folder, compare with `hr_dashboard.SemanticModel/definition`, and copy the changed table files (keep the original `database.tmdl`).
-3. **Report changes**: edit the PBIR JSON under `hr_dashboard.Report/definition/pages/<id>/visuals/<id>/visual.json` directly, then run `python tools/validate_pbir.py` (must report 0 problems).
+2. **Save the model to disk**: `database_operations ExportToTmdlFolder` to a scratch folder, compare with `Acme HR Demo.SemanticModel/definition`, and copy the changed table files (keep the original `database.tmdl`).
+3. **Report changes**: edit the PBIR JSON under `Acme HR Demo.Report/definition/pages/<id>/visuals/<id>/visual.json` directly, then run `python tools/validate_pbir.py` (must report 0 problems).
 4. **Tell the user to close Desktop WITHOUT saving and reopen.** Saving first would overwrite the files edited on disk with Desktop's in-memory copy.
 5. Do not touch pages the user built or adjusted by hand unless asked; copy their formatting (read the current visual.json) instead of the generator output.
 

@@ -3,7 +3,7 @@
   "version": "4.0",
   "datasetReference": {
     "byPath": {
-      "path": "../hr_dashboard.SemanticModel"
+      "path": "../Acme HR Demo.SemanticModel"
     }
   }
 }

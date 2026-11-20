@@ -1,11 +1,11 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
-    "type": "Report",
-    "displayName": "hr_dashboard"
+    "type": "SemanticModel",
+    "displayName": "Acme HR Demo"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "8177dcdf-be8d-4171-83bf-908e4bfa8523"
+    "logicalId": "41ceac59-4fa0-45f8-a2c9-42b109e8b90f"
   }
 }

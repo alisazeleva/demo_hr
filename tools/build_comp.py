@@ -2,7 +2,7 @@
 Overwrites the page 4 visuals only. Run tools/validate_pbir.py afterwards."""
 import json, glob, copy, hashlib, os, shutil
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-base = os.path.join(REPO, 'hr_dashboard.Report', 'definition', 'pages')
+base = os.path.join(REPO, 'Acme HR Demo.Report', 'definition', 'pages')
 pages = {}
 for f in glob.glob(os.path.join(base, '*', 'page.json')):
     pages[json.load(open(f, encoding='utf-8'))['displayName']] = os.path.dirname(f)

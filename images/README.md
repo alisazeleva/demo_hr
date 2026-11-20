@@ -39,6 +39,6 @@ The 151 profile pictures are fictional faces made in an image tool (ChatGPT), 16
 ## If something goes wrong
 
 - **No pictures after Refresh:** check that the files are in `C:\DemoHR\profiles`, are named exactly `EMP-######.jpg`, and that the parameter points there.
-- **"Duplicate value" when opening the project:** the saved data cache is out of date. Close Desktop and delete `hr_dashboard.SemanticModel/.pbi/cache.abf` (it is git-ignored and is rebuilt on Refresh).
+- **"Duplicate value" when opening the project:** the saved data cache is out of date. Close Desktop and delete `Acme HR Demo.SemanticModel/.pbi/cache.abf` (it is git-ignored and is rebuilt on Refresh).
 - **A face is cut at the top or bottom:** change `--top-pad` and `--margin`, and run the script again for all sheets.
 - **Wrong face on a person:** the map in `sheet_map.csv` follows the prompt order. Check the prompt line for that cell, then redo the sheet.

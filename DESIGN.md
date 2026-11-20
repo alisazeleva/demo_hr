@@ -1,6 +1,6 @@
 # DESIGN.md: Acme HR Dashboard (Power BI)
 
-Design spec for the Power BI report in `powerbi/hr_dashboard`. Read this together with `PLAN.md` (Power BI plan) and `CLAUDE.md`.
+Design spec for the Power BI report in `powerbi/acme_hr_theme.json`. Read this together with `PLAN.md` (Power BI plan) and `CLAUDE.md`.
 
 - Page 1 (Workforce) is built and hand-adjusted in Power BI Desktop; it is the reference for style and layout (the early mockup https://claude.ai/artifact/WVDNJWWuenggPHhrU79dUd is superseded where they differ). Mockups of every page are in `desing/` (PNG, 1280 x 720). All pages (Home and 1 to 7) are built and were adjusted by hand in Desktop, and this document records them as they are; follow the same grid and style for new work.
 - Numbers in the early mockup (for example average tenure 5.4 years, average age 38.6, the language split) are illustrative. Real values come from the database.

@@ -22,7 +22,7 @@ def retrieve(uri):
     return Resource.from_contents(doc, default_specification=spec)
 registry = Registry(retrieve=retrieve)
 
-root = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'hr_dashboard.Report', 'definition')
+root = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'Acme HR Demo.Report', 'definition')
 files = glob.glob(os.path.join(root, '**', '*.json'), recursive=True)
 total = bad = 0
 for f in sorted(files):

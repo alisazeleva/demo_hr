@@ -1,7 +1,7 @@
 """Historical generator of page 2 (Organization), kept as a TEMPLATE only. The page was adjusted by hand afterwards; running it would overwrite those changes. Style source: page 1."""
 import json, glob, copy, hashlib, os, shutil
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-base = os.path.join(REPO, 'hr_dashboard.Report', 'definition', 'pages')
+base = os.path.join(REPO, 'Acme HR Demo.Report', 'definition', 'pages')
 P1 = os.path.join(base, 'ff862ad3bc453005bb9c')
 P2 = os.path.join(base, 'a0a5139c61208801d6f5')
 L = lambda v: {"expr": {"Literal": {"Value": v}}}

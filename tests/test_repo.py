@@ -13,8 +13,8 @@ import sys
 import pytest
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MODEL = os.path.join(REPO, 'hr_dashboard.SemanticModel', 'definition')
-REPORT = os.path.join(REPO, 'hr_dashboard.Report', 'definition')
+MODEL = os.path.join(REPO, 'Acme HR Demo.SemanticModel', 'definition')
+REPORT = os.path.join(REPO, 'Acme HR Demo.Report', 'definition')
 
 
 def read(path):

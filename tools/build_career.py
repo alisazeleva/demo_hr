@@ -1,7 +1,7 @@
 """Generator of page 3 (Career): copies the shell (navigation, header, slicers, footer, KPI cards) from page 2 and adds the visuals. Overwrites the page 3 visuals. For a new page, copy this file, change the visuals, then run tools/validate_pbir.py."""
 import json, glob, copy, hashlib, os, shutil
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-base = os.path.join(REPO, 'hr_dashboard.Report', 'definition', 'pages')
+base = os.path.join(REPO, 'Acme HR Demo.Report', 'definition', 'pages')
 pages = {}
 for f in glob.glob(os.path.join(base, '*', 'page.json')):
     pages[json.load(open(f, encoding='utf-8'))['displayName']] = os.path.dirname(f)
