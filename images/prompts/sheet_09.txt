@@ -1,0 +1,28 @@
+Create ONE image: a 4 x 4 contact sheet of 16 separate corporate profile photos of fictional adults, for a dummy company's HR demo.
+
+LAYOUT (strict):
+- Exactly 4 columns and 4 rows, 16 equal square cells, no gaps, no borders, no grid lines, no text, no numbers, no labels.
+- Square image, 1:1.
+- Each cell shows ONE person: head and shoulders, facing the camera, face centred, same size and framing in every cell, plain light-grey background, soft even lighting, natural neutral or slightly friendly expression.
+- Photorealistic, ordinary workplace headshots: smart-casual or business clothing, normal everyday looks, some with glasses, beards or different hairstyles. No filters, no logos, no famous people or lookalikes.
+- Every person must look clearly different from all the others.
+
+PEOPLE, in reading order (left to right, top to bottom):
+1. Male, about 20, Estonian appearance, a trimmed designer stubble
+2. Female, about 25, British appearance, pearl earrings
+3. Male, about 30, Brazilian appearance, round glasses
+4. Female, about 25, Finnish appearance, short dark brown bob
+5. Female, about 25, Finnish appearance, mustard cardigan
+6. Male, about 30, Finnish appearance, neatly combed dark brown hair
+7. Female, about 25, Italian appearance, dark blond hair with a side-swept fringe
+8. Female, about 30, British appearance, pastel pink blouse
+9. Male, about 30, Finnish appearance, tousled short brown hair
+10. Male, about 30, Polish appearance, light stubble
+11. Female, about 20, Finnish appearance, shoulder-length wavy brown hair
+12. Male, about 20, Finnish appearance, a short beard and moustache
+13. Female, about 25, Finnish appearance, charcoal turtleneck
+14. Female, about 30, Indian appearance, wire-rimmed glasses
+15. Female, about 25, Finnish appearance, dark brown hair tied back
+16. Male, about 30, Finnish appearance, a short trimmed beard
+
+If you cannot produce exactly 16 distinct people in 4 rows of 4, say so instead of delivering a sheet with a different count.

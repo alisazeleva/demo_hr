@@ -1,0 +1,28 @@
+Create ONE image: a 4 x 4 contact sheet of 16 separate corporate profile photos of fictional adults, for a dummy company's HR demo.
+
+LAYOUT (strict):
+- Exactly 4 columns and 4 rows, 16 equal square cells, no gaps, no borders, no grid lines, no text, no numbers, no labels.
+- Square image, 1:1.
+- Each cell shows ONE person: head and shoulders, facing the camera, face centred, same size and framing in every cell, plain light-grey background, soft even lighting, natural neutral or slightly friendly expression.
+- Photorealistic, ordinary workplace headshots: smart-casual or business clothing, normal everyday looks, some with glasses, beards or different hairstyles. No filters, no logos, no famous people or lookalikes.
+- Every person must look clearly different from all the others.
+
+PEOPLE, in reading order (left to right, top to bottom):
+1. Female, about 40, Finnish appearance, burgundy top
+2. Male, about 40, Estonian appearance, white shirt with a dark tie
+3. Male, about 30, German appearance, short textured brown hair
+4. Female, about 25, Finnish appearance, striped shirt
+5. Male, about 30, Turkish appearance, rimless glasses
+6. Female, about 35, Turkish appearance, black hair tied back
+7. Female, about 25, French appearance, mustard cardigan
+8. Female, about 35, Finnish appearance, brown hair tied back
+9. Male, about 35, Vietnamese appearance, buzz-cut black hair
+10. Female, about 40, Italian appearance, tortoiseshell glasses
+11. Male, about 35, Finnish appearance, a short beard and moustache
+12. Male, about 30, German appearance, short wavy dark brown hair
+13. Female, about 35, Nigerian appearance, white blouse
+14. Male, about 40, Chinese appearance, short black hair
+15. Male, about 35, Finnish appearance, a goatee
+16. Female, about 35, French appearance, red blouse
+
+If you cannot produce exactly 16 distinct people in 4 rows of 4, say so instead of delivering a sheet with a different count.

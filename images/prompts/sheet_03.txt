@@ -1,0 +1,28 @@
+Create ONE image: a 4 x 4 contact sheet of 16 separate corporate profile photos of fictional adults, for a dummy company's HR demo.
+
+LAYOUT (strict):
+- Exactly 4 columns and 4 rows, 16 equal square cells, no gaps, no borders, no grid lines, no text, no numbers, no labels.
+- Square image, 1:1.
+- Each cell shows ONE person: head and shoulders, facing the camera, face centred, same size and framing in every cell, plain light-grey background, soft even lighting, natural neutral or slightly friendly expression.
+- Photorealistic, ordinary workplace headshots: smart-casual or business clothing, normal everyday looks, some with glasses, beards or different hairstyles. No filters, no logos, no famous people or lookalikes.
+- Every person must look clearly different from all the others.
+
+PEOPLE, in reading order (left to right, top to bottom):
+1. Male, about 45, Italian appearance, charcoal blazer without a tie
+2. Male, about 45, Finnish appearance, tortoiseshell glasses
+3. Female, about 40, Swedish appearance, blond hair in a ponytail
+4. Male, about 50, Finnish appearance, short textured brown hair
+5. Male, about 30, British appearance, round glasses
+6. Male, about 35, Finnish appearance, short textured dark blond hair
+7. Male, about 50, British appearance, a balding head with short blond hair at the sides
+8. Female, about 45, Brazilian appearance, brown hair tied back
+9. Male, about 35, Finnish appearance, a shaved head
+10. Female, about 30, German appearance, thin metal-framed glasses
+11. Female, about 45, Indian appearance, shoulder-length wavy black hair
+12. Male, about 35, Indian appearance, a trimmed designer stubble
+13. Female, about 40, Polish appearance, thick dark-framed glasses
+14. Female, about 40, Estonian appearance, grey cardigan
+15. Female, about 40, Finnish appearance, straight light brown hair with a centre parting
+16. Male, about 50, Finnish appearance, a full beard
+
+If you cannot produce exactly 16 distinct people in 4 rows of 4, say so instead of delivering a sheet with a different count.

@@ -1,0 +1,28 @@
+Create ONE image: a 4 x 4 contact sheet of 16 separate corporate profile photos of fictional adults, for a dummy company's HR demo.
+
+LAYOUT (strict):
+- Exactly 4 columns and 4 rows, 16 equal square cells, no gaps, no borders, no grid lines, no text, no numbers, no labels.
+- Square image, 1:1.
+- Each cell shows ONE person: head and shoulders, facing the camera, face centred, same size and framing in every cell, plain light-grey background, soft even lighting, natural neutral or slightly friendly expression.
+- Photorealistic, ordinary workplace headshots: smart-casual or business clothing, normal everyday looks, some with glasses, beards or different hairstyles. No filters, no logos, no famous people or lookalikes.
+- Every person must look clearly different from all the others.
+
+PEOPLE, in reading order (left to right, top to bottom):
+1. Female, about 50, Finnish appearance, pastel pink blouse
+2. Male, about 45, Estonian appearance, black rectangular glasses
+3. Female, about 45, Italian appearance, small stud earrings
+4. Male, about 35, Finnish appearance, short side-parted dark brown hair
+5. Female, about 40, Finnish appearance, long straight auburn hair
+6. Female, about 35, Finnish appearance, wire-rimmed glasses
+7. Male, about 55, Chinese appearance, rimless glasses
+8. Male, about 40, Spanish appearance, a short trimmed beard
+9. Male, about 35, Finnish appearance, a trimmed designer stubble
+10. Female, about 50, Finnish appearance, navy blazer
+11. Male, about 35, Finnish appearance, short textured light brown hair
+12. Male, about 50, Finnish appearance, charcoal blazer without a tie
+13. Female, about 45, Indian appearance, black hair in a ponytail
+14. Male, about 50, Swedish appearance, light stubble
+15. Female, about 50, Finnish appearance, shoulder-length wavy dark blond hair
+16. Female, about 55, Vietnamese appearance, short grey pixie cut
+
+If you cannot produce exactly 16 distinct people in 4 rows of 4, say so instead of delivering a sheet with a different count.
