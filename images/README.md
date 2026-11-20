@@ -27,7 +27,7 @@ The 151 profile pictures are fictional faces made in an image tool (ChatGPT), 16
    ```
 6. **Refresh in Power BI Desktop.** Press Refresh (or refresh only the `ProfilePictures` table). The table gets one row per file; employees without a file simply have no picture.
 7. **Check page 7.** Drill through to an employee from the new sheet and see the picture in the circle. Then save with no slicer or drill-through selection left active.
-8. **Commit.** Run `python -m pytest tests -q`, then commit `images/profiles/`, `images/sheets/sheet_NN.png` and any other change. Check the image tool's terms before publishing the pictures. The sheet PNGs are about 2 to 3 MB each, so you may want to keep `images/sheets/` out of git (add it to `.gitignore`).
+8. **Nothing to commit for the pictures.** Both `images/sheets/` and `images/profiles/` are git-ignored: the sheets are 2 to 3 MB each, and the cut pictures can be rebuilt from the sheets. Only the prompts, `sheet_map.csv` and `crop_sheets.py` are in git. Run `python -m pytest tests -q` before committing other changes. The pictures exist only on your computer, so **keep a backup** of `images/sheets/` (the copies in `C:\DemoHR\profiles` already back up the cut pictures). Check the image tool's terms before sharing the pictures in any other way.
 
 ## How it is wired in Power BI
 
