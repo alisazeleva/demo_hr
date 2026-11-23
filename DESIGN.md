@@ -165,10 +165,10 @@ KPI cards: Leave days (approved, 1 January to the reference date, subtitle `Text
 
 | Visual | Position (x, y, w x h) | Type | Fields |
 | --- | --- | --- | --- |
-| Vacation days per employee | 330, 305, 597 x 398 | Matrix, heat colouring | `DimDepartment[Department]` rows, `DimDate[Year]` columns (the reference year and the 2 before: filter `DimDate[Years Before Reference]` 0 to 2), `Vacation Days Used per Year`; subtitle "Working days by year; the current year is up to the reference date" |
-| Leave days per month by type | 953, 305, 937 x 398 | Stacked column | axis `DimDate[Year]` and `DimDate[Month]` (hierarchy), legend `DimLeaveType[LeaveType]`, `Leave Days`; a relative-date filter on `DimDate[Date]` is set; Vacation #4A6FA5, Sick Leave #E0A030, Parental Leave #8FAEE8, Unpaid Leave #5B6472, Bereavement #CBD5E1 |
-| Leave days by department | 329, 730, 602 x 320 | Bar | `DimDepartment[Department]` (one navy colour, Acme Corporation excluded, current department), `Leave Days`; filter `IsOnOrBeforeReferenceDate` = true; category labels 16 pt |
-| Absent today and approved absences, next 30 days | 953, 730, 937 x 320 | Gantt chart | Leave type (category), Employee (task), From (`FactLeaveRequests[StartDate]`), Until (`[EndDate]`); filter `FactLeaveRequests[IsInAbsenceWindow]` = true (approved, not ended on the reference date and starting by `Absence Window End Date`, 30 days after the reference date); subtitle `Text: Absent and Upcoming Leave`; the tooltip shows `Days Left in Absence` |
+| Vacation days per employee | 330, 304, 563 x 398 | Matrix, heat colouring | `DimDepartment[Department]` rows, `DimDate[Year]` columns (the reference year and the 2 before: filter `DimDate[Years Before Reference]` 0 to 2), `Vacation Days Used per Year`; subtitle "Working days by year; the current year is up to the reference date" |
+| Leave days per month by type | 923, 304, 967 x 398 | Stacked column | axis `DimDate[Year]` and `DimDate[Month]` (hierarchy), legend `DimLeaveType[LeaveType]`, `Leave Days`; filter `DimDate[Years Before Reference]` -1 to 1 (the year before, the reference year and the year after, so booked future leave shows); Vacation #4A6FA5, Sick Leave #E0A030, Parental Leave #8FAEE8, Unpaid Leave #5B6472, Bereavement #CBD5E1 |
+| Leave days by department | 329, 731, 564 x 319 | Bar | `DimDepartment[Department]` (one navy colour, Acme Corporation excluded, current department), `Leave Days`; filter `IsOnOrBeforeReferenceDate` = true; category labels 16 pt |
+| Absent today and approved absences, next 30 days | 923, 731, 970 x 319 | Gantt chart | Leave type (category), Employee (task), From (`FactLeaveRequests[StartDate]`), Until (`[EndDate]`); filter `FactLeaveRequests[IsInAbsenceWindow]` = true (approved, not ended on the reference date and starting by `Absence Window End Date`, 30 days after the reference date); subtitle `Text: Absent and Upcoming Leave`; the tooltip shows `Days Left in Absence` |
 
 Notes:
 
@@ -178,7 +178,7 @@ Notes:
 
 ## Page 7: Employee profile (built; hidden drill-through page; layout hand-adjusted)
 
-The page is hidden in view mode and filtered on `DimEmployee[FullName]` (unique across all employees) through a drill-through binding. From any visual that contains the employee name (the page 3 latest career moves table, the page 5 latest review table, the page 6 absent-today table) right-click a row, then Drill through, then Employee profile. An employee dropdown slicer (1558, 42, 325 x 79) lets you pick a person without drilling. A Back button (action Back, 1846, 0, 74 x 73) is at the top right; the page title is followed by a text box "Drill-through page" (330, 85, 16 pt, #5B6472) instead of the subtitle card.
+The page is hidden in view mode and filtered on `DimEmployee[FullName]` (unique across all employees) through a drill-through binding. From any visual that contains the employee name (the page 3 latest career moves table, the page 5 latest review table, the page 6 absent-today table) right-click a row, then Drill through, then Employee profile. An employee dropdown slicer (1535, 31, 296 x 79) lets you pick a person without drilling. A Reset page button (1850, 62, 40 x 40, tooltip "Reset page") at the top right applies the bookmark `Employee profile RESET` (data state on, selected visual: the button itself), which resets the page's filters, including the drill-through filter on `DimEmployee[FullName]`, to no employee selected; the page title is followed by a text box "Drill-through page" (330, 85, 16 pt, #5B6472) instead of the subtitle card.
 
 Profile fields that live in `DimPosition`, `DimDepartment` and `DimManager` are read with LOOKUPVALUE on the keys in `DimEmployee` (those dimensions filter `DimEmployee`, not the other way round), so SELECTEDVALUE on them would return nothing.
 
@@ -186,22 +186,22 @@ Header band: a rounded rectangle (330, 141, 1560 x 150, border only) holding bor
 
 | Area | Position (x, y, w x h) | Content |
 | --- | --- | --- |
-| Picture placeholder | 351, 152, 120 x 120 | Oval shape with the picture of the selected employee as its image fill (the measure `Profile Picture`, from `ProfilePictures[Picture]`) |
+| Picture | 350, 154, 120 x 120 | Image visual with the picture of the selected employee (source: image data from the measure `Profile Picture`, from `ProfilePictures[Picture]`; fit, corner radius 90, so it shows as a circle) |
 | Initials | 350, 154, 120 x 120 | Shape under the picture with `Text: Employee Initials` as its text (32 pt bold); visible when the employee has no picture |
-| Name | 479, 146, 477 x 81 | `Text: Profile Name`, subtitle `Text: Profile Job Level`; below it `Text: Profile Number` (488, 212) |
-| Position | 956, 151, 348 x 61 | `Text: Profile Role` (position) |
+| Name | 481, 156, 477 x 81 | `Text: Profile Name`, subtitle `Text: Profile Job Level`; below it `Text: Profile Number` (484, 214) |
+| Position | 956, 151, 348 x 61 | `Text: Profile Role` (position; "-" when no employee is selected) |
 | Department | 1304, 151, 283 x 61 | `Text: Profile Department` |
 | Manager | 1587, 150, 294 x 61 | `Text: Profile Manager` (CEO: "Reports to the board"), subtitle "Direct manager" |
 | Tenure | 960, 216, 343 x 61 | `Text: Profile Tenure`, subtitle `Text: Profile Hire Date` |
 | Current salary | 1303, 216, 283 x 61 | `Text: Profile Salary`, subtitle `Text: Profile Salary Note` |
 | Latest review | 1587, 216, 294 x 61 | `Text: Profile Rating`, subtitle `Text: Profile Rating Note` |
 | Career timeline | 330, 317, 792 x 372 | Table of `FactJobHistory`: Date, Change, Position, Department, Manager, oldest first |
-| Salary history | 1146, 317, 744 x 372 | Stepped line of `Base Salary` over `FactCompensation[EffectiveDate]`; tooltip with `Reason` and `Salary Change` |
-| Leave summary | 330, 717, 325 x 332 | Bar of `Leave Days Last 24 Months` by `DimLeaveType[LeaveType]`, category labels 16 pt |
-| Performance reviews | 680, 717, 366 x 332 | Column chart of `Average Rating` by `FactReviews[ReviewYear]`; bars coloured by a 3-colour gradient on the rating (#C8446A low, #92a9c9 mid, #4A6FA5 high) |
-| Review history | 1071, 717, 819 x 332 | Table of `FactReviews`: Review date, Level, Comments; the Level cell is coloured by `Review Level Colour` (same palette as `Level Colour`) |
+| Salary history | 1146, 317, 744 x 372 | Stepped line of `Base Salary` over `FactCompensation[EffectiveDate]`; filter `DimDate[Years Before Reference]` greater than 0 and up to 5 (the 5 years before the reference year; the reference year itself is not included); tooltip with `Reason` and `Salary Change` |
+| Leave summary | 330, 717, 336 x 332 | Bar of `Leave Days Last 24 Months` by `DimLeaveType[LeaveType]`, category labels 16 pt |
+| Performance reviews | 690, 718, 433 x 332 | Column chart of `Average Rating` by `FactReviews[ReviewYear]` (the last 5 years: filter `DimDate[Years Before Reference]` 0 to 4); bars coloured by a 3-colour gradient on the rating (#C8446A low, #92a9c9 mid, #4A6FA5 high) |
+| Review history | 1146, 717, 744 x 331 | Table of `FactReviews`: Review date, Level, Comments; the Level cell is coloured by `Review Level Colour` (same palette as `Level Colour`) |
 
-Photos: resize to about 240 x 240 px (under 20 KB each), have Power Query read the image folder into the `ProfilePictures` table (file name and base64 text, data category Image URL), related to `DimEmployee[ProfileImageFileName]`. The oval in the header uses the measure `Profile Picture` as its image fill.
+Photos: resize to about 240 x 240 px (under 20 KB each), have Power Query read the image folder into the `ProfilePictures` table (file name and base64 text, data category Image URL), related to `DimEmployee[ProfileImageFileName]`. The round image visual in the header shows the measure `Profile Picture`.
 
 ## Measures (build in the `_Measures` table; each with a description)
 

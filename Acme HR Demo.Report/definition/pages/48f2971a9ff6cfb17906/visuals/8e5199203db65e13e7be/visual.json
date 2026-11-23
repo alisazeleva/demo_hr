@@ -782,6 +782,62 @@
             }
           ]
         }
+      },
+      {
+        "name": "c19a7f01f4894606c3fe",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactJobHistory"
+              }
+            },
+            "Property": "EffectiveDate"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "31704df82221d8a62baa",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimEmployee"
+              }
+            },
+            "Property": "FullName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "e3bb41bab7d87b0342f1",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactJobHistory"
+              }
+            },
+            "Property": "PrevPositionTitle"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "f12990e1d55971148849",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactJobHistory"
+              }
+            },
+            "Property": "PositionTitle"
+          }
+        },
+        "type": "Categorical"
       }
     ]
   }

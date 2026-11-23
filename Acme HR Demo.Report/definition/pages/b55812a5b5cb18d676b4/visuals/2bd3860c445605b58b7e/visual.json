@@ -747,7 +747,8 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "298094dbcc5e2172056d",
+        "name": "e0e416a77c558cd7c92d",
+        "ordinal": 0,
         "field": {
           "Column": {
             "Expression": {
@@ -755,7 +756,7 @@
                 "Entity": "DimDate"
               }
             },
-            "Property": "Date"
+            "Property": "Years Before Reference"
           }
         },
         "type": "Advanced",
@@ -771,26 +772,45 @@
           "Where": [
             {
               "Condition": {
-                "Comparison": {
-                  "ComparisonKind": 2,
+                "And": {
                   "Left": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Source": "d"
+                    "Comparison": {
+                      "ComparisonKind": 2,
+                      "Left": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "d"
+                            }
+                          },
+                          "Property": "Years Before Reference"
                         }
                       },
-                      "Property": "Date"
+                      "Right": {
+                        "Literal": {
+                          "Value": "-1L"
+                        }
+                      }
                     }
                   },
                   "Right": {
-                    "DateSpan": {
-                      "Expression": {
-                        "Literal": {
-                          "Value": "datetime'2025-01-01T00:00:00'"
+                    "Comparison": {
+                      "ComparisonKind": 4,
+                      "Left": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "d"
+                            }
+                          },
+                          "Property": "Years Before Reference"
                         }
                       },
-                      "TimeUnit": 5
+                      "Right": {
+                        "Literal": {
+                          "Value": "1L"
+                        }
+                      }
                     }
                   }
                 }
@@ -801,7 +821,8 @@
         "howCreated": "User"
       },
       {
-        "name": "9a53bb10d868895f35c6",
+        "name": "298094dbcc5e2172056d",
+        "ordinal": 1,
         "field": {
           "Column": {
             "Expression": {
@@ -809,27 +830,30 @@
                 "Entity": "DimDate"
               }
             },
-            "Property": "Year"
+            "Property": "Date"
+          }
+        },
+        "type": "RelativeDate",
+        "howCreated": "User"
+      },
+      {
+        "name": "cfe079c51fc94916a38f",
+        "ordinal": 2,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Leave Days"
           }
         },
         "type": "Advanced"
       },
       {
-        "name": "2d14c32c5ac9cb72e5b5",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimDate"
-              }
-            },
-            "Property": "Month"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
         "name": "1d9e7c2d8cba471cebde",
+        "ordinal": 3,
         "field": {
           "Column": {
             "Expression": {
@@ -843,19 +867,36 @@
         "type": "Categorical"
       },
       {
-        "name": "cfe079c51fc94916a38f",
+        "name": "2d14c32c5ac9cb72e5b5",
+        "ordinal": 4,
         "field": {
-          "Measure": {
+          "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "_Measures"
+                "Entity": "DimDate"
               }
             },
-            "Property": "Leave Days"
+            "Property": "Month"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "9a53bb10d868895f35c6",
+        "ordinal": 5,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimDate"
+              }
+            },
+            "Property": "Year"
           }
         },
         "type": "Advanced"
       }
-    ]
+    ],
+    "filterSortOrder": "Custom"
   }
 }

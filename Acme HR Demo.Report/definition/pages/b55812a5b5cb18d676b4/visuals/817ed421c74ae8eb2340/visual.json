@@ -1128,6 +1128,105 @@
           ]
         },
         "howCreated": "User"
+      },
+      {
+        "name": "17248c9f65d682d9bcbb",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimLeaveType"
+              }
+            },
+            "Property": "LeaveType"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "a616ded84b371ff05c9b",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "FactLeaveRequests"
+                  }
+                },
+                "Property": "EndDate"
+              }
+            },
+            "Function": 4
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "6f9e2d31727fb49008b2",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "FactLeaveRequests"
+                  }
+                },
+                "Property": "StartDate"
+              }
+            },
+            "Function": 3
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "2ebd041b2cc217010d42",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimEmployee"
+              }
+            },
+            "Property": "FullName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "8c172500cde25174c69e",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DimLeaveType"
+                  }
+                },
+                "Property": "LeaveType"
+              }
+            },
+            "Function": 3
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c6a4a72756f197551550",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Days Left in Absence"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

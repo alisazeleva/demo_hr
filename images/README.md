@@ -35,7 +35,7 @@ The prompts and `sheet_map.csv` cover all 171 employees: the 151 of the first lo
 
 - `ProfilePicturesFolder` (parameter, `C:\DemoHR\profiles`) is the folder with the JPEGs.
 - The `ProfilePictures` table reads every `.jpg` there with Power Query and turns each into a base64 text (`data:image/jpeg;base64,...`) with data category Image URL. It is related many-to-one to `DimEmployee[ProfileImageFileName]`, so the selected employee filters it.
-- The measure `Profile Picture` (`SELECTEDVALUE(ProfilePictures[Picture])`) is the image fill of the circle in the page 7 header.
+- The measure `Profile Picture` (`SELECTEDVALUE(ProfilePictures[Picture])`) is the source of the round image visual in the page 7 header (corner radius 90).
 - A model text cell holds about 32,000 characters and base64 adds a third, so keep every JPEG small (the script keeps them under 20 KB; typical files are 6 to 8 KB).
 
 ## If something goes wrong

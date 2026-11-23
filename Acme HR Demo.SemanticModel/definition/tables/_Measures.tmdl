@@ -605,13 +605,13 @@ table _Measures
 		displayFolder: Leave
 		lineageTag: ed7f4f9c-ab8a-4d2c-b613-3219ed3c39da
 
-	/// Position title of the selected employee (shown in the Position card of the profile header); a prompt to drill through when no employee is selected.
+	/// Position title of the selected employee (shown in the Position card of the profile header); "-" when no employee is selected.
 	measure 'Text: Profile Role' =
 			// DimPosition filters DimEmployee, not the other way round, so the title is looked up by key.
 			VAR position =
 			    LOOKUPVALUE(DimPosition[PositionTitle], DimPosition[PositionID], SELECTEDVALUE(DimEmployee[PositionID]))
 			RETURN
-			    IF(ISBLANK(position), "Drill through from another page", position)
+			    IF(ISBLANK(position), "-", position)
 		displayFolder: Profile
 		lineageTag: 6f9b8a1a-78c0-4ac7-9be0-ac65c25a59e0
 
