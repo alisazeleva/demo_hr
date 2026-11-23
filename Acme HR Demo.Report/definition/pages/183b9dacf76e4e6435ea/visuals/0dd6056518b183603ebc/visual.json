@@ -4,7 +4,7 @@
   "position": {
     "x": 1146.480065093572,
     "y": 717.02615366732539,
-    "z": 22000,
+    "z": 21000,
     "height": 331.3746367546205,
     "width": 743.6884807625247,
     "tabOrder": 21000
@@ -210,6 +210,19 @@
                       "Percent": -0.1
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
@@ -426,5 +439,51 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "12d5b4df121455de356d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactReviews"
+              }
+            },
+            "Property": "ReviewDate"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "56224cd4752bd52ff83a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactReviews"
+              }
+            },
+            "Property": "Level"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "ab77d2ca25d10a416403",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactReviews"
+              }
+            },
+            "Property": "Comments"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }
