@@ -1,10 +1,10 @@
 """Cut the ChatGPT contact sheets into one profile picture per employee.
 
-Reads   images/sheets/sheet_01.png ... sheet_10.png   (4 x 4 grid, cell 1 top-left, then left to right, top to bottom)
+Reads   images/sheets/sheet_01.png ... sheet_11.png  (4 x 4 grid, cell 1 top-left, then left to right, top to bottom)
 and     images/sheet_map.csv                          (Sheet, Cell, EmployeeNumber, Gender, Nationality, Age)
 Writes  images/profiles/EMP-000001.jpg ...            (240 x 240 px, JPEG under 20 KB)
 
-Only the cells listed in sheet_map.csv are cut, so the empty cells 8 to 16 of sheet 10 are skipped.
+Only the cells listed in sheet_map.csv are cut, so the empty cells 12 to 16 of sheet 11 are skipped.
 A sheet that is not square is reported (its cells are still cut, each cropped to a centred square).
 
 Usage (from the repo root):

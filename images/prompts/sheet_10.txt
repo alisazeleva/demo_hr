@@ -3,7 +3,7 @@ Create ONE image: a 4 x 4 contact sheet of 16 separate corporate profile photos 
 LAYOUT (strict):
 - Exactly 4 columns and 4 rows, 16 equal square cells, no gaps, no borders, no grid lines, no text, no numbers, no labels.
 - Square image, 1:1.
-- Cells 1 to 7 each show ONE person: head and shoulders, facing the camera, face centred, same size and framing in every cell, plain light-grey background, soft even lighting, natural neutral or slightly friendly expression.
+- Each cell shows ONE person: head and shoulders, facing the camera, face centred, same size and framing in every cell, plain light-grey background, soft even lighting, natural neutral or slightly friendly expression.
 - Photorealistic, ordinary workplace headshots: smart-casual or business clothing, normal everyday looks, some with glasses, beards or different hairstyles. No filters, no logos, no famous people or lookalikes.
 - Every person must look clearly different from all the others.
 
@@ -15,6 +15,14 @@ PEOPLE, in reading order (left to right, top to bottom):
 5. Male, about 20, French appearance, light stubble
 6. Female, about 20, Spanish appearance, short dark brown pixie cut
 7. Female, about 30, Finnish appearance, dark brown hair in a ponytail
-8 to 16. EMPTY: leave cells 8 to 16 as empty plain light-grey squares, with no person, no text and no shapes.
+8. Male, about 30, Vietnamese appearance, thin black-rimmed glasses
+9. Female, about 30, German appearance, straight blond shoulder-length hair
+10. Female, about 25, Indian appearance, long black hair in a side braid
+11. Female, about 35, Finnish appearance, light-brown hair in a low bun, navy blazer
+12. Male, about 25, Finnish appearance, curly light-brown hair, grey hoodie under a jacket
+13. Female, about 40, Finnish appearance, short ash-blond hair, tortoiseshell glasses
+14. Female, about 40, Turkish appearance, dark wavy hair, emerald-green blouse
+15. Male, about 30, Nigerian appearance, short twists, white open-collar shirt
+16. Female, about 30, French appearance, auburn hair in a loose bob, striped top
 
-If you cannot produce exactly 7 distinct people in cells 1 to 7 and 9 empty plain grey cells (8 to 16) in 4 rows of 4, say so instead of delivering a sheet with a different count.
+If you cannot produce exactly 16 distinct people in 4 rows of 4, say so instead of delivering a sheet with a different count.

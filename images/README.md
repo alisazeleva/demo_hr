@@ -2,11 +2,11 @@
 
 The profile pictures are fictional faces made in an image tool (ChatGPT), 16 per contact sheet, then cut into one JPEG per employee and loaded into Power BI. The database stores only the file names (`EMP-######.jpg`, set by `sql/12_assign_profile_pictures.sql` for the first load and by `sql/15_generate_2027_2030.sql` for later hires).
 
-The prompts and `sheet_map.csv` cover the 151 employees of the first load. The 20 people hired after 2026-11-16 (EMP-000152 to EMP-000171) have no prompts yet; they need two more sheets (11 and 12) made the same way. Until a file exists, an employee simply has no picture.
+The prompts and `sheet_map.csv` cover all 171 employees: the 151 of the first load and the 20 hired after 2026-11-16 (EMP-000152 to EMP-000160 fill cells 8 to 16 of sheet 10, EMP-000161 to EMP-000171 are on sheet 11). `Age` in the map is the age on 2026-11-16 for the first load and the age on the hire date for later hires; the prompts round it to the nearest 5. Until a file exists, an employee has no picture and page 7 shows their initials.
 
 | Path | What it is |
 | --- | --- |
-| `prompts/sheet_01.txt` ... `sheet_10.txt` | The prompt for each sheet (16 people per sheet, sheet 10 has 7 people and 9 empty cells) |
+| `prompts/sheet_01.txt` ... `sheet_11.txt` | The prompt for each sheet (16 people per sheet, sheet 11 has 11 people and 5 empty cells) |
 | `sheet_map.csv` | Maps Sheet and Cell to EmployeeNumber (cell 1 is top-left, then left to right, top to bottom) |
 | `sheets/sheet_NN.png` | The sheet saved from the image tool |
 | `crop_sheets.py` | Cuts the sheets into pictures |
@@ -14,7 +14,7 @@ The prompts and `sheet_map.csv` cover the 151 employees of the first load. The 2
 
 ## Add a sheet
 
-1. **Make the sheet.** Paste the whole of `prompts/sheet_NN.txt` into ChatGPT and ask for the image. It must be **square with exactly 4 x 4 faces** (sheet 10: 7 faces in cells 1 to 7, the rest empty plain grey). If a sheet has the wrong count or a bad face, ask again; one face cannot be swapped without redoing the sheet.
+1. **Make the sheet.** Paste the whole of `prompts/sheet_NN.txt` into ChatGPT and ask for the image. It must be **square with exactly 4 x 4 faces** (sheet 11: 11 faces in cells 1 to 11, the rest empty plain grey). If a sheet has the wrong count or a bad face, ask again; one face cannot be swapped without redoing the sheet.
 2. **Save it** as `images/sheets/sheet_NN.png` (two digits, for example `sheet_02.png`).
 3. **Cut it.** From the repository root:
    ```
