@@ -1,6 +1,6 @@
--- 04_calendar.sql: set up the period (#Run.OldDate, #Run.NewDate] (step 5 of sql/extend_data.sql): the hire slots, the quarter starts
--- and the lists used by the hire and quarter steps. The records themselves are written by 05_run_calendar.sql, one date at a time in date
--- order, so a long run and several short runs give the same result. Runs inside the transaction opened by 02_log_run.sql.
+-- 03_calendar.sql: set up the period (#Run.OldDate, #Run.NewDate] (step 4 of sql/15_generate_2027_2030.sql): the hire slots, the quarter starts
+-- and the lists used by the hire and quarter steps. The records themselves are written by 04_run_calendar.sql, one date at a time in date
+-- order, so every run gives the same result. Runs inside the transaction opened by 01_start.sql.
 --
 -- Hire slots: at most 5 hires a calendar year. Each year has 5 fixed slots, one in each fifth of the year (70-day windows from 1 January,
 --   73 days apart); the day inside the window comes from a hash of (seed, year, slot) and moves forward to a working day (no weekend, no

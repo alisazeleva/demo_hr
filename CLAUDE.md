@@ -6,7 +6,7 @@ Build a dummy HR database (SQL Server) for Acme Corporation, then a Power BI rep
 
 - `PLAN.md`: the authoritative data structure, generation rules and script sequence. If anything disagrees with another file, PLAN.md wins.
 - `CONTEXT.md`: the original project description. Kept for background; superseded where PLAN.md says otherwise (see the note at its top).
-- `sql/`: numbered scripts, one logical step each (`00_create_database.sql` ... `99_full_validation.sql`; `12_assign_profile_pictures.sql` sets `ProfileImageFileName` to `EmployeeNumber.jpg` for everyone; `13_create_extension_tables.sql` the add-only tables of the extension; `14_create_reporting_views.sql` the timeline views and as-of functions). `extend_data.sql` with `sql/update/` extends the data to a later end date (see Data timeline). `build_all.sql` runs 00 to 14, the extension and 99 in one go for a new database.
+- `sql/`: numbered scripts, one logical step each (`00_create_database.sql` ... `99_full_validation.sql`; `12_assign_profile_pictures.sql` sets `ProfileImageFileName` to `EmployeeNumber.jpg` for everyone; `13_create_timeline_tables.sql` the tables for the data after 2026-11-16; `14_create_reporting_views.sql` the timeline views and as-of functions; `15_generate_2027_2030.sql` the data from 2026-11-17 to 2030-12-31, with its parts in `sql/15_generate_2027_2030/`). `build_all.sql` builds a new database with everything in one go (see Data timeline).
 - `Acme HR Demo.pbip`, `Acme HR Demo.Report/` (PBIR) and `Acme HR Demo.SemanticModel/` (TMDL): the Power BI project. `DESIGN.md` has the design rules and page layouts.
 - `powerbi/`: the report theme `acme_hr_theme.json`.
 - `tools/`: Python helpers for the report (`validate_pbir.py` and first-draft page builders, see `tools/README.md`).
@@ -22,7 +22,7 @@ Build a dummy HR database (SQL Server) for Acme Corporation, then a Power BI rep
 
 ## Key decisions (details in PLAN.md)
 
-- First load (2026-11-16): 151 employees: 1 CEO under Acme Corporation + 150 in 5 departments (Technology 45, Finance 25, Human Resources 20, Sales 35, Customer Experience 25). The extension adds at most 5 hires a year up to 2030-12-31 (171 employees at the end of the data).
+- First load (2026-11-16): 151 employees: 1 CEO under Acme Corporation + 150 in 5 departments (Technology 45, Finance 25, Human Resources 20, Sales 35, Customer Experience 25). Script 15 adds at most 5 hires a year up to 2030-12-31 (171 employees at the end of the data).
 - Employee numbers EMP-000001 to EMP-000151 in rank order at the first load (CEO is EMP-000001); later hires continue the sequence in hire order.
 - One company, 5 departments, no subdepartments. Current employees only: no former, terminated or retired employees.
 - A position belongs to exactly one department; an employee's department always equals their position's department. A transfer means a new position.
@@ -34,11 +34,10 @@ Build a dummy HR database (SQL Server) for Acme Corporation, then a Power BI rep
 
 ## Data timeline
 
-- The tables hold the whole timeline from the first load (2026-11-16) to the end of the data (`dbo.vw_DataRange`, the latest row of `dbo.ReferenceDateLog`; 2030-12-31 now). Records dated after the reference date are hidden by Power BI until that date comes.
-- **Existing data is never changed.** `sql/extend_data.sql` only adds rows. The one edit to an old row is filling `EndDate` of an open job-history or pay row when a newer row starts. The script checks this with signatures of the old rows and rolls back otherwise.
-- **Extend**: set `EndDate` at the top of `sql/extend_data.sql` and run it from the repository root: `sqlcmd -S ".\SQLEXPRESS" -E -C -b -I -d DemoHR -f 65001 -i sql/extend_data.sql`. It makes a verified backup first (the server's default backup folder, `<db>` subfolder, last 10 kept), runs in one transaction, and is deterministic: one long run gives the same data as several short ones. Afterwards run `sql/99_full_validation.sql` and refresh Power BI.
-- **Restore** a backup: `RESTORE DATABASE DemoHR FROM DISK = N'<path printed by the run>' WITH REPLACE` (set the database to single user first if it is in use).
-- Add-only tables: `ReferenceDateLog` (one row per run), `DepartmentWorkforcePlanHistory` (target per department from a date on), `LeaveRequestInfo` (request date, decision date, final status and approver of a leave; until the decision date a request is Pending).
+- The tables hold the whole timeline, from 2012 to 2030-12-31 (`dbo.vw_DataRange`). Records dated after the reference date are hidden by Power BI until that date comes.
+- **Build** from scratch in one run, from the repository root: `sqlcmd -S ".\SQLEXPRESS" -E -C -b -I -f 65001 -i sql/build_all.sql`. It creates `DemoHR` (and stops if it exists), runs 01 to 15 and 99. Deterministic: every build gives the same data.
+- **How the data is made.** Scripts 06 to 11 build the company as it is on 2026-11-16 and derive its history backwards. Script 15 then moves forward date by date to 2030-12-31 and only adds rows (at most 5 hires a year, promotions, transfers, pay changes, reviews, holidays, leave). The one edit to a row of 06 to 11 is filling `EndDate` of an open job-history or pay row when a newer row starts; script 15 checks this with signatures of those rows and rolls back otherwise. It runs once: on a database that already has the data it stops.
+- Tables of script 13: `ReferenceDateLog` (the range of the data: 2026-11-16, then 2030-12-31), `DepartmentWorkforcePlanHistory` (target per department from a date on), `LeaveRequestInfo` (request date, decision date, final status and approver of a leave; until the decision date a request is Pending).
 - `sql/99_full_validation.sql` checks the timeline and the state of the company on `@RefDate` (default the end of the data; set it at the top to check another date).
 
 ## How to work

@@ -1,19 +1,18 @@
--- build_all.sql: builds DemoHR from scratch with data up to 2030-12-31, in one run.
--- Creates the database, runs scripts 01 to 14 (first load: the company on 2026-11-16), extends the data with
--- sql/extend_data.sql (end date set there, 2030-12-31; it also makes a verified backup) and runs the full validation.
--- Deterministic: every build gives the same data as the database the report was made with.
--- It stops if the database already exists, so an existing database is never overwritten
--- (to rebuild, drop it first; to add data to an existing database, run sql/extend_data.sql instead).
+-- build_all.sql: builds DemoHR from scratch with the full data set, 2012 to 2030-12-31, in one run.
+-- Creates the database and runs every script in order: 01 to 12 build the company as it is on 2026-11-16 (with its history),
+-- 13 and 14 add the timeline tables and the reporting views, 15 generates the data from 2026-11-17 to 2030-12-31,
+-- and 99 validates everything. Deterministic: every build gives the same data.
+-- It stops if the database already exists, so an existing database is never overwritten (to rebuild, drop it first).
 -- Run from the repository root, in sqlcmd mode (the :r lines need sqlcmd), with quoted identifiers on (-I):
 --   sqlcmd -S ".\SQLEXPRESS" -E -C -b -I -f 65001 -i sql/build_all.sql
 -- Another database name: change the :setvar line below.
--- Takes a few minutes; the last result is the validation summary (every check must pass).
+-- Takes under a minute; the last result is the validation summary (every check must pass).
 :setvar DbName DemoHR
 :on error exit
 SET NOCOUNT ON;
 
 IF DB_ID(N'$(DbName)') IS NOT NULL
-    THROW 50000, 'Database $(DbName) already exists. Drop it first to rebuild it, or run sql/extend_data.sql to add data to it.', 1;
+    THROW 50000, 'Database $(DbName) already exists. Drop it first to rebuild it.', 1;
 CREATE DATABASE [$(DbName)];
 PRINT 'Database $(DbName) created.';
 GO
@@ -56,15 +55,15 @@ GO
 PRINT '=== 12 profile picture file names';
 :r sql/12_assign_profile_pictures.sql
 GO
-PRINT '=== 13 extension tables';
-:r sql/13_create_extension_tables.sql
+PRINT '=== 13 timeline tables';
+:r sql/13_create_timeline_tables.sql
 GO
 PRINT '=== 14 reporting views';
 :r sql/14_create_reporting_views.sql
 GO
-PRINT '=== extend the data to 2030-12-31';
-:r sql/extend_data.sql
+PRINT '=== 15 data from 2026-11-17 to 2030-12-31';
+:r sql/15_generate_2027_2030.sql
 GO
-PRINT '=== full validation';
+PRINT '=== 99 full validation';
 :r sql/99_full_validation.sql
 GO

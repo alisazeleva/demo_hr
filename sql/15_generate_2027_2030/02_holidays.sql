@@ -1,4 +1,4 @@
--- 03_holidays.sql: Finnish public holidays for every year of the period that has none yet (step 4 of sql/extend_data.sql)
+-- 02_holidays.sql: Finnish public holidays for every year of the period that has none yet (step 3 of sql/15_generate_2027_2030.sql)
 -- The same 15 days a year as 05_seed_support_data.sql: New Year's Day, Epiphany, Good Friday, Easter Sunday, Easter Monday, May Day,
 -- Ascension Day (Easter + 39), Pentecost (Easter + 49), Midsummer Eve (the Friday of 19-25 June), Midsummer Day, All Saints' Day
 -- (the Saturday of 31 Oct - 6 Nov), Independence Day, Christmas Eve, Christmas Day, Boxing Day. Easter: the Gregorian computus.

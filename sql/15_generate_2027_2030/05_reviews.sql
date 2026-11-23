@@ -1,4 +1,4 @@
--- 06_reviews.sql: annual performance reviews held in the period (#Run.OldDate, #Run.NewDate] (step 6 of sql/extend_data.sql)
+-- 05_reviews.sql: annual performance reviews held in the period (#Run.OldDate, #Run.NewDate] (step 6 of sql/15_generate_2027_2030.sql)
 -- Same rules as 10_generate_reviews.sql, one review per employee and calendar year Y (period 1 Jan - 31 Dec), held on a working day
 -- between 20 January and 15 March of year Y + 1:
 --   * eligible: has a manager (not the CEO) and was hired on or before 1 July of Y; about 4% of the eligible reviews are left out;
@@ -8,7 +8,7 @@
 --     the promotion is not known yet when the review is written);
 --   * comment: a short template sentence for the performance level.
 -- A review is added when its date falls in the period, so the result does not depend on how often the update runs; a review that already
--- exists for that employee and year is left alone. Runs inside the transaction opened by 02_log_run.sql. Only inserts.
+-- exists for that employee and year is left alone. Runs inside the transaction opened by 01_start.sql. Only inserts.
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 

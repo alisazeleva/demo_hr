@@ -5,7 +5,7 @@ SET XACT_ABORT ON;
 SET QUOTED_IDENTIFIER ON; -- required for filtered indexes; sqlcmd defaults to OFF
 BEGIN TRANSACTION;
 
--- Drop in reverse dependency order so the script can be re-run (the tables of 13_create_extension_tables.sql first: they refer to the others)
+-- Drop in reverse dependency order so the script can be re-run (the tables of 13_create_timeline_tables.sql first: they refer to the others)
 DROP TABLE IF EXISTS dbo.LeaveRequestInfo;
 DROP TABLE IF EXISTS dbo.DepartmentWorkforcePlanHistory;
 DROP TABLE IF EXISTS dbo.ReferenceDateLog;
@@ -58,7 +58,7 @@ CREATE TABLE dbo.Employees (
     ManagerEmployeeID    int NULL CONSTRAINT FK_Employees_Manager REFERENCES dbo.Employees (EmployeeID),
     ProfileImageFileName varchar(20) NULL,
     CONSTRAINT CK_Employees_NotOwnManager CHECK (ManagerEmployeeID IS NULL OR ManagerEmployeeID <> EmployeeID),
-    CONSTRAINT CK_Employees_HireDate CHECK (HireDate > DATEADD(YEAR, 18, DateOfBirth))   -- no upper limit: sql/extend_data.sql adds later hires
+    CONSTRAINT CK_Employees_HireDate CHECK (HireDate > DATEADD(YEAR, 18, DateOfBirth))   -- no upper limit: sql/15_generate_2027_2030.sql adds hires up to 2030
 );
 -- Unique filename, but any number of NULLs until the picture phase
 CREATE UNIQUE INDEX UX_Employees_ProfileImage ON dbo.Employees (ProfileImageFileName) WHERE ProfileImageFileName IS NOT NULL;

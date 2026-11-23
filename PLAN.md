@@ -2,7 +2,7 @@
 
 Nov 16, 2026 · @Alisa
 
-DemoHR holds 151 current employees on 2026-11-16 (a CEO plus 150 spread over five departments) in 10 SQL Server tables, filled by numbered scripts you run one at a time and then reported on in Power BI. The data is then extended to 2030-12-31 by adding records only (171 employees at the end; see Refreshing the data), and the report shows the company as of its refresh date.
+DemoHR holds 151 current employees on 2026-11-16 (a CEO plus 150 spread over five departments) in 10 SQL Server tables, filled by numbered scripts you run one at a time and then reported on in Power BI. Script 15 then adds the data up to 2030-12-31 (171 employees at the end; see Data after 2026-11-16), and the report shows the company as of its refresh date.
 
 ## Decisions locked in
 
@@ -12,7 +12,7 @@ DemoHR holds 151 current employees on 2026-11-16 (a CEO plus 150 spread over fiv
 | Employee numbers | EMP-000001 to EMP-000151 (the original plan said 150; the CEO is EMP-000001) |
 | Department vs position | Every position belongs to one department; an employee's department always equals their position's department, so a transfer means a new position |
 | Manager rule | A manager's job level must be strictly higher than every direct report's |
-| Reference date | 2026-11-16 for the first load (scripts 06 to 11); the data is then extended to 2030-12-31 (`sql/extend_data.sql`), and the report's "today" is the refresh date, set in Power BI |
+| Reference date | 2026-11-16 for the first load (scripts 06 to 11); script 15 then adds the data up to 2030-12-31, and the report's "today" is the refresh date, set in Power BI |
 | Currency | EUR for everyone, annual salary |
 | Leave days | Working days, excluding weekends and Finnish public holidays |
 | Profile pictures | Generated in an external AI image tool, after the employee data is final; the database stores only filenames |
@@ -22,7 +22,7 @@ Where a decision below is my default rather than yours, it is listed under Confi
 
 ## Schema
 
-Ten planned tables plus one small support table (PublicHolidays), in SQL Server, schema `dbo`, database `DemoHR`, and three add-only tables for the data extension (see Extension tables). Small fixed lists (change types, statuses, genders) are CHECK constraints rather than lookup tables; only LeaveTypes is a real table, as in your plan.
+Ten planned tables plus one small support table (PublicHolidays), in SQL Server, schema `dbo`, database `DemoHR`, and three tables for the data after 2026-11-16 (see Timeline tables). Small fixed lists (change types, statuses, genders) are CHECK constraints rather than lookup tables; only LeaveTypes is a real table, as in your plan.
 
 ### OrganizationUnits
 
@@ -105,13 +105,13 @@ Ten planned tables plus one small support table (PublicHolidays), in SQL Server,
 ### DummyNames and PublicHolidays (support tables)
 
 - DummyNames: `DummyNameID` int identity primary key; `NameType` varchar(5) ('First' or 'Last'); `NameValue` nvarchar(60); `Gender` varchar(10) null (first names only); `Nationality`, `NativeLanguage` nvarchar(60). Your plan listed FirstName and LastName as columns; two name types in one column lets each name be picked independently.
-- PublicHolidays: `HolidayDate` date primary key; `HolidayName` nvarchar(60). Finnish holidays, used to count working days: 2012 to 2027 from script 05, and the extension adds the years up to the year after its end date (2031 now) with the Easter formula.
+- PublicHolidays: `HolidayDate` date primary key; `HolidayName` nvarchar(60). Finnish holidays, used to count working days: 2012 to 2027 from script 05, and script 15 adds 2028 to 2031 with the Easter formula.
 
-### Extension tables (script 13, add-only)
+### Timeline tables (script 13, filled by script 15)
 
-- ReferenceDateLog: `RunID` int identity primary key; `OldReferenceDate` date null; `NewReferenceDate` date not null, unique (the end of the data after the run); `RunAt` datetime2; `Note`. First row 2026-11-16; the latest row is the end of the data (`vw_DataRange`).
+- ReferenceDateLog: `RunID` int identity primary key; `OldReferenceDate` date null; `NewReferenceDate` date not null, unique; `RunAt` datetime2; `Note`. Two rows: 2026-11-16 (scripts 06 to 11) and 2030-12-31 (script 15); `vw_DataRange` reads the range from it.
 - DepartmentWorkforcePlanHistory: `HistoryID` int identity primary key; `OrganizationUnitID` FK; `EffectiveDate` date; `TargetHeadcount` int, CHECK greater than 0; unique on unit and date. First rows: the plan of 2026-11-16; a row is added when a hire raises a target. DepartmentWorkforcePlan itself is never edited.
-- LeaveRequestInfo: `LeaveID` int primary key, FK to EmployeeLeaves; `RequestDate`, `DecisionDate` date (CHECK decision not before request); `FinalStatus` varchar(10) CHECK in ('Approved','Rejected'); `ApprovedByEmployeeID` FK; `IsNew` bit (1 = leave added by the extension, 0 = a Pending request of the first load). A request is visible from its request date and Pending until its decision date.
+- LeaveRequestInfo: `LeaveID` int primary key, FK to EmployeeLeaves; `RequestDate`, `DecisionDate` date (CHECK decision not before request); `FinalStatus` varchar(10) CHECK in ('Approved','Rejected'); `ApprovedByEmployeeID` FK; `IsNew` bit (1 = leave added by script 15, 0 = a Pending request of 2026-11-16). A request is visible from its request date and Pending until its decision date.
 
 ### Rules the database cannot enforce alone
 
@@ -198,7 +198,7 @@ The holder counts are the final headcount per position and add up to the matrix 
 
 ## Generation rules
 
-These rules describe the first load (scripts 06 to 11, the company on 2026-11-16); the forward extension to 2030 follows Refreshing the data. The data is built backwards from a fixed final state, so the current headcount, positions and managers are exact by construction and the history is derived from them. Every random choice uses a fixed seed (a hash of seed value, employee ID and a label), so re-running a script gives identical data.
+These rules describe the first load (scripts 06 to 11, the company on 2026-11-16); script 15 then goes forward to 2030 (see Data after 2026-11-16). The data is built backwards from a fixed final state, so the current headcount, positions and managers are exact by construction and the history is derived from them. Every random choice uses a fixed seed (a hash of seed value, employee ID and a label), so re-running a script gives identical data.
 
 ### Principles
 
@@ -285,25 +285,24 @@ Fifteen numbered scripts, one logical step each; you run one, check its result, 
 | 10\_generate\_reviews | Annual reviews | Valid reviewers, ratings 1–5, dates after hire |
 | 11\_generate\_leave | Leave records | No overlaps, valid approvers, 6 or more absent on 2026-11-16 |
 | 12\_prepare\_profile\_images | Writes the list of employees with gender and age for image prompts; after you create the images, fills ProfileImageFileName | 151 unique filenames, one per EmployeeNumber |
-| 13\_create\_extension\_tables | Add-only tables of the extension: ReferenceDateLog, DepartmentWorkforcePlanHistory, LeaveRequestInfo (first rows as of 2026-11-16) | Tables exist, one log row |
+| 13\_create\_timeline\_tables | Tables for the data after 2026-11-16: ReferenceDateLog, DepartmentWorkforcePlanHistory, LeaveRequestInfo (first rows as of 2026-11-16) | Tables exist, one log row |
 | 14\_create\_reporting\_views | Timeline views for Power BI (no reference date) and the as-of functions `fn_EmployeeAsOf`, `fn_OrgHierarchy`, `fn_EmployeeCurrent`, `fn_DepartmentHeadcountVsTarget` | Views return rows |
-| extend\_data (with `sql/update/`) | Adds records from the end of the data to a new end date (2030-12-31): hires, job changes, pay, reviews, holidays, leave | Old rows unchanged, all rules hold |
+| 15\_generate\_2027\_2030 (parts in `sql/15_generate_2027_2030/`) | Adds the records from 2026-11-17 to 2030-12-31: hires, job changes, pay, reviews, holidays, leave | Rows of 06 to 11 unchanged, all rules hold |
 | 99\_full\_validation | Every check from the final validation list, on the timeline and on a reference date (default the end of the data) | All checks pass |
-| build\_all | Everything above in one run for a new database: creates it, runs 01 to 14, the extension to 2030-12-31 and 99 (stops if the database exists) | 49 of 49 checks pass |
+| build\_all | Everything above in one run for a new database: creates it, runs 01 to 15 and 99 (stops if the database exists) | 49 of 49 checks pass |
 
 Profile pictures stay the last data step, as in your plan: nothing is generated until the employee data is final. I will produce the prompt list (EmployeeNumber, gender, rough age, a style line identical for all), you create the images in your image tool and save them as `EMP-000001.jpg` to `EMP-000151.jpg`, then script 12 fills the column.
 
 **Prepared workflow (nothing generated yet).** `images/prompts/sheet_01.txt` to `sheet_10.txt` hold ChatGPT prompts for 4 x 4 contact sheets of 16 people (sheet 10: 7 people and 9 empty cells), built from the employees of the first load (now `dbo.fn_EmployeeCurrent('2026-11-16')`) in EmployeeNumber order with a fixed seed (gender, age rounded to 5 on the reference date, nationality as appearance, one varied detail; no names). `images/sheet_map.csv` maps Sheet and Cell to EmployeeNumber. After the sheets are saved as `images/sheets/sheet_NN.png`, `python images/crop_sheets.py` cuts them into `images/profiles/EMP-######.jpg` (240 x 240, under 20 KB). Script 12 (`12_assign_profile_pictures.sql`) sets `ProfileImageFileName` to `EmployeeNumber.jpg` for all employees, including those whose picture does not exist yet.
 
-## Refreshing the data
+## Data after 2026-11-16
 
-The first load (scripts 06 to 11) describes the company on 2026-11-16. It is extended forward by adding records, never by regenerating or shifting dates.
+Scripts 06 to 11 describe the company on 2026-11-16. Script 15 (`sql/15_generate_2027_2030.sql`, parts in `sql/15_generate_2027_2030/`) continues from there to 2030-12-31 by adding records, never by regenerating or shifting dates. `sql/build_all.sql` runs it as part of the full build.
 
-- **Rule for existing data.** Everything up to the old end of the data stays identical. The only edit to an old row is filling `EndDate` of an open job-history or pay row when a newer row starts. `Employees` rows are never updated: they hold each person as at hire (people of the first load: as on 2026-11-16), and the job history says what is true on any date.
-- **Extend.** `sql/extend_data.sql` (set `EndDate` at the top; run from the repository root with `-I -f 65001`) makes a verified backup (last 10 kept), then in one transaction adds, in date order: hires (at most 5 a calendar year: department below target first, level Junior 45 %, Professional 40 %, Senior 15 %, manager of the same family with the smallest team), quarterly promotions and transfers with the 6- and 18-month rules, pay changes (promotion 6-12 %, transfer 0.2-4 %, 1 January increase 1.5-4.5 %, rare market adjustment 4-8 %), annual reviews (20 January to 15 March), Finnish public holidays, and leave (a yearly vacation plan, sick leave, bereavement, rare parental and unpaid leave) with request and decision dates in `LeaveRequestInfo`. It checks that no old row changed and that the rules hold, then commits. A run from A to C equals runs from A to B and B to C.
-- **Power BI.** The reference date is the refresh date in Power BI, limited to the range of the data, so the report moves forward by itself and freezes at the end of the data (2030-12-31) until the data is extended again. Records dated after the reference date stay hidden until then; booked future leave is shown.
-- **Validation after an extension.** Run script 99 (default: the state at the end of the data; set `@RefDate` at the top to check another date). Every check must pass.
-- **Restore.** Every run prints the path of its backup; `RESTORE DATABASE DemoHR FROM DISK = N'<path>' WITH REPLACE` brings the database back.
+- **Rule for the data of scripts 06 to 11.** It stays identical. The only edit to one of its rows is filling `EndDate` of an open job-history or pay row when a newer row starts. `Employees` rows are never updated: they hold each person as at hire (people of 2026-11-16: as on that date), and the job history says what is true on any date.
+- **What script 15 adds**, in one transaction and in date order: hires (at most 5 a calendar year: department below target first, level Junior 45 %, Professional 40 %, Senior 15 %, manager of the same family with the smallest team), quarterly promotions and transfers with the 6- and 18-month rules, pay changes (promotion 6-12 %, transfer 0.2-4 %, 1 January increase 1.5-4.5 %, rare market adjustment 4-8 %), annual reviews (20 January to 15 March), Finnish public holidays, and leave (a yearly vacation plan, sick leave, bereavement, rare parental and unpaid leave) with request and decision dates in `LeaveRequestInfo`. It checks that no row of 06 to 11 changed and that the rules hold, then commits. It runs once; on a database that has the data already it stops.
+- **Power BI.** The reference date is the refresh date in Power BI, limited to the range of the data, so the report moves forward by itself and stays at 2030-12-31 after that date. Records dated after the reference date stay hidden until then; booked future leave is shown.
+- **Validation.** Script 99 (default: the state at the end of the data; set `@RefDate` at the top to check another date). Every check must pass.
 
 ## Power BI plan
 
@@ -372,5 +371,5 @@ All nine open questions are answered; nothing is left to decide before scripts 0
 - [x] Salary bands and department factors as proposed
 - [x] Gender values: Female and Male only
 - [x] Support tables: DummyNames with NameType and NameValue, plus PublicHolidays
-- [x] Time frames: founded 2012, hires to 2026-09-30, leave 2024-01-01 to 2027-03-31 (first load); the extension adds records up to 2030-12-31
+- [x] Time frames: founded 2012, hires to 2026-09-30, leave 2024-01-01 to 2027-03-31 (scripts 06 to 11); script 15 adds records up to 2030-12-31
 - [x] Power BI: try a generated `.pbip` project

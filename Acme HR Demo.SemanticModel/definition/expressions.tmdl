@@ -39,7 +39,7 @@ expression DataStart =
 
 	annotation PBI_ResultType = Date
 
-/// Last date of the data (latest run in ReferenceDateLog, 2030-12-31 after the extension)
+/// Last date of the data (2030-12-31, from vw_DataRange)
 expression DataEnd =
 		let
 		  Source = Sql.Database(SqlServer, SqlDatabase),

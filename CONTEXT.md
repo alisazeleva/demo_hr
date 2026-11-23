@@ -5,7 +5,7 @@
 > - DummyNames uses NameType + NameValue (instead of FirstName/LastName columns); a PublicHolidays support table is added.
 > - Decisions added: reference date 2026-11-16, EUR, working days excluding Finnish public holidays, position decides department, manager level strictly higher, Gender limited to Female/Male, email domain acmecorp.example.
 > - Build sequence is now the numbered scripts in PLAN.md, plus Power BI.
-> - Later (2026-11-23): the data is extended to 2030-12-31 by adding records only (up to 5 hires a year), and the report's reference date is its refresh date, set in Power BI (PLAN.md, Refreshing the data).
+> - Later (2026-11-23): the data runs to 2030-12-31 (script 15 adds records after 2026-11-16, up to 5 hires a year), and the report's reference date is its refresh date, set in Power BI (PLAN.md, Data after 2026-11-16).
 > Everything else below still applies.
 
 DemoHR — Master Context / Project Plan 

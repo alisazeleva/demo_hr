@@ -1,4 +1,4 @@
--- 05a_hire.sql: one new employee on @Date (included inside the loop of 05_run_calendar.sql, so it has no GO)
+-- 04a_hire.sql: one new employee on @Date (included inside the loop of 04_run_calendar.sql, so it has no GO)
 -- Who: same rules as 06_generate_employees.sql. The department is one below its workforce target (Technology 48, Sales 37 at the start),
 --   weighted by the gap, else chosen in proportion to its size; the level is Junior 45%, Professional 40%, Senior 15% (new people do not
 --   join as managers); the position is one of the department's positions at that level; the manager is the manager of the same job

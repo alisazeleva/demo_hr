@@ -1,8 +1,8 @@
--- 02_log_run.sql: open the transaction, create the add-only tables, record the run (step 3 of sql/extend_data.sql)
+-- 01_start.sql: open the transaction and record the run (step 2 of sql/15_generate_2027_2030.sql)
 -- Everything from here to the COMMIT in 90_finish.sql is one transaction. XACT_ABORT is ON and sqlcmd runs with ":on error exit",
 -- so any error ends the connection and SQL Server rolls the whole run back.
--- New tables (add-only, never edited; created by sql/13_create_extension_tables.sql): ReferenceDateLog, DepartmentWorkforcePlanHistory, LeaveRequestInfo.
--- Rule for existing data: rows up to the old end of data stay as they are; the only change is the EndDate of an open job-history or
+-- Tables of script 13 that this step fills: ReferenceDateLog, DepartmentWorkforcePlanHistory, LeaveRequestInfo.
+-- Rule for the data of scripts 06 to 11: those rows stay as they are; the only change is the EndDate of an open job-history or
 -- pay row when a newer row starts. Signatures of the old rows are taken here and compared in 90_finish.sql.
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
@@ -31,7 +31,5 @@ UNION ALL SELECT 'WorkforcePlan', CHECKSUM_AGG(CHECKSUM(WorkforcePlanID, Organiz
 
 BEGIN TRANSACTION;
 
--- the add-only tables and the first rows (the same script as for a new database)
-:r sql/13_create_extension_tables.sql
 
 INSERT dbo.ReferenceDateLog (OldReferenceDate, NewReferenceDate, Note) SELECT OldDate, NewDate, N'Extend data' FROM #Run;

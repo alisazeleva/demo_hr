@@ -1,7 +1,7 @@
--- 05_run_calendar.sql: add the new records, one date at a time in date order (step 5 of sql/extend_data.sql)
--- For every date of #Cal: first the quarter-start changes (05b_quarter.sql: promotions, transfers, annual increase, market adjustment),
--- then the hire if the date is a hire slot (05a_hire.sql). Going through the dates in order is what makes a long run and several short
--- runs give identical data. Runs inside the transaction opened by 02_log_run.sql.
+-- 04_run_calendar.sql: add the new records, one date at a time in date order (step 5 of sql/15_generate_2027_2030.sql)
+-- For every date of #Cal: first the quarter-start changes (04b_quarter.sql: promotions, transfers, annual increase, market adjustment),
+-- then the hire if the date is a hire slot (04a_hire.sql). The dates are handled in order, so every run gives identical data.
+-- Runs inside the transaction opened by 01_start.sql.
 -- State used while running: the OPEN rows of EmployeeJobHistory (position, department, manager) and EmployeeCompensationHistory (salary).
 -- The Employees rows of people who were there before are never updated (they stay as of the first load); a new hire's Employees row
 -- holds the position, department and manager at hire.
@@ -18,12 +18,12 @@ BEGIN
 
     IF @IsQuarter = 1
     BEGIN
-:r sql/update/05b_quarter.sql
+:r sql/15_generate_2027_2030/04b_quarter.sql
     END;
 
     IF @IsHire = 1
     BEGIN
-:r sql/update/05a_hire.sql
+:r sql/15_generate_2027_2030/04a_hire.sql
     END;
 
     SET @CalSeq += 1;

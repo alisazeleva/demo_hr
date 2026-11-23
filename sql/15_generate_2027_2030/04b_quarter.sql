@@ -1,4 +1,4 @@
--- 05b_quarter.sql: job changes and pay changes on a quarter start @Date (included inside the loop of 05_run_calendar.sql, no GO)
+-- 04b_quarter.sql: job changes and pay changes on a quarter start @Date (included inside the loop of 04_run_calendar.sql, no GO)
 -- Rules (the forward-looking version of 08_generate_job_history.sql and 09_generate_compensation.sql); every random value is a hash of
 -- (seed, date, employee, label), so the result does not depend on how often the update runs:
 --   Promotion            Junior to Professional and Professional to Senior, in the same department and job family (so the manager stays),

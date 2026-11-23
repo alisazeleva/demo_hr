@@ -1,4 +1,4 @@
--- 90_finish.sql: check, report and commit (last step of sql/extend_data.sql)
+-- 90_finish.sql: check, report and commit (last step of sql/15_generate_2027_2030.sql)
 -- Any failed check THROWs; with ":on error exit" the connection closes and the open transaction is rolled back.
 SET NOCOUNT ON;
 
@@ -6,8 +6,8 @@ SET NOCOUNT ON;
 IF (SELECT MAX(NewReferenceDate) FROM dbo.ReferenceDateLog) <> (SELECT NewDate FROM #Run)
     THROW 50010, 'The run log does not show the new end date.', 1;
 
--- old rows must be exactly as they were (signatures from 02_log_run.sql); the EndDate of an old open row may now be filled,
--- an old closed row keeps its EndDate (it is not later than the old end of data; rows closed in this run end after it)
+-- old rows must be exactly as they were (signatures from 01_start.sql); the EndDate of an old open row may now be filled,
+-- an old closed row keeps its EndDate (it is not later than 2026-11-16; rows closed in this run end after it)
 DECLARE @Old date = (SELECT OldDate FROM #Run);
 DECLARE @bad varchar(400) = '';
 SELECT @bad = @bad + Name + ' ' FROM #Sig s WHERE ISNULL(Sig, 0) <> ISNULL(CASE Name

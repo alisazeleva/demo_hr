@@ -1,4 +1,4 @@
--- 07_leave.sql: leave records after the first load (step 7 of sql/extend_data.sql)
+-- 06_leave.sql: leave records after the first load (step 7 of sql/15_generate_2027_2030.sql)
 -- The first load has leave up to 2027-03-31. This step adds leave from 2027-04-01 on, with the rules of 11_generate_leave.sql:
 --   Vacation       22-28 working days a year in 2-4 blocks: one summer block of 10-15 days between 1 June and 15 August, the other blocks
 --                  in Jan-May, 16 Aug-Oct and Nov-Dec. Partial years (hired during the year) are scaled. In 2027 the winter blocks of the
@@ -15,7 +15,7 @@
 --   until its decision date. The Pending requests of the first load get an info row too (request date 2026-11-16, decision date the later of
 --   start - 14 days and 2026-11-17, Approved 97% / Rejected 3%); their EmployeeLeaves rows are not changed.
 -- The whole plan of an employee and year comes from hashes and the first-load leave only, so it does not depend on how often the update runs:
--- a leave is added when its request date falls in the period. Runs inside the transaction opened by 02_log_run.sql. Only inserts.
+-- a leave is added when its request date falls in the period. Runs inside the transaction opened by 01_start.sql. Only inserts.
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 
