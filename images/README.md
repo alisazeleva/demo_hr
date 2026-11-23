@@ -1,6 +1,8 @@
 # Profile pictures
 
-The 151 profile pictures are fictional faces made in an image tool (ChatGPT), 16 per contact sheet, then cut into one JPEG per employee and loaded into Power BI. The database stores only the file names (`EMP-######.jpg`, set by `sql/12_assign_profile_pictures.sql`).
+The profile pictures are fictional faces made in an image tool (ChatGPT), 16 per contact sheet, then cut into one JPEG per employee and loaded into Power BI. The database stores only the file names (`EMP-######.jpg`, set by `sql/12_assign_profile_pictures.sql` for the first load and by `sql/extend_data.sql` for later hires).
+
+The prompts and `sheet_map.csv` cover the 151 employees of the first load. The 20 people hired after 2026-11-16 (EMP-000152 to EMP-000171) have no prompts yet; they need two more sheets (11 and 12) made the same way. Until a file exists, an employee simply has no picture.
 
 | Path | What it is |
 | --- | --- |

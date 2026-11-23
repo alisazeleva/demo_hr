@@ -286,7 +286,7 @@ Fifteen numbered scripts, one logical step each; you run one, check its result, 
 
 Profile pictures stay the last data step, as in your plan: nothing is generated until the employee data is final. I will produce the prompt list (EmployeeNumber, gender, rough age, a style line identical for all), you create the images in your image tool and save them as `EMP-000001.jpg` to `EMP-000151.jpg`, then script 12 fills the column.
 
-**Prepared workflow (nothing generated yet).** `images/prompts/sheet_01.txt` to `sheet_10.txt` hold ChatGPT prompts for 4 x 4 contact sheets of 16 people (sheet 10: 7 people and 9 empty cells), built from `vw_EmployeeCurrent` in EmployeeNumber order with a fixed seed (gender, age rounded to 5 on the reference date, nationality as appearance, one varied detail; no names). `images/sheet_map.csv` maps Sheet and Cell to EmployeeNumber. After the sheets are saved as `images/sheets/sheet_NN.png`, `python images/crop_sheets.py` cuts them into `images/profiles/EMP-######.jpg` (240 x 240, under 20 KB). Script 12 (`12_assign_profile_pictures.sql`) sets `ProfileImageFileName` to `EmployeeNumber.jpg` for all employees, including those whose picture does not exist yet.
+**Prepared workflow (nothing generated yet).** `images/prompts/sheet_01.txt` to `sheet_10.txt` hold ChatGPT prompts for 4 x 4 contact sheets of 16 people (sheet 10: 7 people and 9 empty cells), built from the employees of the first load (now `dbo.fn_EmployeeCurrent('2026-11-16')`) in EmployeeNumber order with a fixed seed (gender, age rounded to 5 on the reference date, nationality as appearance, one varied detail; no names). `images/sheet_map.csv` maps Sheet and Cell to EmployeeNumber. After the sheets are saved as `images/sheets/sheet_NN.png`, `python images/crop_sheets.py` cuts them into `images/profiles/EMP-######.jpg` (240 x 240, under 20 KB). Script 12 (`12_assign_profile_pictures.sql`) sets `ProfileImageFileName` to `EmployeeNumber.jpg` for all employees, including those whose picture does not exist yet.
 
 ## Refreshing the data
 
@@ -304,7 +304,7 @@ Power BI Desktop (Windows) loads the reporting views in Import mode, and the rep
 
 ### Model
 
-Star schema (built in Power BI Desktop; the views are in script 13). Table names use the `Dim` and `Fact` prefixes.
+Star schema (built in Power BI Desktop; the views are in script 14). Table names use the `Dim` and `Fact` prefixes.
 
 | Table | Source view | Notes |
 | --- | --- | --- |
@@ -350,7 +350,7 @@ Power BI does not show images from a local file path, so the pictures are loaded
 
 ### Order of work
 
-1. Views (script 13) and a connection check.
+1. Views (script 14) and a connection check.
 2. Model and relationships, then the measures.
 3. Theme, then pages 1 to 6, then the profile page once pictures exist.
 

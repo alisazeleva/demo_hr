@@ -177,7 +177,7 @@ Notes:
 
 ## Page 7: Employee profile (built; hidden drill-through page; layout hand-adjusted)
 
-The page is hidden in view mode and filtered on `DimEmployee[FullName]` (unique across the 151 employees) through a drill-through binding. From any visual that contains the employee name (the page 3 latest career moves table, the page 5 latest review table, the page 6 absent-today table) right-click a row, then Drill through, then Employee profile. An employee dropdown slicer (1558, 42, 325 x 79) lets you pick a person without drilling. A Back button (action Back, 1846, 0, 74 x 73) is at the top right; the page title is followed by a text box "Drill-through page" (330, 85, 16 pt, #5B6472) instead of the subtitle card.
+The page is hidden in view mode and filtered on `DimEmployee[FullName]` (unique across all employees) through a drill-through binding. From any visual that contains the employee name (the page 3 latest career moves table, the page 5 latest review table, the page 6 absent-today table) right-click a row, then Drill through, then Employee profile. An employee dropdown slicer (1558, 42, 325 x 79) lets you pick a person without drilling. A Back button (action Back, 1846, 0, 74 x 73) is at the top right; the page title is followed by a text box "Drill-through page" (330, 85, 16 pt, #5B6472) instead of the subtitle card.
 
 Profile fields that live in `DimPosition`, `DimDepartment` and `DimManager` are read with LOOKUPVALUE on the keys in `DimEmployee` (those dimensions filter `DimEmployee`, not the other way round), so SELECTEDVALUE on them would return nothing.
 
