@@ -289,6 +289,7 @@ Fifteen numbered scripts, one logical step each; you run one, check its result, 
 | 14\_create\_reporting\_views | Timeline views for Power BI (no reference date) and the as-of functions `fn_EmployeeAsOf`, `fn_OrgHierarchy`, `fn_EmployeeCurrent`, `fn_DepartmentHeadcountVsTarget` | Views return rows |
 | extend\_data (with `sql/update/`) | Adds records from the end of the data to a new end date (2030-12-31): hires, job changes, pay, reviews, holidays, leave | Old rows unchanged, all rules hold |
 | 99\_full\_validation | Every check from the final validation list, on the timeline and on a reference date (default the end of the data) | All checks pass |
+| build\_all | Everything above in one run for a new database: creates it, runs 01 to 14, the extension to 2030-12-31 and 99 (stops if the database exists) | 49 of 49 checks pass |
 
 Profile pictures stay the last data step, as in your plan: nothing is generated until the employee data is final. I will produce the prompt list (EmployeeNumber, gender, rough age, a style line identical for all), you create the images in your image tool and save them as `EMP-000001.jpg` to `EMP-000151.jpg`, then script 12 fills the column.
 

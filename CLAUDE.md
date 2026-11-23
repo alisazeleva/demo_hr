@@ -6,7 +6,7 @@ Build a dummy HR database (SQL Server) for Acme Corporation, then a Power BI rep
 
 - `PLAN.md`: the authoritative data structure, generation rules and script sequence. If anything disagrees with another file, PLAN.md wins.
 - `CONTEXT.md`: the original project description. Kept for background; superseded where PLAN.md says otherwise (see the note at its top).
-- `sql/`: numbered scripts, one logical step each (`00_create_database.sql` ... `99_full_validation.sql`; `12_assign_profile_pictures.sql` sets `ProfileImageFileName` to `EmployeeNumber.jpg` for everyone; `13_create_extension_tables.sql` the add-only tables of the extension; `14_create_reporting_views.sql` the timeline views and as-of functions). `extend_data.sql` with `sql/update/` extends the data to a later end date (see Data timeline).
+- `sql/`: numbered scripts, one logical step each (`00_create_database.sql` ... `99_full_validation.sql`; `12_assign_profile_pictures.sql` sets `ProfileImageFileName` to `EmployeeNumber.jpg` for everyone; `13_create_extension_tables.sql` the add-only tables of the extension; `14_create_reporting_views.sql` the timeline views and as-of functions). `extend_data.sql` with `sql/update/` extends the data to a later end date (see Data timeline). `build_all.sql` runs 00 to 14, the extension and 99 in one go for a new database.
 - `Acme HR Demo.pbip`, `Acme HR Demo.Report/` (PBIR) and `Acme HR Demo.SemanticModel/` (TMDL): the Power BI project. `DESIGN.md` has the design rules and page layouts.
 - `powerbi/`: the report theme `acme_hr_theme.json`.
 - `tools/`: Python helpers for the report (`validate_pbir.py` and first-draft page builders, see `tools/README.md`).
@@ -16,7 +16,7 @@ Build a dummy HR database (SQL Server) for Acme Corporation, then a Power BI rep
 ## Environment
 
 - SQL Server Express, named instance .\SQLEXPRESS, Windows authentication.
-- Run scripts with: `sqlcmd -S ".\SQLEXPRESS" -E -C -b -i sql/<file>.sql` (add `-d DemoHR` after script 00).
+- Run scripts with: `sqlcmd -S ".\SQLEXPRESS" -E -C -b -i sql/<file>.sql` (add `-d DemoHR` after script 00). Build everything from scratch, up to 2030-12-31, in one run: `sqlcmd -S ".\SQLEXPRESS" -E -C -b -I -f 65001 -i sql/build_all.sql` (stops if the database already exists).
 - Database name `DemoHR`, schema `dbo`.
 - Never put passwords or connection secrets in files.
 

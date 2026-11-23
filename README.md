@@ -24,7 +24,15 @@ A dummy HR database (SQL Server) and a Power BI report on top of it, for the fic
 
 ## Build the database
 
-SQL Server Express with a named instance `.\SQLEXPRESS` and Windows authentication are assumed. Run the scripts in order from the repository root:
+SQL Server Express with a named instance `.\SQLEXPRESS` and Windows authentication are assumed. One command, run from the repository root, builds the whole database with data up to 2030-12-31 (it takes under a minute):
+
+```
+sqlcmd -S ".\SQLEXPRESS" -E -C -b -I -f 65001 -i sql/build_all.sql
+```
+
+`sql/build_all.sql` creates the database `DemoHR`, runs the scripts below in order, extends the data to 2030-12-31 and ends with the validation summary (all 49 checks must pass). It stops without changing anything if `DemoHR` already exists; to rebuild, drop the database first. Every build gives the same data.
+
+To run the steps one by one instead, run the scripts in order from the repository root:
 
 ```
 sqlcmd -S ".\SQLEXPRESS" -E -C -b -i sql/00_create_database.sql
