@@ -4,7 +4,7 @@
   "position": {
     "x": 350,
     "y": 154,
-    "z": 27000,
+    "z": 29250,
     "height": 120,
     "width": 120,
     "tabOrder": 29000
@@ -94,7 +94,21 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Text: Profile Name"
+                  "Property": "Text: Employee Initials"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "24D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }

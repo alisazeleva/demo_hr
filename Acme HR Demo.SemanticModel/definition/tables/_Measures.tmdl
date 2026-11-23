@@ -756,6 +756,30 @@ table _Measures
 		lineageTag: 3e8d5a76-1c40-4b9f-a2d7-6f0b94c8e5a1
 		dataCategory: ImageUrl
 
+	/// Initials of the selected employee: first letter of the first and the last word of the full name (for example "Anna Maria Virtanen" gives "AV"). Blank when no single employee is selected.
+	measure 'Text: Employee Initials' = ```
+			
+			    // One employee only: on a total or with several employees in context there is no single name
+			    VAR fullName = TRIM ( SELECTEDVALUE ( DimEmployee[FullName] ) )
+			    // Position of the last space marks the start of the last name (0 for a one-word name)
+			    VAR wordCount = LEN ( fullName ) - LEN ( SUBSTITUTE ( fullName, " ", "" ) )
+			    VAR lastSpace =
+			        IF (
+			            wordCount > 0,
+			            FIND ( "|", SUBSTITUTE ( fullName, " ", "|", wordCount ) ),
+			            0
+			        )
+			    VAR initials =
+			        UPPER (
+			            LEFT ( fullName, 1 )
+			                & IF ( lastSpace > 0, MID ( fullName, lastSpace + 1, 1 ) )
+			        )
+			    RETURN
+			        IF ( NOT ISBLANK ( fullName ), initials )
+			```
+		displayFolder: Text
+		lineageTag: f9f415d6-2a8f-4da3-a494-e5981375ed66
+
 	column Placeholder
 		isHidden
 		lineageTag: fea314cd-4a29-4eed-b760-804721d78b06
