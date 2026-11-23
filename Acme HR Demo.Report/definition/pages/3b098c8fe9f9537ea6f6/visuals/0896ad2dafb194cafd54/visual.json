@@ -608,32 +608,95 @@
           "Where": [
             {
               "Condition": {
-                "Between": {
-                  "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Source": "d"
+                "And": {
+                  "Left": {
+                    "Comparison": {
+                      "ComparisonKind": 2,
+                      "Left": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "d"
+                            }
+                          },
+                          "Property": "Years Before Reference"
                         }
                       },
-                      "Property": "Years Before Reference"
+                      "Right": {
+                        "Literal": {
+                          "Value": "0L"
+                        }
+                      }
                     }
                   },
-                  "LowerBound": {
-                    "Literal": {
-                      "Value": "0L"
-                    }
-                  },
-                  "UpperBound": {
-                    "Literal": {
-                      "Value": "100L"
+                  "Right": {
+                    "Comparison": {
+                      "ComparisonKind": 4,
+                      "Left": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "d"
+                            }
+                          },
+                          "Property": "Years Before Reference"
+                        }
+                      },
+                      "Right": {
+                        "Literal": {
+                          "Value": "4L"
+                        }
+                      }
                     }
                   }
                 }
               }
             }
           ]
-        }
+        },
+        "howCreated": "User"
+      },
+      {
+        "name": "4a29135e91cbcf3bde18",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimDate"
+              }
+            },
+            "Property": "Year"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "8390b3538f5dde912aeb",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Employees at Year End"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "87da39dc1baa24b1b680",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Average Salary at Year End"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

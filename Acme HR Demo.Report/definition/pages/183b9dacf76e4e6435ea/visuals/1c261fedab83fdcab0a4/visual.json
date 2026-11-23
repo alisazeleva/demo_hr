@@ -291,15 +291,7 @@
           }
         },
         {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "138.3936045746883D"
-                }
-              }
-            }
-          },
+          "properties": {},
           "selector": {
             "metadata": "FactJobHistory.ChangeType"
           }

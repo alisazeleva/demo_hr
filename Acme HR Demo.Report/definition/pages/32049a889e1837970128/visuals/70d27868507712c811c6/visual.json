@@ -3,10 +3,10 @@
   "name": "70d27868507712c811c6",
   "position": {
     "x": 329.92688669503076,
-    "y": 667.9750506010162,
+    "y": 667.97505060101616,
     "z": 16000,
-    "height": 381.7000289148664,
-    "width": 791.8245280680738,
+    "height": 381.70002891486638,
+    "width": 791.82452806807385,
     "tabOrder": 16000
   },
   "visual": {
@@ -111,6 +111,13 @@
               "expr": {
                 "Literal": {
                   "Value": "4D"
+                }
+              }
+            },
+            "columnAdjustment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'growToFit'"
                 }
               }
             }
@@ -542,32 +549,81 @@
           "Where": [
             {
               "Condition": {
-                "Between": {
-                  "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Source": "d"
+                "And": {
+                  "Left": {
+                    "Comparison": {
+                      "ComparisonKind": 2,
+                      "Left": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "d"
+                            }
+                          },
+                          "Property": "Years Before Reference"
                         }
                       },
-                      "Property": "Years Before Reference"
+                      "Right": {
+                        "Literal": {
+                          "Value": "0L"
+                        }
+                      }
                     }
                   },
-                  "LowerBound": {
-                    "Literal": {
-                      "Value": "0L"
-                    }
-                  },
-                  "UpperBound": {
-                    "Literal": {
-                      "Value": "7L"
+                  "Right": {
+                    "Comparison": {
+                      "ComparisonKind": 4,
+                      "Left": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "d"
+                            }
+                          },
+                          "Property": "Years Before Reference"
+                        }
+                      },
+                      "Right": {
+                        "Literal": {
+                          "Value": "4L"
+                        }
+                      }
                     }
                   }
                 }
               }
             }
           ]
-        }
+        },
+        "howCreated": "User"
+      },
+      {
+        "name": "97cb72f3b388d4524b40",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactReviews"
+              }
+            },
+            "Property": "ReviewYear"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "ef24e196b9b1a4972344",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Average Rating"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

@@ -857,6 +857,76 @@
           ]
         },
         "howCreated": "User"
+      },
+      {
+        "name": "c3d31fceb4ef39b23087",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimEmployee"
+              }
+            },
+            "Property": "FullName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "319331e735318f24754d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimDepartment"
+              }
+            },
+            "Property": "Department"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "d888b8643b500a83f09c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimEmployee"
+              }
+            },
+            "Property": "LatestReviewDate"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "9133dc79de35a352ba5f",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimEmployee"
+              }
+            },
+            "Property": "LatestRating"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "7891d9121faf537022e7",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimEmployee"
+              }
+            },
+            "Property": "Latest Level Short"
+          }
+        },
+        "type": "Categorical"
       }
     ]
   }

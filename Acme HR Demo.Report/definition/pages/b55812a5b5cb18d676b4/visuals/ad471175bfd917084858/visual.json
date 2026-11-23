@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "ad471175bfd917084858",
   "position": {
-    "x": 329.5921576766798,
-    "y": 304.0880026183653,
+    "x": 329.59215767667979,
+    "y": 304.08800261836529,
     "z": 15000,
-    "height": 398.2571905259881,
+    "height": 398.25719052598811,
     "width": 563.053269364328,
     "tabOrder": 15000
   },
@@ -110,6 +110,13 @@
               "expr": {
                 "Literal": {
                   "Value": "4D"
+                }
+              }
+            },
+            "columnAdjustment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'growToFit'"
                 }
               }
             }
@@ -335,7 +342,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Working days by year; the current year is up to the reference date'"
+                  "Value": "'The current year is up to the reference date'"
                 }
               }
             },
@@ -560,7 +567,36 @@
               }
             }
           ]
-        }
+        },
+        "howCreated": "User"
+      },
+      {
+        "name": "2f9743c144c8f9269b08",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimDate"
+              }
+            },
+            "Property": "Year"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a87614dd64168cfe78dc",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Vacation Days Used per Year"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

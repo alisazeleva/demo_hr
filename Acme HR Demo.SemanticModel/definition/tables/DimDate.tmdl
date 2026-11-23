@@ -41,8 +41,8 @@ table DimDate
 	/// Years from this date's year back to the reference year: 0 = the reference year, 1 = the year before, -1 = the year after.
 	/// Visual filters use it so that year ranges follow the reference date.
 	column 'Years Before Reference' = YEAR(MAX(ReferenceDate[ReferenceDate])) - DimDate[Year]
-		formatString: 0
 		isHidden
+		formatString: 0
 		lineageTag: b6f495a3-24d4-4381-b7e2-9f993903095c
 		summarizeBy: none
 

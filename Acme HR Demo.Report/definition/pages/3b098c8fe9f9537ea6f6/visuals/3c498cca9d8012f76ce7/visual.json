@@ -569,45 +569,7 @@
             "Property": "Year"
           }
         },
-        "type": "Advanced",
-        "filter": {
-          "Version": 2,
-          "From": [
-            {
-              "Name": "d",
-              "Entity": "DimDate",
-              "Type": 0
-            }
-          ],
-          "Where": [
-            {
-              "Condition": {
-                "Between": {
-                  "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Source": "d"
-                        }
-                      },
-                      "Property": "Year"
-                    }
-                  },
-                  "LowerBound": {
-                    "Literal": {
-                      "Value": "2013L"
-                    }
-                  },
-                  "UpperBound": {
-                    "Literal": {
-                      "Value": "2100L"
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        }
+        "type": "Advanced"
       },
       {
         "name": "b1e193cccf694bbeb797",
@@ -634,32 +596,81 @@
           "Where": [
             {
               "Condition": {
-                "Between": {
-                  "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Source": "d"
+                "And": {
+                  "Left": {
+                    "Comparison": {
+                      "ComparisonKind": 2,
+                      "Left": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "d"
+                            }
+                          },
+                          "Property": "Years Before Reference"
                         }
                       },
-                      "Property": "Years Before Reference"
+                      "Right": {
+                        "Literal": {
+                          "Value": "0L"
+                        }
+                      }
                     }
                   },
-                  "LowerBound": {
-                    "Literal": {
-                      "Value": "0L"
-                    }
-                  },
-                  "UpperBound": {
-                    "Literal": {
-                      "Value": "100L"
+                  "Right": {
+                    "Comparison": {
+                      "ComparisonKind": 4,
+                      "Left": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "d"
+                            }
+                          },
+                          "Property": "Years Before Reference"
+                        }
+                      },
+                      "Right": {
+                        "Literal": {
+                          "Value": "4L"
+                        }
+                      }
                     }
                   }
                 }
               }
             }
           ]
-        }
+        },
+        "howCreated": "User"
+      },
+      {
+        "name": "bbce716d0f4a95bf2d01",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Average Annual Increase"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "aec95ac56eb15f15a933",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Average Promotion Increase"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

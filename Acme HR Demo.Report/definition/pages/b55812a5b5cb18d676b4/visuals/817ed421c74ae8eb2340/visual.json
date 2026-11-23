@@ -285,14 +285,14 @@
             "zoomMin": {
               "expr": {
                 "Literal": {
-                  "Value": "1794787200000D"
+                  "Value": "1795392000000D"
                 }
               }
             },
             "zoomMax": {
               "expr": {
                 "Literal": {
-                  "Value": "1796587378826.0159D"
+                  "Value": "1797027498045.0994D"
                 }
               }
             },
