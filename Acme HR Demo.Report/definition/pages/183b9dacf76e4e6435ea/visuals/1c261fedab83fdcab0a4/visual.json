@@ -150,8 +150,9 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "Literal": {
-                      "Value": "'#F0F0F0'"
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.1
                     }
                   }
                 }
@@ -187,7 +188,7 @@
             "columnAdjustment": {
               "expr": {
                 "Literal": {
-                  "Value": "'fitToContent'"
+                  "Value": "'fixedWidth'"
                 }
               }
             },
@@ -281,7 +282,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "161.1201851127421D"
+                  "Value": "170D"
                 }
               }
             }
@@ -291,7 +292,15 @@
           }
         },
         {
-          "properties": {},
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "120D"
+                }
+              }
+            }
+          },
           "selector": {
             "metadata": "FactJobHistory.ChangeType"
           }
@@ -301,13 +310,41 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "151.1358884356323D"
+                  "Value": "160D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "FactJobHistory.Department"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "120D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactJobHistory.EffectiveDate"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "160D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactJobHistory.ManagerName"
           }
         }
       ]
