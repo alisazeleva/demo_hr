@@ -1,4 +1,3 @@
-/// Job history records with previous position, department and manager (vw_JobHistory)
 table FactJobHistory
 	lineageTag: 9e2b14d4-9b54-408b-9d42-262eef49a5e2
 
@@ -76,11 +75,17 @@ table FactJobHistory
 
 	partition JobHistory = m
 		mode: import
+		queryGroup: Facts
 		source =
 				let
 				    Source = Sql.Database(SqlServer, SqlDatabase),
 				    Data = Source{[Schema="dbo", Item="vw_JobHistory"]}[Data],
-				    Slim = Table.RemoveColumns(Data, {"JobHistoryID", "EndDate", "IsCurrent", "Reason", "PositionID", "DepartmentID", "ManagerID", "PrevPositionID", "PrevDepartmentID", "PrevDepartment", "PrevManagerID", "PrevManagerName"}, MissingField.Ignore)
+				    Started = Table.SelectRows(Data, each [EffectiveDate] <= ReferenceDateValue),
+				    Open = Table.TransformColumns(Started, {{"EndDate", each if _ <> null and _ <= ReferenceDateValue then _ else null, type nullable date}}),
+				    Current = Table.AddColumn(Table.RemoveColumns(Open, {"IsCurrent"}), "IsCurrent", each [EndDate] = null, type logical),
+				    Slim = Table.RemoveColumns(Current, {"JobHistoryID", "EndDate", "IsCurrent", "Reason", "PositionID", "DepartmentID", "ManagerID", "PrevPositionID", "PrevDepartmentID", "PrevDepartment", "PrevManagerID", "PrevManagerName"}, MissingField.Ignore)
 				in
 				    Slim
+
+	annotation PBI_ResultType = Table
 

@@ -13,10 +13,12 @@ table ReferenceDate
 
 	partition ReferenceDate = m
 		mode: import
+		queryGroup: 'Reference Date'
 		source =
 				let
-				    Source = Sql.Database(SqlServer, SqlDatabase),
-				    Data = Source{[Schema="dbo", Item="vw_ReferenceDate"]}[Data]
+				    Source = #table(type table [ReferenceDate = date], {{ReferenceDateValue}})
 				in
-				    Data
+				    Source
+
+	annotation PBI_ResultType = Table
 

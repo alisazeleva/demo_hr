@@ -35,11 +35,17 @@ table FactLeaveDays
 
 	partition LeaveDays = m
 		mode: import
+		queryGroup: Facts
 		source =
 				let
 				    Source = Sql.Database(SqlServer, SqlDatabase),
 				    Data = Source{[Schema="dbo", Item="vw_LeaveDays"]}[Data],
-				    Slim = Table.RemoveColumns(Data, {"LeaveID", "DepartmentID"}, MissingField.Ignore)
+				    // days count once the leave is approved (on its decision date); booked future days are kept
+				    Decided = Table.SelectRows(Data, each [DecisionDate] = null or [DecisionDate] <= ReferenceDateValue),
+				    Flag = Table.AddColumn(Decided, "IsOnOrBeforeReferenceDate", each [LeaveDate] <= ReferenceDateValue, type logical),
+				    Slim = Table.RemoveColumns(Flag, {"LeaveID", "DepartmentID", "RequestDate", "DecisionDate"}, MissingField.Ignore)
 				in
 				    Slim
+
+	annotation PBI_ResultType = Exception
 

@@ -1,6 +1,8 @@
 // Measure tests: one row per check, Result is PASS or FAIL.
 // Run it against the open model (Desktop DAX query view, or the Power BI Modeling MCP dax_query_operations Execute)
-// and expect no FAIL row. Expected values come from the SQL database (sql/99_full_validation.sql) and PLAN.md.
+// and expect no FAIL row. Expected values are the state of the first load, so set the Power Query parameter
+// ReferenceDateOverride to 2026-11-16 and refresh first; clear it and refresh again afterwards (it must be empty when committed).
+// Expected values come from the SQL database (dbo.fn_EmployeeCurrent('2026-11-16'), sql/99_full_validation.sql) and PLAN.md.
 // All Actual and Expected values must be numbers (a text check is written as IF(..., 1, 0) against 1).
 // To add a test: copy a ROW line, change the name, the measure (or CALCULATE filter) and the expected value.
 EVALUATE

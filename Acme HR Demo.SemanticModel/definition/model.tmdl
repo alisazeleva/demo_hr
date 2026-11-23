@@ -7,11 +7,31 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
+/// Connection, picture folder and the optional reference date override
+queryGroup Parameters
+
+	annotation PBI_QueryGroupOrder = 0
+
+/// The range of the data and the reference date of the report
+queryGroup 'Reference Date'
+
+	annotation PBI_QueryGroupOrder = 1
+
+/// Dimension tables and the profile pictures
+queryGroup Dimensions
+
+	annotation PBI_QueryGroupOrder = 2
+
+/// Fact tables as of the reference date
+queryGroup Facts
+
+	annotation PBI_QueryGroupOrder = 3
+
 annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_ProTooling = ["DevMode","MCP-PBIModeling"]
 
-annotation PBI_QueryOrder = ["DimEmployee","FactJobHistory","FactCompensation","FactReviews","FactLeaveDays","FactWorkforcePlan","ReferenceDate","SqlServer","SqlDatabase","DimDepartment","DimPosition","DimManager","DimLeaveType","ProfilePicturesFolder","ProfilePictures","FactLeaveRequests"]
+annotation PBI_QueryOrder = ["DimEmployee","FactJobHistory","FactCompensation","FactReviews","FactLeaveDays","FactWorkforcePlan","ReferenceDate","SqlServer","SqlDatabase","DimDepartment","DimPosition","DimManager","DimLeaveType","ProfilePicturesFolder","ProfilePictures","FactLeaveRequests","ReferenceDateOverride","DataStart","DataEnd","ReferenceDateValue"]
 
 ref table DimEmployee
 ref table FactJobHistory

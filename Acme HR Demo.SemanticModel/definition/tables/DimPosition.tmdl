@@ -34,6 +34,7 @@ table DimPosition
 
 	partition Position = m
 		mode: import
+		queryGroup: Dimensions
 		source =
 				let
 				    Source = Sql.Database(SqlServer, SqlDatabase),
@@ -41,4 +42,6 @@ table DimPosition
 				    Slim = Table.RemoveColumns(Data, {"JobFamily", "IsManagementPosition"}, MissingField.Ignore)
 				in
 				    Slim
+
+	annotation PBI_ResultType = Table
 

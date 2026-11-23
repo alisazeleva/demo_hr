@@ -63,11 +63,18 @@ table FactCompensation
 
 	partition Compensation = m
 		mode: import
+		queryGroup: Facts
 		source =
 				let
 				    Source = Sql.Database(SqlServer, SqlDatabase),
 				    Data = Source{[Schema="dbo", Item="vw_CompensationHistory"]}[Data],
-				    Slim = Table.RemoveColumns(Data, {"Currency", "PayFrequency", "CompensationHistoryID", "PreviousSalary", "ChangeAmount"}, MissingField.Ignore)
+				    Started = Table.SelectRows(Data, each [EffectiveDate] <= ReferenceDateValue),
+				    // the row that covers the reference date is open: EndDate empty and IsCurrent true
+				    Open = Table.TransformColumns(Started, {{"EndDate", each if _ <> null and _ <= ReferenceDateValue then _ else null, type nullable date}}),
+				    Current = Table.AddColumn(Table.RemoveColumns(Open, {"IsCurrent"}), "IsCurrent", each [EndDate] = null, type logical),
+				    Slim = Table.RemoveColumns(Current, {"Currency", "PayFrequency", "CompensationHistoryID", "PreviousSalary", "ChangeAmount"}, MissingField.Ignore)
 				in
 				    Slim
+
+	annotation PBI_ResultType = Table
 

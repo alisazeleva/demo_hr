@@ -7,7 +7,7 @@
     "z": 15000,
     "height": 60.909579082159524,
     "width": 348.19976041967863,
-    "tabOrder": 22000
+    "tabOrder": 21000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -531,23 +531,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "d10af842047b66cbc29d",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Text: Profile Role"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

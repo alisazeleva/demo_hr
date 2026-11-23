@@ -514,37 +514,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "0f3c135a26b5b00002a3",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactReviews"
-              }
-            },
-            "Property": "ReviewYear"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "5a7abe609a6dd040a03a",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Average Rating"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

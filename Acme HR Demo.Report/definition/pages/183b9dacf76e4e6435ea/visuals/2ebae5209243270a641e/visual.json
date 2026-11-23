@@ -7,7 +7,7 @@
     "z": 20000,
     "height": 78.890857375050786,
     "width": 295.5910605444941,
-    "tabOrder": 20000
+    "tabOrder": 19000
   },
   "visual": {
     "visualType": "slicer",
@@ -519,23 +519,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "e4a258f18e3748edeb7e",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimEmployee"
-              }
-            },
-            "Property": "FullName"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

@@ -78,11 +78,15 @@ table FactReviews
 
 	partition Reviews = m
 		mode: import
+		queryGroup: Facts
 		source =
 				let
 				    Source = Sql.Database(SqlServer, SqlDatabase),
 				    Data = Source{[Schema="dbo", Item="vw_PerformanceReviews"]}[Data],
-				    Slim = Table.RemoveColumns(Data, {"ReviewPeriodStart", "ReviewPeriodEnd", "PerformanceReviewID", "ReviewerID", "IsRecentReview", "PositionID", "DepartmentID"}, MissingField.Ignore)
+				    Dated = Table.SelectRows(Data, each [ReviewDate] <= ReferenceDateValue),
+				    Slim = Table.RemoveColumns(Dated, {"ReviewPeriodStart", "ReviewPeriodEnd", "PerformanceReviewID", "ReviewerID", "PositionID", "DepartmentID"}, MissingField.Ignore)
 				in
 				    Slim
+
+	annotation PBI_ResultType = Table
 

@@ -1,18 +1,64 @@
 /// SQL Server instance (Windows authentication, no secrets stored)
 expression SqlServer = ".\SQLEXPRESS" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
 	lineageTag: 8300c834-cc9c-4dd5-9d24-f8e9fa8ba7e6
+	queryGroup: Parameters
 
 	annotation PBI_ResultType = Text
 
 /// Database name
 expression SqlDatabase = "DemoHR" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
 	lineageTag: 323aa1fc-654f-4bbe-8c2c-554922073d90
+	queryGroup: Parameters
 
 	annotation PBI_ResultType = Text
 
 /// Folder with the profile pictures (EMP-######.jpg), read by the ProfilePictures table
 expression ProfilePicturesFolder = "C:\DemoHR\profiles" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
 	lineageTag: aaa4a8b6-db38-4311-85ef-bbce42479255
+	queryGroup: Parameters
 
 	annotation PBI_ResultType = Text
+
+/// Leave empty for normal use (the report then uses today). Enter a date only to test the report as of that date; it must be empty in committed files
+expression ReferenceDateOverride = null meta [IsParameterQuery=true, Type="Date", IsParameterQueryRequired=false]
+	lineageTag: 8ffe0d25-d908-4f8f-95a7-251d6b710b9e
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = Null
+
+/// First date of the data (the reference date of the first load)
+expression DataStart =
+		let
+		  Source = Sql.Database(SqlServer, SqlDatabase),
+		  Data = Source{[Schema = "dbo", Item = "vw_DataRange"]}[Data],
+		  Navigation = Data{0}[DataStart]
+		in
+		  Navigation
+	lineageTag: 4a55f3aa-ff7a-4f7b-812f-fedd3eadf81a
+	queryGroup: 'Reference Date'
+
+	annotation PBI_ResultType = Date
+
+/// Last date of the data (latest run in ReferenceDateLog, 2030-12-31 after the extension)
+expression DataEnd =
+		let
+		  Source = Sql.Database(SqlServer, SqlDatabase),
+		  Data = Source{[Schema = "dbo", Item = "vw_DataRange"]}[Data],
+		  Navigation = Data{0}[DataEnd]
+		in
+		  Navigation
+	lineageTag: 642542c8-982c-4a39-ac5d-3959c1874933
+	queryGroup: 'Reference Date'
+
+	annotation PBI_ResultType = Date
+
+/// The reference date of the report: the override if given, else today, limited to the range of the data
+expression ReferenceDateValue =
+		let
+		    Wanted = if ReferenceDateOverride <> null then ReferenceDateOverride else Date.From(DateTime.LocalNow()),
+		    Limited = List.Max({DataStart, List.Min({DataEnd, Wanted})})
+		in
+		    Limited
+	lineageTag: e891616f-63c0-425a-9601-e9e12669206d
+	queryGroup: 'Reference Date'
 

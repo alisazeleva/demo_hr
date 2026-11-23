@@ -17,10 +17,16 @@ table FactWorkforcePlan
 
 	partition DepartmentTargets = m
 		mode: import
+		queryGroup: Facts
 		source =
 				let
 				    Source = Sql.Database(SqlServer, SqlDatabase),
-				    Data = Source{[Schema="dbo", Item="vw_FactWorkforcePlan"]}[Data]
+				    Data = Source{[Schema="dbo", Item="vw_FactWorkforcePlan"]}[Data],
+				    Started = Table.SelectRows(Data, each [EffectiveDate] <= ReferenceDateValue),
+				    // the latest target of each department on the reference date
+				    Latest = Table.Group(Started, {"DepartmentID"}, {{"TargetHeadcount", each Table.Max(_, "EffectiveDate")[TargetHeadcount], Int64.Type}})
 				in
-				    Data
+				    Latest
+
+	annotation PBI_ResultType = Table
 

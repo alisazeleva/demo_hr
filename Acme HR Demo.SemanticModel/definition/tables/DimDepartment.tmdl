@@ -27,10 +27,13 @@ table DimDepartment
 
 	partition Department = m
 		mode: import
+		queryGroup: Dimensions
 		source =
 				let
 				    Source = Sql.Database(SqlServer, SqlDatabase),
 				    Data = Source{[Schema="dbo", Item="vw_DimDepartment"]}[Data]
 				in
 				    Data
+
+	annotation PBI_ResultType = Table
 

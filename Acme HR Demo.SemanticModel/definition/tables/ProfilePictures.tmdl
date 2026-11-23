@@ -20,6 +20,7 @@ table ProfilePictures
 
 	partition ProfilePictures = m
 		mode: import
+		queryGroup: Dimensions
 		source =
 				let
 				    Source = Folder.Files(ProfilePicturesFolder),

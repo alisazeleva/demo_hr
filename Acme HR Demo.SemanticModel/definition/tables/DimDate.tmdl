@@ -1,4 +1,4 @@
-/// Calendar 2012-01-01 to 2027-12-31 (PLAN.md)
+/// Calendar from 2012-01-01 to 31 December of the year after the reference year (PLAN.md)
 table DimDate
 	lineageTag: fac3adc9-ad12-486e-8d30-1663c1895fe3
 	dataCategory: Time
@@ -38,11 +38,21 @@ table DimDate
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Years from this date's year back to the reference year: 0 = the reference year, 1 = the year before, -1 = the year after.
+	/// Visual filters use it so that year ranges follow the reference date.
+	column 'Years Before Reference' = YEAR(MAX(ReferenceDate[ReferenceDate])) - DimDate[Year]
+		formatString: 0
+		isHidden
+		lineageTag: b6f495a3-24d4-4381-b7e2-9f993903095c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = User
+
 	partition Date = calculated
 		mode: import
 		source =
 				ADDCOLUMNS(
-				    CALENDAR(DATE(2012, 1, 1), DATE(2027, 12, 31)),
+				    CALENDAR(DATE(2012, 1, 1), DATE(YEAR(MAX(ReferenceDate[ReferenceDate])) + 1, 12, 31)),
 				    "Year", YEAR([Date]),
 				    "Month Number", MONTH([Date]),
 				    "Month", FORMAT([Date], "MMM")

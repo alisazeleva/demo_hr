@@ -7,7 +7,7 @@
     "z": 19000,
     "height": 331.55401575808861,
     "width": 336.45866096161063,
-    "tabOrder": 19000
+    "tabOrder": 18000
   },
   "visual": {
     "visualType": "barChart",
@@ -442,37 +442,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "fbec8de5b20b2e40b20e",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimLeaveType"
-              }
-            },
-            "Property": "LeaveType"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "6b3cbba5670e1083d08a",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Leave Days Last 24 Months"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

@@ -592,7 +592,7 @@
                 "Entity": "DimDate"
               }
             },
-            "Property": "Year"
+            "Property": "Years Before Reference"
           }
         },
         "type": "Advanced",
@@ -616,17 +616,17 @@
                           "Source": "d"
                         }
                       },
-                      "Property": "Year"
+                      "Property": "Years Before Reference"
                     }
                   },
                   "LowerBound": {
                     "Literal": {
-                      "Value": "2012L"
+                      "Value": "0L"
                     }
                   },
                   "UpperBound": {
                     "Literal": {
-                      "Value": "2026L"
+                      "Value": "100L"
                     }
                   }
                 }

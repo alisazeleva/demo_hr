@@ -1,0 +1,281 @@
+-- 14_create_reporting_views.sql: reporting views for Power BI (PLAN.md, Power BI plan, Model) and the as-of functions for SQL checks.
+-- The tables hold the whole timeline, from the first load (2026-11-16) up to the end of the data (dbo.ReferenceDateLog, 2030-12-31 after
+-- sql/extend_data.sql). The views return that timeline with raw dates and NO reference date: Power BI works out the state as of its own
+-- reference date (DateTime.LocalNow) in Power Query. Every view is CREATE OR ALTER VIEW in its own batch, so the script can be re-run.
+-- Star schema for Power BI: dimensions vw_DimDepartment, vw_DimPosition, vw_DimEmployee, vw_DimManager, vw_DimLeaveType;
+-- facts vw_JobHistory, vw_CompensationHistory, vw_PerformanceReviews, vw_LeaveDays, vw_LeaveRequests, vw_FactWorkforcePlan carry keys, dates and
+-- measures. Names are repeated only where an event needs its own label (position, department and manager at the time of a job change).
+-- vw_DataRange gives the first and the last date of the data.
+-- For SQL checks and ad-hoc queries the state on one date is given by functions (the Power BI model does not load them):
+--   dbo.fn_EmployeeAsOf(@RefDate), dbo.fn_OrgHierarchy(@RefDate), dbo.fn_EmployeeCurrent(@RefDate), dbo.fn_DepartmentHeadcountVsTarget(@RefDate).
+-- Run with -I (quoted identifiers ON), after 13_create_extension_tables.sql:
+--   sqlcmd -S ".\SQLEXPRESS" -E -C -b -I -d DemoHR -f 65001 -i sql/14_create_reporting_views.sql
+SET NOCOUNT ON;
+GO
+
+-- views of the earlier version that read a fixed reference date: replaced by the functions below
+DROP VIEW IF EXISTS dbo.vw_EmployeeCurrent;
+DROP VIEW IF EXISTS dbo.vw_DepartmentHeadcountVsTarget;
+DROP VIEW IF EXISTS dbo.vw_OrgHierarchy;
+DROP VIEW IF EXISTS dbo.vw_ReferenceDate;
+GO
+
+-- ====================================================================== the range of the data
+CREATE OR ALTER VIEW dbo.vw_DataRange
+AS
+SELECT ISNULL(MIN(NewReferenceDate), CAST('2026-11-16' AS date)) AS DataStart,
+       ISNULL(MAX(NewReferenceDate), CAST('2026-11-16' AS date)) AS DataEnd
+FROM dbo.ReferenceDateLog;
+GO
+
+-- ====================================================================== the state on one date (functions)
+-- employees hired on or before @RefDate, with the position, department and manager of the job-history row and the salary of the pay row on that date
+CREATE OR ALTER FUNCTION dbo.fn_EmployeeAsOf (@RefDate date)
+RETURNS TABLE
+AS RETURN
+SELECT e.EmployeeID, e.EmployeeNumber, e.FirstName, e.LastName, e.Gender, e.DateOfBirth, e.Nationality, e.NativeLanguage, e.HireDate, e.EmailAddress,
+       e.ProfileImageFileName,
+       j.PositionID, j.OrganizationUnitID, j.ManagerEmployeeID,
+       c.BaseSalary, c.Currency
+FROM dbo.Employees e
+JOIN dbo.EmployeeJobHistory j ON j.EmployeeID = e.EmployeeID AND j.EffectiveDate <= @RefDate AND (j.EndDate IS NULL OR j.EndDate > @RefDate)
+LEFT JOIN dbo.EmployeeCompensationHistory c ON c.EmployeeID = e.EmployeeID AND c.EffectiveDate <= @RefDate AND (c.EndDate IS NULL OR c.EndDate > @RefDate)
+WHERE e.HireDate <= @RefDate;
+GO
+
+-- reporting tree on @RefDate: depth, path from the CEO, manager chain
+CREATE OR ALTER FUNCTION dbo.fn_OrgHierarchy (@RefDate date)
+RETURNS TABLE
+AS RETURN
+WITH a AS (SELECT * FROM dbo.fn_EmployeeAsOf(@RefDate)),
+tree AS (
+    SELECT a.EmployeeID, 0 AS Depth,
+           CAST('/' + CAST(a.EmployeeID AS varchar(10)) + '/' AS varchar(200)) AS PathIDs,
+           CAST(a.FirstName + N' ' + a.LastName AS nvarchar(1000)) AS FullName,
+           CAST(a.FirstName + N' ' + a.LastName AS nvarchar(1000)) AS PathNames,
+           CAST(NULL AS nvarchar(1000)) AS ManagerChain
+    FROM a WHERE a.ManagerEmployeeID IS NULL
+    UNION ALL
+    SELECT c.EmployeeID, t.Depth + 1,
+           CAST(t.PathIDs + CAST(c.EmployeeID AS varchar(10)) + '/' AS varchar(200)),
+           CAST(c.FirstName + N' ' + c.LastName AS nvarchar(1000)),
+           CAST(t.PathNames + N' > ' + c.FirstName + N' ' + c.LastName AS nvarchar(1000)),
+           CAST(t.FullName + CASE WHEN t.ManagerChain IS NULL THEN N'' ELSE N' > ' + t.ManagerChain END AS nvarchar(1000))
+    FROM a c JOIN tree t ON c.ManagerEmployeeID = t.EmployeeID)
+SELECT a.EmployeeID, a.EmployeeNumber, t.FullName AS EmployeeName, p.PositionTitle, p.JobLevel, p.JobLevelRank,
+       u.UnitName AS Department,
+       a.ManagerEmployeeID, m.FirstName + N' ' + m.LastName AS ManagerName,
+       t.Depth, t.PathIDs, t.PathNames AS PathFromCEO, t.ManagerChain,
+       (SELECT COUNT(*) FROM a d WHERE d.ManagerEmployeeID = a.EmployeeID) AS DirectReports
+FROM tree t
+JOIN a ON a.EmployeeID = t.EmployeeID
+JOIN dbo.Positions p ON p.PositionID = a.PositionID
+JOIN dbo.OrganizationUnits u ON u.OrganizationUnitID = a.OrganizationUnitID
+LEFT JOIN a m ON m.EmployeeID = a.ManagerEmployeeID;
+GO
+
+-- one row per employee on @RefDate
+CREATE OR ALTER FUNCTION dbo.fn_EmployeeCurrent (@RefDate date)
+RETURNS TABLE
+AS RETURN
+SELECT a.EmployeeID, a.EmployeeNumber, a.FirstName, a.LastName,
+       a.FirstName + N' ' + a.LastName AS FullName,
+       a.Gender, a.DateOfBirth,
+       DATEDIFF(YEAR, a.DateOfBirth, @RefDate)
+         - CASE WHEN DATEADD(YEAR, DATEDIFF(YEAR, a.DateOfBirth, @RefDate), a.DateOfBirth) > @RefDate THEN 1 ELSE 0 END AS Age,
+       a.Nationality, a.NativeLanguage, a.HireDate,
+       CAST(DATEDIFF(DAY, a.HireDate, @RefDate) / 365.25 AS decimal(5,2)) AS TenureYears,
+       a.EmailAddress,
+       p.PositionID, p.PositionTitle, p.JobFamily, p.JobLevel, p.JobLevelRank, p.IsManagementPosition,
+       u.OrganizationUnitID AS DepartmentID, u.UnitName AS Department,
+       a.ManagerEmployeeID, m.FirstName + N' ' + m.LastName AS ManagerName,
+       (SELECT COUNT(*) FROM dbo.fn_EmployeeAsOf(@RefDate) d WHERE d.ManagerEmployeeID = a.EmployeeID) AS DirectReports,
+       a.BaseSalary AS CurrentSalary, a.Currency,
+       rv.OverallRating AS LatestRating, rv.ReviewDate AS LatestReviewDate, rv.PerformanceLevel AS LatestPerformanceLevel,
+       a.ProfileImageFileName,
+       oh.Depth AS OrgDepth, oh.PathIDs, oh.PathFromCEO, oh.ManagerChain
+FROM dbo.fn_EmployeeAsOf(@RefDate) a
+JOIN dbo.Positions p ON p.PositionID = a.PositionID
+JOIN dbo.OrganizationUnits u ON u.OrganizationUnitID = a.OrganizationUnitID
+LEFT JOIN dbo.fn_EmployeeAsOf(@RefDate) m ON m.EmployeeID = a.ManagerEmployeeID
+LEFT JOIN dbo.fn_OrgHierarchy(@RefDate) oh ON oh.EmployeeID = a.EmployeeID
+OUTER APPLY (SELECT TOP (1) x.OverallRating, x.ReviewDate, x.PerformanceLevel
+             FROM dbo.PerformanceReviews x WHERE x.EmployeeID = a.EmployeeID AND x.ReviewDate <= @RefDate ORDER BY x.ReviewPeriodEnd DESC) rv;
+GO
+
+-- headcount against the workforce plan on @RefDate (the target is the latest row of the plan history on that date)
+CREATE OR ALTER FUNCTION dbo.fn_DepartmentHeadcountVsTarget (@RefDate date)
+RETURNS TABLE
+AS RETURN
+SELECT u.OrganizationUnitID AS DepartmentID, u.UnitName AS Department,
+       t.TargetHeadcount, COUNT(a.EmployeeID) AS ActualHeadcount,
+       COUNT(a.EmployeeID) - t.TargetHeadcount AS Difference,
+       CAST(100.0 * COUNT(a.EmployeeID) / t.TargetHeadcount AS decimal(5,1)) AS PctOfTarget
+FROM dbo.DepartmentWorkforcePlan w
+JOIN dbo.OrganizationUnits u ON u.OrganizationUnitID = w.OrganizationUnitID
+CROSS APPLY (SELECT TOP (1) h.TargetHeadcount FROM dbo.DepartmentWorkforcePlanHistory h
+             WHERE h.OrganizationUnitID = w.OrganizationUnitID AND h.EffectiveDate <= @RefDate ORDER BY h.EffectiveDate DESC) t
+LEFT JOIN dbo.fn_EmployeeAsOf(@RefDate) a ON a.OrganizationUnitID = u.OrganizationUnitID
+GROUP BY u.OrganizationUnitID, u.UnitName, t.TargetHeadcount;
+GO
+
+-- ====================================================================== dimensions
+CREATE OR ALTER VIEW dbo.vw_DimDepartment
+AS
+SELECT u.OrganizationUnitID AS DepartmentID, u.UnitName AS Department, u.UnitType AS DepartmentType
+FROM dbo.OrganizationUnits u;
+GO
+
+CREATE OR ALTER VIEW dbo.vw_DimPosition
+AS
+SELECT p.PositionID, p.PositionTitle, p.JobFamily, p.JobLevel, p.JobLevelRank, p.IsManagementPosition
+FROM dbo.Positions p;
+GO
+
+-- one row per employee ever hired: who they are (fixed attributes). Position, department, manager, salary, age, tenure, latest review
+-- and direct reports depend on the date and are worked out in Power BI from the job, pay and review history.
+CREATE OR ALTER VIEW dbo.vw_DimEmployee
+AS
+SELECT e.EmployeeID, e.EmployeeNumber, e.FirstName, e.LastName,
+       e.FirstName + N' ' + e.LastName AS FullName,
+       e.Gender, e.DateOfBirth, e.Nationality, e.NativeLanguage, e.HireDate, e.EmailAddress, e.ProfileImageFileName
+FROM dbo.Employees e;
+GO
+
+-- everyone who has direct reports at some time (Power BI keeps those who have reports on its reference date)
+CREATE OR ALTER VIEW dbo.vw_DimManager
+AS
+SELECT m.EmployeeID AS ManagerEmployeeID, m.EmployeeNumber AS ManagerNumber,
+       m.FirstName + N' ' + m.LastName AS ManagerName
+FROM dbo.Employees m
+WHERE EXISTS (SELECT 1 FROM dbo.EmployeeJobHistory d WHERE d.ManagerEmployeeID = m.EmployeeID);
+GO
+
+CREATE OR ALTER VIEW dbo.vw_DimLeaveType
+AS
+SELECT t.LeaveTypeID, t.LeaveTypeName AS LeaveType, t.IsPaid
+FROM dbo.LeaveTypes t;
+GO
+
+-- ====================================================================== job history: keys, dates, flags, and the labels of the old and new position, department and manager
+-- IsCurrent = the row is open at the end of the data; Power BI recalculates it for its reference date
+CREATE OR ALTER VIEW dbo.vw_JobHistory
+AS
+WITH h AS (
+    SELECT j.*,
+           LAG(j.PositionID)         OVER (PARTITION BY j.EmployeeID ORDER BY j.EffectiveDate) AS PrevPositionID,
+           LAG(j.OrganizationUnitID) OVER (PARTITION BY j.EmployeeID ORDER BY j.EffectiveDate) AS PrevUnitID,
+           LAG(j.ManagerEmployeeID)  OVER (PARTITION BY j.EmployeeID ORDER BY j.EffectiveDate) AS PrevManagerID
+    FROM dbo.EmployeeJobHistory j)
+SELECT h.JobHistoryID, h.EmployeeID,
+       h.EffectiveDate, h.EndDate, CAST(CASE WHEN h.EndDate IS NULL THEN 1 ELSE 0 END AS bit) AS IsCurrent,
+       h.ChangeType, h.Reason,
+       CAST(CASE WHEN h.ChangeType IN ('Promotion', 'Promotion + Department Transfer') THEN 1 ELSE 0 END AS bit) AS IsPromotion,
+       CAST(CASE WHEN h.ChangeType IN ('Department Transfer', 'Promotion + Department Transfer') THEN 1 ELSE 0 END AS bit) AS IsDepartmentTransfer,
+       -- new (this record)
+       h.PositionID, h.OrganizationUnitID AS DepartmentID, h.ManagerEmployeeID AS ManagerID,
+       p.PositionTitle, u.UnitName AS Department, m.FirstName + N' ' + m.LastName AS ManagerName,
+       -- previous (the record before it; NULL for the first record)
+       h.PrevPositionID, h.PrevUnitID AS PrevDepartmentID, h.PrevManagerID,
+       pp.PositionTitle AS PrevPositionTitle, pu.UnitName AS PrevDepartment, pm.FirstName + N' ' + pm.LastName AS PrevManagerName
+FROM h
+JOIN dbo.Positions p ON p.PositionID = h.PositionID
+JOIN dbo.OrganizationUnits u ON u.OrganizationUnitID = h.OrganizationUnitID
+LEFT JOIN dbo.Employees m ON m.EmployeeID = h.ManagerEmployeeID
+LEFT JOIN dbo.Positions pp ON pp.PositionID = h.PrevPositionID
+LEFT JOIN dbo.OrganizationUnits pu ON pu.OrganizationUnitID = h.PrevUnitID
+LEFT JOIN dbo.Employees pm ON pm.EmployeeID = h.PrevManagerID;
+GO
+
+-- ====================================================================== salary periods with the previous salary and the change
+CREATE OR ALTER VIEW dbo.vw_CompensationHistory
+AS
+WITH c AS (
+    SELECT x.*, LAG(x.BaseSalary) OVER (PARTITION BY x.EmployeeID ORDER BY x.EffectiveDate) AS PrevSalary
+    FROM dbo.EmployeeCompensationHistory x)
+SELECT c.CompensationHistoryID, c.EmployeeID,
+       c.EffectiveDate, c.EndDate, CAST(CASE WHEN c.EndDate IS NULL THEN 1 ELSE 0 END AS bit) AS IsCurrent,
+       c.BaseSalary AS Salary, c.Currency, c.PayFrequency,
+       c.PrevSalary AS PreviousSalary,
+       c.BaseSalary - c.PrevSalary AS ChangeAmount,
+       CAST(100.0 * (c.BaseSalary / c.PrevSalary - 1) AS decimal(6,2)) AS ChangePct,
+       c.ChangeReason AS Reason
+FROM c;
+GO
+
+-- ====================================================================== reviews: reviewer, and the position and department on 31 December of the period (keys)
+CREATE OR ALTER VIEW dbo.vw_PerformanceReviews
+AS
+SELECT r.PerformanceReviewID, r.EmployeeID,
+       r.ReviewerEmployeeID AS ReviewerID, rv.FirstName + N' ' + rv.LastName AS ReviewerName,
+       j.PositionID, j.OrganizationUnitID AS DepartmentID,
+       YEAR(r.ReviewPeriodEnd) AS ReviewYear, r.ReviewPeriodStart, r.ReviewPeriodEnd, r.ReviewDate,
+       r.OverallRating AS Rating, r.PerformanceLevel AS Level, r.Comments
+FROM dbo.PerformanceReviews r
+JOIN dbo.Employees rv ON rv.EmployeeID = r.ReviewerEmployeeID
+JOIN dbo.EmployeeJobHistory j ON j.EmployeeID = r.EmployeeID AND j.EffectiveDate <= r.ReviewPeriodEnd AND (j.EndDate IS NULL OR j.EndDate > r.ReviewPeriodEnd);
+GO
+
+-- ====================================================================== one row per working day of every leave that ends Approved
+-- RequestDate / DecisionDate come from dbo.LeaveRequestInfo (NULL for the leave of the first load that was decided when it was loaded):
+-- Power BI shows a day from the request date and counts it once the leave is decided
+CREATE OR ALTER VIEW dbo.vw_LeaveDays
+AS
+SELECT l.LeaveID, l.EmployeeID,
+       j.OrganizationUnitID AS DepartmentID,           -- department on that day, from job history
+       l.LeaveTypeID,
+       d.LeaveDate,
+       i.RequestDate, i.DecisionDate
+FROM dbo.EmployeeLeaves l
+LEFT JOIN dbo.LeaveRequestInfo i ON i.LeaveID = l.LeaveID
+CROSS APPLY (   -- every calendar day from start to end (up to 1000 days), then only working days
+    SELECT DATEADD(DAY, a.v + 10 * b.v + 100 * c.v, l.StartDate) AS LeaveDate
+    FROM (VALUES (0),(1),(2),(3),(4),(5),(6),(7),(8),(9)) a(v)
+    CROSS JOIN (VALUES (0),(1),(2),(3),(4),(5),(6),(7),(8),(9)) b(v)
+    CROSS JOIN (VALUES (0),(1),(2),(3),(4),(5),(6),(7),(8),(9)) c(v)
+    WHERE a.v + 10 * b.v + 100 * c.v <= DATEDIFF(DAY, l.StartDate, l.EndDate)) d
+JOIN dbo.EmployeeJobHistory j ON j.EmployeeID = l.EmployeeID AND j.EffectiveDate <= d.LeaveDate AND (j.EndDate IS NULL OR j.EndDate > d.LeaveDate)
+WHERE ISNULL(i.FinalStatus, l.Status) = 'Approved'
+  AND DATEDIFF(DAY, '19000101', d.LeaveDate) % 7 < 5                                   -- Monday-Friday (1900-01-01 was a Monday)
+  AND NOT EXISTS (SELECT 1 FROM dbo.PublicHolidays h WHERE h.HolidayDate = d.LeaveDate);
+GO
+
+-- ====================================================================== leave requests: one row per request; Status is the final one (Approved or Rejected)
+-- Power BI shows the request from RequestDate, as Pending until DecisionDate (both NULL = decided when it was loaded, always visible)
+CREATE OR ALTER VIEW dbo.vw_LeaveRequests
+AS
+SELECT l.LeaveID, l.EmployeeID,
+       j.OrganizationUnitID AS DepartmentID,           -- department on the start date, from job history
+       l.LeaveTypeID, ISNULL(i.FinalStatus, l.Status) AS Status, l.StartDate, l.EndDate,
+       i.RequestDate, i.DecisionDate
+FROM dbo.EmployeeLeaves l
+LEFT JOIN dbo.LeaveRequestInfo i ON i.LeaveID = l.LeaveID
+JOIN dbo.EmployeeJobHistory j ON j.EmployeeID = l.EmployeeID AND j.EffectiveDate <= l.StartDate AND (j.EndDate IS NULL OR j.EndDate > l.StartDate);
+GO
+
+-- ====================================================================== workforce plan: target headcount per department from a date on (fact for the star)
+-- the history table (first rows = the plan of 2026-11-16); a database that has not been extended yet shows the plan table
+CREATE OR ALTER VIEW dbo.vw_FactWorkforcePlan
+AS
+SELECT h.OrganizationUnitID AS DepartmentID, h.EffectiveDate, h.TargetHeadcount
+FROM dbo.DepartmentWorkforcePlanHistory h
+UNION ALL
+SELECT w.OrganizationUnitID, CAST('2026-11-16' AS date), w.TargetHeadcount
+FROM dbo.DepartmentWorkforcePlan w
+WHERE NOT EXISTS (SELECT 1 FROM dbo.DepartmentWorkforcePlanHistory);
+GO
+
+-- ====================================================================== row counts
+SELECT 'vw_DataRange' AS ViewName, COUNT(*) AS [Rows], 1 AS Expected FROM dbo.vw_DataRange
+UNION ALL SELECT 'vw_DimEmployee', COUNT(*), (SELECT COUNT(*) FROM dbo.Employees) FROM dbo.vw_DimEmployee
+UNION ALL SELECT 'vw_JobHistory', COUNT(*), (SELECT COUNT(*) FROM dbo.EmployeeJobHistory) FROM dbo.vw_JobHistory
+UNION ALL SELECT 'vw_CompensationHistory', COUNT(*), (SELECT COUNT(*) FROM dbo.EmployeeCompensationHistory) FROM dbo.vw_CompensationHistory
+UNION ALL SELECT 'vw_PerformanceReviews', COUNT(*), (SELECT COUNT(*) FROM dbo.PerformanceReviews) FROM dbo.vw_PerformanceReviews
+UNION ALL SELECT 'vw_LeaveDays', COUNT(*), NULL FROM dbo.vw_LeaveDays
+UNION ALL SELECT 'vw_LeaveRequests', COUNT(*), (SELECT COUNT(*) FROM dbo.EmployeeLeaves) FROM dbo.vw_LeaveRequests
+UNION ALL SELECT 'vw_DimDepartment', COUNT(*), 6 FROM dbo.vw_DimDepartment
+UNION ALL SELECT 'vw_DimPosition', COUNT(*), (SELECT COUNT(*) FROM dbo.Positions) FROM dbo.vw_DimPosition
+UNION ALL SELECT 'vw_DimManager', COUNT(*), NULL FROM dbo.vw_DimManager
+UNION ALL SELECT 'vw_DimLeaveType', COUNT(*), (SELECT COUNT(*) FROM dbo.LeaveTypes) FROM dbo.vw_DimLeaveType
+UNION ALL SELECT 'vw_FactWorkforcePlan', COUNT(*), (SELECT COUNT(*) FROM dbo.DepartmentWorkforcePlanHistory) FROM dbo.vw_FactWorkforcePlan;
+GO

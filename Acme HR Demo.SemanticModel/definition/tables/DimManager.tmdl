@@ -19,11 +19,19 @@ table DimManager
 
 	partition Manager = m
 		mode: import
+		queryGroup: Dimensions
 		source =
 				let
 				    Source = Sql.Database(SqlServer, SqlDatabase),
 				    Data = Source{[Schema="dbo", Item="vw_DimManager"]}[Data],
-				    Slim = Table.RemoveColumns(Data, {"ManagerNumber"}, MissingField.Ignore)
+				    Jobs = Source{[Schema="dbo", Item="vw_JobHistory"]}[Data],
+				    // people who have direct reports on the reference date (job rows that cover it)
+				    Current = Table.SelectRows(Jobs, each [EffectiveDate] <= ReferenceDateValue and ([EndDate] = null or [EndDate] > ReferenceDateValue)),
+				    Managers = List.Distinct(List.RemoveNulls(Current[ManagerID])),
+				    Active = Table.SelectRows(Data, each List.Contains(Managers, [ManagerEmployeeID])),
+				    Slim = Table.RemoveColumns(Active, {"ManagerNumber"}, MissingField.Ignore)
 				in
 				    Slim
+
+	annotation PBI_ResultType = Table
 

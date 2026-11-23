@@ -108,10 +108,10 @@
                     "Entity": "FactJobHistory"
                   }
                 },
-                "Property": "ChangeType"
+                "Property": "EffectiveDate"
               }
             },
-            "direction": "Ascending"
+            "direction": "Descending"
           }
         ]
       }

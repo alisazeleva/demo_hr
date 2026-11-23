@@ -197,6 +197,17 @@ def test_report_opens_on_the_home_page():
     assert meta['pageOrder'][0] == home[0], 'Home must be the first page'
 
 
+def test_reference_date_override_is_empty():
+    """ReferenceDateOverride is for testing the report as of another date; committed, it must be null so the report uses today."""
+    with open(os.path.join(MODEL, 'expressions.tmdl'), encoding='utf-8') as f:
+        text = f.read()
+    match = re.search(r'^expression ReferenceDateOverride = (.*)$', text, re.M)
+    assert match, 'expressions.tmdl has no ReferenceDateOverride parameter'
+    assert match.group(1).startswith('null meta'), (
+        'ReferenceDateOverride is set (%s): clear it in Desktop (Transform data > Manage parameters) before committing'
+        % match.group(1).split(' meta')[0])
+
+
 def test_bookmark_list_matches_bookmark_files():
     listed = [i['name'] for i in load(os.path.join(REPORT, 'bookmarks', 'bookmarks.json'))['items']]
     assert len(listed) == len(set(listed)), 'duplicate bookmark in bookmarks.json'

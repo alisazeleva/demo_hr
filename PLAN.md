@@ -2,7 +2,7 @@
 
 Nov 16, 2026 · @Alisa
 
-DemoHR holds 151 current employees (a CEO plus 150 spread over five departments) in 10 SQL Server tables, filled by numbered scripts you run one at a time and then reported on in Power BI.
+DemoHR holds 151 current employees on 2026-11-16 (a CEO plus 150 spread over five departments) in 10 SQL Server tables, filled by numbered scripts you run one at a time and then reported on in Power BI. The data is then extended to 2030-12-31 by adding records only (171 employees at the end; see Refreshing the data), and the report shows the company as of its refresh date.
 
 ## Decisions locked in
 
@@ -12,7 +12,7 @@ DemoHR holds 151 current employees (a CEO plus 150 spread over five departments)
 | Employee numbers | EMP-000001 to EMP-000151 (the original plan said 150; the CEO is EMP-000001) |
 | Department vs position | Every position belongs to one department; an employee's department always equals their position's department, so a transfer means a new position |
 | Manager rule | A manager's job level must be strictly higher than every direct report's |
-| Reference date | 2026-11-16 ("today" for all generated dates) |
+| Reference date | 2026-11-16 for the first load (scripts 06 to 11); the data is then extended to 2030-12-31 (`sql/extend_data.sql`), and the report's "today" is the refresh date, set in Power BI |
 | Currency | EUR for everyone, annual salary |
 | Leave days | Working days, excluding weekends and Finnish public holidays |
 | Profile pictures | Generated in an external AI image tool, after the employee data is final; the database stores only filenames |
@@ -50,7 +50,7 @@ Ten planned tables plus one small support table (PublicHolidays), in SQL Server,
 - `Gender` varchar(10) not null, CHECK in ('Female','Male')
 - `DateOfBirth` date not null
 - `Nationality`, `NativeLanguage` nvarchar(60) not null
-- `HireDate` date not null, CHECK later than DateOfBirth + 18 years and not after the reference date
+- `HireDate` date not null, CHECK later than DateOfBirth + 18 years (the old upper limit, the reference date, was removed by script 13)
 - `EmailAddress` nvarchar(150) not null, unique
 - `PositionID` int not null, FK
 - `OrganizationUnitID` int not null, FK
@@ -279,8 +279,10 @@ Fifteen numbered scripts, one logical step each; you run one, check its result, 
 | 10\_generate\_reviews | Annual reviews | Valid reviewers, ratings 1–5, dates after hire |
 | 11\_generate\_leave | Leave records | No overlaps, valid approvers, 6 or more absent on 2026-11-16 |
 | 12\_prepare\_profile\_images | Writes the list of employees with gender and age for image prompts; after you create the images, fills ProfileImageFileName | 151 unique filenames, one per EmployeeNumber |
-| 13\_create\_reporting\_views | Views for Power BI | Views return rows |
-| 99\_full\_validation | Every check from the final validation list, with 151 as the total | All checks pass |
+| 13\_create\_extension\_tables | Add-only tables of the extension: ReferenceDateLog, DepartmentWorkforcePlanHistory, LeaveRequestInfo (first rows as of 2026-11-16) | Tables exist, one log row |
+| 14\_create\_reporting\_views | Timeline views for Power BI (no reference date) and the as-of functions `fn_EmployeeAsOf`, `fn_OrgHierarchy`, `fn_EmployeeCurrent`, `fn_DepartmentHeadcountVsTarget` | Views return rows |
+| extend\_data (with `sql/update/`) | Adds records from the end of the data to a new end date (2030-12-31): hires, job changes, pay, reviews, holidays, leave | Old rows unchanged, all rules hold |
+| 99\_full\_validation | Every check from the final validation list, on the timeline and on a reference date (default the end of the data) | All checks pass |
 
 Profile pictures stay the last data step, as in your plan: nothing is generated until the employee data is final. I will produce the prompt list (EmployeeNumber, gender, rough age, a style line identical for all), you create the images in your image tool and save them as `EMP-000001.jpg` to `EMP-000151.jpg`, then script 12 fills the column.
 
@@ -288,14 +290,13 @@ Profile pictures stay the last data step, as in your plan: nothing is generated 
 
 ## Refreshing the data
 
-The generated data is anchored to one reference date, so it can be refreshed later by changing that date and rerunning the generation scripts.
+The first load (scripts 06 to 11) describes the company on 2026-11-16. It is extended forward by adding records, never by regenerating or shifting dates.
 
-- **One place for the date.** The reference date (currently 2026-11-16) is a single variable at the top of every generation script (06 and 08 to 11) and of the validation script. It is not repeated inside queries. The hire-date check in script 01 is the exception: it must be updated with the same date whenever the reference date changes.
-- **Same company or a new one.** The generation uses a fixed seed. Keeping the seed gives the same people, positions and managers, with the history, reviews, leave and absences moved forward to the new date. Changing the seed generates a different company.
-- **What to rerun.** To bring the data up to date for the same employees, rerun scripts 08, 09, 10 and 11, then 99 (full validation). Rerun 06 and 07 as well only if the employees themselves should change; that also means rerunning 08 to 11 and redoing the profile pictures (step 12).
-- **Never shift dates directly.** Adding a fixed number of days to existing dates breaks weekends, Finnish public holidays, the 1 January pay increases and the review windows. Always regenerate from the reference date.
-- **Power BI.** Views and measures use the reference date from the data (for example "currently absent" and tenure), not today's date, so the report does not drift between refreshes. After a refresh, refresh the Power BI data as well.
-- **Validation after a refresh.** Run script 99. Every check must pass with the new reference date, including the 151 total, one open job-history and one open compensation record per employee, and at least 6 employees on approved leave on the reference date.
+- **Rule for existing data.** Everything up to the old end of the data stays identical. The only edit to an old row is filling `EndDate` of an open job-history or pay row when a newer row starts. `Employees` rows are never updated: they hold each person as at hire (people of the first load: as on 2026-11-16), and the job history says what is true on any date.
+- **Extend.** `sql/extend_data.sql` (set `EndDate` at the top; run from the repository root with `-I -f 65001`) makes a verified backup (last 10 kept), then in one transaction adds, in date order: hires (at most 5 a calendar year: department below target first, level Junior 45 %, Professional 40 %, Senior 15 %, manager of the same family with the smallest team), quarterly promotions and transfers with the 6- and 18-month rules, pay changes (promotion 6-12 %, transfer 0.2-4 %, 1 January increase 1.5-4.5 %, rare market adjustment 4-8 %), annual reviews (20 January to 15 March), Finnish public holidays, and leave (a yearly vacation plan, sick leave, bereavement, rare parental and unpaid leave) with request and decision dates in `LeaveRequestInfo`. It checks that no old row changed and that the rules hold, then commits. A run from A to C equals runs from A to B and B to C.
+- **Power BI.** The reference date is the refresh date in Power BI, limited to the range of the data, so the report moves forward by itself and freezes at the end of the data (2030-12-31) until the data is extended again. Records dated after the reference date stay hidden until then; booked future leave is shown.
+- **Validation after an extension.** Run script 99 (default: the state at the end of the data; set `@RefDate` at the top to check another date). Every check must pass.
+- **Restore.** Every run prints the path of its backup; `RESTORE DATABASE DemoHR FROM DISK = N'<path>' WITH REPLACE` brings the database back.
 
 ## Power BI plan
 
@@ -312,23 +313,23 @@ Star schema (built in Power BI Desktop; the views are in script 13). Table names
 | DimPosition | vw\_DimPosition | Title, job family, job level and rank, management flag |
 | DimManager | vw\_DimManager | The manager role of an employee (employees with direct reports) |
 | DimLeaveType | vw\_DimLeaveType | Leave types |
-| DimDate | DAX CALENDAR | 2012-01-01 to 2027-12-31, marked as the date table |
+| DimDate | DAX CALENDAR | 2012-01-01 to 31 December of the year after the reference year, marked as the date table; `Years Before Reference` for year ranges in visual filters |
 | FactJobHistory | vw\_JobHistory | Change type, keys and labels of the old and new position, department and manager |
 | FactCompensation | vw\_CompensationHistory | Salary periods with the change percentage |
 | FactReviews | vw\_PerformanceReviews | Rating, level, reviewer |
 | FactLeaveDays | vw\_LeaveDays | One row per working day of an approved leave |
 | FactLeaveRequests | vw\_LeaveRequests | One row per leave request of any status (pending, approved, rejected), with department on the start date |
 | FactWorkforcePlan | vw\_FactWorkforcePlan | Target headcount per department |
-| ReferenceDate | vw\_ReferenceDate | The single source of "today" (2026-11-16) |
+| ReferenceDate | Power Query `ReferenceDateValue` | The single source of "today": the refresh date (or the `ReferenceDateOverride` parameter), limited to the range of the data in `vw_DataRange` |
 | \_Measures | (DAX) | All measures |
 
-`vw_EmployeeCurrent` and `vw_OrgHierarchy` remain as flat views for SQL checks; the model does not load them.
+The views hold the whole timeline without a reference date; each table query in Power Query keeps the state as of the reference date (people hired by then, the job, pay and review rows dated up to it, leave requests from their request date and Pending until decided, the latest workforce target). For SQL checks on one date use the functions `fn_EmployeeCurrent(@date)`, `fn_OrgHierarchy(@date)` and `fn_DepartmentHeadcountVsTarget(@date)`; the model does not load them.
 
 DimEmployee relates one-to-many to every fact on EmployeeID; DimDepartment, DimPosition and DimManager filter DimEmployee (and DimDepartment filters FactWorkforcePlan); DimLeaveType filters FactLeaveDays; DimDate relates to each fact by its main date. There are no inactive relationships: every department, position and manager in the report is the employee's current one, and the job-history table carries the department, position and manager at the time of each event as text columns. Columns that no visual, measure, relationship or sort order uses are removed in the Power Query step of each table (see DESIGN.md).
 
 ### Measures
 
-Headcount, Headcount vs Target, Average Salary, Average Salary at Year End, Employees at Year End, Average Annual Increase, Average Promotion Increase, Average Tenure (years), Promotions, Department Transfers, Average Months Before Promotion, Average Rating, Employees Without Recent Review, Leave Days, Vacation Days Used per Year, Currently Absent (on 2026-11-16), Direct Reports and Span of Control.
+Headcount, Headcount vs Target, Average Salary, Average Salary at Year End, Employees at Year End, Average Annual Increase, Average Promotion Increase, Average Tenure (years), Promotions, Department Transfers, Average Months Before Promotion, Average Rating, Employees Without Recent Review, Leave Days, Vacation Days Used per Year, Currently Absent (on the reference date), Direct Reports and Span of Control.
 
 ### Report pages
 

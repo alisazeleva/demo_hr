@@ -1,4 +1,3 @@
-/// One row per current employee: person attributes plus keys to Department, Position and Manager (vw_DimEmployee)
 table DimEmployee
 	lineageTag: 7096802c-7393-4515-b82d-886879a710f1
 
@@ -110,6 +109,8 @@ table DimEmployee
 
 		annotation SummarizationSetBy = Automatic
 
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column CurrentSalary
 		dataType: double
 		formatString: #,0
@@ -203,11 +204,40 @@ table DimEmployee
 
 	partition Employees = m
 		mode: import
+		queryGroup: Dimensions
 		source =
 				let
 				    Source = Sql.Database(SqlServer, SqlDatabase),
-				    Data = Source{[Schema="dbo", Item="vw_DimEmployee"]}[Data],
-				    Slim = Table.RemoveColumns(Data, {"FirstName", "LastName", "EmailAddress", "DateOfBirth", "Currency", "PathIDs", "OrgDepth", "PathFromCEO", "ManagerChain"}, MissingField.Ignore)
+				    People = Source{[Schema="dbo", Item="vw_DimEmployee"]}[Data],
+				    Hired = Table.SelectRows(People, each [HireDate] <= ReferenceDateValue),
+				    // position, department and manager: the job row that covers the reference date
+				    Jobs = Source{[Schema="dbo", Item="vw_JobHistory"]}[Data],
+				    Job = Table.SelectRows(Jobs, each [EffectiveDate] <= ReferenceDateValue and ([EndDate] = null or [EndDate] > ReferenceDateValue)),
+				    JobCols = Table.RenameColumns(Table.SelectColumns(Job, {"EmployeeID", "PositionID", "DepartmentID", "ManagerID"}), {{"EmployeeID", "JobEmployeeID"}, {"ManagerID", "ManagerEmployeeID"}}),
+				    WithJob = Table.Join(Hired, "EmployeeID", JobCols, "JobEmployeeID", JoinKind.LeftOuter),
+				    // salary: the pay row that covers the reference date
+				    PayRows = Source{[Schema="dbo", Item="vw_CompensationHistory"]}[Data],
+				    PayNow = Table.SelectRows(PayRows, each [EffectiveDate] <= ReferenceDateValue and ([EndDate] = null or [EndDate] > ReferenceDateValue)),
+				    Pay = Table.RenameColumns(Table.SelectColumns(PayNow, {"EmployeeID", "Salary"}), {{"EmployeeID", "PayEmployeeID"}, {"Salary", "CurrentSalary"}}),
+				    WithPay = Table.Join(WithJob, "EmployeeID", Pay, "PayEmployeeID", JoinKind.LeftOuter),
+				    // latest review dated on or before the reference date
+				    Reviews = Source{[Schema="dbo", Item="vw_PerformanceReviews"]}[Data],
+				    Dated = Table.SelectRows(Reviews, each [ReviewDate] <= ReferenceDateValue),
+				    Latest = Table.Group(Dated, {"EmployeeID"}, {{"Last", each Table.Max(_, "ReviewPeriodEnd"), type record}}),
+				    LatestCols = Table.AddColumn(Table.AddColumn(Table.AddColumn(Latest, "LatestRating", each [Last][Rating], type number), "LatestReviewDate", each [Last][ReviewDate], type date), "LatestPerformanceLevel", each [Last][Level], type text),
+				    LatestSlim = Table.RenameColumns(Table.SelectColumns(LatestCols, {"EmployeeID", "LatestRating", "LatestReviewDate", "LatestPerformanceLevel"}), {{"EmployeeID", "ReviewEmployeeID"}}),
+				    WithReview = Table.Join(WithPay, "EmployeeID", LatestSlim, "ReviewEmployeeID", JoinKind.LeftOuter),
+				    // direct reports on the reference date
+				    Reports = Table.Group(Table.SelectRows(WithJob, each [ManagerEmployeeID] <> null), {"ManagerEmployeeID"}, {{"DirectReports", each Table.RowCount(_), Int64.Type}}),
+				    ReportsRen = Table.RenameColumns(Reports, {{"ManagerEmployeeID", "ReportsManagerID"}}),
+				    WithReports = Table.Join(WithReview, "EmployeeID", ReportsRen, "ReportsManagerID", JoinKind.LeftOuter),
+				    Zero = Table.TransformColumns(WithReports, {{"DirectReports", each if _ = null then 0 else _, Int64.Type}}),
+				    // age and tenure on the reference date
+				    Aged = Table.AddColumn(Zero, "Age", each Date.Year(ReferenceDateValue) - Date.Year([DateOfBirth]) - (if Date.AddYears([DateOfBirth], Date.Year(ReferenceDateValue) - Date.Year([DateOfBirth])) > ReferenceDateValue then 1 else 0), Int64.Type),
+				    Tenure = Table.AddColumn(Aged, "TenureYears", each Number.Round(Duration.Days(ReferenceDateValue - [HireDate]) / 365.25, 2), type number),
+				    Slim = Table.RemoveColumns(Tenure, {"FirstName", "LastName", "EmailAddress", "DateOfBirth", "JobEmployeeID", "PayEmployeeID", "ReviewEmployeeID", "ReportsManagerID"}, MissingField.Ignore)
 				in
 				    Slim
+
+	annotation PBI_ResultType = Table
 

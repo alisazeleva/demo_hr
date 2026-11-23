@@ -16,6 +16,7 @@ table DimLeaveType
 
 	partition LeaveType = m
 		mode: import
+		queryGroup: Dimensions
 		source =
 				let
 				    Source = Sql.Database(SqlServer, SqlDatabase),
@@ -23,4 +24,6 @@ table DimLeaveType
 				    Slim = Table.RemoveColumns(Data, {"IsPaid"}, MissingField.Ignore)
 				in
 				    Slim
+
+	annotation PBI_ResultType = Table
 

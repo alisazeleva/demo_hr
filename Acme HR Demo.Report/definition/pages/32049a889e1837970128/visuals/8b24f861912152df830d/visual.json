@@ -108,7 +108,7 @@
                     "Entity": "DimEmployee"
                   }
                 },
-                "Property": "LatestRating"
+                "Property": "LatestReviewDate"
               }
             },
             "direction": "Descending"

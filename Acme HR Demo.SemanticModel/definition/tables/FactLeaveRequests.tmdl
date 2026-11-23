@@ -64,11 +64,17 @@ table FactLeaveRequests
 
 	partition LeaveRequests = m
 		mode: import
+		queryGroup: Facts
 		source =
 				let
 				    Source = Sql.Database(SqlServer, SqlDatabase),
 				    Data = Source{[Schema="dbo", Item="vw_LeaveRequests"]}[Data],
-				    Slim = Table.RemoveColumns(Data, {"LeaveID", "DepartmentID"}, MissingField.Ignore)
+				    // a request exists from its request date; it is Pending until its decision date, then Approved or Rejected
+				    Visible = Table.SelectRows(Data, each [RequestDate] = null or [RequestDate] <= ReferenceDateValue),
+				    AsOf = Table.AddColumn(Table.RenameColumns(Visible, {{"Status", "FinalStatus"}}), "Status", each if [DecisionDate] <> null and [DecisionDate] > ReferenceDateValue then "Pending" else [FinalStatus], type text),
+				    Slim = Table.RemoveColumns(AsOf, {"LeaveID", "DepartmentID", "RequestDate", "DecisionDate", "FinalStatus"}, MissingField.Ignore)
 				in
 				    Slim
+
+	annotation PBI_ResultType = Table
 

@@ -568,23 +568,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "2f9a9db906000106ab00",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Text: Profile Tenure"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }
