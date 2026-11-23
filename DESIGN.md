@@ -187,7 +187,7 @@ Header band: a rounded rectangle (330, 141, 1560 x 150, border only) holding bor
 | Area | Position (x, y, w x h) | Content |
 | --- | --- | --- |
 | Picture placeholder | 351, 152, 120 x 120 | Oval shape with the picture of the selected employee as its image fill (the measure `Profile Picture`, from `ProfilePictures[Picture]`) |
-| Initials | 350, 154, 120 x 120 | Shape under the picture with `Text: Employee Initials` as its text (24 pt bold); visible when the employee has no picture |
+| Initials | 350, 154, 120 x 120 | Shape under the picture with `Text: Employee Initials` as its text (32 pt bold); visible when the employee has no picture |
 | Name | 479, 146, 477 x 81 | `Text: Profile Name`, subtitle `Text: Profile Job Level`; below it `Text: Profile Number` (488, 212) |
 | Position | 956, 151, 348 x 61 | `Text: Profile Role` (position) |
 | Department | 1304, 151, 283 x 61 | `Text: Profile Department` |
