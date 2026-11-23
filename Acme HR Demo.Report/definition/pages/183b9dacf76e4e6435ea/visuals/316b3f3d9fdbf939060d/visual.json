@@ -537,7 +537,7 @@
                 "And": {
                   "Left": {
                     "Comparison": {
-                      "ComparisonKind": 1,
+                      "ComparisonKind": 2,
                       "Left": {
                         "Column": {
                           "Expression": {

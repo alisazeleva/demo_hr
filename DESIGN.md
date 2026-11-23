@@ -196,7 +196,7 @@ Header band: a rounded rectangle (330, 141, 1560 x 150, border only) holding bor
 | Current salary | 1303, 216, 283 x 61 | `Text: Profile Salary`, subtitle `Text: Profile Salary Note` |
 | Latest review | 1587, 216, 294 x 61 | `Text: Profile Rating`, subtitle `Text: Profile Rating Note` |
 | Career timeline | 330, 317, 792 x 372 | Table of `FactJobHistory`: Date, Change, Position, Department, Manager, oldest first |
-| Salary history | 1146, 317, 744 x 372 | Stepped line of `Base Salary` over `FactCompensation[EffectiveDate]`; filter `DimDate[Years Before Reference]` greater than 0 and up to 5 (the 5 years before the reference year; the reference year itself is not included); tooltip with `Reason` and `Salary Change` |
+| Salary history | 1146, 317, 744 x 372 | Stepped line of `Base Salary` over `FactCompensation[EffectiveDate]`; filter `DimDate[Years Before Reference]` 0 to 5 (the reference year and the 5 before); tooltip with `Reason` and `Salary Change` |
 | Leave summary | 330, 717, 336 x 332 | Bar of `Leave Days Last 24 Months` by `DimLeaveType[LeaveType]`, category labels 16 pt |
 | Performance reviews | 690, 718, 433 x 332 | Column chart of `Average Rating` by `FactReviews[ReviewYear]` (the last 5 years: filter `DimDate[Years Before Reference]` 0 to 4); bars coloured by a 3-colour gradient on the rating (#C8446A low, #92a9c9 mid, #4A6FA5 high) |
 | Review history | 1146, 717, 744 x 331 | Table of `FactReviews`: Review date, Level, Comments; the Level cell is coloured by `Review Level Colour` (same palette as `Level Colour`) |
