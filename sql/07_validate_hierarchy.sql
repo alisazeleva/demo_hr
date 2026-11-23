@@ -2,8 +2,6 @@
 -- Run: sqlcmd -S ".\SQLEXPRESS" -E -C -b -d DemoHR -f 65001 -i sql/07_validate_hierarchy.sql
 SET NOCOUNT ON;
 
-DECLARE @RefDate date = '2026-11-16';   -- reference date ("today"); the only place it is written (no check in this script needs it yet)
-
 -- Everything is collected in one result: Check, Violations (expect 0 unless noted), Status
 CREATE TABLE #Result (Ord int IDENTITY(1,1), CheckName nvarchar(120), Violations int, Expected nvarchar(20));
 

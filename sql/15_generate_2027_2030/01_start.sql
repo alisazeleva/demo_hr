@@ -32,4 +32,4 @@ UNION ALL SELECT 'WorkforcePlan', CHECKSUM_AGG(CHECKSUM(WorkforcePlanID, Organiz
 BEGIN TRANSACTION;
 
 
-INSERT dbo.ReferenceDateLog (OldReferenceDate, NewReferenceDate, Note) SELECT OldDate, NewDate, N'Extend data' FROM #Run;
+INSERT dbo.ReferenceDateLog (OldReferenceDate, NewReferenceDate, Note) SELECT OldDate, NewDate, N'Data 2026-11-17 to 2030-12-31 (script 15)' FROM #Run;

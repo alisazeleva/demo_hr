@@ -18,7 +18,6 @@ SET XACT_ABORT ON;
 SET QUOTED_IDENTIFIER ON;
 
 DECLARE @Seed       varchar(20) = 'DemoHR-2026';
-DECLARE @RefDate    date        = '2026-11-16';   -- reference date ("today"); the only place it is written (not otherwise needed here yet)
 DECLARE @LastEvent  date        = '2026-07-01';   -- last quarter start before 2026-10-01
 -- Tunable event probabilities (Manager..Professional; about-targets from PLAN.md are reported in the checks)
 -- (higher than the PLAN targets because recent hires and managers with reports cannot take every planned event)

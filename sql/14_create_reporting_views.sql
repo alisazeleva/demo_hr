@@ -13,13 +13,6 @@
 SET NOCOUNT ON;
 GO
 
--- views of the earlier version that read a fixed reference date: replaced by the functions below
-DROP VIEW IF EXISTS dbo.vw_EmployeeCurrent;
-DROP VIEW IF EXISTS dbo.vw_DepartmentHeadcountVsTarget;
-DROP VIEW IF EXISTS dbo.vw_OrgHierarchy;
-DROP VIEW IF EXISTS dbo.vw_ReferenceDate;
-GO
-
 -- ====================================================================== the range of the data
 CREATE OR ALTER VIEW dbo.vw_DataRange
 AS
@@ -254,15 +247,11 @@ JOIN dbo.EmployeeJobHistory j ON j.EmployeeID = l.EmployeeID AND j.EffectiveDate
 GO
 
 -- ====================================================================== workforce plan: target headcount per department from a date on (fact for the star)
--- the history table (first rows = the plan of 2026-11-16); before script 15 has run, the plan table
+-- from the plan history (first rows = the plan of 2026-11-16, script 13; later rows from script 15)
 CREATE OR ALTER VIEW dbo.vw_FactWorkforcePlan
 AS
 SELECT h.OrganizationUnitID AS DepartmentID, h.EffectiveDate, h.TargetHeadcount
-FROM dbo.DepartmentWorkforcePlanHistory h
-UNION ALL
-SELECT w.OrganizationUnitID, CAST('2026-11-16' AS date), w.TargetHeadcount
-FROM dbo.DepartmentWorkforcePlan w
-WHERE NOT EXISTS (SELECT 1 FROM dbo.DepartmentWorkforcePlanHistory);
+FROM dbo.DepartmentWorkforcePlanHistory h;
 GO
 
 -- ====================================================================== row counts
