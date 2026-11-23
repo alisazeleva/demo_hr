@@ -4,8 +4,9 @@ Design spec for the Power BI report in `powerbi/acme_hr_theme.json`. Read this t
 
 - Page 1 (Workforce) is built and hand-adjusted in Power BI Desktop; it is the reference for style and layout (the early mockup https://claude.ai/artifact/WVDNJWWuenggPHhrU79dUd is superseded where they differ). Mockups of every page are in `desing/` (PNG, 1280 x 720). All pages (Home and 1 to 7) are built and were adjusted by hand in Desktop, and this document records them as they are; follow the same grid and style for new work.
 - Numbers in the early mockup (for example average tenure 5.4 years, average age 38.6, the language split) are illustrative. Real values come from the database.
+- The report shows the company on its reference date (the refresh date, from 2026-11-16 to 2030-12-31), so its numbers change over time. Numbers quoted in this document (151 employees, 557 reviews, 33 pending requests and so on) are those of 2026-11-16; set `ReferenceDateOverride` to that date to see them.
 - Use native Power BI visuals only (cards, bar, column, line, donut, matrix, table, decomposition tree, slicers). No custom visuals.
-- Data comes from the SQL views created by script 14 (the whole timeline, no reference date), modelled as a star schema. Model tables: `DimEmployee` (vw_DimEmployee), `DimDepartment`, `DimPosition`, `DimManager`, `DimLeaveType`, `DimDate`, and facts `FactJobHistory`, `FactCompensation`, `FactReviews`, `FactLeaveDays`, `FactWorkforcePlan`; `ReferenceDate` holds "today" (the refresh date or the `ReferenceDateOverride` parameter, limited to the range of the data; each table query keeps the state as of that date, see CLAUDE.md) and `_Measures` holds the measures. Attributes live in one dimension only: use `DimDepartment[Department]`, `DimPosition[JobLevel]`, `DimPosition[PositionTitle]` and `DimManager[ManagerName]`. Facts relate to `DimEmployee` and `DimDate` (active); `DimDepartment`, `DimPosition` and `DimManager` filter `DimEmployee`, so every department, position or manager shown in a visual is the employee's current one (the job-history table carries the department, position and manager at the time of each event as text columns). The model keeps only the columns that a visual, a measure, a relationship or a sort order uses (76 columns); the unused columns of each view are removed in the Power Query step `Slim` (Table.RemoveColumns) of each table, not in the SQL view, so the views stay complete for SQL checks. Dropped on 2026-11-19: the surrogate keys and ID columns of the facts (JobHistoryID, CompensationHistoryID, PerformanceReviewID, LeaveID, ReviewerID and the PositionID, DepartmentID and ManagerID columns of the facts), FactJobHistory[EndDate], [IsCurrent], [Reason], [PrevDepartment], [PrevManagerName], FactCompensation[PreviousSalary], [ChangeAmount], FactReviews[IsRecentReview], DimEmployee[OrgDepth], [PathFromCEO], [ManagerChain], DimPosition[JobFamily], [IsManagementPosition], DimLeaveType[IsPaid], DimManager[ManagerNumber] and DimDate[Quarter], [Year-Month], [Weekday], [Weekday Number]. Only DimEmployee[ProfileImageFileName] is kept without a use: page 7 will show the pictures from it. There are no inactive relationships from the facts to DimDepartment, DimPosition or DimManager and none from DimEmployee[HireDate] to DimDate; the events carry the department, position and manager of the event as text labels (FactJobHistory[Department], [PositionTitle], [ManagerName], [PrevPositionTitle]). To analyse by the department at the time of a review or leave, re-add the DepartmentID column from the view and an inactive relationship. Check the real column names in the model before building. Never use TODAY() or NOW().
+- Data comes from the SQL views created by script 14 (the whole timeline, no reference date), modelled as a star schema. Model tables: `DimEmployee` (vw_DimEmployee), `DimDepartment`, `DimPosition`, `DimManager`, `DimLeaveType`, `DimDate`, and facts `FactJobHistory`, `FactCompensation`, `FactReviews`, `FactLeaveDays`, `FactWorkforcePlan`; `ReferenceDate` holds "today" (the refresh date or the `ReferenceDateOverride` parameter, limited to the range of the data; each table query keeps the state as of that date, see CLAUDE.md) and `_Measures` holds the measures. Attributes live in one dimension only: use `DimDepartment[Department]`, `DimPosition[JobLevel]`, `DimPosition[PositionTitle]` and `DimManager[ManagerName]`. Facts relate to `DimEmployee` and `DimDate` (active); `DimDepartment`, `DimPosition` and `DimManager` filter `DimEmployee`, so every department, position or manager shown in a visual is the employee's one on the reference date (the job-history table carries the department, position and manager at the time of each event as text columns). The model keeps only the columns that a visual, a measure, a relationship or a sort order uses (76 columns); the unused columns of each view are removed in the Power Query step `Slim` (Table.RemoveColumns) of each table, not in the SQL view, so the views stay complete for SQL checks. Dropped on 2026-11-19: the surrogate keys and ID columns of the facts (JobHistoryID, CompensationHistoryID, PerformanceReviewID, LeaveID, ReviewerID and the PositionID, DepartmentID and ManagerID columns of the facts), FactJobHistory[EndDate], [IsCurrent], [Reason], [PrevDepartment], [PrevManagerName], FactCompensation[PreviousSalary], [ChangeAmount], FactReviews[IsRecentReview], DimEmployee[OrgDepth], [PathFromCEO], [ManagerChain], DimPosition[JobFamily], [IsManagementPosition], DimLeaveType[IsPaid], DimManager[ManagerNumber] and DimDate[Quarter], [Year-Month], [Weekday], [Weekday Number]. Only DimEmployee[ProfileImageFileName] is kept without a use: page 7 will show the pictures from it. There are no inactive relationships from the facts to DimDepartment, DimPosition or DimManager and none from DimEmployee[HireDate] to DimDate; the events carry the department, position and manager of the event as text labels (FactJobHistory[Department], [PositionTitle], [ManagerName], [PrevPositionTitle]). To analyse by the department at the time of a review or leave, re-add the DepartmentID column from the view and an inactive relationship. Check the real column names in the model before building. Never use TODAY() or NOW().
 
 ## Global layout and style
 
@@ -74,7 +75,7 @@ Header subtitle, KPI cards and subtitles as built:
 
 | KPI card | Title | Subtitle |
 | --- | --- | --- |
-| Headcount | Total employees | `Text: Headcount Split` (1 CEO + 150 in departments) |
+| Headcount | Total employees | `Text: Headcount Split` (1 CEO + the employees in departments; 150 on 2026-11-16) |
 | Average Tenure (years) | Average tenure | Since hire date |
 | Average Age | Average age | `Text: Age Range` |
 | Departments | Departments | One company, no subdepartments |
@@ -131,14 +132,14 @@ KPI cards: Average salary, Median salary, Total annual payroll, Average promotio
 
 Notes:
 
-- Average salary over time falls from about 170k in 2012 to 69k in 2026. That is not a pay cut: the data holds only current employees, so the early years contain only the first (senior) hires, 2 people at the end of 2012 and 151 in 2026. The columns and the subtitle make this visible.
-- `Average Salary at Year End` and `Employees at Year End` use the salary period valid on 31 December of the year (the reference date for 2026). Do not put the period filter in the CALCULATE filter argument: it would be evaluated under the year filter. Iterate with AVERAGEX/COUNTROWS over FILTER inside CALCULATE(..., REMOVEFILTERS(DimDate)).
+- Average salary over time falls from about 170k in 2012 to 69k in 2026. That is not a pay cut: the data holds only current employees, so the early years contain only the first (senior) hires, 2 people at the end of 2012 and 151 in 2026 (as of 2026-11-16). The columns and the subtitle make this visible.
+- `Average Salary at Year End` and `Employees at Year End` use the salary period valid on 31 December of the year (the reference date for the reference year). Do not put the period filter in the CALCULATE filter argument: it would be evaluated under the year filter. Iterate with AVERAGEX/COUNTROWS over FILTER inside CALCULATE(..., REMOVEFILTERS(DimDate)).
 
 ## Page 5: Performance (built; layout hand-adjusted)
 
-Ratings are 1.0 to 5.0 from the annual reviews 2012 to 2025 (557 reviews, none for the CEO). "Latest" means the employee's latest review (`DimEmployee[LatestReviewDate]`, `LatestRating`, `LatestPerformanceLevel`). The third slicer (x 1640) is Manager.
+Ratings are 1.0 to 5.0 from the annual reviews dated up to the reference date (on 2026-11-16: periods 2012 to 2025, 557 reviews, none for the CEO). "Latest" means the employee's latest review (`DimEmployee[LatestReviewDate]`, `LatestRating`, `LatestPerformanceLevel`). The third slicer (x 1640) is Manager.
 
-KPI cards: Average rating (all reviews, 3.47), Exceeds or Outstanding (share of latest reviews, 47 %: 54 of 114), Without a recent review (no review in the 12 months before the reference date, 40), Reviews (number of reviews, 557).
+KPI cards (values on 2026-11-16): Average rating (all reviews, 3.47), Exceeds or Outstanding (share of latest reviews, 47 %: 54 of 114), Without a recent review (no review in the 12 months before the reference date, 40), Reviews (number of reviews, 557).
 
 Row 1 is 346 high (y 300), row 2 starts at y 668 and is 382 high.
 
@@ -158,9 +159,9 @@ Notes:
 
 ## Page 6: Leave (built; layout hand-adjusted)
 
-Leave counts are working days of approved leave up to the reference date unless stated (`FactLeaveDays` has one row per approved working day, including booked future leave, which is why charts filter `IsOnOrBeforeReferenceDate` or by date). Requests of every status are in `FactLeaveRequests` (vw_LeaveRequests, added to script 13), related to `DimEmployee` and `DimLeaveType`; it feeds Pending requests and the absent-today table. The third slicer (x 1640) is Leave type.
+Leave counts are working days of approved leave up to the reference date unless stated (`FactLeaveDays` has one row per approved working day, including booked future leave, which is why charts filter `IsOnOrBeforeReferenceDate` or by date). Requests of every status are in `FactLeaveRequests` (vw_LeaveRequests, script 14; a request appears on its request date and is Pending until its decision date), related to `DimEmployee` and `DimLeaveType`; it feeds Pending requests and the absent-today table. The third slicer (x 1640) is Leave type.
 
-KPI cards: Leave days (approved, 1 January to the reference date, subtitle `Text: Leave Days YTD`), Absent today (`Currently Absent`), Vacation days per employee (`Vacation Days YTD per Employee`), Pending requests (`Pending Requests`, 33).
+KPI cards: Leave days (approved, 1 January to the reference date, subtitle `Text: Leave Days YTD`), Absent today (`Currently Absent`), Vacation days per employee (`Vacation Days YTD per Employee`), Pending requests (`Pending Requests`, 33 on 2026-11-16).
 
 | Visual | Position (x, y, w x h) | Type | Fields |
 | --- | --- | --- | --- |
@@ -172,7 +173,7 @@ KPI cards: Leave days (approved, 1 January to the reference date, subtitle `Text
 Notes:
 
 - `FactLeaveRequests[IsAbsentToday]` is a calculated column (approved, covers the reference date). An earlier measure version was slow (about 17 s) and had to be rewritten; a column is evaluated once at refresh.
-- Unpaid Leave has no days in 2026 yet (blank in the year-to-date split).
+- A leave type without days in the reference year so far is blank in the year-to-date split (on 2026-11-16: Unpaid Leave).
 - Vacation days per employee divides approved vacation days by employees hired by the end of the year (the card divides by the current headcount); employees hired part-way through the year count in full.
 
 ## Page 7: Employee profile (built; hidden drill-through page; layout hand-adjusted)
@@ -205,10 +206,10 @@ Photos: resize to about 240 x 240 px (under 20 KB each), have Power Query read t
 
 | Measure | Definition |
 | --- | --- |
-| Headcount | Count of current employees (respecting slicers) |
+| Headcount | Count of employees on the reference date (respecting slicers) |
 | Headcount vs Target | Target headcount minus department headcount: positive = below target (open positions), 0 = on target |
 | Average Salary / Median Salary | Over current salaries |
-| Average Salary at Year End / Employees at Year End | Average salary and headcount on 31 December of the selected year (reference date for 2026), from the salary period valid on that date |
+| Average Salary at Year End / Employees at Year End | Average salary and headcount on 31 December of the selected year (the reference date for the reference year), from the salary period valid on that date |
 | Average Annual Increase / Average Promotion Increase | Average ChangePct of the pay-history rows with reason Annual Increase / Promotion, as a share |
 | Total Payroll | Sum of current annual salaries |
 | Average Tenure (years) | Average of (reference date minus hire date) in years |
@@ -218,7 +219,7 @@ Photos: resize to about 240 x 240 px (under 20 KB each), have Power Query read t
 | Average Rating | Average of OverallRating |
 | Number of Reviews / Exceeds or Outstanding Share | Review count; share of employees with a latest review whose latest level is Exceeds Expectations or Outstanding |
 | Employees Without Recent Review | Employees with no review dated within 12 months before the reference date |
-| Leave Days | Count of rows in `vw_LeaveDays` (one row per working day) |
+| Leave Days | Count of rows in `FactLeaveDays` (one row per approved working day) |
 | Vacation Days Used / Vacation Days Used per Year | Approved vacation days up to the reference date; per year: divided by employees hired by the end of the year |
 | Leave Days YTD / Vacation Days YTD per Employee | Approved leave days (vacation days divided by Headcount) from 1 January of the reference year to the reference date, regardless of date filters |
 | Pending Requests | Leave requests with status Pending (`FactLeaveRequests`) |
@@ -236,8 +237,8 @@ Calculated columns added for the report: `DimEmployee[Latest Level Short]` (NI, 
 ## Build order and checks
 
 1. Theme JSON with the colours and fonts above.
-2. Model: connect to the views in Import mode, relationships Employees (1) to every fact table on EmployeeID, a Date table marked as the date table.
-3. Measures. Check against SQL before building visuals: Headcount 151, departments 45/25/20/35/25, one open job-history and one open compensation record per employee, at least 6 employees absent on the reference date.
+2. Model: connect to the views in Import mode, each table query filtered to the reference date (`ReferenceDateValue`), relationships Employees (1) to every fact table on EmployeeID, a Date table marked as the date table.
+3. Measures. Check against SQL before building visuals (with `ReferenceDateOverride` 2026-11-16, or against `dbo.fn_EmployeeCurrent(@date)` for another date): Headcount 151, departments 45/25/20/35/25, one open job-history and one open compensation record per employee, at least 6 employees absent on the reference date.
 4. Pages in order 1 to 7; after each page, compare its numbers with the same queries in SQL.
 5. Profile photos last: script 12 has run; the pictures are added sheet by sheet (images/ workflow).
 

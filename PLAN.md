@@ -22,7 +22,7 @@ Where a decision below is my default rather than yours, it is listed under Confi
 
 ## Schema
 
-Ten planned tables plus one small support table (PublicHolidays), in SQL Server, schema `dbo`, database `DemoHR`. Small fixed lists (change types, statuses, genders) are CHECK constraints rather than lookup tables; only LeaveTypes is a real table, as in your plan.
+Ten planned tables plus one small support table (PublicHolidays), in SQL Server, schema `dbo`, database `DemoHR`, and three add-only tables for the data extension (see Extension tables). Small fixed lists (change types, statuses, genders) are CHECK constraints rather than lookup tables; only LeaveTypes is a real table, as in your plan.
 
 ### OrganizationUnits
 
@@ -105,14 +105,20 @@ Ten planned tables plus one small support table (PublicHolidays), in SQL Server,
 ### DummyNames and PublicHolidays (support tables)
 
 - DummyNames: `DummyNameID` int identity primary key; `NameType` varchar(5) ('First' or 'Last'); `NameValue` nvarchar(60); `Gender` varchar(10) null (first names only); `Nationality`, `NativeLanguage` nvarchar(60). Your plan listed FirstName and LastName as columns; two name types in one column lets each name be picked independently.
-- PublicHolidays: `HolidayDate` date primary key; `HolidayName` nvarchar(60). Finnish holidays 2020 to 2027, used to count working days.
+- PublicHolidays: `HolidayDate` date primary key; `HolidayName` nvarchar(60). Finnish holidays, used to count working days: 2012 to 2027 from script 05, and the extension adds the years up to the year after its end date (2031 now) with the Easter formula.
+
+### Extension tables (script 13, add-only)
+
+- ReferenceDateLog: `RunID` int identity primary key; `OldReferenceDate` date null; `NewReferenceDate` date not null, unique (the end of the data after the run); `RunAt` datetime2; `Note`. First row 2026-11-16; the latest row is the end of the data (`vw_DataRange`).
+- DepartmentWorkforcePlanHistory: `HistoryID` int identity primary key; `OrganizationUnitID` FK; `EffectiveDate` date; `TargetHeadcount` int, CHECK greater than 0; unique on unit and date. First rows: the plan of 2026-11-16; a row is added when a hire raises a target. DepartmentWorkforcePlan itself is never edited.
+- LeaveRequestInfo: `LeaveID` int primary key, FK to EmployeeLeaves; `RequestDate`, `DecisionDate` date (CHECK decision not before request); `FinalStatus` varchar(10) CHECK in ('Approved','Rejected'); `ApprovedByEmployeeID` FK; `IsNew` bit (1 = leave added by the extension, 0 = a Pending request of the first load). A request is visible from its request date and Pending until its decision date.
 
 ### Rules the database cannot enforce alone
 
 These are checked by the validation scripts, because a foreign key or CHECK cannot express them:
 
 - Employee department equals their position's department
-- Current Employees row equals the open job-history row (position, department, manager)
+- The Employees row equals the job-history record at hire (people of the first load: the record on 2026-11-16); exactly one open job-history record per employee
 - No circular reporting; manager level strictly higher than the report's
 - No overlapping or gapped periods in job and compensation history
 - Every leave and review falls after hire; no overlapping leaves for one employee
@@ -192,7 +198,7 @@ The holder counts are the final headcount per position and add up to the matrix 
 
 ## Generation rules
 
-The data is built backwards from a fixed final state, so the current headcount, positions and managers are exact by construction and the history is derived from them. Every random choice uses a fixed seed (a hash of seed value, employee ID and a label), so re-running a script gives identical data.
+These rules describe the first load (scripts 06 to 11, the company on 2026-11-16); the forward extension to 2030 follows Refreshing the data. The data is built backwards from a fixed final state, so the current headcount, positions and managers are exact by construction and the history is derived from them. Every random choice uses a fixed seed (a hash of seed value, employee ID and a label), so re-running a script gives identical data.
 
 ### Principles
 
@@ -308,24 +314,24 @@ Star schema (built in Power BI Desktop; the views are in script 14). Table names
 
 | Table | Source view | Notes |
 | --- | --- | --- |
-| DimEmployee | vw\_DimEmployee | One row per employee: person attributes, keys to position, department and manager, current salary and latest rating (org depth, manager chain and other unused columns are dropped in the model) |
+| DimEmployee | vw\_DimEmployee, vw\_JobHistory, vw\_CompensationHistory, vw\_PerformanceReviews | One row per employee hired by the reference date: person attributes, and on that date the keys to position, department and manager, salary, latest rating, direct reports, age and tenure |
 | DimDepartment | vw\_DimDepartment | Five departments plus the company unit (Acme Corporation) |
 | DimPosition | vw\_DimPosition | Title, job family, job level and rank, management flag |
-| DimManager | vw\_DimManager | The manager role of an employee (employees with direct reports) |
+| DimManager | vw\_DimManager, vw\_JobHistory | The manager role of an employee (employees with direct reports on the reference date) |
 | DimLeaveType | vw\_DimLeaveType | Leave types |
 | DimDate | DAX CALENDAR | 2012-01-01 to 31 December of the year after the reference year, marked as the date table; `Years Before Reference` for year ranges in visual filters |
-| FactJobHistory | vw\_JobHistory | Change type, keys and labels of the old and new position, department and manager |
-| FactCompensation | vw\_CompensationHistory | Salary periods with the change percentage |
-| FactReviews | vw\_PerformanceReviews | Rating, level, reviewer |
-| FactLeaveDays | vw\_LeaveDays | One row per working day of an approved leave |
-| FactLeaveRequests | vw\_LeaveRequests | One row per leave request of any status (pending, approved, rejected), with department on the start date |
-| FactWorkforcePlan | vw\_FactWorkforcePlan | Target headcount per department |
+| FactJobHistory | vw\_JobHistory | Changes dated up to the reference date: change type, labels of the old and new position, department and manager |
+| FactCompensation | vw\_CompensationHistory | Salary periods starting by the reference date, with the change percentage; the period that covers the reference date is open (`IsCurrent`) |
+| FactReviews | vw\_PerformanceReviews | Reviews dated up to the reference date: rating, level, reviewer |
+| FactLeaveDays | vw\_LeaveDays | One row per working day of a leave approved by the reference date (booked future days included, `IsOnOrBeforeReferenceDate` marks the past ones) |
+| FactLeaveRequests | vw\_LeaveRequests | One row per leave request made by the reference date, of any status (Pending until its decision date, then Approved or Rejected) |
+| FactWorkforcePlan | vw\_FactWorkforcePlan | Target headcount per department on the reference date (latest row of the plan history) |
 | ReferenceDate | Power Query `ReferenceDateValue` | The single source of "today": the refresh date (or the `ReferenceDateOverride` parameter), limited to the range of the data in `vw_DataRange` |
 | \_Measures | (DAX) | All measures |
 
 The views hold the whole timeline without a reference date; each table query in Power Query keeps the state as of the reference date (people hired by then, the job, pay and review rows dated up to it, leave requests from their request date and Pending until decided, the latest workforce target). For SQL checks on one date use the functions `fn_EmployeeCurrent(@date)`, `fn_OrgHierarchy(@date)` and `fn_DepartmentHeadcountVsTarget(@date)`; the model does not load them.
 
-DimEmployee relates one-to-many to every fact on EmployeeID; DimDepartment, DimPosition and DimManager filter DimEmployee (and DimDepartment filters FactWorkforcePlan); DimLeaveType filters FactLeaveDays; DimDate relates to each fact by its main date. There are no inactive relationships: every department, position and manager in the report is the employee's current one, and the job-history table carries the department, position and manager at the time of each event as text columns. Columns that no visual, measure, relationship or sort order uses are removed in the Power Query step of each table (see DESIGN.md).
+DimEmployee relates one-to-many to every fact on EmployeeID; DimDepartment, DimPosition and DimManager filter DimEmployee (and DimDepartment filters FactWorkforcePlan); DimLeaveType filters FactLeaveDays; DimDate relates to each fact by its main date. There are no inactive relationships: every department, position and manager in the report is the employee's one on the reference date, and the job-history table carries the department, position and manager at the time of each event as text columns. Columns that no visual, measure, relationship or sort order uses are removed in the Power Query step of each table (see DESIGN.md).
 
 ### Measures
 
@@ -365,5 +371,5 @@ All nine open questions are answered; nothing is left to decide before scripts 0
 - [x] Salary bands and department factors as proposed
 - [x] Gender values: Female and Male only
 - [x] Support tables: DummyNames with NameType and NameValue, plus PublicHolidays
-- [x] Time frames: founded 2012, hires to 2026-09-30, leave 2024-01-01 to 2027-03-31
+- [x] Time frames: founded 2012, hires to 2026-09-30, leave 2024-01-01 to 2027-03-31 (first load); the extension adds records up to 2030-12-31
 - [x] Power BI: try a generated `.pbip` project
