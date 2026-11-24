@@ -5,7 +5,7 @@ A dummy HR database (SQL Server) and a Power BI report on top of it, for the fic
 <img width="400" height="225" alt="image" src="https://github.com/user-attachments/assets/973be5ff-aceb-49a9-93f7-66195c102e68" />
 <img width="400" height="225" alt="image" src="https://github.com/user-attachments/assets/5d8cf177-0473-49ba-92ea-22b289c9188f" />
 
-[Open in Power BI](https://app.powerbi.com/view?r=eyJrIjoiNTY0ZDRhNTMtMTFlMS00ZTVmLTlmYWEtNDlhZDg0ZjhiODQ0IiwidCI6ImQ2ZmNiOGI4LTNmZDUtNGM1NC05NjM2LWU2YTMyZTMzYjJiYSJ9) (the online report shows the data as of its last publish; it does not move forward by date like a refreshed local copy)
+[Open in Power BI](https://app.powerbi.com/view?r=eyJrIjoiNTY0ZDRhNTMtMTFlMS00ZTVmLTlmYWEtNDlhZDg0ZjhiODQ0IiwidCI6ImQ2ZmNiOGI4LTNmZDUtNGM1NC05NjM2LWU2YTMyZTMzYjJiYSJ9) (the online report shows the data as of its last successful refresh date)
 
 **All data is synthetic.** The company, its employees (151 on 2026-11-16, 171 by 2030), their names, salaries, ratings, leave records are generated for demonstration only, the profile pictures are AI-generated, and any resemblance to real people is a coincidence. The patterns in the data (gender, pay, ratings) are random and illustrate how the report works; they are not findings about real workforces.
 
