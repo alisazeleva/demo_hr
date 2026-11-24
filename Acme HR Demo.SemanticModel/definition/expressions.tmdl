@@ -17,7 +17,7 @@ expression ProfilePicturesFolder = "C:\DemoHR\profiles" meta [IsParameterQuery=t
 	lineageTag: aaa4a8b6-db38-4311-85ef-bbce42479255
 	queryGroup: Parameters
 
-	annotation PBI_ResultType = Text
+	annotation PBI_ResultType = Exception
 
 /// Leave empty for normal use (the report then uses today). Enter a date only to test the report as of that date; it must be empty in committed files
 expression ReferenceDateOverride = null meta [IsParameterQuery=true, Type="Date", IsParameterQueryRequired=false]
