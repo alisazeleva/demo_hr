@@ -41,7 +41,7 @@ table _Measures
 		lineageTag: 6469f3eb-bd7d-4c2d-98f1-b3f907a58a5c
 
 	/// Average years of service on the reference date
-	measure 'Average Tenure (years)' = AVERAGE(DimEmployee[TenureYears])
+	measure 'Average Tenure' = AVERAGE(DimEmployee[TenureYears])
 		formatString: 0.0" years"
 		displayFolder: Workforce
 		lineageTag: c7bc268b-c549-4704-9dac-63db9c3a18e1
@@ -232,7 +232,7 @@ table _Measures
 		lineageTag: 0701d465-0444-4613-a868-d17207c4c55a
 
 	/// Largest number of direct reports of any single manager
-	measure 'Largest Span of Control' = MAX(DimEmployee[DirectReports])
+	measure 'Largest Team Size' = MAX(DimEmployee[DirectReports])
 		formatString: #,0
 		displayFolder: Organization
 		lineageTag: 5b1f6a0e-2c1d-4e7a-9a53-0d9c6e0f1a01
@@ -258,7 +258,7 @@ table _Measures
 	measure 'Text: Teams with Largest Span' =
 			// Subtitle of the Largest team card. The card shows the number; this text explains it.
 			// The 1-team text keeps its trailing space as originally written.
-			VAR maxSpan = [Largest Span of Control]
+			VAR maxSpan = [Largest Team Size]
 			VAR managersWithMaxSpan =
 			    CALCULATE(COUNTROWS(DimEmployee), DimEmployee[DirectReports] = maxSpan)
 			RETURN
@@ -683,13 +683,11 @@ table _Measures
 		displayFolder: Performance
 		lineageTag: 5c588b49-b527-457b-9b22-7eb12a62ec68
 
-	/// Disclaimer shown in the info pop-up on every page: the data is synthetic and the figures are as of the reference date
+	/// Disclaimer shown in the info pop-up on every page: the data is synthetic and the profile pictures are AI-generated
 	measure 'Text: Info Note' =
-			// Static disclaimer text plus the reference date, so the "as of" date follows the ReferenceDate table
-			// and is formatted like the footer ("Data as of ..."). Used by the info panel on pages 1 to 7.
+			// Static disclaimer text. Used by the info panel on every page.
 			"Demo report with fictional data. Acme Corporation and all employees are synthetic, generated for demonstration only, "
-			    & "and any resemblance to real people is coincidental. Figures are as of "
-			    & FORMAT([Reference Date], "d mmm yyyy") & "."
+			    & "and any resemblance to real people is coincidental. Profile pictures are AI-generated."
 		displayFolder: Text
 		lineageTag: 01f97653-b652-4988-bb6a-29df0e9bc453
 
@@ -703,8 +701,8 @@ table _Measures
 		displayFolder: Home
 		lineageTag: 6f2f6a53-3c1e-4d52-9b50-8d0a6c7a41e1
 
-	/// Note in the "Using the report" card on the home page: the data is dummy data and the reference date
-	measure 'Text: Home Data Note' = "Dummy data for demonstration. "
+	/// Note in the "Using the report" card on the home page: the data is synthetic and the profile pictures are AI-generated
+	measure 'Text: Home Data Note' = "Demo report with synthetic data and AI-generated profile pictures."
 		displayFolder: Text
 		lineageTag: b3c5e0a4-2a57-4f43-8d2e-0f7c1d9a6b32
 

@@ -23,11 +23,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Average Tenure (years)"
+                  "Property": "Average Tenure"
                 }
               },
-              "queryRef": "_Measures.Average Tenure (years)",
-              "nativeQueryRef": "Average Tenure (years)"
+              "queryRef": "_Measures.Average Tenure",
+              "nativeQueryRef": "Average Tenure"
             }
           ]
         }
@@ -42,7 +42,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Average Tenure (years)"
+                "Property": "Average Tenure"
               }
             },
             "direction": "Descending"

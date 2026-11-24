@@ -10352,7 +10352,7 @@ cultureInfo en-GB
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "_Measures",
-			          "ConceptualProperty": "Average Tenure (years)"
+			          "ConceptualProperty": "Average Tenure"
 			        }
 			      },
 			      "State": "Generated",
@@ -13037,7 +13037,7 @@ cultureInfo en-GB
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "_Measures",
-			          "ConceptualProperty": "Largest Span of Control"
+			          "ConceptualProperty": "Largest Team Size"
 			        }
 			      },
 			      "State": "Generated",

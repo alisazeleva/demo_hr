@@ -54,7 +54,7 @@ def kpi(x, m, title, sub, alttext):
     add('kpi' + m, d, x, 137.5, 373.9, 139.7)
 kpi(328.7, 'Managers', 'Managers', ('lit', 'With at least one direct report'), 'Managers: employees with at least one direct report')
 kpi(726.2, 'Span of Control', 'Average span of control', ('lit', 'Direct reports per manager'), 'Average number of direct reports per manager')
-kpi(1121.6, 'Largest Span of Control', 'Largest span of control', ('m', 'Text: Largest Span'), 'Largest number of direct reports of one manager')
+kpi(1121.6, 'Largest Team Size', 'Largest span of control', ('m', 'Text: Largest Span'), 'Largest number of direct reports of one manager')
 kpi(1519.0, 'Departments at Target', 'Departments at target', ('m', 'Text: Departments at Target'), 'Departments whose headcount equals the plan')
 
 # ---- charts
@@ -108,7 +108,7 @@ add('bar_target', d)
 
 tbl = {"$schema": SCHEMA, "name": '', "position": {"x": 858, "y": 687, "z": 1, "height": H, "width": W * 2 + 24, "tabOrder": 1},
        "visual": {"visualType": "tableEx",
-                  "query": {"queryState": {"Values": {"projections": [cproj('Department'), mproj('Managers'), mproj('Span of Control'), mproj('Largest Span of Control')]}},
+                  "query": {"queryState": {"Values": {"projections": [cproj('Department'), mproj('Managers'), mproj('Span of Control'), mproj('Largest Team Size')]}},
                             "sortDefinition": {"sort": [{"field": meas('Managers'), "direction": "Descending"}], "isDefaultSort": True}},
                   "objects": {"columnHeaders": [{"properties": {"fontFamily": L("'Segoe UI Semibold'"), "fontSize": L("16D"), "fontColor": SOL('#1F2937'), "backColor": SOL('#F3F4F6')}}],
                               "values": [{"properties": {"fontFamily": L("'Segoe UI'"), "fontSize": L("16D"), "fontColor": SOL('#1F2937')}}],
@@ -125,7 +125,7 @@ def put(l, x, y, w, h): out[l]['position'].update(x=x, y=y, width=w, height=h)
 put('dtree', 330, 300, W * 2 + 24, H); put('bar_span', 1386, 300, W, H)
 put('bar_target', 330, 687, W, H); put('table', 858, 687, W * 2 + 24, H)
 order = ['navbg', 'navtitle', 'navsub', 'nav', 'footer', 'title', 'subtitle', 'slicerDepartment', 'slicerJobLevel', 'slicerNationality',
-         'kpiManagers', 'kpiSpan of Control', 'kpiLargest Span of Control', 'kpiDepartments at Target', 'dtree', 'bar_span', 'bar_target', 'table']
+         'kpiManagers', 'kpiSpan of Control', 'kpiLargest Team Size', 'kpiDepartments at Target', 'dtree', 'bar_span', 'bar_target', 'table']
 assert set(order) == set(out), set(out) ^ set(order)
 for i, l in enumerate(order):
     out[l]['position'].update(z=1000 * (i + 1), tabOrder=1000 * (i + 1))

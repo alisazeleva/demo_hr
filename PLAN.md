@@ -335,7 +335,7 @@ DimEmployee relates one-to-many to every fact on EmployeeID; DimDepartment, DimP
 
 ### Measures
 
-Headcount, Headcount vs Target, Average Salary, Average Salary at Year End, Employees at Year End, Average Annual Increase, Average Promotion Increase, Average Tenure (years), Promotions, Department Transfers, Average Months Before Promotion, Average Rating, Employees Without Recent Review, Leave Days, Vacation Days Used per Year, Currently Absent (on the reference date), Direct Reports and Span of Control.
+Headcount, Headcount vs Target, Average Salary, Average Salary at Year End, Employees at Year End, Average Annual Increase, Average Promotion Increase, Average Tenure, Promotions, Department Transfers, Average Months Before Promotion, Average Rating, Employees Without Recent Review, Leave Days, Vacation Days Used per Year, Currently Absent (on the reference date), Direct Reports and Span of Control.
 
 ### Report pages
 

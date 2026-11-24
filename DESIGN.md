@@ -37,7 +37,7 @@ The Workforce page as built in Power BI Desktop is the reference. Copy it for ev
 
 | Use | Colour |
 | --- | --- |
-| Page background | #F3F4F6 |
+| Page background | #F3F4F6 as the wallpaper (`outspace`, 0 % transparency); the canvas background is the same colour at 100 % transparency. Same on every page |
 | Card background / border | #FFFFFF / #E5E7EB |
 | Text / muted text | #1F2937 / #5B6472 |
 | Navigation background / text | #14213D / #CBD5E1 |
@@ -76,7 +76,7 @@ Header subtitle, KPI cards and subtitles as built:
 | KPI card | Title | Subtitle |
 | --- | --- | --- |
 | Headcount | Total employees | `Text: Headcount Split` (1 CEO + the employees in departments; 150 on 2026-11-16) |
-| Average Tenure (years) | Average tenure | Since hire date |
+| Average Tenure | Average tenure | Since hire date |
 | Average Age | Average age | `Text: Age Range` |
 | Departments | Departments | One company, no subdepartments |
 
@@ -99,7 +99,7 @@ The chart area is not the 3 x 2 grid: a tall decomposition tree on the left and 
 | --- | --- | --- | --- |
 | Reporting structure | 330, 300, 952 x 749 | Decomposition tree | Analyze `Headcount`; explain by `DimDepartment[Department]`, `DimManager[ManagerName]`, `DimPosition[JobLevel]`, `DimEmployee[FullName]`; Acme Corporation excluded |
 | Headcount vs target | 1309, 300, 585 x 352 | Bar | `DimDepartment[Department]`, `Department Headcount` (#4A6FA5), `Headcount vs Target` (grey tint, theme colour 7 at +60 %), legend 16 pt at the bottom; subtitle hidden |
-| Team size by department | 1309, 675, 585 x 375 | Matrix | `DimDepartment[Department]` rows; Managers, Average Team Size ("Avg team"), Largest Span of Control ("Max team") values; subtitle hidden |
+| Team size by department | 1309, 675, 585 x 375 | Matrix | `DimDepartment[Department]` rows; Managers, Average Team Size ("Avg team"), Largest Team Size ("Max team") values; subtitle hidden |
 
 A chart subtitle may be hidden when the card is small (show = false); the title still says what it shows.
 
@@ -213,7 +213,7 @@ Photos: resize to about 240 x 240 px (under 20 KB each), have Power Query read t
 | Average Salary at Year End / Employees at Year End | Average salary and headcount on 31 December of the selected year (the reference date for the reference year), from the salary period valid on that date |
 | Average Annual Increase / Average Promotion Increase | Average ChangePct of the pay-history rows with reason Annual Increase / Promotion, as a share |
 | Total Payroll | Sum of current annual salaries |
-| Average Tenure (years) | Average of (reference date minus hire date) in years |
+| Average Tenure | Average of (reference date minus hire date) in years |
 | Promotions | Job-history rows whose change type contains "Promotion" |
 | Department Transfers | Job-history rows whose change type contains "Department Transfer" |
 | Average Months Before Promotion | Average months in the job before a promotion: from the previous promotion, or from hire for a first promotion, to each promotion date (every promoted employee contributes) |

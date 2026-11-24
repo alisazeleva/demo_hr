@@ -1,21 +1,38 @@
 """Usage: python tools/validate_pbir.py [report definition folder]   (needs: pip install jsonschema referencing)
 Validate PBIR files against the official Microsoft JSON schemas (downloaded on demand, cached in memory)."""
-import sys, json, glob, os, urllib.request
+import sys, json, glob, os, re, urllib.request, urllib.error
 from jsonschema import Draft7Validator, Draft202012Validator, validators
 from referencing import Registry, Resource
 from referencing.jsonschema import DRAFT7, DRAFT202012
 
 cache = {}
+fallback = set()   # schema URIs that were replaced by a lower version
+# Properties that newer schema versions added; allowed only when an older schema is used in their place.
+NEWER_PROPERTIES = {'linguisticSchemaSyncVersion'}   # report.json, report schema 3.4.0
 def fetch(uri):
+    # Desktop sometimes writes a schema version that Microsoft has not published yet (for example
+    # visualContainer 2.15.0 or report 3.4.0). Then fall back to the nearest lower minor version that exists.
     if uri not in cache:
-        try:
-            with urllib.request.urlopen(uri, timeout=60) as r:
-                cache[uri] = json.loads(r.read().decode('utf-8'))
-        except Exception:
-            alt = uri.replace('/2.14.0/', '/2.13.0/')
-            with urllib.request.urlopen(alt, timeout=60) as r:
-                cache[uri] = json.loads(r.read().decode('utf-8'))
+        m = re.search(r'/(\d+)\.(\d+)\.(\d+)/', uri)
+        candidates = [uri]
+        if m:
+            major, minor = int(m.group(1)), int(m.group(2))
+            candidates += [uri.replace(m.group(0), f'/{major}.{n}.0/') for n in range(minor - 1, -1, -1)]
+        for alt in candidates:
+            try:
+                with urllib.request.urlopen(alt, timeout=60) as r:
+                    cache[uri] = json.loads(r.read().decode('utf-8'))
+                if alt != uri:
+                    fallback.add(uri)
+                break
+            except urllib.error.HTTPError as e:
+                if e.code != 404 or alt == candidates[-1]:
+                    raise
     return cache[uri]
+def doc_at(doc, path):
+    for p in path:
+        doc = doc[p]
+    return doc
 def retrieve(uri):
     doc = fetch(uri)
     spec = DRAFT202012 if '2020-12' in doc.get('$schema', '') else DRAFT7
@@ -38,6 +55,10 @@ for f in sorted(files):
     cls = validators.validator_for(sch, default=Draft7Validator)
     v = cls(sch, registry=registry)
     errs = [e for e in sorted(v.iter_errors(doc), key=lambda e: list(e.absolute_path)) if list(e.absolute_path) != ['$schema']]
+    if uri in fallback:
+        errs = [e for e in errs if not (e.validator == 'additionalProperties'
+                                        and set(doc_at(doc, e.absolute_path)) - set(e.schema.get('properties', {}))
+                                        <= NEWER_PROPERTIES)]
     total += 1
     if errs:
         bad += 1

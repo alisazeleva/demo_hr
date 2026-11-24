@@ -71,10 +71,10 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Largest Span of Control"
+                  "Property": "Largest Team Size"
                 }
               },
-              "queryRef": "_Measures.Largest Span of Control",
+              "queryRef": "_Measures.Largest Team Size",
               "nativeQueryRef": "Max team",
               "displayName": "Max team"
             }
