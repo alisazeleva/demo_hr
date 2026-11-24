@@ -2,7 +2,7 @@
 
 A dummy HR database (SQL Server) and a Power BI report on top of it, for the fictional company **Acme Corporation**.
 
-**All data is synthetic.** The company, its employees (151 on 2026-11-16, 171 by 2030), their names, salaries, ratings, leave records and pictures are generated for demonstration only, and any resemblance to real people is a coincidence. The patterns in the data (gender, pay, ratings) are random and illustrate how the report works; they are not findings about real workforces.
+**All data is synthetic.** The company, its employees (151 on 2026-11-16, 171 by 2030), their names, salaries, ratings, leave records are generated for demonstration only, the profile pictures are AI-generated, and any resemblance to real people is a coincidence. The patterns in the data (gender, pay, ratings) are random and illustrate how the report works; they are not findings about real workforces.
 
 ## What it contains
 
